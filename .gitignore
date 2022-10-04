@@ -14,7 +14,6 @@ gen/
 BUILD_AOS/
 buildTemp/
 DOCUMENT/
-sample/
 
 # Gradle files
 .gradle/

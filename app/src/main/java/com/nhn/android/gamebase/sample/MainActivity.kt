@@ -24,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -41,6 +42,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.nhn.android.gamebase.sample.ui.HomeScreen
 import com.nhn.android.gamebase.sample.ui.ProfileScreen
@@ -66,13 +68,17 @@ fun MainScreen() {
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
 
+    val currentBackStackEntry = navController.currentBackStackEntryAsState()
+    val currentScreen = SampleAppScreen.fromRoute(
+        currentBackStackEntry.value?.destination?.route
+    )
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background,
     ) {
         Scaffold (
             topBar = {
-                com.nhn.android.gamebase.sample.AppBar {
+                com.nhn.android.gamebase.sample.AppBar(currentScreen) {
                     scope.launch {
                         scaffoldState.drawerState.open()
                     }
@@ -130,10 +136,11 @@ fun SampleAppNavHost(
 
 @Composable
 fun AppBar(
+    currentScreen: SampleAppScreen,
     openDrawer: () -> Unit
 ) {
     TopAppBar(
-        title = { Text(stringResource(R.string.app_name)) },
+        title = { Text(stringResource(currentScreen.resourceId)) },
         backgroundColor = MaterialTheme.colors.primary,
         navigationIcon = {
             IconButton(onClick = { openDrawer() }) {
