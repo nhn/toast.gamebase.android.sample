@@ -2,7 +2,6 @@ package com.nhn.android.gamebase.sample.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -28,12 +27,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.nhn.android.gamebase.sample.GamebaseActivity
+import com.nhn.android.gamebase.sample.ui.navigation.SampleAppNavHost
+import com.nhn.android.gamebase.sample.ui.navigation.SampleAppScreens
+import com.nhn.android.gamebase.sample.ui.navigation.screens
 import com.nhn.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 import kotlinx.coroutines.launch
 
@@ -95,28 +94,6 @@ fun MainScreen() {
                 navController = navController,
                 modifier = Modifier.padding(innerPadding)
             )
-        }
-    }
-}
-
-@Composable
-fun SampleAppNavHost(
-    navController: NavHostController,
-    modifier: Modifier = Modifier
-) {
-    NavHost(
-        navController = navController,
-        startDestination = SampleAppScreens.Home.route,
-        modifier = modifier
-    ) {
-        composable(SampleAppScreens.Home.route) {
-            HomeScreen()
-        }
-        composable(SampleAppScreens.Shopping.route) {
-            ShoppingScreen()
-        }
-        composable(SampleAppScreens.Profile.route) {
-            ProfileScreen()
         }
     }
 }
