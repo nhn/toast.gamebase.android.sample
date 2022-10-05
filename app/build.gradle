@@ -64,4 +64,28 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+    // >>> Gamebase - Auth Adapter
+    //implementation "com.toast.android.gamebase:gamebase-adapter-auth-facebook:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-google:${GAMEBASE_VERSION}"
+    //implementation "com.toast.android.gamebase:gamebase-adapter-auth-line:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-naver:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-payco:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-twitter:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-appleid:${GAMEBASE_VERSION}"
+    //implementation "com.toast.android.gamebase:gamebase-adapter-auth-kakaogame:${GAMEBASE_VERSION}"
+/*
+    // >>> [Weibo IdP]
+    implementation(files("../weibo_sdk/openDefault-4.4.4.aar"))
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo-v4:${GAMEBASE_VERSION}"
+
+    // >>> Gamebase - Purchase Adapter
+    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-google:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-galaxy:${GAMEBASE_VERSION}"
+
+    // >>> Gamebase - Push Adapter
+    implementation "com.toast.android.gamebase:gamebase-adapter-push-fcm:${GAMEBASE_VERSION}"
+
+     */
 }
