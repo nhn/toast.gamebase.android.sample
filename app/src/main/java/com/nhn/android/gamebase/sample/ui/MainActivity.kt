@@ -1,4 +1,4 @@
-package com.nhn.android.gamebase.sample
+package com.nhn.android.gamebase.sample.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,12 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Snackbar
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -24,19 +22,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -44,13 +33,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.nhn.android.gamebase.sample.ui.HomeScreen
-import com.nhn.android.gamebase.sample.ui.ProfileScreen
-import com.nhn.android.gamebase.sample.ui.ShoppingScreen
+import com.nhn.android.gamebase.sample.GamebaseActivity
 import com.nhn.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
+class MainActivity : GamebaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -69,7 +56,7 @@ fun MainScreen() {
     val navController = rememberNavController()
 
     val currentBackStackEntry = navController.currentBackStackEntryAsState()
-    val currentScreen = SampleAppScreen.fromRoute(
+    val currentScreen = SampleAppScreens.fromRoute(
         currentBackStackEntry.value?.destination?.route
     )
     Surface(
@@ -78,7 +65,7 @@ fun MainScreen() {
     ) {
         Scaffold (
             topBar = {
-                com.nhn.android.gamebase.sample.AppBar(currentScreen) {
+                AppBar(currentScreen) {
                     scope.launch {
                         scaffoldState.drawerState.open()
                     }
@@ -99,7 +86,7 @@ fun MainScreen() {
                             restoreState = true
                         }
                     } catch (exception: IllegalArgumentException) {
-                        navController.navigate(SampleAppScreen.Home.route)
+                        navController.navigate(SampleAppScreens.Home.route)
                     }
                 }
             },
@@ -119,16 +106,16 @@ fun SampleAppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = SampleAppScreen.Home.route,
+        startDestination = SampleAppScreens.Home.route,
         modifier = modifier
     ) {
-        composable(SampleAppScreen.Home.route) {
+        composable(SampleAppScreens.Home.route) {
             HomeScreen()
         }
-        composable(SampleAppScreen.Shopping.route) {
+        composable(SampleAppScreens.Shopping.route) {
             ShoppingScreen()
         }
-        composable(SampleAppScreen.Profile.route) {
+        composable(SampleAppScreens.Profile.route) {
             ProfileScreen()
         }
     }
@@ -136,7 +123,7 @@ fun SampleAppNavHost(
 
 @Composable
 fun AppBar(
-    currentScreen: SampleAppScreen,
+    currentScreen: SampleAppScreens,
     openDrawer: () -> Unit
 ) {
     TopAppBar(
