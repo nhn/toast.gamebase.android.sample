@@ -26,3 +26,11 @@ val Typography = Typography(
     )
     */
 )
+
+val LaunchingTypography = Typography(
+     body1 = TextStyle(
+         fontFamily = FontFamily.Default,
+         fontWeight = FontWeight(400),
+         fontSize = 30.sp
+     )
+)
