@@ -2,6 +2,7 @@ package com.nhn.android.gamebase.sample.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.nhn.android.gamebase.sample.GamebaseActivity
+import com.nhn.android.gamebase.sample.GamebaseManager
 import com.nhn.android.gamebase.sample.ui.navigation.SampleAppNavHost
 import com.nhn.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.nhn.android.gamebase.sample.ui.navigation.screens
@@ -26,14 +28,20 @@ import kotlinx.coroutines.launch
 
 class MainActivity : GamebaseActivity() {
     companion object {
-        val INTENT_APPLICATION_RELAUNCHED = "intent_key_is_application_relaunched"
+        const val INTENT_APPLICATION_RELAUNCHED = "intent_key_is_application_relaunched"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val isApplicationRelaunched = intent.getBooleanExtra(INTENT_APPLICATION_RELAUNCHED, false)
+        val startRoute = if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Login.route
         setContent {
             GamebaseSampleProjectTheme {
-                MainScreen()
+                MainScreen(
+                    activity = this,
+                    startRoute = startRoute
+                )
             }
         }
     }
@@ -41,7 +49,10 @@ class MainActivity : GamebaseActivity() {
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    activity: GamebaseActivity,
+    startRoute: String,
+) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
@@ -56,9 +67,11 @@ fun MainScreen() {
     ) {
         Scaffold (
             topBar = {
-                AppBar(currentScreen) {
-                    scope.launch {
-                        scaffoldState.drawerState.open()
+                if (currentScreen.route != "login") {
+                    AppBar(currentScreen) {
+                        scope.launch {
+                            scaffoldState.drawerState.open()
+                        }
                     }
                 }
             },
@@ -83,8 +96,10 @@ fun MainScreen() {
             },
         ){ innerPadding ->
             SampleAppNavHost(
+                activity = activity,
                 navController = navController,
-                modifier = Modifier.padding(innerPadding)
+                modifier = Modifier.padding(innerPadding),
+                startRoute = startRoute
             )
         }
     }
