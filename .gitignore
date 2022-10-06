@@ -32,7 +32,6 @@ proguard/
 # Android Studio Settings
 *.iml
 .idea/
-.idea/misc.xml
 captures/
 
 # Mac Folder File
