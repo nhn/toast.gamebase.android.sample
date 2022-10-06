@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import com.nhn.android.gamebase.sample.GamebaseActivity
 import com.nhn.android.gamebase.sample.GamebaseManager
@@ -15,13 +16,14 @@ class SplashActivity : GamebaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            if(Gamebase.isInitialized() && GamebaseManager.isLoggedIn()) {
-                // Application relaunched by clicking of notification.
-                LoadMainActivity(this, true)
-            } else {
-                LaunchingScreen()
-                GamebaseManager.initialize(this)
-            }
+            LaunchingScreen()
+        }
+
+        if (Gamebase.isInitialized() && GamebaseManager.isLoggedIn()) {
+            // Application relaunched by clicking of notification.
+            LoadMainActivity(this, true)
+        } else {
+            GamebaseManager.initialize(this)
         }
     }
 
