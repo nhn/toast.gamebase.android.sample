@@ -5,10 +5,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import com.nhn.android.gamebase.sample.GamebaseActivity
 import com.nhn.android.gamebase.sample.GamebaseManager
+import com.nhn.android.gamebase.sample.ui.theme.AccessInformationScreen
 import com.toast.android.gamebase.Gamebase
 
 @SuppressLint("CustomSplashScreen")
@@ -19,19 +19,21 @@ class SplashActivity : GamebaseActivity() {
             LaunchingScreen()
         }
 
-        if (Gamebase.isInitialized() && GamebaseManager.isLoggedIn()) {
-            // Application relaunched by clicking of notification.
-            LoadMainActivity(this, true)
+        if(Gamebase.isInitialized()) {
+            if(GamebaseManager.isLoggedIn()) {
+                // Application relaunched by clicking of notification.
+                LoadMainActivity(this, true)
+            } else {
+                setContent {
+                    AccessInformationScreen(this)
+                }
+            }
         } else {
             GamebaseManager.initialize(this)
         }
     }
 
     companion object {
-        fun LoadMainActivity(activity: Activity) {
-            LoadMainActivity(activity, false)
-        }
-
         fun LoadMainActivity(
             activity: Activity,
             isRelaunched: Boolean

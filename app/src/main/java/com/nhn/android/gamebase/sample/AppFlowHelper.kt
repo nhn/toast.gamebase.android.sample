@@ -3,6 +3,7 @@ package com.nhn.android.gamebase.sample
 import android.app.Activity
 import android.content.*
 import android.net.Uri
+import com.nhn.android.gamebase.sample.ui.MainActivity
 import com.nhn.android.gamebase.sample.ui.SplashActivity
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.push.PushConfiguration
@@ -50,8 +51,9 @@ class AppFlowHelper {
             }
         }
 
-        fun moveToLoginScene(activity: Activity) {
-            SplashActivity.LoadMainActivity(activity)
+        fun moveToAccessInformation(activity: Activity) {
+            val intent = Intent(activity, SplashActivity::class.java)
+            activity.startActivity(intent)
         }
 
         fun showUnregisteredVersionAndMoveToStore(
