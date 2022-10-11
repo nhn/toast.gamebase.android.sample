@@ -110,7 +110,7 @@ class GamebaseManager {
                         }
                         if (canPlay == GAME_PLAY_STATUS.PLAYABLE) {
                             Log.v(TAG, "Launching Succeeded")
-                            AppFlowHelper.moveToAccessInformation(
+                            AppFlowHelper.moveToMainActivity(
                                 activity
                             )
                         } else {

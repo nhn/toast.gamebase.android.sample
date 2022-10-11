@@ -24,7 +24,7 @@ import com.nhn.android.gamebase.sample.R
 import com.nhn.android.gamebase.sample.ui.SplashActivity
 
 @Composable
-fun AccessInformationScreen(activity: Activity) {
+fun AccessInformationScreen(moveComposable: () -> Unit) {
     Surface {
         Column(
             modifier = Modifier
@@ -78,9 +78,7 @@ fun AccessInformationScreen(activity: Activity) {
                     .height(70.dp)
                     .fillMaxSize()
                     .weight(1f, false),
-                onClick = {
-                    SplashActivity.LoadMainActivity(activity, false)
-                },
+                onClick = moveComposable,
                 colors = ButtonDefaults.buttonColors(backgroundColor = LightBlue400),
             ) {
                 Text(

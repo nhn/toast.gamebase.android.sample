@@ -19,15 +19,9 @@ class SplashActivity : GamebaseActivity() {
             LaunchingScreen()
         }
 
-        if(Gamebase.isInitialized()) {
-            if(GamebaseManager.isLoggedIn()) {
-                // Application relaunched by clicking of notification.
-                LoadMainActivity(this, true)
-            } else {
-                setContent {
-                    AccessInformationScreen(this)
-                }
-            }
+        if (Gamebase.isInitialized() && GamebaseManager.isLoggedIn()) {
+            // Application relaunched by clicking of notification.
+            LoadMainActivity(this, true)
         } else {
             GamebaseManager.initialize(this)
         }
@@ -57,5 +51,4 @@ class SplashActivity : GamebaseActivity() {
             thread.start()
         }
     }
-
 }

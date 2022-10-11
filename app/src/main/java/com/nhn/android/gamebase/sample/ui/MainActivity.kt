@@ -35,7 +35,7 @@ class MainActivity : GamebaseActivity() {
         super.onCreate(savedInstanceState)
 
         val isApplicationRelaunched = intent.getBooleanExtra(INTENT_APPLICATION_RELAUNCHED, false)
-        val startRoute = if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Login.route
+        val startRoute = if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.AccessInformation.route
         setContent {
             GamebaseSampleProjectTheme {
                 MainScreen(
@@ -67,7 +67,7 @@ fun MainScreen(
     ) {
         Scaffold (
             topBar = {
-                if (currentScreen.route != "login") {
+                if (currentScreen.route != "login" && currentScreen.route != "access_information") {
                     AppBar(currentScreen) {
                         scope.launch {
                             scaffoldState.drawerState.open()

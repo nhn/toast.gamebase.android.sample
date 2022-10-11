@@ -51,9 +51,8 @@ class AppFlowHelper {
             }
         }
 
-        fun moveToAccessInformation(activity: Activity) {
-            val intent = Intent(activity, SplashActivity::class.java)
-            activity.startActivity(intent)
+        fun moveToMainActivity(activity: Activity) {
+            SplashActivity.LoadMainActivity(activity = activity, false)
         }
 
         fun showUnregisteredVersionAndMoveToStore(
