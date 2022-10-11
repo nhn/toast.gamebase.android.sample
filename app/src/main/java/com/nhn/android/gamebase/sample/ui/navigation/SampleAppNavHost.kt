@@ -27,13 +27,7 @@ fun SampleAppNavHost(
         modifier = modifier
     ) {
         composable(SampleAppScreens.Login.route) {
-            LoginScreen(activity) {
-                navController.navigate(SampleAppScreens.Home.route) {
-                    popUpTo(SampleAppScreens.Login.route) {
-                        inclusive = true
-                    }
-                }
-            }
+            LoginScreen(activity, navController = navController)
         }
         composable(SampleAppScreens.Home.route) {
             HomeScreen()

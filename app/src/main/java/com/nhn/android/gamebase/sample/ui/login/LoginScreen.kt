@@ -20,6 +20,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,9 +29,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.nhn.android.gamebase.sample.GamebaseActivity
 import com.nhn.android.gamebase.sample.GamebaseManager
 import com.nhn.android.gamebase.sample.R
+import com.nhn.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.nhn.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 import com.toast.android.gamebase.Gamebase
 import kotlinx.coroutines.launch
@@ -38,14 +42,19 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(
     activity: GamebaseActivity,
-    onLoginSuccess: () -> Unit) {
+    loginViewModel: LoginViewModel = viewModel(),
+    navController: NavController) {
+
     LaunchedEffect(true) {
-        if (Gamebase.getLastLoggedInProvider() != null && !GamebaseManager.isLoggedIn()) {
-            GamebaseManager.lastProviderLogin(activity) {
-                onLoginSuccess()
-            }
+        loginViewModel.tryLastIdpLogin(activity)
+    }
+
+    LaunchedEffect(loginViewModel.uiState) {
+        if (loginViewModel.uiState == LoginState.LOGGED_IN) {
+            loginViewModel.navigateToHome(navController)
         }
     }
+
     val scrollState = rememberScrollState()
     GamebaseSampleProjectTheme {
         Surface(Modifier.background(Color.White)) {
@@ -65,7 +74,7 @@ fun LoginScreen(
                 Text("원하시는 로그인 타입을 선택해 주세요.")
                 Spacer(modifier = Modifier.height(40.dp))
                 for (idp in supportedIdpList) {
-                    OutlineLoginButton(activity, idp, onLoginSuccess)
+                    OutlineLoginButton(activity, loginViewModel, idp)
                     Spacer(modifier = Modifier.height(4.dp))
                 }
                 Spacer(modifier = Modifier.weight(1.0f))
@@ -81,7 +90,7 @@ fun LoginScreen(
 }
 
 @Composable
-fun OutlineLoginButton(activity: GamebaseActivity, idp: String, onLoginSuccess: () -> Unit) {
+fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewModel, idp: String) {
     OutlinedButton(
         modifier = Modifier
             .fillMaxWidth(0.9f),
@@ -90,11 +99,7 @@ fun OutlineLoginButton(activity: GamebaseActivity, idp: String, onLoginSuccess: 
             backgroundColor = Color.White
         ),
         onClick = {
-            login(activity, idp) {
-                activity.lifecycleScope.launch {
-                    onLoginSuccess()
-                }
-            }
+            loginViewModel.login(activity, idp)
         }) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -102,7 +107,7 @@ fun OutlineLoginButton(activity: GamebaseActivity, idp: String, onLoginSuccess: 
             horizontalArrangement = Arrangement.Start
         ) {
             Image(
-                painter = painterResource(getIconResourceById(idp)),
+                painter = painterResource(loginViewModel.getIconResourceById(idp)),
                 contentDescription = idp,
                 modifier = Modifier
                     .width(30.dp)
@@ -117,44 +122,4 @@ fun OutlineLoginButton(activity: GamebaseActivity, idp: String, onLoginSuccess: 
             )
         }
     }
-}
-
-private fun login(activity: GamebaseActivity, idp: String, onLoginSuccess: () -> Unit) {
-    // you can add additionalInfo by idp
-    val additionalInfo: Map<String, Any> = HashMap()
-    GamebaseManager.loginWithIdP(
-        activity,
-        idp,
-        additionalInfo,
-        onLoginSuccess
-    )
-}
-
-val supportedIdpList = listOf(
-    "guest",
-    "google",
-    "naver",
-    "applieid",
-    "facebook",
-    "kakaogame",
-    "line",
-    "twitter",
-    "weibo",
-    "payco",
-)
-
-fun getIconResourceById(idp: String): Int {
-    when(idp){
-        "guest" -> return R.drawable.guest_logo
-        "google" -> return R.drawable.google_logo
-        "naver" -> return R.drawable.naver_logo
-        "applieid" -> return R.drawable.appleid_logo
-        "facebook" -> return R.drawable.facebook_logo
-        "kakaogame" -> return R.drawable.kakaogames_logo
-        "line" -> return R.drawable.line_logo
-        "twitter" -> return R.drawable.twitter_logo
-        "weibo" -> return R.drawable.weibo_logo
-        "payco" -> return R.drawable.payco_logo
-    }
-    return R.drawable.guest_logo
 }
