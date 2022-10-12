@@ -1,7 +1,6 @@
 package com.nhn.android.gamebase.sample.ui
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -37,34 +36,43 @@ class MainActivity : GamebaseActivity() {
         super.onCreate(savedInstanceState)
 
         val isApplicationRelaunched = intent.getBooleanExtra(INTENT_APPLICATION_RELAUNCHED, false)
-        val startRoute = if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Login.route
+        val startRoute =
+            if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Login.route
+        var shouldShowAccessInformationScreen by mutableStateOf(true)
+        val versionCheckKey = "version"
+
+        if (getIntInPreference(applicationContext, versionCheckKey, -1) == BuildConfig.VERSION_CODE) {
+            shouldShowAccessInformationScreen = false
+        }
         setContent {
             GamebaseSampleProjectTheme {
-                LoadStartScreen(applicationContext = applicationContext, activity = this, startRoute = startRoute)
+                LoadStartScreen(
+                    activity = this,
+                    startRoute = startRoute,
+                    shouldShowAccessInformationScreen = shouldShowAccessInformationScreen
+                ) {
+                    shouldShowAccessInformationScreen = false
+                    putIntInPreference(applicationContext, versionCheckKey, BuildConfig.VERSION_CODE)
+                }
             }
         }
     }
 }
 
 @Composable
-fun LoadStartScreen(applicationContext: Context, activity: GamebaseActivity, startRoute: String) {
-    val versionCheck = "version"
-    var goLoginDirect by remember { mutableStateOf(false) }
-
-    if (getIntInPreference(applicationContext, versionCheck) == BuildConfig.VERSION_CODE) {
-        goLoginDirect = true
-    }
-
-    if (goLoginDirect) {
+fun LoadStartScreen(
+    activity: GamebaseActivity,
+    startRoute: String,
+    shouldShowAccessInformationScreen: Boolean,
+    updateVersionInPreferenceAndState: () -> Unit
+) {
+    if (shouldShowAccessInformationScreen) {
+        AccessInformationScreen(updateVersionInPreferenceAndState)
+    } else {
         MainScreen(
             activity = activity,
             startRoute = startRoute
         )
-    } else {
-        AccessInformationScreen {
-            goLoginDirect = true
-        }
-        putIntInPreference(applicationContext, versionCheck, BuildConfig.VERSION_CODE)
     }
 }
 
@@ -86,7 +94,7 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background,
     ) {
-        Scaffold (
+        Scaffold(
             topBar = {
                 if (currentScreen.route != "login" && currentScreen.route != "access_information") {
                     AppBar(currentScreen) {
@@ -115,7 +123,7 @@ fun MainScreen(
                     }
                 }
             },
-        ){ innerPadding ->
+        ) { innerPadding ->
             SampleAppNavHost(
                 activity = activity,
                 navController = navController,

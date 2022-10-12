@@ -1,7 +1,5 @@
 package com.nhn.android.gamebase.sample.ui.theme
 
-import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,12 +19,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nhn.android.gamebase.sample.BuildConfig
 import com.nhn.android.gamebase.sample.R
-import com.nhn.android.gamebase.sample.util.putIntInPreference
 
 @Composable
-fun AccessInformationScreen(changeDelimiter: () -> Unit) {
+fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
     Surface {
         Column(
             modifier = Modifier
@@ -38,30 +34,38 @@ fun AccessInformationScreen(changeDelimiter: () -> Unit) {
             AccessInformationTitle()
             AccessInformationBody()
             Spacer(modifier = Modifier.height(70.dp))
-            MoveToLoginButton(changeDelimiter)
+            MoveToLoginButton(updateVersionInPreferenceAndState)
         }
     }
 }
 
-data class AccessInformation(val title : String, val subTitle : String, val imgSrc : Int)
+data class AccessInformation(val title : String, val subTitle : String, val imgSrc : Int, val contentDescription : String)
 
 class AccessInformationRepository() {
     fun getAccessInformation(): List<AccessInformation> {
         return listOf(
-            AccessInformation("광고 식별자(선택)", "Gamebase IDEA API 호출 시 필요", R.drawable.person),
+            AccessInformation(
+                "광고 식별자(선택)",
+                "Gamebase IDEA API 호출 시 필요",
+                R.drawable.person,
+                "person"
+            ),
             AccessInformation(
                 "카메라 (선택)",
                 "Game 고객센터 API 호출 시 필요.\n사용자가 문의사항에 사진 또는 동영상 첨부시 사용.",
-                R.drawable.photo_camera
+                R.drawable.photo_camera,
+                "photo_camera"
             ),
             AccessInformation(
                 "사진 (선택)",
                 "Gamebase 고객센터 API 호출 시 필요.\n사용자가 문의사항에 앨범에서 사진 또는 동영상 첨부시 사용.",
-                R.drawable.photo
+                R.drawable.photo,
+                "photo"
             )
         )
     }
 }
+
 @Composable
 fun AccessInformationTitle() {
     Column(
@@ -136,8 +140,7 @@ fun ListAccessInformation(information: AccessInformation) {
     ) {
         Image(
             painter = painterResource(information.imgSrc),
-            //contentDescription을 아래와 같이 정수형으로 두어도 될지 확인
-            contentDescription = information.imgSrc.toString(),
+            contentDescription = information.contentDescription,
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .width(60.dp)
@@ -160,9 +163,4 @@ fun ListAccessInformation(information: AccessInformation) {
             )
         }
     }
-}
-
-fun setVersionCodeInPreference(context : Context) {
-    putIntInPreference(context, "version", BuildConfig.VERSION_CODE)
-    Log.e("asas", BuildConfig.VERSION_CODE.toString())
 }
