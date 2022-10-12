@@ -23,7 +23,8 @@ fun SettingsScreen(
     navController: NavController,
     settingsViewModel: SettingsViewModel = viewModel()
 ) {
-    val isDialogOpened = remember { mutableStateOf(false) }
+    val isLogoutDialogOpened = remember { mutableStateOf(false) }
+    val isWithdrawDialogOpened = remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = settingsViewModel.uiState) {
         if (settingsViewModel.uiState == LoginState.LOGGED_OUT) {
@@ -37,20 +38,27 @@ fun SettingsScreen(
             modifier = Modifier
                 .padding(6.dp)
                 .clickable {
-                    isDialogOpened.value = true
+                    isLogoutDialogOpened.value = true
                 })
         Text(text = "탈퇴하기",
-            modifier = Modifier.padding(6.dp))
+            modifier = Modifier
+                .padding(6.dp)
+                .clickable {
+                    isWithdrawDialogOpened.value = true
+                })
         ConfirmAlertDialog(
-            isDialogOpened.value,
+            isLogoutDialogOpened.value,
             "Gamebase 로그아웃",
             "로그아웃 하시겠습니까?",
-            { opened ->
-                isDialogOpened.value = opened
-            },
-            {
-                settingsViewModel.logout(activity)
-            }
+            { opened -> isLogoutDialogOpened.value = opened },
+            { settingsViewModel.logout(activity) }
+        )
+        ConfirmAlertDialog(
+            isWithdrawDialogOpened.value,
+            "Gamebase 탈퇴",
+            "탈퇴 하시겠습니까?\n 탈퇴 후에는 계정 복구가 어렵습니다.",
+            { opened -> isWithdrawDialogOpened.value = opened },
+            { settingsViewModel.withdraw(activity) }
         )
     }
 }

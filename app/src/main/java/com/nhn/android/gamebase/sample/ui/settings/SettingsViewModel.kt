@@ -38,4 +38,15 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
+    fun withdraw(activity: GamebaseActivity) {
+        GamebaseManager.withdraw(activity) { isSuccess, errorMessage ->
+            if (isSuccess) {
+                uiState = LoginState.LOGGED_OUT
+            } else {
+                val msg = errorMessage ?: ""
+                GamebaseManager.showError(activity, "Withdraw Failed", msg)
+            }
+        }
+    }
+
 }

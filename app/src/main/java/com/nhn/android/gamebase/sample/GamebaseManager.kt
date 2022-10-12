@@ -290,6 +290,14 @@ class GamebaseManager {
             }
         }
 
+        fun withdraw(
+            activity: Activity,
+            onWithdrawFinished: (isSuccess: Boolean, errorMessage: String?) -> Unit) {
+            Gamebase.withdraw(activity) { exception ->
+                onWithdrawFinished(Gamebase.isSuccess(exception), exception?.toJsonString())
+            }
+        }
+
         fun showError(activity: Activity, title: String, message: String) {
             Gamebase.Util.showAlert(activity, title, message)
         }
