@@ -1,9 +1,7 @@
 package com.nhn.android.gamebase.sample.ui.navigation
 
-import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,16 +10,13 @@ import com.nhn.android.gamebase.sample.ui.HomeScreen
 import com.nhn.android.gamebase.sample.ui.ProfileScreen
 import com.nhn.android.gamebase.sample.ui.ShoppingScreen
 import com.nhn.android.gamebase.sample.ui.login.LoginScreen
-import com.nhn.android.gamebase.sample.ui.theme.AccessInformation
-import com.nhn.android.gamebase.sample.ui.theme.AccessInformationScreen
-
 
 @Composable
 fun SampleAppNavHost(
     activity: GamebaseActivity,
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    startRoute: String = SampleAppScreens.AccessInformation.route,
+    startRoute: String = SampleAppScreens.Login.route
 ) {
     NavHost(
         navController = navController,
@@ -35,11 +30,6 @@ fun SampleAppNavHost(
                         inclusive = true
                     }
                 }
-            }
-        }
-        composable(SampleAppScreens.AccessInformation.route) {
-            AccessInformationScreen {
-                navController.navigate(SampleAppScreens.Login.route)
             }
         }
         composable(SampleAppScreens.Home.route) {

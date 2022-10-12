@@ -1,6 +1,7 @@
 package com.nhn.android.gamebase.sample.ui.theme
 
-import android.app.Activity
+import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,11 +21,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.nhn.android.gamebase.sample.BuildConfig
 import com.nhn.android.gamebase.sample.R
-import com.nhn.android.gamebase.sample.ui.SplashActivity
+import com.nhn.android.gamebase.sample.util.putIntInPreference
 
 @Composable
-fun AccessInformationScreen(moveComposable: () -> Unit) {
+fun AccessInformationScreen(changeDelimiter: () -> Unit) {
     Surface {
         Column(
             modifier = Modifier
@@ -33,62 +35,10 @@ fun AccessInformationScreen(moveComposable: () -> Unit) {
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Column(
-                modifier = Modifier.padding(top = 50.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "앱 접근 권한 안내",
-                    color = Black,
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight(400),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    modifier = Modifier.padding(top = 20.dp),
-                    text = "Gamebase는 특정 상황에서 다음 권한들을 사용합니다.",
-                    color = Grey500,
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight(300),
-                    textAlign = TextAlign.Center
-                )
-            }
-
-            Column(modifier = Modifier.padding(24.dp)) {
-                Text(
-                    text = "선택적 접근 권한",
-                    color = Black,
-                    fontSize = 25.sp,
-                    fontWeight = FontWeight(350),
-                    textAlign = TextAlign.Start
-                )
-
-                LazyColumn() {
-                    items(items = AccessInformationRepository().getAccessInformation()){AccessInformation ->
-                        ListAccessInformation(information = AccessInformation)
-                    }
-                }
-            }
-
+            AccessInformationTitle()
+            AccessInformationBody()
             Spacer(modifier = Modifier.height(70.dp))
-
-            Button(
-                modifier = Modifier
-                    .height(70.dp)
-                    .fillMaxSize()
-                    .weight(1f, false),
-                onClick = moveComposable,
-                colors = ButtonDefaults.buttonColors(backgroundColor = LightBlue400),
-            ) {
-                Text(
-                    text = "확인",
-                    color = White,
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight(400),
-                    textAlign = TextAlign.Center
-                )
-            }
+            MoveToLoginButton(changeDelimiter)
         }
     }
 }
@@ -109,6 +59,68 @@ class AccessInformationRepository() {
                 "Gamebase 고객센터 API 호출 시 필요.\n사용자가 문의사항에 앨범에서 사진 또는 동영상 첨부시 사용.",
                 R.drawable.photo
             )
+        )
+    }
+}
+@Composable
+fun AccessInformationTitle() {
+    Column(
+        modifier = Modifier.padding(top = 50.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "앱 접근 권한 안내",
+            color = Black,
+            fontSize = 30.sp,
+            fontWeight = FontWeight(400),
+            textAlign = TextAlign.Center
+        )
+        Text(
+            modifier = Modifier.padding(top = 20.dp),
+            text = "Gamebase는 특정 상황에서 다음 권한들을 사용합니다.",
+            color = Grey500,
+            fontSize = 15.sp,
+            fontWeight = FontWeight(300),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun AccessInformationBody() {
+    Column(modifier = Modifier.padding(24.dp)) {
+        Text(
+            text = "선택적 접근 권한",
+            color = Black,
+            fontSize = 25.sp,
+            fontWeight = FontWeight(350),
+            textAlign = TextAlign.Start
+        )
+
+        LazyColumn() {
+            items(items = AccessInformationRepository().getAccessInformation()){AccessInformation ->
+                ListAccessInformation(information = AccessInformation)
+            }
+        }
+    }
+}
+
+@Composable
+fun MoveToLoginButton(moveComposable: () -> Unit) {
+    Button(
+        modifier = Modifier
+            .height(70.dp)
+            .fillMaxSize(),
+        onClick = moveComposable,
+        colors = ButtonDefaults.buttonColors(backgroundColor = LightBlue400),
+    ) {
+        Text(
+            text = "확인",
+            color = White,
+            fontSize = 30.sp,
+            fontWeight = FontWeight(400),
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -148,4 +160,9 @@ fun ListAccessInformation(information: AccessInformation) {
             )
         }
     }
+}
+
+fun setVersionCodeInPreference(context : Context) {
+    putIntInPreference(context, "version", BuildConfig.VERSION_CODE)
+    Log.e("asas", BuildConfig.VERSION_CODE.toString())
 }

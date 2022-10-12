@@ -8,7 +8,6 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import com.nhn.android.gamebase.sample.GamebaseActivity
 import com.nhn.android.gamebase.sample.GamebaseManager
-import com.nhn.android.gamebase.sample.ui.theme.AccessInformationScreen
 import com.toast.android.gamebase.Gamebase
 
 @SuppressLint("CustomSplashScreen")
