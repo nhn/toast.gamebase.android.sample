@@ -12,6 +12,8 @@ import com.toast.android.gamebase.sample.GamebaseManager
 
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.Gamebase
+import com.toast.android.gamebase.base.auth.AuthProvider
+import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
 import kotlinx.coroutines.launch
 
 enum class LoginState() {
@@ -47,7 +49,11 @@ class LoginViewModel() : ViewModel() {
 
     fun login(activity: GamebaseActivity, idp: String) {
         // you can add additionalInfo by idp
-        val additionalInfo: Map<String, Any> = HashMap()
+        val additionalInfo: MutableMap<String, Any> = mutableMapOf()
+        if (idp == AuthProvider.LINE) {
+            // TODO: Add real current region for LINE login
+            additionalInfo[AuthProviderCredentialConstants.LINE_CHANNEL_REGION] = "japan"
+        }
         GamebaseManager.loginWithIdP(
             activity,
             idp,

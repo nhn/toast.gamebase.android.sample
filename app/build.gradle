@@ -90,7 +90,7 @@ dependencies {
     // >>> Gamebase - Auth Adapter
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-facebook:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-google:${GAMEBASE_VERSION}"
-    //implementation "com.toast.android.gamebase:gamebase-adapter-auth-line:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-line:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-naver:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-payco:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-twitter:${GAMEBASE_VERSION}"

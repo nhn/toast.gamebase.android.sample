@@ -13,10 +13,21 @@
         <!-- [Facebook] Configurations begin -->
         <package android:name="com.facebook.katana" />
         <!-- [Facebook] Configurations end -->
+
+        <!-- [LINE] Configurations begin -->
+        <package android:name="jp.naver.line.android" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+        <!-- [LINE] Configurations end -->
     </queries>
 
+    <!-- [Line] Add 'tools:replace="android:allowBackup"' because of Line SDK -->
     <application
         android:allowBackup="true"
+        tools:replace="android:allowBackup"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_gamebase"

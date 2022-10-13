@@ -2,13 +2,6 @@ package com.toast.android.gamebase.sample
 
 import android.app.Activity
 import android.util.Log
-import com.toast.android.gamebase.sample.util.printBanInfo
-import com.toast.android.gamebase.sample.util.printLoginError
-import com.toast.android.gamebase.sample.util.printLoginSuccess
-import com.toast.android.gamebase.sample.util.printLoginWithIdpSuccess
-import com.toast.android.gamebase.sample.util.printPushAction
-import com.toast.android.gamebase.sample.util.printPushClickMessage
-import com.toast.android.gamebase.sample.util.printWhat
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseConfiguration
 import com.toast.android.gamebase.GamebaseDataCallback
@@ -17,6 +10,7 @@ import com.toast.android.gamebase.auth.data.BanInfo
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.auth.AuthProvider
+import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.base.purchase.PurchaseProvider
 import com.toast.android.gamebase.error.data.UpdateInfo
@@ -24,11 +18,16 @@ import com.toast.android.gamebase.event.GamebaseEventCategory
 import com.toast.android.gamebase.event.GamebaseEventHandler
 import com.toast.android.gamebase.event.data.GamebaseEventLoggedOutData
 import com.toast.android.gamebase.event.data.GamebaseEventMessage
-import com.toast.android.gamebase.event.data.GamebaseEventObserverData
-import com.toast.android.gamebase.event.data.GamebaseEventServerPushData
 import com.toast.android.gamebase.event.data.PushAction
 import com.toast.android.gamebase.event.data.PushMessage
 import com.toast.android.gamebase.launching.data.LaunchingStatus
+import com.toast.android.gamebase.sample.util.printBanInfo
+import com.toast.android.gamebase.sample.util.printLoginError
+import com.toast.android.gamebase.sample.util.printLoginSuccess
+import com.toast.android.gamebase.sample.util.printLoginWithIdpSuccess
+import com.toast.android.gamebase.sample.util.printPushAction
+import com.toast.android.gamebase.sample.util.printPushClickMessage
+import com.toast.android.gamebase.sample.util.printWhat
 import org.json.JSONObject
 
 class GamebaseManager {
@@ -303,12 +302,12 @@ class GamebaseManager {
                 printBanInfo(TAG, banInfo)
             } else {
                 if (hasGamebaseAccessToken && lastLoggedInProvider != null) {
-                    val additionalInfo: Map<String, Any?> = HashMap()
+                    val additionalInfo: MutableMap<String, Any?> = mutableMapOf()
                     if (lastLoggedInProvider == AuthProvider.LINE) {
                         // TODO: Line login with dialog
-                    } else {
-                        loginWithIdP(activity, lastLoggedInProvider, additionalInfo, onLoginFinished)
+                        additionalInfo[AuthProviderCredentialConstants.LINE_CHANNEL_REGION] = "japan"
                     }
+                    loginWithIdP(activity, lastLoggedInProvider, additionalInfo, onLoginFinished)
                 } else {
                     // Do nothing. User should select IDP from Game UI.
                 }
