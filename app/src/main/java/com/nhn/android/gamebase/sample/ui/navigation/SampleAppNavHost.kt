@@ -12,13 +12,12 @@ import com.nhn.android.gamebase.sample.ui.ShoppingScreen
 import com.nhn.android.gamebase.sample.ui.login.LoginScreen
 import com.nhn.android.gamebase.sample.ui.settings.SettingsScreen
 
-
 @Composable
 fun SampleAppNavHost(
     activity: GamebaseActivity,
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    startRoute: String = SampleAppScreens.Login.route,
+    startRoute: String = SampleAppScreens.Login.route
 ) {
     NavHost(
         navController = navController,

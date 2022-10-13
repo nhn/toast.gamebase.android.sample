@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import com.nhn.android.gamebase.sample.GamebaseActivity
 import com.nhn.android.gamebase.sample.GamebaseManager
@@ -28,10 +27,6 @@ class SplashActivity : GamebaseActivity() {
     }
 
     companion object {
-        fun LoadMainActivity(activity: Activity) {
-            LoadMainActivity(activity, false)
-        }
-
         fun LoadMainActivity(
             activity: Activity,
             isRelaunched: Boolean
@@ -55,5 +50,4 @@ class SplashActivity : GamebaseActivity() {
             thread.start()
         }
     }
-
 }
