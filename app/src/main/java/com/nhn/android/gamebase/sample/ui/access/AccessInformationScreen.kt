@@ -90,7 +90,7 @@ fun MoveToLoginButton(moveComposable: () -> Unit) {
             .height(70.dp)
             .fillMaxSize(),
         onClick = moveComposable,
-        colors = ButtonDefaults.buttonColors(backgroundColor = LightBlue400),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Toast),
     ) {
         Text(
             text = "확인",
