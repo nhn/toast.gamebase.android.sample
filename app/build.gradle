@@ -22,7 +22,7 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -88,14 +88,16 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
     // >>> Gamebase - Auth Adapter
-    //implementation "com.toast.android.gamebase:gamebase-adapter-auth-facebook:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-facebook:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-google:${GAMEBASE_VERSION}"
-    //implementation "com.toast.android.gamebase:gamebase-adapter-auth-line:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-line:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-naver:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-payco:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-twitter:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-appleid:${GAMEBASE_VERSION}"
-    //implementation "com.toast.android.gamebase:gamebase-adapter-auth-kakaogame:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-kakaogame:${GAMEBASE_VERSION}"
+
+    implementation 'com.facebook.android:facebook-login:14.1.1'
 /*
     // >>> [Weibo IdP]
     implementation(files("../weibo_sdk/openDefault-4.4.4.aar"))

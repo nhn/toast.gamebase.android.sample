@@ -4,4 +4,9 @@
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="shopping">Shopping</string>
+    <string name="settings">Settings</string>
+
+    <!-- TODO: [Fix me] Set your Facebook App ID -->
+    <string name="facebook_app_id">252590081934203</string>
+    <string name="facebook_client_token">012e060867866b205ca253e258ab2991</string>
 </resources>

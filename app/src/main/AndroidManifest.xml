@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nhn.android.gamebase.sample">
+    package="com.toast.android.gamebase.sample">
+    <queries>
+        <!-- [All SDK] AppToWeb Authenthcation support start -->
+        <package android:name="com.android.chrome" />
+        <package android:name="com.chrome.beta" />
+        <package android:name="com.chrome.dev" />
+        <package android:name="com.sec.android.app.sbrowser" />
+        <!-- [All SDK] AppToWeb Authenthcation support end -->
 
+        <!-- [Facebook] Configurations begin -->
+        <package android:name="com.facebook.katana" />
+        <!-- [Facebook] Configurations end -->
+
+        <!-- [LINE] Configurations begin -->
+        <package android:name="jp.naver.line.android" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+        <!-- [LINE] Configurations end -->
+    </queries>
+
+    <!-- [Line] Add 'tools:replace="android:allowBackup"' because of Line SDK -->
     <application
         android:allowBackup="true"
+        tools:replace="android:allowBackup"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_gamebase"
@@ -12,6 +35,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GamebaseSampleProject"
         tools:targetApi="31">
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+
+        <!-- [KakaoGame] Configurations begin -->
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="oauth" android:scheme="@string/kakao_scheme" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".ui.SplashActivity"
@@ -23,7 +60,6 @@
                 <action android:name="android.intent.action.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </activity>
-
 
         <activity
             android:name=".ui.MainActivity"
