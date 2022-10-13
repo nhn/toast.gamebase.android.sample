@@ -21,7 +21,7 @@ import com.nhn.android.gamebase.sample.GamebaseActivity
 import com.nhn.android.gamebase.sample.ui.navigation.SampleAppNavHost
 import com.nhn.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.nhn.android.gamebase.sample.ui.navigation.screens
-import com.nhn.android.gamebase.sample.ui.theme.AccessInformationScreen
+import com.nhn.android.gamebase.sample.ui.access.AccessInformationScreen
 import com.nhn.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 import com.nhn.android.gamebase.sample.util.getIntInPreference
 import com.nhn.android.gamebase.sample.util.putIntInPreference

@@ -1,4 +1,4 @@
-package com.nhn.android.gamebase.sample.ui.theme
+package com.nhn.android.gamebase.sample.ui.access
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nhn.android.gamebase.sample.R
+import com.nhn.android.gamebase.sample.ui.theme.*
 
 @Composable
 fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
@@ -36,33 +36,6 @@ fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
             Spacer(modifier = Modifier.height(70.dp))
             MoveToLoginButton(updateVersionInPreferenceAndState)
         }
-    }
-}
-
-data class AccessInformation(val title : String, val subTitle : String, val imgSrc : Int, val contentDescription : String)
-
-class AccessInformationRepository() {
-    fun getAccessInformation(): List<AccessInformation> {
-        return listOf(
-            AccessInformation(
-                "광고 식별자(선택)",
-                "Gamebase IDEA API 호출 시 필요",
-                R.drawable.person,
-                "person"
-            ),
-            AccessInformation(
-                "카메라 (선택)",
-                "Game 고객센터 API 호출 시 필요.\n사용자가 문의사항에 사진 또는 동영상 첨부시 사용.",
-                R.drawable.photo_camera,
-                "photo_camera"
-            ),
-            AccessInformation(
-                "사진 (선택)",
-                "Gamebase 고객센터 API 호출 시 필요.\n사용자가 문의사항에 앨범에서 사진 또는 동영상 첨부시 사용.",
-                R.drawable.photo,
-                "photo"
-            )
-        )
     }
 }
 
@@ -103,7 +76,7 @@ fun AccessInformationBody() {
         )
 
         LazyColumn() {
-            items(items = AccessInformationRepository().getAccessInformation()){AccessInformation ->
+            items(items = AccessInformationRepository().getAccessInformation()){ AccessInformation ->
                 ListAccessInformation(information = AccessInformation)
             }
         }
