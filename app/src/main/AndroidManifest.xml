@@ -22,6 +22,11 @@
             <data android:scheme="https" />
         </intent>
         <!-- [LINE] Configurations end -->
+
+        <!-- [Weibo] Configurations begin -->
+        <package android:name="com.weico.international" />
+        <package android:name="com.sina.weibo" />
+        <!-- [Weibo] Configurations end -->
     </queries>
 
     <!-- [Line] Add 'tools:replace="android:allowBackup"' because of Line SDK -->

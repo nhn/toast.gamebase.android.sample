@@ -28,6 +28,10 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        // >>> [Weibo IdP]
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
     }
     signingConfigs {
         config {
@@ -98,11 +102,11 @@ dependencies {
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-kakaogame:${GAMEBASE_VERSION}"
 
     implementation 'com.facebook.android:facebook-login:14.1.1'
-/*
+
     // >>> [Weibo IdP]
     implementation(files("../weibo_sdk/openDefault-4.4.4.aar"))
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo-v4:${GAMEBASE_VERSION}"
-
+/*
     // >>> Gamebase - Purchase Adapter
     implementation "com.toast.android.gamebase:gamebase-adapter-purchase-google:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore:${GAMEBASE_VERSION}"
