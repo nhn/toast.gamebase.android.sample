@@ -95,7 +95,7 @@ dependencies {
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-payco:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-twitter:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-appleid:${GAMEBASE_VERSION}"
-    //implementation "com.toast.android.gamebase:gamebase-adapter-auth-kakaogame:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-kakaogame:${GAMEBASE_VERSION}"
 
     implementation 'com.facebook.android:facebook-login:14.1.1'
 /*
