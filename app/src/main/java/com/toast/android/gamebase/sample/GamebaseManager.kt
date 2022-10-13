@@ -28,6 +28,7 @@ import com.toast.android.gamebase.sample.util.printLoginWithIdpSuccess
 import com.toast.android.gamebase.sample.util.printPushAction
 import com.toast.android.gamebase.sample.util.printPushClickMessage
 import com.toast.android.gamebase.sample.util.printWhat
+
 import org.json.JSONObject
 
 class GamebaseManager {
