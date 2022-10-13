@@ -125,7 +125,7 @@ class GamebaseManager {
                         }
                         if (canPlay == GAME_PLAY_STATUS.PLAYABLE) {
                             Log.v(TAG, "Launching Succeeded")
-                            com.toast.android.gamebase.sample.AppFlowHelper.moveToLoginScene(
+                            AppFlowHelper.moveToMainActivity(
                                 activity
                             )
                         } else {

@@ -2,15 +2,13 @@ package com.toast.android.gamebase.sample.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,9 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.facebook.FacebookSdk
+import com.nhn.android.gamebase.sample.util.getIntInPreference
+import com.nhn.android.gamebase.sample.util.putIntInPreference
+import com.toast.android.gamebase.sample.BuildConfig
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.GamebaseManager
+import com.toast.android.gamebase.sample.ui.access.AccessInformationScreen
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppNavHost
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.ui.navigation.screens
@@ -36,13 +37,24 @@ class MainActivity : GamebaseActivity() {
         super.onCreate(savedInstanceState)
 
         val isApplicationRelaunched = intent.getBooleanExtra(INTENT_APPLICATION_RELAUNCHED, false)
-        val startRoute = if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Login.route
+        val startRoute =
+            if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Login.route
+        var shouldShowAccessInformationScreen by mutableStateOf(true)
+        val versionCheckKey = "version"
+
+        if (getIntInPreference(applicationContext, versionCheckKey, -1) == BuildConfig.VERSION_CODE) {
+            shouldShowAccessInformationScreen = false
+        }
         setContent {
             GamebaseSampleProjectTheme {
-                MainScreen(
+                LoadStartScreen(
                     activity = this,
-                    startRoute = startRoute
-                )
+                    startRoute = startRoute,
+                    shouldShowAccessInformationScreen = shouldShowAccessInformationScreen
+                ) {
+                    shouldShowAccessInformationScreen = false
+                    putIntInPreference(applicationContext, versionCheckKey, BuildConfig.VERSION_CODE)
+                }
             }
         }
         // Handles All of Gamebase events.
@@ -50,11 +62,28 @@ class MainActivity : GamebaseActivity() {
     }
 }
 
+@Composable
+fun LoadStartScreen(
+    activity: GamebaseActivity,
+    startRoute: String,
+    shouldShowAccessInformationScreen: Boolean,
+    updateVersionInPreferenceAndState: () -> Unit
+) {
+    if (shouldShowAccessInformationScreen) {
+        AccessInformationScreen(updateVersionInPreferenceAndState)
+    } else {
+        MainScreen(
+            activity = activity,
+            startRoute = startRoute
+        )
+    }
+}
+
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(
     activity: GamebaseActivity,
-    startRoute: String,
+    startRoute: String
 ) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
@@ -68,7 +97,7 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background,
     ) {
-        Scaffold (
+        Scaffold(
             topBar = {
                 if (currentScreen.route != "login") {
                     AppBar(currentScreen) {
@@ -97,7 +126,7 @@ fun MainScreen(
                     }
                 }
             },
-        ){ innerPadding ->
+        ) { innerPadding ->
             SampleAppNavHost(
                 activity = activity,
                 navController = navController,

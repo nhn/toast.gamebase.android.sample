@@ -27,8 +27,8 @@ private val LightColorPalette = lightColors(
 )
 
 private val LaunchingPalette = lightColors(
-    primary = LightBlue400,
-    background = LightBlue400
+    primary = Toast,
+    background = Toast
 )
 
 @Composable

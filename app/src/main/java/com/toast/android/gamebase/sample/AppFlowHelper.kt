@@ -50,8 +50,8 @@ class AppFlowHelper {
             }
         }
 
-        fun moveToLoginScene(activity: Activity) {
-            SplashActivity.LoadMainActivity(activity)
+        fun moveToMainActivity(activity: Activity) {
+            SplashActivity.LoadMainActivity(activity = activity, false)
         }
 
         fun showUnregisteredVersionAndMoveToStore(
