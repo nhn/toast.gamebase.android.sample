@@ -98,7 +98,7 @@ fun MainScreen(
     ) {
         Scaffold(
             topBar = {
-                if (currentScreen.route != "login" && currentScreen.route != "access_information") {
+                if (currentScreen.route != "login") {
                     AppBar(currentScreen) {
                         scope.launch {
                             scaffoldState.drawerState.open()
