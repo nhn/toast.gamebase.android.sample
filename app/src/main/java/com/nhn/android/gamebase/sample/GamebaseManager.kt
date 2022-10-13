@@ -281,5 +281,25 @@ class GamebaseManager {
         private fun isBannedUser(exception: GamebaseException): Boolean {
             return exception.code == GamebaseError.BANNED_MEMBER
         }
+
+        fun logout(
+            activity: Activity,
+            onLogoutFinished: (isSuccess: Boolean, errorMessage: String?) -> Unit) {
+            Gamebase.logout(activity) { exception ->
+                onLogoutFinished(Gamebase.isSuccess(exception), exception?.toJsonString())
+            }
+        }
+
+        fun withdraw(
+            activity: Activity,
+            onWithdrawFinished: (isSuccess: Boolean, errorMessage: String?) -> Unit) {
+            Gamebase.withdraw(activity) { exception ->
+                onWithdrawFinished(Gamebase.isSuccess(exception), exception?.toJsonString())
+            }
+        }
+
+        fun showError(activity: Activity, title: String, message: String) {
+            Gamebase.Util.showAlert(activity, title, message)
+        }
     }
 }

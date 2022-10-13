@@ -10,6 +10,7 @@ import com.nhn.android.gamebase.sample.ui.HomeScreen
 import com.nhn.android.gamebase.sample.ui.ProfileScreen
 import com.nhn.android.gamebase.sample.ui.ShoppingScreen
 import com.nhn.android.gamebase.sample.ui.login.LoginScreen
+import com.nhn.android.gamebase.sample.ui.settings.SettingsScreen
 
 @Composable
 fun SampleAppNavHost(
@@ -34,6 +35,9 @@ fun SampleAppNavHost(
         }
         composable(SampleAppScreens.Profile.route) {
             ProfileScreen()
+        }
+        composable(SampleAppScreens.Settings.route) {
+            SettingsScreen(activity, navController = navController)
         }
     }
 }
