@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
@@ -30,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.toast.android.gamebase.sample.GamebaseActivity
+import com.toast.android.gamebase.sample.ui.common.CopyrightFooter
 import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 
 @Composable
@@ -48,35 +51,31 @@ fun LoginScreen(
         }
     }
 
-    val scrollState = rememberScrollState()
     GamebaseSampleProjectTheme {
         Surface(Modifier.background(Color.White)) {
-            Column(
+            LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(scrollState),
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Spacer(modifier = Modifier.height(40.dp))
-                Text(
-                    style = MaterialTheme.typography.h4,
-                    text = "Gamebase 로그인"
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-                Text("원하시는 로그인 타입을 선택해 주세요.")
-                Spacer(modifier = Modifier.height(40.dp))
-                for (idp in supportedIdpList) {
+                item {
+                    Spacer(modifier = Modifier.height(40.dp))
+                    Text(
+                        style = MaterialTheme.typography.h4,
+                        text = "Gamebase 로그인"
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text("원하시는 로그인 타입을 선택해 주세요.")
+                    Spacer(modifier = Modifier.height(40.dp))
+                }
+                itemsIndexed(supportedIdpList) { _, idp ->
                     OutlineLoginButton(activity, loginViewModel, idp)
                     Spacer(modifier = Modifier.height(4.dp))
                 }
-                Spacer(modifier = Modifier.weight(1.0f))
-                Text(
-                    fontSize = 12.sp,
-                    color = Color.Gray,
-                    text = "Copyright NHN Corp All Rights reserved.",
-                )
-                Spacer(modifier = Modifier.height(48.dp))
+                item {
+                    CopyrightFooter()
+                }
             }
         }
     }
