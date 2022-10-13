@@ -1,13 +1,24 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
+
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+def keystorePropertiesFile = project.file("../keystore.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.nhn.android.gamebase.sample"
+        applicationId "com.toast.gamebasesample"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -18,11 +29,22 @@ android {
             useSupportLibrary true
         }
     }
-
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -46,7 +68,6 @@ android {
 }
 
 dependencies {
-
     implementation "androidx.multidex:multidex:$multidex_version"
 
     implementation 'androidx.core:core-ktx:1.7.0'
