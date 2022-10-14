@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.nhn.android.gamebase.sample.util.getIntInPreference
-import com.nhn.android.gamebase.sample.util.putIntInPreference
+import com.toast.android.gamebase.sample.util.getIntInPreference
+import com.toast.android.gamebase.sample.util.putIntInPreference
 import com.toast.android.gamebase.sample.BuildConfig
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.GamebaseManager
@@ -31,6 +31,7 @@ import kotlinx.coroutines.launch
 class MainActivity : GamebaseActivity() {
     companion object {
         const val INTENT_APPLICATION_RELAUNCHED = "intent_key_is_application_relaunched"
+        const val KEY_LAST_ACCESS_INFO_SHOWN_VERSION = "gamebase.sample.pref.access.info.shown.version"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +41,8 @@ class MainActivity : GamebaseActivity() {
         val startRoute =
             if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Login.route
         var shouldShowAccessInformationScreen by mutableStateOf(true)
-        val versionCheckKey = "version"
 
-        if (getIntInPreference(applicationContext, versionCheckKey, -1) == BuildConfig.VERSION_CODE) {
+        if (getIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, -1) == BuildConfig.VERSION_CODE) {
             shouldShowAccessInformationScreen = false
         }
         setContent {
@@ -53,7 +53,7 @@ class MainActivity : GamebaseActivity() {
                     shouldShowAccessInformationScreen = shouldShowAccessInformationScreen
                 ) {
                     shouldShowAccessInformationScreen = false
-                    putIntInPreference(applicationContext, versionCheckKey, BuildConfig.VERSION_CODE)
+                    putIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, BuildConfig.VERSION_CODE)
                 }
             }
         }
