@@ -3,9 +3,9 @@ package com.toast.android.gamebase.sample.ui.access
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Surface
@@ -23,82 +23,71 @@ import com.toast.android.gamebase.sample.ui.theme.*
 
 @Composable
 fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
+    val scrollState = rememberScrollState()
+
     Surface {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(White),
+                .background(White)
+                .verticalScroll(scrollState),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            AccessInformationTitle()
-            AccessInformationBody()
+            Column(
+                modifier = Modifier.padding(top = 50.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "앱 접근 권한 안내",
+                    color = Black,
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight(400),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    modifier = Modifier.padding(top = 20.dp),
+                    text = "Gamebase는 특정 상황에서 다음 권한들을 사용합니다.",
+                    color = Grey500,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight(300),
+                    textAlign = TextAlign.Center
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp)
+            ) {
+                Text(
+                    text = "선택적 접근 권한",
+                    color = Black,
+                    fontSize = 25.sp,
+                    fontWeight = FontWeight(350),
+                    textAlign = TextAlign.Start
+                )
+                AccessInformationRepository().getAccessInformation().forEach { AccessInformation ->
+                    ListAccessInformation(information = AccessInformation)
+                }
+            }
             Spacer(modifier = Modifier.height(70.dp))
-            MoveToLoginButton(updateVersionInPreferenceAndState)
-        }
-    }
-}
-
-@Composable
-fun AccessInformationTitle() {
-    Column(
-        modifier = Modifier.padding(top = 50.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "앱 접근 권한 안내",
-            color = Black,
-            fontSize = 30.sp,
-            fontWeight = FontWeight(400),
-            textAlign = TextAlign.Center
-        )
-        Text(
-            modifier = Modifier.padding(top = 20.dp),
-            text = "Gamebase는 특정 상황에서 다음 권한들을 사용합니다.",
-            color = Grey500,
-            fontSize = 15.sp,
-            fontWeight = FontWeight(300),
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-fun AccessInformationBody() {
-    Column(modifier = Modifier.padding(24.dp)) {
-        Text(
-            text = "선택적 접근 권한",
-            color = Black,
-            fontSize = 25.sp,
-            fontWeight = FontWeight(350),
-            textAlign = TextAlign.Start
-        )
-
-        LazyColumn() {
-            items(items = AccessInformationRepository().getAccessInformation()){ AccessInformation ->
-                ListAccessInformation(information = AccessInformation)
+            Button(
+                modifier = Modifier
+                    .height(70.dp)
+                    .fillMaxSize(),
+                onClick = updateVersionInPreferenceAndState,
+                colors = ButtonDefaults.buttonColors(backgroundColor = Toast),
+            ) {
+                Text(
+                    text = "확인",
+                    color = White,
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight(400),
+                    textAlign = TextAlign.Center
+                )
             }
         }
-    }
-}
-
-@Composable
-fun MoveToLoginButton(moveComposable: () -> Unit) {
-    Button(
-        modifier = Modifier
-            .height(70.dp)
-            .fillMaxSize(),
-        onClick = moveComposable,
-        colors = ButtonDefaults.buttonColors(backgroundColor = Toast),
-    ) {
-        Text(
-            text = "확인",
-            color = White,
-            fontSize = 30.sp,
-            fontWeight = FontWeight(400),
-            textAlign = TextAlign.Center
-        )
     }
 }
 
