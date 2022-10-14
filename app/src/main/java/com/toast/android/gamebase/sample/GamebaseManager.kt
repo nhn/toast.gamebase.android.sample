@@ -74,7 +74,13 @@ class GamebaseManager {
         // Initialization
         //
         ////////////////////////////////////////////////////////////////////////////////
-        fun initialize(activity: Activity) {
+        fun initialize(
+            activity: Activity,
+            moveToMainActivity: (Activity) -> Unit,
+            showErrorAndReturnToTitle: (Activity, String, String) -> Unit,
+            returnToTitle: (Activity) -> Unit,
+            showUnregisteredVersionAndMoveToStore: (Activity, String?, String?) -> Unit
+        ) {
             Gamebase.setDebugMode(DEBUG_MODE)
             val configuration =
                 GamebaseConfiguration.newBuilder(PROJECT_ID, APP_CLIENT_VERSION, STORE_CODE)
@@ -83,7 +89,8 @@ class GamebaseManager {
                     .enableBanPopup(ENABLE_BAN_POPUP)
                     .build()
 
-            Gamebase.initialize(activity, configuration,
+            Gamebase.initialize(
+                activity, configuration,
                 GamebaseDataCallback { launchingInfo, exception ->
                     if (Gamebase.isSuccess(exception)) {
                         var canPlay: GAME_PLAY_STATUS = GAME_PLAY_STATUS.PLAYABLE
@@ -126,9 +133,7 @@ class GamebaseManager {
                         }
                         if (canPlay == GAME_PLAY_STATUS.PLAYABLE) {
                             Log.v(TAG, "Launching Succeeded")
-                            AppFlowHelper.moveToMainActivity(
-                                activity
-                            )
+                            moveToMainActivity(activity)
                         } else {
                             Log.w(
                                 TAG,
@@ -136,13 +141,13 @@ class GamebaseManager {
                             )
                             if (canPlay == GAME_PLAY_STATUS.INITIALIZE_AGAIN) {
                                 if (!ENABLE_POPUP || !ENABLE_LAUNCHING_STATUS_POPUP) {
-                                    com.toast.android.gamebase.sample.AppFlowHelper.showErrorAndReturnToTitle(
+                                    showErrorAndReturnToTitle(
                                         activity,
                                         "Launching Failed",
                                         errorLog
                                     )
                                 } else {
-                                    com.toast.android.gamebase.sample.AppFlowHelper.returnToTitle(activity)
+                                    returnToTitle(activity)
                                 }
                             }
                         }
@@ -156,7 +161,7 @@ class GamebaseManager {
                             if (!ENABLE_POPUP || !ENABLE_LAUNCHING_STATUS_POPUP) {
                                 // Initialized with not registered game client version.
                                 // Show update popup manually.
-                                com.toast.android.gamebase.sample.AppFlowHelper.showUnregisteredVersionAndMoveToStore(
+                                showUnregisteredVersionAndMoveToStore(
                                     activity,
                                     updateInfo.installUrl,
                                     updateInfo.message
@@ -168,7 +173,7 @@ class GamebaseManager {
                             TAG,
                             "Launching Exception : " + exception.toJsonString()
                         )
-                        com.toast.android.gamebase.sample.AppFlowHelper.showErrorAndReturnToTitle(
+                        showErrorAndReturnToTitle(
                             activity,
                             "Launching Exception",
                             exception.toJsonString()
@@ -306,7 +311,8 @@ class GamebaseManager {
                     val additionalInfo: MutableMap<String, Any?> = mutableMapOf()
                     if (lastLoggedInProvider == AuthProvider.LINE) {
                         // TODO: Line login with dialog
-                        additionalInfo[AuthProviderCredentialConstants.LINE_CHANNEL_REGION] = "japan"
+                        additionalInfo[AuthProviderCredentialConstants.LINE_CHANNEL_REGION] =
+                            "japan"
                     }
                     loginWithIdP(activity, lastLoggedInProvider, additionalInfo, onLoginFinished)
                 } else {
@@ -330,14 +336,25 @@ class GamebaseManager {
             return !(userId == null || userId.equals("", ignoreCase = true))
         }
 
-        fun loginWithIdP(activity: Activity, provider: String, additionalInfo: Map<String, Any?>?, onLoginSuccess: () -> Unit) {
+        fun loginWithIdP(
+            activity: Activity,
+            provider: String,
+            additionalInfo: Map<String, Any?>?,
+            onLoginSuccess: () -> Unit
+        ) {
             Log.d(TAG, "Logger with provider : $provider")
             Gamebase.login(activity, provider, additionalInfo) { result, exception ->
                 if (Gamebase.isSuccess(exception)) {
                     printLoginWithIdpSuccess(TAG, provider)
                     handleLoginSuccess(activity, result, onLoginSuccess)
                 } else {
-                    handleIdpLoginFailed(activity, exception, provider, additionalInfo, onLoginSuccess)
+                    handleIdpLoginFailed(
+                        activity,
+                        exception,
+                        provider,
+                        additionalInfo,
+                        onLoginSuccess
+                    )
                 }
             }
         }
@@ -347,7 +364,7 @@ class GamebaseManager {
             exception: GamebaseException,
             provider: String,
             additionalInfo: Map<String, Any?>?,
-            onLoginSuccess:() -> Unit
+            onLoginSuccess: () -> Unit
         ) {
             if (isNetworkError(exception)) {
                 Gamebase.Util.showAlert(activity, "Network Error", "Check your network.")
@@ -364,7 +381,11 @@ class GamebaseManager {
             }
         }
 
-        private fun handleLoginSuccess(activity: Activity, authToken: AuthToken, onLoginSuccess: () -> Unit) {
+        private fun handleLoginSuccess(
+            activity: Activity,
+            authToken: AuthToken,
+            onLoginSuccess: () -> Unit
+        ) {
             printLoginSuccess(TAG, authToken)
 
             //TODO: Initialize Gamebase Analytics
@@ -384,7 +405,8 @@ class GamebaseManager {
 
         fun logout(
             activity: Activity,
-            onLogoutFinished: (isSuccess: Boolean, errorMessage: String?) -> Unit) {
+            onLogoutFinished: (isSuccess: Boolean, errorMessage: String?) -> Unit
+        ) {
             Gamebase.logout(activity) { exception ->
                 onLogoutFinished(Gamebase.isSuccess(exception), exception?.toJsonString())
             }
@@ -392,7 +414,8 @@ class GamebaseManager {
 
         fun withdraw(
             activity: Activity,
-            onWithdrawFinished: (isSuccess: Boolean, errorMessage: String?) -> Unit) {
+            onWithdrawFinished: (isSuccess: Boolean, errorMessage: String?) -> Unit
+        ) {
             Gamebase.withdraw(activity) { exception ->
                 onWithdrawFinished(Gamebase.isSuccess(exception), exception?.toJsonString())
             }
