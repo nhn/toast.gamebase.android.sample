@@ -76,10 +76,9 @@ class GamebaseManager {
         ////////////////////////////////////////////////////////////////////////////////
         fun initialize(
             activity: Activity,
-            moveToMainActivity: (Activity) -> Unit,
-            showErrorAndReturnToTitle: (Activity, String, String) -> Unit,
-            returnToTitle: (Activity) -> Unit,
-            showUnregisteredVersionAndMoveToStore: (Activity, String?, String?) -> Unit
+            onSuccess: () -> Unit,
+            showErrorAndReturnToSplash: (String?, String?) -> Unit,
+            showUnregisteredVersionAndMoveToStore: (String, String) -> Unit
         ) {
             Gamebase.setDebugMode(DEBUG_MODE)
             val configuration =
@@ -133,7 +132,7 @@ class GamebaseManager {
                         }
                         if (canPlay == GAME_PLAY_STATUS.PLAYABLE) {
                             Log.v(TAG, "Launching Succeeded")
-                            moveToMainActivity(activity)
+                            onSuccess()
                         } else {
                             Log.w(
                                 TAG,
@@ -141,13 +140,12 @@ class GamebaseManager {
                             )
                             if (canPlay == GAME_PLAY_STATUS.INITIALIZE_AGAIN) {
                                 if (!ENABLE_POPUP || !ENABLE_LAUNCHING_STATUS_POPUP) {
-                                    showErrorAndReturnToTitle(
-                                        activity,
+                                    showErrorAndReturnToSplash(
                                         "Launching Failed",
                                         errorLog
                                     )
                                 } else {
-                                    returnToTitle(activity)
+                                    showErrorAndReturnToSplash(null, null)
                                 }
                             }
                         }
@@ -162,7 +160,6 @@ class GamebaseManager {
                                 // Initialized with not registered game client version.
                                 // Show update popup manually.
                                 showUnregisteredVersionAndMoveToStore(
-                                    activity,
                                     updateInfo.installUrl,
                                     updateInfo.message
                                 )
@@ -173,8 +170,7 @@ class GamebaseManager {
                             TAG,
                             "Launching Exception : " + exception.toJsonString()
                         )
-                        showErrorAndReturnToTitle(
-                            activity,
+                        showErrorAndReturnToSplash(
                             "Launching Exception",
                             exception.toJsonString()
                         )
