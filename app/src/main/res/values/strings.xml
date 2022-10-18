@@ -45,4 +45,10 @@
     <string name="login_title">Gamebase 로그인</string>
     <string name="login_description">원하시는 로그인 타입을 선택해 주세요.</string>
 
+    <!-- profile screen -->
+    <string name="profile_picture_content_description">profile picture</string>
+    <string name="profile_menu_gamebase_user_id">Gamebase UserID</string>
+    <string name="profile_menu_gamebase_access_token">Gamebase AccessToken</string>
+    <string name="profile_menu_last_logged_in_provider">Last Logged in Provider</string>
+    <string name="profile_menu_connected_idp_list">Idp 연동 목록</string>
 </resources>

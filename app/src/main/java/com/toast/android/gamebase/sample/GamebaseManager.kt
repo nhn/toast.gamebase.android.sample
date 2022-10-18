@@ -420,5 +420,23 @@ class GamebaseManager {
         fun showError(activity: Activity, title: String, message: String) {
             Gamebase.Util.showAlert(activity, title, message)
         }
+
+        ////////////////////////////////////////////////////////////////////////////////
+        //
+        // Get Profile Data
+        //
+        ////////////////////////////////////////////////////////////////////////////////
+        fun getUserID(): String {
+            return Gamebase.getUserID()
+        }
+        fun getAccessToken(): String {
+            return Gamebase.getAccessToken()
+        }
+        fun getLastLoggedInProvider(): String {
+            return Gamebase.getLastLoggedInProvider() ?: ""
+        }
+        fun getAuthMappingList(): List<String> {
+            return Gamebase.getAuthMappingList()
+        }
     }
 }
