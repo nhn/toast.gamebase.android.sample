@@ -33,18 +33,13 @@ class SplashActivity : GamebaseActivity() {
     }
 
     private fun loadMainActivity() {
-        val thread: Thread = object : Thread() {
-            override fun run() {
-                mActivity.runOnUiThread {
-                    val intent = Intent(mActivity, MainActivity::class.java)
-                    intent.putExtra(MainActivity.INTENT_APPLICATION_RELAUNCHED, true)
-                    mActivity.startActivity(intent)
-                    mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                    mActivity.finish()
-                }
-            }
+        val intent = Intent(mActivity, MainActivity::class.java)
+        intent.putExtra(MainActivity.INTENT_APPLICATION_RELAUNCHED, true)
+        mActivity.let {
+            startActivity(intent)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
         }
-        thread.start()
     }
 
     private fun initialize() {
@@ -63,18 +58,18 @@ class SplashActivity : GamebaseActivity() {
     }
 
     private fun showErrorAndRetryInitialize(title: String?, message: String?) {
-        if(title.isNullOrEmpty() || message.isNullOrEmpty()) {
-            returnToSplash()
+        if (title.isNullOrEmpty() || message.isNullOrEmpty()) {
+            logoutOrRetryInitialize()
         } else {
             val returnToTitle =
                 DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
-                    returnToSplash()
+                    logoutOrRetryInitialize()
                 }
             Gamebase.Util.showAlert(mActivity, title, message, returnToTitle)
         }
     }
 
-    private fun returnToSplash() {
+    private fun logoutOrRetryInitialize() {
         val userId = Gamebase.getUserID()
         if (!userId.isNullOrEmpty()) {
             GamebaseManager.logout(mActivity) { isSuccess, errorMessage ->
@@ -90,7 +85,7 @@ class SplashActivity : GamebaseActivity() {
 
     private fun moveToMainActivity() {
         val intent = Intent(mActivity, MainActivity::class.java)
-        mActivity.apply {
+        mActivity.let {
             startActivity(intent)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
@@ -116,7 +111,7 @@ class SplashActivity : GamebaseActivity() {
     }
 
     private fun retryInitialize() {
-        if(reInitializeCount < MAX_COUNT) {
+        if (reInitializeCount < MAX_COUNT) {
             try {
                 Thread.sleep(1000)
             } catch (e: Exception) {
