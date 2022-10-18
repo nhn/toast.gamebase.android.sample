@@ -12,11 +12,12 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.GamebaseManager
 
+private const val INITIALIZE_RETRY_MAX_COUNT = 2
+private const val MARKET_INTENT_REQUEST_CODE = 123
+
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : GamebaseActivity() {
-    private val requestCode = 123
     private val mActivity = this
-    private val MAX_COUNT = 2
     private var reInitializeCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,7 +99,7 @@ class SplashActivity : GamebaseActivity() {
                 try {
                     val marketIntent = Intent(Intent.ACTION_VIEW)
                     marketIntent.data = Uri.parse(updateUrl)
-                    mActivity.startActivityForResult(marketIntent, requestCode)
+                    mActivity.startActivityForResult(marketIntent, MARKET_INTENT_REQUEST_CODE)
                 } catch (ignored: ActivityNotFoundException) {
                 }
             }
@@ -111,7 +112,7 @@ class SplashActivity : GamebaseActivity() {
     }
 
     private fun retryInitialize() {
-        if (reInitializeCount < MAX_COUNT) {
+        if (reInitializeCount < INITIALIZE_RETRY_MAX_COUNT) {
             try {
                 Thread.sleep(1000)
             } catch (e: Exception) {
