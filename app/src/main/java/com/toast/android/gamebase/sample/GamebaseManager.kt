@@ -77,7 +77,7 @@ class GamebaseManager {
         fun initialize(
             activity: Activity,
             onSuccess: () -> Unit,
-            showErrorAndReturnToSplash: (String?, String?) -> Unit,
+            showErrorAndRetryInitialize: (String?, String?) -> Unit,
             showUnregisteredVersionAndMoveToStore: (String, String) -> Unit
         ) {
             Gamebase.setDebugMode(DEBUG_MODE)
@@ -140,12 +140,12 @@ class GamebaseManager {
                             )
                             if (canPlay == GAME_PLAY_STATUS.INITIALIZE_AGAIN) {
                                 if (!ENABLE_POPUP || !ENABLE_LAUNCHING_STATUS_POPUP) {
-                                    showErrorAndReturnToSplash(
+                                    showErrorAndRetryInitialize(
                                         "Launching Failed",
                                         errorLog
                                     )
                                 } else {
-                                    showErrorAndReturnToSplash(null, null)
+                                    showErrorAndRetryInitialize(null, null)
                                 }
                             }
                         }
@@ -170,7 +170,7 @@ class GamebaseManager {
                             TAG,
                             "Launching Exception : " + exception.toJsonString()
                         )
-                        showErrorAndReturnToSplash(
+                        showErrorAndRetryInitialize(
                             "Launching Exception",
                             exception.toJsonString()
                         )

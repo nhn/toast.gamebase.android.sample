@@ -16,6 +16,9 @@ import com.toast.android.gamebase.sample.GamebaseManager
 class SplashActivity : GamebaseActivity() {
     private val requestCode = 123
     private val mActivity = this
+    private val MAX_COUNT = 2
+    private var reInitializeCount = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -50,8 +53,8 @@ class SplashActivity : GamebaseActivity() {
             onSuccess = {
                 moveToMainActivity()
             },
-            showErrorAndReturnToSplash = { title, message ->
-                showErrorAndReturnToSplash(title, message)
+            showErrorAndRetryInitialize = { title, message ->
+                showErrorAndRetryInitialize(title, message)
             },
             showUnregisteredVersionAndMoveToStore = { updateUrl, message ->
                 showUnregisteredVersionAndMoveToStore(updateUrl, message)
@@ -59,7 +62,7 @@ class SplashActivity : GamebaseActivity() {
         )
     }
 
-    private fun showErrorAndReturnToSplash(title: String?, message: String?) {
+    private fun showErrorAndRetryInitialize(title: String?, message: String?) {
         if(title.isNullOrEmpty() || message.isNullOrEmpty()) {
             returnToSplash()
         } else {
@@ -81,11 +84,7 @@ class SplashActivity : GamebaseActivity() {
                 }
             }
         } else {
-            val intent = Intent(mActivity, SplashActivity::class.java)
-            mActivity.apply {
-                startActivity(intent)
-                finish()
-            }
+            retryInitialize()
         }
     }
 
@@ -114,5 +113,17 @@ class SplashActivity : GamebaseActivity() {
             message,
             moveToStore
         )
+    }
+
+    private fun retryInitialize() {
+        if(reInitializeCount < MAX_COUNT) {
+            try {
+                Thread.sleep(1000)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            ++reInitializeCount
+            initialize()
+        }
     }
 }
