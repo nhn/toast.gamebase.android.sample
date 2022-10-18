@@ -23,7 +23,10 @@
     <!-- home screen -->
     <string name="home_main_text">Gamebase 기능들을 마음껏 경험해보세요</string>
 
-    <!-- TODO access information screen -->
+    <!-- access information screen -->
+    <string name="access_info_title">앱 접근 권한 안내</string>
+    <string name="access_info_subtitle">Gamebase는 특정 상황에서 다음 권한들을 사용합니다.</string>
+    <string name="access_info_list_title">선택적 접근 권한</string>
     <string name="access_info_ad_id_title">광고 식별자(선택)</string>
     <string name="access_info_ad_id_subtitle">Gamebase IDEA API 호출 시 필요</string>
     <string name="access_info_ad_id_content_description">person</string>

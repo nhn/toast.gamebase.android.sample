@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import com.toast.android.gamebase.sample.R
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,7 +42,7 @@ fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "앱 접근 권한 안내",
+                    text = stringResource(R.string.access_info_title),
                     color = Black,
                     fontSize = 30.sp,
                     fontWeight = FontWeight(400),
@@ -48,7 +50,7 @@ fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
                 )
                 Text(
                     modifier = Modifier.padding(top = 20.dp),
-                    text = "Gamebase는 특정 상황에서 다음 권한들을 사용합니다.",
+                    text = stringResource(R.string.access_info_subtitle),
                     color = Grey500,
                     fontSize = 15.sp,
                     fontWeight = FontWeight(300),
@@ -61,7 +63,7 @@ fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
                     .padding(24.dp)
             ) {
                 Text(
-                    text = "선택적 접근 권한",
+                    text = stringResource(R.string.access_info_list_title),
                     color = Black,
                     fontSize = 25.sp,
                     fontWeight = FontWeight(350),
