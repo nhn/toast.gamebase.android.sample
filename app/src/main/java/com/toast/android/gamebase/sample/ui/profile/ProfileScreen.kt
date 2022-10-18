@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,7 +41,7 @@ fun ProfileScreen(
 
         Image (
             painter = painterResource(id = R.drawable.profile),
-            contentDescription = "profile picture",
+            contentDescription = stringResource(R.string.profile_picture_content_description),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(180.dp)
@@ -49,19 +50,19 @@ fun ProfileScreen(
 
         Spacer(Modifier.height(40.dp))
 
-        Text(text = "Gamebase UserID", fontWeight = FontWeight.Bold)
+        Text(text = stringResource(R.string.profile_menu_gamebase_user_id), fontWeight = FontWeight.Bold)
         Text(text = profileViewModel.userId, color = Grey700)
         Spacer(Modifier.height(20.dp))
 
-        Text(text = "Gamebase AccessToken", fontWeight = FontWeight.Bold)
+        Text(text = stringResource(R.string.profile_menu_gamebase_access_token), fontWeight = FontWeight.Bold)
         Text(text = profileViewModel.accessToken, color = Grey700)
         Spacer(Modifier.height(20.dp))
 
-        Text(text = "Last Logged in Provider", fontWeight = FontWeight.Bold)
+        Text(text = stringResource(R.string.profile_menu_last_logged_in_provider), fontWeight = FontWeight.Bold)
         Text(text = profileViewModel.lastLoggedInProvider, color = Grey700)
         Spacer(Modifier.height(20.dp))
 
-        Text(text = "Idp 연동 목록", fontWeight = FontWeight.Bold)
+        Text(text = stringResource(R.string.profile_menu_connected_idp_list), fontWeight = FontWeight.Bold)
         for (idp in profileViewModel.connectedIdpList) {
             Text(text = idp, color = Grey700)
         }
