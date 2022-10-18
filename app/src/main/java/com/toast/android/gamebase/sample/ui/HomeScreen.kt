@@ -8,6 +8,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.toast.android.gamebase.sample.R
 
 @Composable
 fun HomeScreen() {
@@ -17,7 +19,7 @@ fun HomeScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text("Gamebase 기능들을 마음껏 경험해보세요")
+            Text(stringResource(id = R.string.home_main_text))
         }
     }
 }

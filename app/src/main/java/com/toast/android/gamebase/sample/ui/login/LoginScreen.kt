@@ -26,12 +26,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.toast.android.gamebase.sample.GamebaseActivity
+import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.common.CopyrightFooter
 import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 
@@ -63,10 +65,10 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.height(40.dp))
                     Text(
                         style = MaterialTheme.typography.h4,
-                        text = "Gamebase 로그인"
+                        text = stringResource(R.string.login_title)
                     )
                     Spacer(modifier = Modifier.height(2.dp))
-                    Text("원하시는 로그인 타입을 선택해 주세요.")
+                    Text(stringResource(R.string.login_description))
                     Spacer(modifier = Modifier.height(40.dp))
                 }
                 itemsIndexed(supportedIdpList) { _, idp ->

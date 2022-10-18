@@ -23,15 +23,15 @@ enum class LoginState() {
 
 // Add supported Idp List
 val supportedIdpList = listOf(
-    "guest",
-    "google",
-    "naver",
-    "appleid",
-    "facebook",
-    "kakaogame",
-    "line",
-    "twitter",
-    "weibo",
+    AuthProvider.GUEST,
+    AuthProvider.GOOGLE,
+    AuthProvider.NAVER,
+    AuthProvider.APPLEID,
+    AuthProvider.FACEBOOK,
+    AuthProvider.KAKAOGAME,
+    AuthProvider.LINE,
+    AuthProvider.TWITTER,
+    AuthProvider.WEIBO,
     "payco",
 )
 
@@ -75,15 +75,15 @@ class LoginViewModel() : ViewModel() {
 
     fun getIconResourceById(idp: String): Int {
         when(idp){
-            "guest" -> return R.drawable.guest_logo
-            "google" -> return R.drawable.google_logo
-            "naver" -> return R.drawable.naver_logo
-            "appleid" -> return R.drawable.appleid_logo
-            "facebook" -> return R.drawable.facebook_logo
-            "kakaogame" -> return R.drawable.kakaogames_logo
-            "line" -> return R.drawable.line_logo
-            "twitter" -> return R.drawable.twitter_logo
-            "weibo" -> return R.drawable.weibo_logo
+            AuthProvider.GUEST -> return R.drawable.guest_logo
+            AuthProvider.GOOGLE -> return R.drawable.google_logo
+            AuthProvider.NAVER -> return R.drawable.naver_logo
+            AuthProvider.APPLEID -> return R.drawable.appleid_logo
+            AuthProvider.FACEBOOK -> return R.drawable.facebook_logo
+            AuthProvider.KAKAOGAME -> return R.drawable.kakaogames_logo
+            AuthProvider.LINE -> return R.drawable.line_logo
+            AuthProvider.TWITTER -> return R.drawable.twitter_logo
+            AuthProvider.WEIBO -> return R.drawable.weibo_logo
             "payco" -> return R.drawable.payco_logo
         }
         return R.drawable.guest_logo

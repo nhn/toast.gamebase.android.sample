@@ -6,8 +6,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.toast.android.gamebase.sample.R
 
 @Composable
 fun CopyrightFooter() {
@@ -15,7 +17,7 @@ fun CopyrightFooter() {
     Text(
         fontSize = 12.sp,
         color = Color.Gray,
-        text = "Copyright NHN Corp All Rights reserved.",
+        text = stringResource(id = R.string.copyright_nhn),
     )
     Spacer(modifier = Modifier.height(48.dp))
 }

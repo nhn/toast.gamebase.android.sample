@@ -1,12 +1,48 @@
 <resources>
+
+    <!-- TODO: [Fix me] Set your Facebook App ID -->
+    <string name="facebook_app_id">252590081934203</string>
+    <string name="facebook_client_token">012e060867866b205ca253e258ab2991</string>
+
     <string name="app_name">Gamebase Sample</string>
+
+    <!-- menu name -->
     <string name="login">Login</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="shopping">Shopping</string>
     <string name="settings">Settings</string>
 
-    <!-- TODO: [Fix me] Set your Facebook App ID -->
-    <string name="facebook_app_id">252590081934203</string>
-    <string name="facebook_client_token">012e060867866b205ca253e258ab2991</string>
+    <!-- common -->
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="logout">logout</string>
+    <string name="withdraw">withdraw</string>
+    <string name="copyright_nhn">© NHN Corp. All rights reserved.</string>
+
+    <!-- home screen -->
+    <string name="home_main_text">Gamebase 기능들을 마음껏 경험해보세요</string>
+
+    <!-- TODO access information screen -->
+    <string name="access_info_ad_id_title">광고 식별자(선택)</string>
+    <string name="access_info_ad_id_subtitle">Gamebase IDEA API 호출 시 필요</string>
+    <string name="access_info_ad_id_content_description">person</string>
+    <string name="access_info_camera_title">카메라 (선택)</string>
+    <string name="access_info_camera_subtitle">Game 고객센터 API 호출 시 필요.\n사용자가 문의사항에 사진 또는 동영상 첨부시 사용.</string>
+    <string name="access_info_camera_content_description">camera</string>
+    <string name="access_info_photo_title">사진 (선택)</string>
+    <string name="access_info_photo_subtitle">Gamebase 고객센터 API 호출 시 필요.\n사용자가 문의사항에 앨범에서 사진 또는 동영상 첨부시 사용.</string>
+    <string name="access_info_photo_content_description">photo</string>
+
+    <!-- setting screen -->
+    <string name="setting_login_manage">Gamebase Sample</string>
+    <string name="setting_logout_dialog_title">Gamebase 로그아웃</string>
+    <string name="setting_logout_dialog_description">로그아웃 하시겠습니까?</string>
+    <string name="setting_withdraw_dialog_title">Gamebase 탈퇴</string>
+    <string name="setting_withdraw_dialog_description">탈퇴 하시겠습니까?\n 탈퇴 후에는 계정 복구가 어렵습니다.</string>
+
+    <!-- login screen -->
+    <string name="login_title">Gamebase 로그인</string>
+    <string name="login_description">원하시는 로그인 타입을 선택해 주세요.</string>
+
 </resources>

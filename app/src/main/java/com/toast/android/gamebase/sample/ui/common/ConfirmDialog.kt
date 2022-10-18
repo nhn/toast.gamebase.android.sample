@@ -10,7 +10,9 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toast.android.gamebase.sample.R
 
 @Composable
 fun ConfirmAlertDialog(
@@ -33,7 +35,9 @@ fun ConfirmAlertDialog(
             },
             buttons = {
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 20.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly) {
                     TextButton(
                         onClick = {
@@ -41,14 +45,14 @@ fun ConfirmAlertDialog(
                             setDialogStatus(false)
                         }
                     ) {
-                        Text("확인")
+                        Text(stringResource(id = R.string.button_ok))
                     }
                     TextButton(
                         onClick = {
                             setDialogStatus(false)
                         }
                     ) {
-                        Text("취소")
+                        Text(stringResource(id = R.string.button_cancel))
                     }
                 }
             },
