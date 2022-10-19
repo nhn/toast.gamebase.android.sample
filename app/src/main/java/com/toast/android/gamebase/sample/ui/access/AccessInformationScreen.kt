@@ -82,7 +82,7 @@ fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
                 colors = ButtonDefaults.buttonColors(backgroundColor = Toast),
             ) {
                 Text(
-                    text = "확인",
+                    text = stringResource(R.string.button_ok),
                     color = White,
                     fontSize = 30.sp,
                     fontWeight = FontWeight(400),
@@ -104,7 +104,7 @@ fun ListAccessInformation(information: AccessInformation) {
     ) {
         Image(
             painter = painterResource(information.imgSrc),
-            contentDescription = information.contentDescription,
+            contentDescription = stringResource(information.contentDescription),
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .width(60.dp)
@@ -114,13 +114,13 @@ fun ListAccessInformation(information: AccessInformation) {
         )
         Column() {
             Text(
-                text = information.title,
+                text = stringResource(information.title),
                 color = Black,
                 fontSize = 15.sp,
                 fontWeight = FontWeight(300)
             )
             Text(
-                text = information.subTitle,
+                text = stringResource(information.subTitle),
                 color = Grey500,
                 fontSize = 13.sp,
                 fontWeight = FontWeight(300)
