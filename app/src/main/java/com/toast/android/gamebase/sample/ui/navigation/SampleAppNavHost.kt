@@ -31,7 +31,7 @@ fun SampleAppNavHost(
             HomeScreen()
         }
         composable(SampleAppScreens.Shopping.route) {
-            ShoppingScreen()
+            ShoppingScreen(activity)
         }
         composable(SampleAppScreens.Profile.route) {
             ProfileScreen()
