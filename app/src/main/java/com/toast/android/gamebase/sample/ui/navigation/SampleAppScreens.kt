@@ -9,6 +9,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object Shopping: SampleAppScreens("shopping", R.string.shopping)
     object Profile: SampleAppScreens("profile", R.string.profile)
     object Settings: SampleAppScreens("settings", R.string.settings)
+    object UI: SampleAppScreens("ui", R.string.ui)
 
     companion object {
         fun fromRoute(route: String?): SampleAppScreens =
@@ -18,6 +19,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
                 Shopping.route -> Shopping
                 Profile.route -> Profile
                 Settings.route -> Settings
+                UI.route -> UI
                 null -> Home
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
             }
@@ -28,6 +30,7 @@ val screens = listOf(
     SampleAppScreens.Home,
     SampleAppScreens.Shopping,
     SampleAppScreens.Profile,
+    SampleAppScreens.UI,
     SampleAppScreens.Settings
     /*TODO: Add Screens*/
 )

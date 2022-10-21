@@ -7,11 +7,17 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.GamebaseManager
+import com.toast.android.gamebase.sample.showTermsView
+import com.toast.android.gamebase.sample.util.savePushConfiguration
+import com.toast.android.gamebase.terms.data.GamebaseShowTermsViewResult
 
+
+private const val TAG = "SplashActivity"
 private const val INITIALIZE_RETRY_MAX_COUNT = 2
 private const val MARKET_INTENT_REQUEST_CODE = 123
 
@@ -46,8 +52,10 @@ class SplashActivity : GamebaseActivity() {
     private fun initialize() {
         GamebaseManager.initialize(
             activity = mActivity,
-            onSuccess = {
-                moveToMainActivity()
+            onLaunchingSuccess = {
+                showTermsViewPopup {
+                    moveToMainActivity()
+                }
             },
             showErrorAndRetryInitialize = { title, message ->
                 showErrorAndRetryInitialize(title, message)
@@ -81,6 +89,33 @@ class SplashActivity : GamebaseActivity() {
             }
         } else {
             retryInitialize()
+        }
+    }
+
+    private fun showTermsViewPopup(onPopupClosed: (() -> Unit)?) {
+        showTermsView(
+            this
+        ) { container, exception ->
+            if (GamebaseManager.isRequestSuccess(exception)) {
+                val termsViewResult: GamebaseShowTermsViewResult? = GamebaseShowTermsViewResult.from(container)
+                if (termsViewResult != null) {
+                    Log.d("SplashActivity", "GamebaseShowTermsViewResult : $termsViewResult")
+                    if (termsViewResult.isTermsUIOpened) {
+                        savePushConfiguration(termsViewResult.pushConfiguration)
+                    }
+                }
+                onPopupClosed?.invoke()
+            } else {
+                Log.w(TAG, "showTermsView() failed : $exception")
+                // 시간 텀을 두고 약관팝업을 다시 보여주도록 구현할 수 있습니다.
+                Thread {
+                    try {
+                        Thread.sleep(500)
+                    } catch (ignored: Exception) {
+                    }
+                    showTermsViewPopup(onPopupClosed)
+                }.start()
+            }
         }
     }
 

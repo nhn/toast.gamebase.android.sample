@@ -1,5 +1,6 @@
 package com.toast.android.gamebase.sample.ui.login
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,6 +15,7 @@ import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
+import com.toast.android.gamebase.sample.util.loadPushConfiguration
 import kotlinx.coroutines.launch
 
 enum class LoginState() {
@@ -34,6 +36,8 @@ val supportedIdpList = listOf(
     AuthProvider.WEIBO,
     "payco",
 )
+
+private const val TAG = "LoginViewModel"
 
 class LoginViewModel() : ViewModel() {
     var uiState by mutableStateOf(value = LoginState.LOGGED_OUT)
@@ -60,6 +64,14 @@ class LoginViewModel() : ViewModel() {
             additionalInfo
         ) {
             uiState = LoginState.LOGGED_IN
+
+            // Call registerPush with saved PushConfiguration.
+            val savedPushConfiguration = loadPushConfiguration()
+            if (savedPushConfiguration != null) {
+                Gamebase.Push.registerPush(activity, savedPushConfiguration) {
+                    Log.e(TAG, "registerPush failed! ${it.code} ${it.message}")
+                };
+            }
         }
     }
 

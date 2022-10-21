@@ -22,6 +22,7 @@ val Typography = Typography(
     caption = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
+        color = Grey500,
         fontSize = 12.sp
     )
     */

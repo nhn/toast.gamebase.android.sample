@@ -11,6 +11,7 @@ import com.toast.android.gamebase.sample.ui.profile.ProfileScreen
 import com.toast.android.gamebase.sample.ui.ShoppingScreen
 import com.toast.android.gamebase.sample.ui.login.LoginScreen
 import com.toast.android.gamebase.sample.ui.settings.SettingsScreen
+import com.toast.android.gamebase.sample.ui.gamebaseui.UIScreen
 
 @Composable
 fun SampleAppNavHost(
@@ -28,7 +29,7 @@ fun SampleAppNavHost(
             LoginScreen(activity, navController = navController)
         }
         composable(SampleAppScreens.Home.route) {
-            HomeScreen()
+            HomeScreen(activity)
         }
         composable(SampleAppScreens.Shopping.route) {
             ShoppingScreen(activity)
@@ -38,6 +39,9 @@ fun SampleAppNavHost(
         }
         composable(SampleAppScreens.Settings.route) {
             SettingsScreen(activity, navController = navController)
+        }
+        composable(SampleAppScreens.UI.route) {
+            UIScreen(activity = activity)
         }
     }
 }

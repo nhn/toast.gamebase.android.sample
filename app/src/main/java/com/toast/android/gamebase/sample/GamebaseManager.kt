@@ -87,11 +87,16 @@ class GamebaseManager {
         ////////////////////////////////////////////////////////////////////////////////
         fun initialize(
             activity: Activity,
-            onSuccess: () -> Unit,
+            onLaunchingSuccess: () -> Unit,
             showErrorAndRetryInitialize: (String?, String?) -> Unit,
             showUnregisteredVersionAndMoveToStore: (String, String) -> Unit
         ) {
+            /**
+             * Show gamebase debug message.
+             * Set 'false' when build RELEASE.
+             */
             Gamebase.setDebugMode(DEBUG_MODE)
+
             val configuration =
                 GamebaseConfiguration.newBuilder(PROJECT_ID, APP_CLIENT_VERSION, STORE_CODE)
                     .enablePopup(ENABLE_POPUP)
@@ -102,91 +107,90 @@ class GamebaseManager {
             Gamebase.initialize(
                 activity, configuration,
                 GamebaseDataCallback { launchingInfo, exception ->
+                    val launchingStatusCode = launchingInfo.status.code
                     if (Gamebase.isSuccess(exception)) {
-                        var canPlay: GAME_PLAY_STATUS = GAME_PLAY_STATUS.PLAYABLE
-                        var errorLog = ""
-                        val launchingStatusCode = launchingInfo.status.code
-                        when (launchingStatusCode) {
-                            LaunchingStatus.IN_SERVICE -> {}
-                            LaunchingStatus.RECOMMEND_UPDATE -> Log.d(
-                                TAG,
-                                "There is a new version of this application."
-                            )
-                            LaunchingStatus.IN_SERVICE_BY_QA_WHITE_LIST, LaunchingStatus.IN_TEST, LaunchingStatus.IN_REVIEW, LaunchingStatus.IN_BETA -> Log.d(
-                                TAG,
-                                "You logged in because you are developer."
-                            )
-                            LaunchingStatus.REQUIRE_UPDATE -> {
-                                canPlay = GAME_PLAY_STATUS.STOP_PLAYING
-                                errorLog = "You have to update this application."
-                            }
-                            LaunchingStatus.BLOCKED_USER -> {
-                                canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
-                                errorLog = "You are blocked user!"
-                            }
-                            LaunchingStatus.TERMINATED_SERVICE -> {
-                                canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
-                                errorLog = "Game is closed!"
-                            }
-                            LaunchingStatus.INSPECTING_SERVICE, LaunchingStatus.INSPECTING_ALL_SERVICES -> {
-                                canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
-                                errorLog = "Under maintenance."
-                            }
-                            LaunchingStatus.INTERNAL_SERVER_ERROR -> {
-                                canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
-                                errorLog = "Unknown internal error."
-                            }
-                            else -> {
-                                canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
-                                errorLog = "Unknown internal error."
-                            }
-                        }
+                        // 게임 진입을 허용할지 여부를 론칭 코드에 따라 판단하십시오.
+                        val (canPlay, errorLog) = checkIfGameCanPlay(launchingStatusCode)
+
                         if (canPlay == GAME_PLAY_STATUS.PLAYABLE) {
+                            // 게임 플레이를 시작합니다.
                             Log.v(TAG, "Launching Succeeded")
-                            onSuccess()
+                            onLaunchingSuccess()
                         } else {
-                            Log.w(
-                                TAG,
-                                "Launching Failed($launchingStatusCode) : $errorLog"
-                            )
+                            // 게임 불가 사유를 밝히고 게임을 중지합니다.
+                            Log.w(TAG, "Launching Failed($launchingStatusCode) : $errorLog")
                             if (canPlay == GAME_PLAY_STATUS.INITIALIZE_AGAIN) {
                                 if (!ENABLE_POPUP || !ENABLE_LAUNCHING_STATUS_POPUP) {
-                                    showErrorAndRetryInitialize(
-                                        "Launching Failed",
-                                        errorLog
-                                    )
+                                    showErrorAndRetryInitialize("Launching Failed", errorLog)
                                 } else {
                                     showErrorAndRetryInitialize(null, null)
                                 }
                             }
                         }
                     } else {
+                        // 초기화에 실패하면 Gamebase SDK를 이용할 수 없습니다.
+                        // 오류를 표시하고 게임을 재시작 또는 종료해야 합니다.
+                        Log.w(TAG, "Launching Exception : " + exception.toJsonString())
+
                         val updateInfo = UpdateInfo.from(exception)
                         if (updateInfo != null) {
-                            Log.w(
-                                TAG,
-                                "Launching Exception : " + exception.toJsonString()
-                            )
                             if (!ENABLE_POPUP || !ENABLE_LAUNCHING_STATUS_POPUP) {
-                                // Initialized with not registered game client version.
-                                // Show update popup manually.
+                                // 등록되지 않은 game client version 입니다.
+                                // 사용자가 마켓으로 이동할 수 있도록 게임에서 직접 UI를 구현할 수 있습니다
                                 showUnregisteredVersionAndMoveToStore(
-                                    updateInfo.installUrl,
-                                    updateInfo.message
+                                    updateInfo.installUrl,  // Market URL
+                                    updateInfo.message      // Message from launching server
                                 )
                             }
                             return@GamebaseDataCallback
                         }
-                        Log.w(
-                            TAG,
-                            "Launching Exception : " + exception.toJsonString()
-                        )
-                        showErrorAndRetryInitialize(
-                            "Launching Exception",
-                            exception.toJsonString()
-                        )
+                        showErrorAndRetryInitialize("Launching Exception", exception.toJsonString())
                     }
                 })
+        }
+
+        private fun checkIfGameCanPlay(launchingStatusCode: Int): Pair<GAME_PLAY_STATUS, String> {
+            var canPlay: GAME_PLAY_STATUS = GAME_PLAY_STATUS.PLAYABLE
+            var errorLog = ""
+
+            // 론칭 상태를 확인합니다.
+            when (launchingStatusCode) {
+                LaunchingStatus.IN_SERVICE -> {}
+                LaunchingStatus.RECOMMEND_UPDATE ->
+                    Log.d(TAG, "There is a new version of this application.")
+                LaunchingStatus.IN_SERVICE_BY_QA_WHITE_LIST,
+                LaunchingStatus.IN_TEST,
+                LaunchingStatus.IN_REVIEW,
+                LaunchingStatus.IN_BETA ->
+                    Log.d(TAG, "You logged in because you are developer.")
+                LaunchingStatus.REQUIRE_UPDATE -> {
+                    canPlay = GAME_PLAY_STATUS.STOP_PLAYING
+                    errorLog = "You have to update this application."
+                }
+                LaunchingStatus.BLOCKED_USER -> {
+                    canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
+                    errorLog = "You are blocked user!"
+                }
+                LaunchingStatus.TERMINATED_SERVICE -> {
+                    canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
+                    errorLog = "Game is closed!"
+                }
+                // enablePopup과 enableLaunchingStatusPopup 값이 모두 true인 경우, 게임이 점검 상태라면 자동으로 점검 팝업 창이 표시됩니다.
+                LaunchingStatus.INSPECTING_SERVICE,
+                LaunchingStatus.INSPECTING_ALL_SERVICES -> {
+                    canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
+                    errorLog = "Under maintenance."
+                }
+                LaunchingStatus.INTERNAL_SERVER_ERROR -> {
+                    canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
+                    errorLog = "Unknown internal error."
+                }
+                else -> {
+                    canPlay = GAME_PLAY_STATUS.INITIALIZE_AGAIN
+                    errorLog = "Unknown internal error."
+                }
+            }
+            return (canPlay to errorLog)
         }
 
         // TODO: 동작 테스트 필요
