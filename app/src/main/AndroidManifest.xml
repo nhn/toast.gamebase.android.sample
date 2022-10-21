@@ -42,8 +42,11 @@
         android:theme="@style/Theme.GamebaseSampleProject"
         tools:targetApi="31">
 
+        <!-- [Facebook] Configurations begin -->
+        <!-- TODO: [Fix me] Set your Facebook App ID -->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        <!-- [Facebook] Configurations end -->
 
         <!-- [KakaoGame] Configurations begin -->
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -63,20 +66,14 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.GamebaseSampleProject">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
