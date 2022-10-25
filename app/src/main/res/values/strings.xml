@@ -40,10 +40,23 @@
 
     <!-- setting screen -->
     <string name="setting_login_manage">Gamebase Sample</string>
+    <string name="setting_version_title">버전 정보</string>
+    <string name="setting_version_sdk_title">Gamebase</string>
+    <string name="setting_account_title">계정 관리</string>
+    <string name="setting_account_connected_idp_title">idP 계정 연동</string>
+    <string name="setting_account_logout_title">로그아웃</string>
+    <string name="setting_account_withdraw_title">탈퇴하기</string>
     <string name="setting_logout_dialog_title">Gamebase 로그아웃</string>
     <string name="setting_logout_dialog_description">로그아웃 하시겠습니까?</string>
     <string name="setting_withdraw_dialog_title">Gamebase 탈퇴</string>
     <string name="setting_withdraw_dialog_description">탈퇴 하시겠습니까?\n 탈퇴 후에는 계정 복구가 어렵습니다.</string>
+    <string name="setting_notification_title">알림</string>
+    <string name="setting_normal_push_title">푸시알림 받기</string>
+    <string name="setting_advertising_push_title">광고성 푸시알림 받기</string>
+    <string name="setting_night_advertising_push_title">야간 광고성 푸시알림 받기</string>
+    <string name="setting_push_foreground_title">앱 활성화 중에도 푸시 알림 받기</string>
+    <string name="setting_extra_title">기타</string>
+    <string name="setting_service_center_title">고객센터</string>
 
     <!-- login screen -->
     <string name="login_title">Gamebase 로그인</string>

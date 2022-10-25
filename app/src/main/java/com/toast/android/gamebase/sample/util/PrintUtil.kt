@@ -1,14 +1,12 @@
 package com.toast.android.gamebase.sample.util
 
 import android.util.Log
-import com.toast.android.gamebase.sample.GamebaseManager
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.auth.data.AuthToken
 import com.toast.android.gamebase.auth.data.BanInfo
 import com.toast.android.gamebase.base.GamebaseException
-import com.toast.android.gamebase.base.auth.AuthProviderProfile
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
-import com.toast.android.gamebase.event.data.GamebaseEventMessage
+import com.toast.android.gamebase.base.push.data.GamebasePushTokenInfo
 import com.toast.android.gamebase.event.data.PushAction
 import com.toast.android.gamebase.event.data.PushMessage
 
@@ -66,5 +64,17 @@ fun printPushAction(TAG: String, category: String, pushAction: PushAction) {
     // When you clicked action button by 'Rich Message'.
     Log.i(TAG, "[GamebaseEventHandler] category : $category")
     Log.i(TAG, "[GamebaseEventHandler] PushAction : $pushAction")
+    Log.d(TAG, "--------------------------------------")
+}
+
+fun printQueryTokenInfo(TAG: String, tokenInfo: GamebasePushTokenInfo) {
+    Log.d(TAG, "QueryTokenInfo Success")
+    Log.i(TAG, "push token : " + tokenInfo.token)
+    Log.i(TAG, "enablePush : " + tokenInfo.agreement.pushEnabled)
+    Log.i(TAG, "enableAdPush : " + tokenInfo.agreement.adAgreement)
+    Log.i(
+        TAG,
+        "enableAdNightPush : " + tokenInfo.agreement.adAgreementNight
+    )
     Log.d(TAG, "--------------------------------------")
 }

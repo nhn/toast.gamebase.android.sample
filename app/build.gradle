@@ -112,9 +112,7 @@ dependencies {
     /*
     implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-purchase-galaxy:${GAMEBASE_VERSION}"
-
+    */
     // >>> Gamebase - Push Adapter
     implementation "com.toast.android.gamebase:gamebase-adapter-push-fcm:${GAMEBASE_VERSION}"
-
-     */
 }

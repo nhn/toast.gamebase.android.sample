@@ -96,7 +96,7 @@ class SplashActivity : GamebaseActivity() {
         showTermsView(
             this
         ) { container, exception ->
-            if (GamebaseManager.isRequestSuccess(exception)) {
+            if (GamebaseManager.requestSuccess(exception)) {
                 val termsViewResult: GamebaseShowTermsViewResult? = GamebaseShowTermsViewResult.from(container)
                 if (termsViewResult != null) {
                     Log.d("SplashActivity", "GamebaseShowTermsViewResult : $termsViewResult")

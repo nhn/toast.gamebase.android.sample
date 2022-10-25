@@ -28,7 +28,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
 
     fun requestItemNotConsumed(activity: GamebaseActivity) {
         GamebaseManager.requestNotConsumedItems(activity) { data, exception ->
-            if (!GamebaseManager.isRequestSuccess(exception)) {
+            if (!GamebaseManager.isSuccess(exception)) {
                 GamebaseManager.showAlert(
                     activity,
                     "requestItemNotConsumed error",
@@ -44,7 +44,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
 
     private fun requestItemList(activity: GamebaseActivity) {
         GamebaseManager.requestItemList(activity = activity) { data, exception ->
-            if (GamebaseManager.isRequestSuccess(exception)) {
+            if (GamebaseManager.isSuccess(exception)) {
                 itemList = data
             } else {
                 GamebaseManager.showAlert(
@@ -62,7 +62,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
 
     fun requestPurchaseItem(activity: GamebaseActivity, gamebaseProductId: String) {
         GamebaseManager.requestPurchase(activity, gamebaseProductId) { data, exception ->
-            if (GamebaseManager.isRequestSuccess(exception)) {
+            if (GamebaseManager.isSuccess(exception)) {
                 GamebaseManager.showToast(activity, "Success Purchase : $data", Toast.LENGTH_SHORT)
                 needLoadingDialog = false
                 if (data != null) {
