@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.showImageNotices
+import com.toast.android.gamebase.sample.gamebasemanager.showImageNotices
 
 @Composable
 fun HomeScreen(activity: Activity) {

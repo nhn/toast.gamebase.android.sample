@@ -14,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.showImageNotices
-import com.toast.android.gamebase.sample.showWebView
+import com.toast.android.gamebase.sample.gamebasemanager.showImageNotices
+import com.toast.android.gamebase.sample.gamebasemanager.showWebView
 import com.toast.android.gamebase.sample.ui.common.InputDialog
 import com.toast.android.gamebase.sample.ui.common.RoundButton
 

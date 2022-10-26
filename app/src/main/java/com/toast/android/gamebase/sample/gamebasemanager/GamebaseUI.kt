@@ -1,4 +1,4 @@
-package com.toast.android.gamebase.sample
+package com.toast.android.gamebase.sample.gamebasemanager
 
 import android.app.Activity
 import android.graphics.Color
@@ -17,13 +17,6 @@ import com.toast.android.gamebase.terms.data.GamebaseQueryTermsResult
 import com.toast.android.gamebase.terms.data.GamebaseTermsContent
 import com.toast.android.gamebase.terms.data.GamebaseUpdateTermsConfiguration
 
-private const val LOGGER_TAG = "GamebaseUI"
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// Image Notice
-//
-////////////////////////////////////////////////////////////////////////////////
 fun showImageNotices(activity: Activity, onCloseCallback: GamebaseCallback) {
     val configuration = ImageNoticeConfiguration.newBuilder()
         .build()
@@ -33,7 +26,7 @@ fun showImageNotices(activity: Activity, onCloseCallback: GamebaseCallback) {
         { exception -> onCloseCallback.onCallback(exception) },
         { payload, exception ->
             if (Gamebase.isSuccess(exception)) {
-                Log.i(LOGGER_TAG, "Clicked Image Notice Payload: $payload")
+                Log.i(TAG, "Clicked Image Notice Payload: $payload")
                 if (payload.equals("mygame://some_custom_scheme", ignoreCase = true)) {
                     // Do something with your custom scheme
                 }
@@ -45,11 +38,6 @@ fun closeImageNotices(activity: Activity?) {
     Gamebase.ImageNotice.closeImageNotices(activity!!)
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//
-// Image Notice - Example Code
-//
-////////////////////////////////////////////////////////////////////////////////
 fun imageNoticesExample(activity: Activity, onCloseCallback: GamebaseCallback) {
     val configuration = ImageNoticeConfiguration.newBuilder()
         .setBackgroundColor("#80000000")
@@ -61,7 +49,7 @@ fun imageNoticesExample(activity: Activity, onCloseCallback: GamebaseCallback) {
         { exception -> onCloseCallback.onCallback(exception) }
     ) { payload, exception ->
         if (Gamebase.isSuccess(exception)) {
-            Log.i(LOGGER_TAG, "Clicked Image Notice Payload: $payload")
+            Log.i(TAG, "Clicked Image Notice Payload: $payload")
             if (payload.equals("GO_TO_IN_GAME_STORE", ignoreCase = true)) {
                 // Custom: go to game store
                 closeImageNotices(activity)
@@ -73,11 +61,6 @@ fun imageNoticesExample(activity: Activity, onCloseCallback: GamebaseCallback) {
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//
-// Terms
-//
-////////////////////////////////////////////////////////////////////////////////
 fun showTermsView(
     activity: Activity,
     callback: GamebaseDataCallback<GamebaseDataContainer?>?
@@ -155,12 +138,6 @@ fun updateTermsExample(
         })
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//
-// WebView
-//
-////////////////////////////////////////////////////////////////////////////////
-// Show WebView.
 fun showWebView(activity: Activity, urlString: String) {
     Gamebase.WebView.showWebView(activity, urlString)
 }
@@ -189,11 +166,6 @@ fun openExternalBrowser(activity: Activity, urlString: String) {
     Gamebase.WebView.openWebBrowser(activity, urlString)
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//
-// WebView - Example Code
-//
-////////////////////////////////////////////////////////////////////////////////
 private fun webViewExample(
     activity: Activity,
     urlString: String,
@@ -237,7 +209,7 @@ private fun webViewExampleWithSchemeEvent(
                     closeWebView(activity)
                 }
             } else {
-                GamebaseManager.showError(
+                showAlert(
                     activity,
                     "Exception from WebView Callback",
                     exception.toString())

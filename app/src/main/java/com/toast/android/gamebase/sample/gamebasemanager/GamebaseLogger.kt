@@ -1,4 +1,4 @@
-package com.toast.android.gamebase.sample
+package com.toast.android.gamebase.sample.gamebasemanager
 
 import android.content.Context
 import android.util.Log
@@ -9,13 +9,7 @@ import com.toast.android.gamebase.toastlogger.data.LogEntry
 import com.toast.android.gamebase.toastlogger.data.LogFilter
 import com.toast.android.gamebase.toastlogger.data.LoggerListener
 
-private const val LOGGER_TAG = "GamebaseLogger"
-
-////////////////////////////////////////////////////////////////////////////////
-//
 // NHN Cloud Logger (Log & Crash)
-//
-////////////////////////////////////////////////////////////////////////////////
 
 // See https://docs.toast.com/en/Game/Gamebase/en/aos-logger/#initialize
 // TODO: [Fix me] AppKey for the Log & Crash from NHN Cloud Console > Analytics > Log & Crash Search

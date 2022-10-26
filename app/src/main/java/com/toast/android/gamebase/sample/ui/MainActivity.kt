@@ -8,7 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.toast.android.gamebase.sample.BuildConfig
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.GamebaseManager
+import com.toast.android.gamebase.sample.gamebasemanager.addGamebaseEventHandler
 import com.toast.android.gamebase.sample.ui.access.AccessInformationScreen
 import com.toast.android.gamebase.sample.ui.main.MainScreen
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
@@ -46,7 +46,7 @@ class MainActivity : GamebaseActivity() {
             }
         }
         // Handles All of Gamebase events.
-        GamebaseManager.addGamebaseEventHandler(this)
+        addGamebaseEventHandler(this)
     }
 }
 
