@@ -13,6 +13,7 @@
     <string name="shopping">Shopping</string>
     <string name="settings">Settings</string>
     <string name="ui">UI</string>
+    <string name="developer">Developer</string>
 
     <!-- common -->
     <string name="button_ok">OK</string>
@@ -77,4 +78,66 @@
     <!-- shopping screen -->
     <string name="loading">loading...</string>
 
+    <!-- developer menu string array -->
+    <string-array name="인증">
+        <item>탈퇴 유예 요청</item>
+        <item>탈퇴 유예 철회</item>
+    </string-array>
+
+    <string-array name="결제">
+        <item>구독 목록 조회</item>
+        <item>미소비 목록 조회</item>
+        <item>구매 내역 복원</item>
+    </string-array>
+
+    <string-array name="푸시">
+        <item>푸시 설정 조회</item>
+        <item>푸시 상세 설정</item>
+    </string-array>
+
+    <string-array name="Logger">
+        <item>Logger 초기화</item>
+        <item>디버그 로그 전송</item>
+    </string-array>
+
+    <string-array name="약관">
+        <item>약관 정보 조회</item>
+        <item>약관 상세 설정</item>
+        <item>약관 동의 내역 저장</item>
+    </string-array>
+
+    <string-array name="이미지공지">
+        <item>이미지공지 보기</item>
+        <item>이미지공지 상세설정</item>
+    </string-array>
+
+    <string-array name="웹뷰">
+        <item>웹뷰 열기</item>
+        <item>외부 브라우저 열기</item>
+        <item>웹뷰 상세설정</item>
+    </string-array>
+
+    <string-array name="Alert">
+        <item>Alert</item>
+        <item>토스트 메시지</item>
+    </string-array>
+
+    <string-array name="Analytics">
+        <item>유저 레벨 정보 설정</item>
+        <item>유저 레벨업 정보 설정</item>
+    </string-array>
+
+    <string-array name="고객센터">
+        <item>고객센터 URL 조회</item>
+        <item>고객센터 상세 설정</item>
+    </string-array>
+
+    <string-array name="기타">
+        <item>IDFA 조회</item>
+        <item>Device language 조회</item>
+        <item>Country code</item>
+        <item>Using country code</item>
+        <item>Country code</item>
+        <item>Display language 조회</item>
+    </string-array>
 </resources>
