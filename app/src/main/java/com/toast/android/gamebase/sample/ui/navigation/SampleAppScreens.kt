@@ -9,6 +9,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object Shopping: SampleAppScreens("shopping", R.string.shopping)
     object Profile: SampleAppScreens("profile", R.string.profile)
     object Settings: SampleAppScreens("settings", R.string.settings)
+    object IdpMapping: SampleAppScreens("idp_mapping", R.string.idp_mapping)
     object UI: SampleAppScreens("ui", R.string.ui)
     object Developer: SampleAppScreens("developer", R.string.developer)
 
@@ -20,6 +21,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
                 Shopping.route -> Shopping
                 Profile.route -> Profile
                 Settings.route -> Settings
+                IdpMapping.route -> IdpMapping
                 UI.route -> UI
                 Developer.route -> Developer
                 null -> Home

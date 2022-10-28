@@ -7,7 +7,14 @@ import androidx.navigation.NavController
 import com.toast.android.gamebase.base.push.PushConfiguration
 import com.toast.android.gamebase.base.push.data.GamebaseNotificationOptions
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.GamebaseManager
+import com.toast.android.gamebase.sample.gamebasemanager.getNotificationOptions
+import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
+import com.toast.android.gamebase.sample.gamebasemanager.openContact
+import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
+import com.toast.android.gamebase.sample.gamebasemanager.registerPush as gamebaseRegisterPush
+import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.gamebasemanager.withdraw as gamebaseWithdraw
+import com.toast.android.gamebase.sample.gamebasemanager.logout as gamebaseLogout
 import com.toast.android.gamebase.sample.ui.login.LoginState
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import kotlinx.coroutines.launch
@@ -59,23 +66,23 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun logout(activity: GamebaseActivity) {
-        GamebaseManager.logout(activity) { isSuccess, errorMessage ->
+        gamebaseLogout(activity) { isSuccess, errorMessage ->
             if (isSuccess) {
                 uiState = LoginState.LOGGED_OUT
             } else {
                 val msg = errorMessage ?: ""
-                GamebaseManager.showError(activity, "Logout Failed", msg)
+                showAlert(activity, "Logout Failed", msg)
             }
         }
     }
 
     fun withdraw(activity: GamebaseActivity) {
-        GamebaseManager.withdraw(activity) { isSuccess, errorMessage ->
+        gamebaseWithdraw(activity) { isSuccess, errorMessage ->
             if (isSuccess) {
                 uiState = LoginState.LOGGED_OUT
             } else {
                 val msg = errorMessage ?: ""
-                GamebaseManager.showError(activity, "Withdraw Failed", msg)
+                showAlert(activity, "Withdraw Failed", msg)
             }
         }
     }
@@ -93,11 +100,11 @@ class SettingsViewModel : ViewModel() {
             .enableAdAgreement(advertisePushState.value)
             .enableAdAgreementNight(nightAdvertisePushState.value).build()
 
-        GamebaseManager.registerPush(activity, configuration) { exception ->
-            if (GamebaseManager.isSuccess(exception)) {
+        gamebaseRegisterPush(activity, configuration) { exception ->
+            if (isSuccess(exception)) {
                 requestPushSettingInfo(activity)
             } else {
-                GamebaseManager.showAlert(
+                showAlert(
                     activity,
                     "registerPush error",
                     exception.toJsonString()
@@ -121,9 +128,9 @@ class SettingsViewModel : ViewModel() {
             GamebaseNotificationOptions.newBuilder().enableForeground(foregroundState.value)
                 .build()
 
-        GamebaseManager.registerPush(activity, configuration, notificationOpitions) { exception ->
-            if (!GamebaseManager.isSuccess(exception)) {
-                GamebaseManager.showAlert(
+        gamebaseRegisterPush(activity, configuration, notificationOpitions) { exception ->
+            if (!isSuccess(exception)) {
+                showAlert(
                     activity,
                     "registerPushForeground error",
                     exception.toJsonString()
@@ -137,13 +144,13 @@ class SettingsViewModel : ViewModel() {
     }
 
     private fun requestPushSettingInfo(activity: GamebaseActivity) {
-        GamebaseManager.queryTokenInfo(activity) { data, exception ->
-            if (GamebaseManager.isSuccess(exception)) {
+        queryTokenInfo(activity) { data, exception ->
+            if (isSuccess(exception)) {
                 pushState.value = data.agreement.pushEnabled
                 advertisePushState.value = data.agreement.adAgreement
                 nightAdvertisePushState.value = data.agreement.adAgreementNight
             } else {
-                GamebaseManager.showAlert(
+                showAlert(
                     activity,
                     "requestPushSettingInfo error",
                     exception.toJsonString()
@@ -157,12 +164,20 @@ class SettingsViewModel : ViewModel() {
     }
 
     private fun requestPushForegroundInfo(activity: GamebaseActivity) {
-        val notificationOptions = GamebaseManager.getNotificationOptions(activity)
+        val notificationOptions = getNotificationOptions(activity)
         foregroundState.value = notificationOptions.isForegroundEnabled
     }
 
     fun loadServiceCenter(activity: GamebaseActivity, userName: String?) {
-        GamebaseManager.openContact(activity, userName) {
+        openContact(activity, userName) {
+        }
+    }
+
+    fun navigateToIdpMapping(navController: NavController) {
+        viewModelScope.launch {
+            navController.navigate(SampleAppScreens.IdpMapping.route) {
+                launchSingleTop = true
+            }
         }
     }
 }

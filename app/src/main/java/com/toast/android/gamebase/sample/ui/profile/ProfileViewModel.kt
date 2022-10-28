@@ -4,7 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.toast.android.gamebase.sample.GamebaseManager
+import com.toast.android.gamebase.sample.gamebasemanager.*
 
 class ProfileViewModel : ViewModel() {
     var userId: String by mutableStateOf("")
@@ -17,9 +17,9 @@ class ProfileViewModel : ViewModel() {
         private set
 
     fun updateData() {
-        userId = GamebaseManager.getUserID()
-        accessToken = GamebaseManager.getAccessToken()
-        lastLoggedInProvider = GamebaseManager.getLastLoggedInProvider()
-        connectedIdpList = GamebaseManager.getAuthMappingList()
+        userId = getUserID()
+        accessToken = getAccessToken()
+        lastLoggedInProvider = getLastLoggedInProvider()
+        connectedIdpList = getAuthMappingList()
     }
 }

@@ -34,6 +34,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.getIconResourceById
+import com.toast.android.gamebase.sample.supportedIdpList
 import com.toast.android.gamebase.sample.ui.common.CopyrightFooter
 import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 
@@ -101,7 +103,7 @@ fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewMode
             horizontalArrangement = Arrangement.Start
         ) {
             Image(
-                painter = painterResource(loginViewModel.getIconResourceById(idp)),
+                painter = painterResource(getIconResourceById(idp)),
                 contentDescription = idp,
                 modifier = Modifier
                     .width(30.dp)

@@ -20,6 +20,7 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.common.ConfirmAlertDialog
 import com.toast.android.gamebase.sample.ui.common.NotificationWithSwitch
 import com.toast.android.gamebase.sample.ui.login.LoginState
+import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.ui.theme.Black
 
 @Composable
@@ -84,6 +85,7 @@ fun SettingsScreen(
             )
             // TODO : idp 계정 연동 구현 완료시 event 추가
             ListItem(R.string.setting_account_connected_idp_title) {
+                settingsViewModel.navigateToIdpMapping(navController)
                 Log.d("SettingScreen", "idp 계정 연동 listen 활성화")
             }
             ListItem(R.string.logout) {
@@ -143,19 +145,27 @@ fun SettingsScreen(
             }
         }
         ConfirmAlertDialog(
-            isLogoutDialogOpened.value,
-            stringResource(id = R.string.setting_logout_dialog_title),
-            stringResource(id = R.string.setting_logout_dialog_description),
-            { opened -> isLogoutDialogOpened.value = opened },
-            { settingsViewModel.logout(activity) }
+            dialogOpened = isLogoutDialogOpened.value,
+            title = stringResource(id = R.string.setting_logout_dialog_title),
+            description = stringResource(id = R.string.setting_logout_dialog_description),
+            setDialogStatus = { opened -> isLogoutDialogOpened.value = opened },
+            showCancel = true,
+            onOkButtonClicked = { settingsViewModel.logout(activity) }
         )
         ConfirmAlertDialog(
-            isWithdrawDialogOpened.value,
-            stringResource(id = R.string.setting_withdraw_dialog_title),
-            stringResource(id = R.string.setting_withdraw_dialog_description),
-            { opened -> isWithdrawDialogOpened.value = opened },
-            { settingsViewModel.withdraw(activity) }
+            dialogOpened = isWithdrawDialogOpened.value,
+            title = stringResource(id = R.string.setting_withdraw_dialog_title),
+            description = stringResource(id = R.string.setting_withdraw_dialog_description),
+            setDialogStatus = { opened -> isWithdrawDialogOpened.value = opened },
+            showCancel = true,
+            onOkButtonClicked = { settingsViewModel.withdraw(activity) }
         )
+        Text(text = stringResource(id = R.string.idp_mapping_button_do_mapping),
+            modifier = Modifier
+                .padding(6.dp)
+                .clickable {
+                    navController.navigate(SampleAppScreens.IdpMapping.route)
+                })
     }
 }
 
@@ -172,5 +182,3 @@ private fun ListItem(stringId: Int, event: () -> Unit) {
         fontWeight = FontWeight.Normal
     )
 }
-
-

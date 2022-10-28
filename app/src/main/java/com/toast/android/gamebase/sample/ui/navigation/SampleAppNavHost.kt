@@ -10,6 +10,7 @@ import com.toast.android.gamebase.sample.ui.HomeScreen
 import com.toast.android.gamebase.sample.ui.profile.ProfileScreen
 import com.toast.android.gamebase.sample.ui.ShoppingScreen
 import com.toast.android.gamebase.sample.ui.developer.DeveloperScreen
+import com.toast.android.gamebase.sample.ui.idpmap.IdpMappingScreen
 import com.toast.android.gamebase.sample.ui.login.LoginScreen
 import com.toast.android.gamebase.sample.ui.settings.SettingsScreen
 import com.toast.android.gamebase.sample.ui.gamebaseui.UIScreen
@@ -40,6 +41,9 @@ fun SampleAppNavHost(
         }
         composable(SampleAppScreens.Settings.route) {
             SettingsScreen(activity, navController = navController)
+        }
+        composable(SampleAppScreens.IdpMapping.route) {
+            IdpMappingScreen(activity = activity)
         }
         composable(SampleAppScreens.UI.route) {
             UIScreen(activity = activity)
