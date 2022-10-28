@@ -165,4 +165,12 @@ class SettingsViewModel : ViewModel() {
         GamebaseManager.openContact(activity, userName) {
         }
     }
+
+    fun navigateToIdpMapping(navController: NavController) {
+        viewModelScope.launch {
+            navController.navigate(SampleAppScreens.IdpMapping.route) {
+                launchSingleTop = true
+            }
+        }
+    }
 }
