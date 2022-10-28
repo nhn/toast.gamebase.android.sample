@@ -182,5 +182,3 @@ private fun ListItem(stringId: Int, event: () -> Unit) {
         fontWeight = FontWeight.Normal
     )
 }
-
-

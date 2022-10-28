@@ -11,11 +11,14 @@ import android.util.Log
 import androidx.activity.compose.setContent
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.GamebaseManager
-import com.toast.android.gamebase.sample.showTermsView
+import com.toast.android.gamebase.sample.gamebasemanager.initializeGamebase
+import com.toast.android.gamebase.sample.gamebasemanager.isLoggedIn
+import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
+import com.toast.android.gamebase.sample.gamebasemanager.logout
+import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.gamebasemanager.showTermsView
 import com.toast.android.gamebase.sample.util.savePushConfiguration
 import com.toast.android.gamebase.terms.data.GamebaseShowTermsViewResult
-
 
 private const val TAG = "SplashActivity"
 private const val INITIALIZE_RETRY_MAX_COUNT = 2
@@ -31,11 +34,11 @@ class SplashActivity : GamebaseActivity() {
         setContent {
             LaunchingScreen()
         }
-        if (Gamebase.isInitialized() && GamebaseManager.isLoggedIn()) {
+        if (Gamebase.isInitialized() && isLoggedIn()) {
             // Application relaunched by clicking of notification.
             loadMainActivity()
         } else {
-            initialize()
+            init()
         }
     }
 
@@ -49,8 +52,8 @@ class SplashActivity : GamebaseActivity() {
         }
     }
 
-    private fun initialize() {
-        GamebaseManager.initialize(
+    private fun init() {
+        initializeGamebase(
             activity = mActivity,
             onLaunchingSuccess = {
                 showTermsViewPopup {
@@ -81,10 +84,10 @@ class SplashActivity : GamebaseActivity() {
     private fun logoutOrRetryInitialize() {
         val userId = Gamebase.getUserID()
         if (!userId.isNullOrEmpty()) {
-            GamebaseManager.logout(mActivity) { isSuccess, errorMessage ->
+            logout(mActivity) { isSuccess, errorMessage ->
                 if (!isSuccess) {
                     val msg = errorMessage ?: ""
-                    GamebaseManager.showError(mActivity, "Logout Failed", msg)
+                    showAlert(mActivity, "Logout Failed", msg)
                 }
             }
         } else {
@@ -96,7 +99,7 @@ class SplashActivity : GamebaseActivity() {
         showTermsView(
             this
         ) { container, exception ->
-            if (GamebaseManager.isSuccess(exception)) {
+            if (isSuccess(exception)) {
                 val termsViewResult: GamebaseShowTermsViewResult? = GamebaseShowTermsViewResult.from(container)
                 if (termsViewResult != null) {
                     Log.d("SplashActivity", "GamebaseShowTermsViewResult : $termsViewResult")
@@ -154,7 +157,7 @@ class SplashActivity : GamebaseActivity() {
                 e.printStackTrace()
             }
             ++reInitializeCount
-            initialize()
+            init()
         }
     }
 }

@@ -10,7 +10,10 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.GamebaseManager
+import com.toast.android.gamebase.sample.gamebasemanager.isLoggedIn
+import com.toast.android.gamebase.sample.gamebasemanager.lastProviderLogin
+import com.toast.android.gamebase.sample.gamebasemanager.loginWithIdP
+import com.toast.android.gamebase.sample.gamebasemanager.registerPush
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.loadPushConfiguration
 import kotlinx.coroutines.launch
@@ -27,8 +30,8 @@ class LoginViewModel() : ViewModel() {
         private set
 
     fun tryLastIdpLogin(activity: GamebaseActivity) {
-        if (Gamebase.getLastLoggedInProvider() != null && !GamebaseManager.isLoggedIn()) {
-            GamebaseManager.lastProviderLogin(activity) {
+        if (Gamebase.getLastLoggedInProvider() != null && !isLoggedIn()) {
+            lastProviderLogin(activity) {
                 uiState = LoginState.LOGGED_IN
             }
         }
@@ -41,7 +44,7 @@ class LoginViewModel() : ViewModel() {
             // TODO: Add real current region for LINE login
             additionalInfo[AuthProviderCredentialConstants.LINE_CHANNEL_REGION] = "japan"
         }
-        GamebaseManager.loginWithIdP(
+        loginWithIdP(
             activity,
             idp,
             additionalInfo
@@ -51,7 +54,7 @@ class LoginViewModel() : ViewModel() {
             // Call registerPush with saved PushConfiguration.
             val savedPushConfiguration = loadPushConfiguration()
             savedPushConfiguration?.let {
-                GamebaseManager.registerPush(activity, savedPushConfiguration, callback = null)
+                registerPush(activity, savedPushConfiguration, callback = null)
             }
         }
     }

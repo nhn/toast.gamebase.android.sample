@@ -7,7 +7,12 @@ import androidx.compose.runtime.*
 import androidx.lifecycle.*
 import com.toast.android.gamebase.base.purchase.PurchasableItem
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.GamebaseManager
+import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
+import com.toast.android.gamebase.sample.gamebasemanager.requestItemList as gamebaseRequestItemList
+import com.toast.android.gamebase.sample.gamebasemanager.requestNotConsumedItems
+import com.toast.android.gamebase.sample.gamebasemanager.requestPurchase
+import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.gamebasemanager.showToast
 import kotlinx.coroutines.launch
 
 private const val TAG: String = "ShoppingScreen"
@@ -27,9 +32,9 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
     }
 
     fun requestItemNotConsumed(activity: GamebaseActivity) {
-        GamebaseManager.requestNotConsumedItems(activity) { data, exception ->
-            if (!GamebaseManager.isSuccess(exception)) {
-                GamebaseManager.showAlert(
+        requestNotConsumedItems(activity) { data, exception ->
+            if (!isSuccess(exception)) {
+                showAlert(
                     activity,
                     "requestItemNotConsumed error",
                     exception.toJsonString()
@@ -43,11 +48,11 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
     }
 
     private fun requestItemList(activity: GamebaseActivity) {
-        GamebaseManager.requestItemList(activity = activity) { data, exception ->
-            if (GamebaseManager.isSuccess(exception)) {
+        gamebaseRequestItemList(activity = activity) { data, exception ->
+            if (isSuccess(exception)) {
                 itemList = data
             } else {
-                GamebaseManager.showAlert(
+                showAlert(
                     activity,
                     "requestItemListPurchasable error",
                     exception.toJsonString()
@@ -61,9 +66,9 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
     }
 
     fun requestPurchaseItem(activity: GamebaseActivity, gamebaseProductId: String) {
-        GamebaseManager.requestPurchase(activity, gamebaseProductId) { data, exception ->
-            if (GamebaseManager.isSuccess(exception)) {
-                GamebaseManager.showToast(activity, "Success Purchase : $data", Toast.LENGTH_SHORT)
+        requestPurchase(activity, gamebaseProductId) { data, exception ->
+            if (isSuccess(exception)) {
+                showToast(activity, "Success Purchase : $data", Toast.LENGTH_SHORT)
                 needLoadingDialog = false
                 if (data != null) {
                     Log.d(TAG, data.paymentSeq)
@@ -82,7 +87,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
                     )
                 }
             } else {
-                GamebaseManager.showAlert(activity, "Error", exception.toJsonString())
+                showAlert(activity, "Error", exception.toJsonString())
                 needLoadingDialog = false
                 Log.d(
                     TAG,

@@ -1,7 +1,6 @@
 package com.toast.android.gamebase.sample.ui.idpmap
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +11,11 @@ import androidx.lifecycle.viewModelScope
 import com.toast.android.gamebase.auth.mapping.data.ForcingMappingTicket
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
-import com.toast.android.gamebase.sample.GamebaseManager
+import com.toast.android.gamebase.sample.gamebasemanager.addIdpMapping
+import com.toast.android.gamebase.sample.gamebasemanager.forceIdpMapping
+import com.toast.android.gamebase.sample.gamebasemanager.getAuthMappingList
+import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
+import com.toast.android.gamebase.sample.gamebasemanager.removeIdpMapping
 import com.toast.android.gamebase.sample.supportedIdpList
 import kotlinx.coroutines.launch
 
@@ -34,7 +37,7 @@ class IdpMappingViewModel: ViewModel() {
 
     fun fetchAuthMappingList() {
         val supportedIdpListWithoutGuest = supportedIdpList.drop(1)
-        val mappedIdpList = GamebaseManager.getAuthMappingList()
+        val mappedIdpList = getAuthMappingList()
         val authMappingMap: SnapshotStateMap<String, Boolean> = mutableStateMapOf()
 
         supportedIdpListWithoutGuest.map {
@@ -48,8 +51,8 @@ class IdpMappingViewModel: ViewModel() {
     }
 
     fun addMapping(activity: Activity, idp: String) {
-        GamebaseManager.addMappingForProvider(activity, idp) { exception: GamebaseException? ->
-            val isSuccess = GamebaseManager.isSuccess(exception)
+        addIdpMapping(activity, idp) { exception: GamebaseException? ->
+            val isSuccess = isSuccess(exception)
             if (isSuccess) {
                 idpMappedMap[idp] = true
             } else if (exception?.code == GamebaseError.AUTH_ADD_MAPPING_ALREADY_MAPPED_TO_OTHER_MEMBER){
@@ -63,8 +66,8 @@ class IdpMappingViewModel: ViewModel() {
 
     fun removeMapping(activity: Activity, idp: String) {
         viewModelScope.launch {
-            GamebaseManager.removeMapping(activity, idp) { exception: GamebaseException? ->
-                val isSuccess = GamebaseManager.isSuccess(exception)
+            removeIdpMapping(activity, idp) { exception: GamebaseException? ->
+                val isSuccess = isSuccess(exception)
                 if (isSuccess) {
                     idpMappedMap[idp] = false
                 } else {
@@ -80,8 +83,8 @@ class IdpMappingViewModel: ViewModel() {
             return
         }
         val forcingMappingTicket = ForcingMappingTicket.from(exception);
-        GamebaseManager.forceMapping(activity, forcingMappingTicket) { exception ->
-            val isSuccess = GamebaseManager.isSuccess(exception)
+        forceIdpMapping(activity, forcingMappingTicket) { exception ->
+            val isSuccess = isSuccess(exception)
             if (isSuccess) {
                 idpMappedMap[idp] = true
             } else {
