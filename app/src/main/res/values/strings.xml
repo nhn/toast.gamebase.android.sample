@@ -90,18 +90,30 @@
     <string name="idp_mapping_force_mapping_failed_dialog_description">계정 강제 연동에 실패하였습니다.</string>
   
     <!-- developer menu string array -->
-    <string-array name="인증">
+    <string name="developer_menu_category_auth">Auth</string>
+    <string name="developer_menu_category_purchase">Purchase</string>
+    <string name="developer_menu_category_push">Push</string>
+    <string name="developer_menu_category_logger">Logger</string>
+    <string name="developer_menu_category_terms">Terms</string>
+    <string name="developer_menu_category_image_notice">ImageNotice</string>
+    <string name="developer_menu_category_webview">WebView</string>
+    <string name="developer_menu_category_alert">Alert</string>
+    <string name="developer_menu_category_analytics">Analytics</string>
+    <string name="developer_menu_category_contact">Contact</string>
+    <string name="developer_menu_category_etc">Etc</string>
+
+    <string-array name="Auth">
         <item>탈퇴 유예 요청</item>
         <item>탈퇴 유예 철회</item>
     </string-array>
 
-    <string-array name="결제">
+    <string-array name="Purchase">
         <item>구독 목록 조회</item>
         <item>미소비 목록 조회</item>
         <item>구매 내역 복원</item>
     </string-array>
 
-    <string-array name="푸시">
+    <string-array name="Push">
         <item>푸시 설정 조회</item>
         <item>푸시 상세 설정</item>
     </string-array>
@@ -111,18 +123,18 @@
         <item>디버그 로그 전송</item>
     </string-array>
 
-    <string-array name="약관">
+    <string-array name="Terms">
         <item>약관 정보 조회</item>
         <item>약관 상세 설정</item>
         <item>약관 동의 내역 저장</item>
     </string-array>
 
-    <string-array name="이미지공지">
+    <string-array name="ImageNotice">
         <item>이미지공지 보기</item>
         <item>이미지공지 상세설정</item>
     </string-array>
 
-    <string-array name="웹뷰">
+    <string-array name="WebView">
         <item>웹뷰 열기</item>
         <item>외부 브라우저 열기</item>
         <item>웹뷰 상세설정</item>
@@ -138,12 +150,12 @@
         <item>유저 레벨업 정보 설정</item>
     </string-array>
 
-    <string-array name="고객센터">
+    <string-array name="Contact">
         <item>고객센터 URL 조회</item>
         <item>고객센터 상세 설정</item>
     </string-array>
 
-    <string-array name="기타">
+    <string-array name="Etc">
         <item>IDFA 조회</item>
         <item>Device language 조회</item>
         <item>Country code</item>
