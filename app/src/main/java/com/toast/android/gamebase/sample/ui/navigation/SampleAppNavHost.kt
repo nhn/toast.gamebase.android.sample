@@ -49,7 +49,7 @@ fun SampleAppNavHost(
             UIScreen(activity = activity)
         }
         composable(SampleAppScreens.Developer.route) {
-            DeveloperScreen()
+            DeveloperScreen(activity)
         }
     }
 }

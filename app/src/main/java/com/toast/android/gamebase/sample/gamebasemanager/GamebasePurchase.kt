@@ -60,3 +60,21 @@ fun requestPurchase(
         callback?.onCallback(data, exception)
     }
 }
+
+fun requestActivatedPurchases(
+    activity: Activity,
+    callback: GamebaseDataCallback<List<PurchasableReceipt>>?
+) {
+    Gamebase.Purchase.requestActivatedPurchases(activity) { list, exception ->
+        callback?.onCallback(list, exception)
+    }
+}
+
+fun requestItemListOfNotConsumed(
+    activity: Activity,
+    callback: GamebaseDataCallback<List<PurchasableReceipt>>?
+) {
+    Gamebase.Purchase.requestItemListOfNotConsumed(activity) { data, exception ->
+        callback?.onCallback(data, exception)
+    }
+}
