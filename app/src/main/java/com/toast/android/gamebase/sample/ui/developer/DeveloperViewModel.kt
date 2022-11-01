@@ -3,13 +3,16 @@ package com.toast.android.gamebase.sample.ui.developer
 import android.app.Activity
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
+import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
 import com.toast.android.gamebase.sample.gamebasemanager.requestActivatedPurchases
 import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotConsumed
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 
 class DeveloperViewModel: ViewModel() {
     val menuMap = createMenuMap()
@@ -69,12 +72,24 @@ class DeveloperViewModel: ViewModel() {
         return menuMap
     }
 
-    fun onMenuClick(activity: Activity, menuItem: Menu) {
+    fun onMenuClick(activity: Activity, menuItem: Menu, navController: NavController) {
         if (menuItem.category == R.array.Purchase) {
             if (menuItem.id == 0) {
                 fetchActivatedPurchaseList(activity)
             } else if (menuItem.id == 1) {
                 fetchItemNotConsumedList(activity)
+            }
+        } else if (menuItem.category == R.array.Push) {
+            if (menuItem.id == 0) {
+                queryTokenInfo(activity) { pushTokenInfo, exception ->
+                    if (isSuccess(exception)) {
+                        showAlert(activity, "Success", pushTokenInfo.toJsonString())
+                    } else {
+                        showAlert(activity, "Failed", exception.toJsonString())
+                    }
+                }
+            } else if (menuItem.id == 1) {
+                navController.navigate(SampleAppScreens.DeveloperPushSetting.route)
             }
         }
         // TODO: More Menus

@@ -15,12 +15,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.Navigator
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 
 @Composable
 fun DeveloperScreen(
     activity: Activity,
-    viewModel: DeveloperViewModel = viewModel()
+    viewModel: DeveloperViewModel = viewModel(),
+    navController: NavController
 ) {
     Box {
         Surface(color = MaterialTheme.colors.surface) {
@@ -30,7 +33,12 @@ fun DeveloperScreen(
                 viewModel.purchaseItemList,
                 {}
             )
-            DeveloperMenuList(groupedListMap = viewModel.menuMap, activity, viewModel)
+            DeveloperMenuList(
+                groupedListMap = viewModel.menuMap,
+                activity,
+                viewModel,
+                navController
+            )
         }
     }
 }
@@ -40,14 +48,16 @@ fun DeveloperScreen(
 fun DeveloperMenuList(
     groupedListMap: Map<String, List<Menu>>,
     activity: Activity,
-    viewModel: DeveloperViewModel) {
+    viewModel: DeveloperViewModel,
+    navController: NavController
+) {
     LazyColumn {
         groupedListMap.forEach { (category, subMenuList) ->
             item {
                 CharacterHeader(category)
             }
             items(items = subMenuList) { subMenu ->
-                MenuItem(subMenu, activity, viewModel)
+                MenuItem(subMenu, activity, viewModel, navController)
             }
         }
     }
@@ -67,13 +77,15 @@ fun CharacterHeader(text: String) {
 @Composable
 fun MenuItem(menuItem: Menu,
              activity: Activity,
-             viewModel: DeveloperViewModel) {
+             viewModel: DeveloperViewModel,
+             navController: NavController
+) {
     Surface (
         color = MaterialTheme.colors.surface,
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                viewModel.onMenuClick(activity, menuItem)
+                viewModel.onMenuClick(activity, menuItem, navController)
             }
             .padding(vertical = 12.dp, horizontal = 8.dp)
     ) {

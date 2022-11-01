@@ -18,7 +18,7 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.common.ConfirmAlertDialog
-import com.toast.android.gamebase.sample.ui.common.NotificationWithSwitch
+import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
 import com.toast.android.gamebase.sample.ui.login.LoginState
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.ui.theme.Black
@@ -102,28 +102,28 @@ fun SettingsScreen(
                 modifier = Modifier.padding(6.dp),
                 fontWeight = FontWeight.Bold
             )
-            NotificationWithSwitch(
+            SwitchWithLabel(
                 stringId = R.string.setting_normal_push_title,
                 state = settingsViewModel.pushState,
                 enableSwitch = true
             ) {
                 settingsViewModel.registerPush(activity, PUSH_TYPE.NORMAL_PUSH)
             }
-            NotificationWithSwitch(
+            SwitchWithLabel(
                 stringId = R.string.setting_advertising_push_title,
                 state = settingsViewModel.advertisePushState,
                 enableSwitch = settingsViewModel.pushState.value
             ) {
                 settingsViewModel.registerPush(activity, PUSH_TYPE.ADVERTISING_PUSH)
             }
-            NotificationWithSwitch(
+            SwitchWithLabel(
                 stringId = R.string.setting_night_advertising_push_title,
                 state = settingsViewModel.nightAdvertisePushState,
                 enableSwitch = (settingsViewModel.pushState.value && settingsViewModel.advertisePushState.value)
             ) {
                 settingsViewModel.registerPush(activity, PUSH_TYPE.NIGHT_ADVERTISING_PUSH)
             }
-            NotificationWithSwitch(
+            SwitchWithLabel(
                 stringId = R.string.setting_push_foreground_title,
                 state = settingsViewModel.foregroundState,
                 enableSwitch = settingsViewModel.pushState.value

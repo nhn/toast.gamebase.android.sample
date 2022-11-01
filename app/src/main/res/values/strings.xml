@@ -164,4 +164,8 @@
         <item>Display language 조회</item>
     </string-array>
 
+    <!-- developer push setting -->
+    <string name="developer_push_noti_enable_badge">뱃지 아이콘 사용</string>
+    <string name="developer_push_noti_enable_set_priority">알림 우선 순위</string>
+
 </resources>
