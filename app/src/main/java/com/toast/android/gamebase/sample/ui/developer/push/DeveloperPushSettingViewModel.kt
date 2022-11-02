@@ -11,7 +11,7 @@ import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 
 const val NOTIFICATION_PRIORITY_MIN = -2
-const val NOTIFICATION_PRIORITY_DEFAULT = 0
+const val NOTIFICATION_PRIORITY_MAX = 2
 
 class DeveloperPushSettingViewModel(): ViewModel() {
     // push options
@@ -23,8 +23,7 @@ class DeveloperPushSettingViewModel(): ViewModel() {
     // notification options
     var enableForeground = mutableStateOf(false)
     var enableBadge = mutableStateOf(false)
-    var notificationPriority: MutableState<Int> = mutableStateOf(
-        NOTIFICATION_PRIORITY_DEFAULT)
+    var notificationPriority: MutableState<Int> = mutableStateOf(0)
 
     val noticePriorityOptions = listOf<String>(
         "Min", "Low", "Default", "High", "Max"
@@ -48,7 +47,7 @@ class DeveloperPushSettingViewModel(): ViewModel() {
         if (currentNotificationOptions != null) {
             enableForeground.value = currentNotificationOptions.isForegroundEnabled
             enableBadge.value = currentNotificationOptions.isBadgeEnabled
-            notificationPriority.value = currentNotificationOptions.priority
+            notificationPriority.value = currentNotificationOptions.priority + NOTIFICATION_PRIORITY_MAX
         }
     }
 
@@ -61,7 +60,7 @@ class DeveloperPushSettingViewModel(): ViewModel() {
         val notificationOptions = GamebaseNotificationOptions.newBuilder()
             .enableBadge(enableBadge.value)
             .enableForeground(enableForeground.value)
-            .setPriority(notificationPriority.value).build()
+            .setPriority(notificationPriority.value + NOTIFICATION_PRIORITY_MIN).build()
 
 //        sound file과 icon file 도 설정할 수 있습니다.
 //            .setSmallIconName(smallIconName.value)

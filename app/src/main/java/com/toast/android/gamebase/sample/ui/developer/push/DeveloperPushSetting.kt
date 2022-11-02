@@ -38,7 +38,6 @@ fun DeveloperPushSettingScreen(
     val scrollState = rememberScrollState()
     val activity: Activity = LocalContext.current as Activity
     var expandState by remember { mutableStateOf(false) }
-    var selectedOption by remember { mutableStateOf(0) }
 
     LaunchedEffect(Unit) {
         viewModel.initialFetch(activity)
@@ -121,10 +120,9 @@ fun DeveloperPushSettingScreen(
                 options = viewModel.noticePriorityOptions,
                 expanded = expandState,
                 onExpandChanged = { expand -> expandState = expand },
-                selected = selectedOption,
+                selected = viewModel.notificationPriority.value,
                 onSelected = { selectedId ->
-                    selectedOption = selectedId
-                    viewModel.notificationPriority.value = NOTIFICATION_PRIORITY_MIN + selectedOption
+                    viewModel.notificationPriority.value = selectedId
                     viewModel.updatePushNotificationOptions(activity)
                 }
             )
