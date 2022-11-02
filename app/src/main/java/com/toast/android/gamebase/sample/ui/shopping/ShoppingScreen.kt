@@ -95,7 +95,7 @@ fun ListItems(
     ) {
         Column() {
             Text(
-                text = item.localizedTitle ?: "",
+                text = item.itemName ?: "",
                 color = Black,
                 fontSize = 10.sp,
                 fontWeight = FontWeight(400),
