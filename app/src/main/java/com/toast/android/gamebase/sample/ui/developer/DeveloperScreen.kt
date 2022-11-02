@@ -14,6 +14,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.Navigator
@@ -46,7 +48,7 @@ fun DeveloperScreen(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DeveloperMenuList(
-    groupedListMap: Map<String, List<Menu>>,
+    groupedListMap: Map<String, List<DeveloperMenu>>,
     activity: Activity,
     viewModel: DeveloperViewModel,
     navController: NavController
@@ -75,7 +77,7 @@ fun CharacterHeader(text: String) {
 }
 
 @Composable
-fun MenuItem(menuItem: Menu,
+fun MenuItem(developerMenuItem: DeveloperMenu,
              activity: Activity,
              viewModel: DeveloperViewModel,
              navController: NavController
@@ -85,12 +87,12 @@ fun MenuItem(menuItem: Menu,
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                viewModel.onMenuClick(activity, menuItem, navController)
+                viewModel.onMenuClick(activity, developerMenuItem, navController)
             }
             .padding(vertical = 12.dp, horizontal = 8.dp)
     ) {
         Text(
-            text = menuItem.name,
+            text = developerMenuItem.name,
             style = MaterialTheme.typography.body1)
     }
 }

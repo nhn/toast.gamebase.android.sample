@@ -3,8 +3,11 @@ package com.toast.android.gamebase.sample.gamebasemanager
 import android.app.Activity
 import android.util.Log
 import com.toast.android.gamebase.Gamebase
+import com.toast.android.gamebase.GamebaseCallback
+import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.auth.data.AuthToken
 import com.toast.android.gamebase.auth.data.BanInfo
+import com.toast.android.gamebase.auth.data.TemporaryWithdrawalInfo
 import com.toast.android.gamebase.auth.mapping.data.ForcingMappingTicket
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
@@ -246,6 +249,26 @@ fun forceIdpMapping(
             authToken, exception ->
         onForceMapping?.invoke(exception)
     }
+}
+
+fun requestWithdrawal(
+    activity: Activity,
+    callback: GamebaseDataCallback<TemporaryWithdrawalInfo>?
+) {
+    Gamebase.TemporaryWithdrawal.requestWithdrawal(
+        activity
+    ) { temporaryWithdrawalInfo, exception ->
+        callback?.onCallback(
+            temporaryWithdrawalInfo,
+            exception
+        )
+    }
+}
+
+fun cancelWithdrawal(activity: Activity, callback: GamebaseCallback?) {
+    Gamebase.TemporaryWithdrawal.cancelWithdrawal(
+        activity
+    ) { exception -> callback?.onCallback(exception) }
 }
 
 // Get Profile Data
