@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.requestActivatedPurchases
-import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotConsumed
-import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.gamebasemanager.*
 
 class DeveloperViewModel: ViewModel() {
     val showPurchaseDialog = mutableStateOf(false)
@@ -50,9 +47,49 @@ class DeveloperViewModel: ViewModel() {
     }
 
     fun onMenuClick(activity: Activity, developerMenuItem: DeveloperMenu) {
-        when(developerMenuItem.id) {
+        when (developerMenuItem.id) {
+            DeveloperMenu.AUTH_SUSPEND_WITHDRAWAL -> requestWithdrawal(activity)
+            DeveloperMenu.AUTH_SUSPEND_WITHDRAWAL_CANCEL -> cancelWithdrawal(activity)
             DeveloperMenu.PURCHASE_ACTIVATED_SUBSCRIPTION -> fetchActivatedPurchaseList(activity)
             DeveloperMenu.PURCHASE_NOT_CONSUMED_LIST -> fetchItemNotConsumedList(activity)
+        }
+    }
+
+    private fun requestWithdrawal(activity: Activity) {
+        val context = GamebaseApplication.instance.applicationContext
+        requestWithdrawal(activity) { data, exception ->
+            if (isSuccess(exception)) {
+                showAlert(
+                    activity,
+                    "requestWithdrawal success",
+                    context.resources.getString(R.string.request_withdrawal_success) + "${data.gracePeriodDate}"
+                )
+            } else {
+                showAlert(
+                    activity,
+                    "requestWithdrawal error",
+                    exception.toJsonString()
+                )
+            }
+        }
+    }
+
+    private fun cancelWithdrawal(activity: Activity) {
+        val context = GamebaseApplication.instance.applicationContext
+        cancelWithdrawal(activity) { exception ->
+            if (isSuccess(exception)) {
+                showAlert(
+                    activity,
+                    "cancelWithdrawal success",
+                    context.resources.getString(R.string.cancel_withdrawal_success)
+                )
+            } else {
+                showAlert(
+                    activity,
+                    "cancelWithdrawal error",
+                    exception.toJsonString()
+                )
+            }
         }
     }
 
