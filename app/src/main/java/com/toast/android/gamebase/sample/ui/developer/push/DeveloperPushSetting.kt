@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.common.DropdownMenuBox
+import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
 import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
 
 @Composable
@@ -47,11 +48,7 @@ fun DeveloperPushSettingScreen(
         .padding(20.dp)
         .verticalScroll(scrollState)) {
 
-        Text(
-            text = stringResource(R.string.developer_push_configuration_sub_title),
-            style = MaterialTheme.typography.caption)
-        Divider(modifier = Modifier.fillMaxWidth())
-
+        SubMenuDivider(R.string.developer_push_configuration_sub_title)
         SwitchWithLabel(
             stringId = R.string.setting_normal_push_title,
             state = viewModel.enablePush,
@@ -87,12 +84,7 @@ fun DeveloperPushSettingScreen(
             }
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
-        Text(
-            text = stringResource(R.string.developer_push_notification_options_sub_title),
-            style = MaterialTheme.typography.caption)
-        Divider(modifier = Modifier.fillMaxWidth())
-
+        SubMenuDivider(R.string.developer_push_notification_options_sub_title)
         SwitchWithLabel(
             stringId = R.string.setting_push_foreground_title,
             state = viewModel.enableForeground,

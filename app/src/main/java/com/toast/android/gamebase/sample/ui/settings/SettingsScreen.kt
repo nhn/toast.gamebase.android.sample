@@ -2,11 +2,18 @@ package com.toast.android.gamebase.sample.ui.settings
 
 import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,10 +25,10 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.common.ConfirmAlertDialog
+import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
 import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
 import com.toast.android.gamebase.sample.ui.login.LoginState
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
-import com.toast.android.gamebase.sample.ui.theme.Black
 
 @Composable
 fun SettingsScreen(
@@ -50,39 +57,31 @@ fun SettingsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp)
+            .padding(horizontal = 20.dp)
             .verticalScroll(scrollState),
         horizontalAlignment = Alignment.Start
     ) {
         Column() {
-            Text(
-                text = stringResource(R.string.setting_version_sdk_title),
-                modifier = Modifier.padding(6.dp),
-                fontWeight = FontWeight.Bold
-            )
+            SubMenuDivider(R.string.setting_version_sdk_title)
             Row(
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = stringResource(R.string.setting_version_title),
-                    modifier = Modifier.padding(6.dp),
+                    modifier = Modifier.padding(10.dp),
                     fontWeight = FontWeight.Normal
                 )
                 Text(
                     text = Gamebase.getSDKVersion().toString(),
-                    modifier = Modifier.padding(6.dp),
+                    modifier = Modifier.padding(8.dp),
                     fontWeight = FontWeight.Normal
                 )
             }
         }
-        Divider(color = Black, thickness = 1.dp)
+
         Column() {
-            Text(
-                text = stringResource(R.string.setting_account_title),
-                modifier = Modifier.padding(6.dp),
-                fontWeight = FontWeight.Bold
-            )
+            SubMenuDivider(R.string.setting_account_title)
             // TODO : idp 계정 연동 구현 완료시 event 추가
             ListItem(R.string.setting_account_connected_idp_title) {
                 settingsViewModel.navigateToIdpMapping(navController)
@@ -95,13 +94,9 @@ fun SettingsScreen(
                 isWithdrawDialogOpened.value = true
             }
         }
-        Divider(color = Black, thickness = 1.dp)
+
         Column() {
-            Text(
-                text = stringResource(R.string.setting_notification_title),
-                modifier = Modifier.padding(6.dp),
-                fontWeight = FontWeight.Bold
-            )
+            SubMenuDivider(R.string.setting_notification_title)
             SwitchWithLabel(
                 stringId = R.string.setting_normal_push_title,
                 state = settingsViewModel.pushState,
@@ -132,14 +127,8 @@ fun SettingsScreen(
             }
         }
 
-        Divider(color = Black, thickness = 1.dp)
-
         Column() {
-            Text(
-                text = stringResource(R.string.setting_extra_title),
-                modifier = Modifier.padding(6.dp),
-                fontWeight = FontWeight.Bold
-            )
+            SubMenuDivider(R.string.setting_extra_title)
             ListItem(R.string.setting_service_center_title) {
                 settingsViewModel.loadServiceCenter(activity, "Test User")
             }
@@ -175,10 +164,11 @@ private fun ListItem(stringId: Int, event: () -> Unit) {
         text = stringResource(stringId),
         modifier = Modifier
             .fillMaxSize()
-            .padding(6.dp)
             .clickable {
                 event()
-            },
+            }
+            .padding(10.dp)
+        ,
         fontWeight = FontWeight.Normal
     )
 }

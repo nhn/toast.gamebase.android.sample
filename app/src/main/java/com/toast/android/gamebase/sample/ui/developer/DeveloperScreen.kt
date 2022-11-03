@@ -14,12 +14,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.Navigator
 import com.toast.android.gamebase.sample.ui.common.ListDialog
+import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
 
 @Composable
 fun DeveloperScreen(
@@ -53,25 +51,14 @@ fun DeveloperMenuList(
     viewModel: DeveloperViewModel,
     navController: NavController
 ) {
-    LazyColumn {
+    LazyColumn(modifier = Modifier.padding(horizontal = 20.dp)) {
         groupedListMap.forEach { (category, subMenuList) ->
             item {
-                CharacterHeader(category)
+                SubMenuDivider(category)
             }
             items(items = subMenuList) { subMenu ->
                 MenuItem(subMenu, activity, viewModel, navController)
             }
-        }
-    }
-}
-
-@Composable
-fun CharacterHeader(text: String) {
-    Surface(color = MaterialTheme.colors.secondary) {
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .padding(4.dp)) {
-            Text(text = text, style = MaterialTheme.typography.body1)
         }
     }
 }
@@ -89,7 +76,7 @@ fun MenuItem(developerMenuItem: DeveloperMenu,
             .clickable {
                 viewModel.onMenuClick(activity, developerMenuItem, navController)
             }
-            .padding(vertical = 12.dp, horizontal = 8.dp)
+            .padding(vertical = 12.dp, horizontal = 10.dp)
     ) {
         Text(
             text = developerMenuItem.name,

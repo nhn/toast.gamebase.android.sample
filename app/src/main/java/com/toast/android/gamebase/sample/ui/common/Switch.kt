@@ -30,7 +30,7 @@ fun SwitchWithLabel(
     ) {
         Text(
             text = stringResource(stringId),
-            modifier = Modifier.padding(6.dp),
+            modifier = Modifier.padding(10.dp),
             fontWeight = FontWeight.Normal
         )
         Switch(
