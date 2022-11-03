@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.ui.theme.Toast
 
 @Composable
-fun NotificationWithSwitch(
+fun SwitchWithLabel(
     stringId: Int,
     state: MutableState<Boolean>,
     enableSwitch: Boolean,

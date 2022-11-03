@@ -12,6 +12,8 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object IdpMapping: SampleAppScreens("idp_mapping", R.string.idp_mapping)
     object UI: SampleAppScreens("ui", R.string.ui)
     object Developer: SampleAppScreens("developer", R.string.developer)
+    object DeveloperRoot: SampleAppScreens("dev_home", R.string.developer)
+    object DeveloperPushSetting: SampleAppScreens("push_setting", R.string.developer_menu_category_push)
 
     companion object {
         fun fromRoute(route: String?): SampleAppScreens =
@@ -25,6 +27,8 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
                 UI.route -> UI
                 Developer.route -> Developer
                 null -> Home
+                DeveloperRoot.route -> DeveloperRoot
+                DeveloperPushSetting.route -> DeveloperPushSetting
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
             }
     }

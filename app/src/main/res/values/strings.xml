@@ -21,6 +21,8 @@
     <string name="button_cancel">Cancel</string>
     <string name="logout">logout</string>
     <string name="withdraw">withdraw</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
     <string name="copyright_nhn">© NHN Corp. All rights reserved.</string>
 
     <!-- home screen -->
@@ -111,7 +113,6 @@
     <string-array name="Purchase">
         <item>developer_menu_purchase_activated_subscription</item>
         <item>developer_menu_purchase_not_consumed_list</item>
-        <item>developer_menu_purchase_consume_restore</item>
     </string-array>
     <string-array name="Push">
         <item>developer_menu_push_current_setting</item>
@@ -160,7 +161,6 @@
     <string name="developer_menu_auth_suspend_withdrawal_cancel">탈퇴 유예 철회</string>
     <string name="developer_menu_purchase_activated_subscription">구독 목록 조회</string>
     <string name="developer_menu_purchase_not_consumed_list">미소비 목록 조회</string>
-    <string name="developer_menu_purchase_consume_restore">구매 내역 복원</string>
     <string name="developer_menu_push_current_setting">푸시 설정 조회</string>
     <string name="developer_menu_push_detail_setting">푸시 상세 설정</string>
     <string name="developer_menu_logger_initialize">Logger 초기화</string>
@@ -189,5 +189,11 @@
     <!-- developer menu auth -->
     <string name="request_withdrawal_success">탈퇴 요청이 완료되었습니다.\n일시 : </string>
     <string name="cancel_withdrawal_success">탈퇴 철회 요청이 성공하였습니다.</string>
+
+    <!-- developer push setting -->
+    <string name="developer_push_configuration_sub_title">Push Configurations</string>
+    <string name="developer_push_notification_options_sub_title">Notification Options</string>
+    <string name="developer_push_noti_enable_badge">뱃지 아이콘 사용</string>
+    <string name="developer_push_noti_enable_set_priority">알림 우선 순위</string>
 
 </resources>
