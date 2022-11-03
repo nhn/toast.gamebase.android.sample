@@ -13,6 +13,7 @@ import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
+import com.toast.android.gamebase.sample.util.printWithIndent
 import com.toast.android.gamebase.sample.util.printBanInfo
 import com.toast.android.gamebase.sample.util.printLoginError
 import com.toast.android.gamebase.sample.util.printLoginSuccess
@@ -123,7 +124,7 @@ private fun handleIdpLoginFailed(
         printBanInfo(TAG, BanInfo.from(exception))
     } else {
         printLoginError(TAG, exception)
-        Gamebase.Util.showAlert(activity, "Login Failed!", exception.toJsonString())
+        Gamebase.Util.showAlert(activity, "Login Failed!", exception.printWithIndent())
     }
 }
 

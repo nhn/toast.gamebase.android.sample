@@ -16,6 +16,7 @@ import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotCon
 import com.toast.android.gamebase.sample.gamebasemanager.requestWithdrawal
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
+import com.toast.android.gamebase.sample.util.printWithIndent
 
 class DeveloperViewModel: ViewModel() {
     val showPurchaseDialog = mutableStateOf(false)
@@ -84,7 +85,7 @@ class DeveloperViewModel: ViewModel() {
                 showAlert(
                     activity,
                     failedTitle,
-                    exception.toJsonString()
+                    exception.printWithIndent()
                 )
             }
         }
@@ -103,7 +104,7 @@ class DeveloperViewModel: ViewModel() {
                 showAlert(
                     activity,
                     failedTitle,
-                    exception.toJsonString()
+                    exception.printWithIndent()
                 )
             }
         }
@@ -116,7 +117,7 @@ class DeveloperViewModel: ViewModel() {
                 purchaseItemList = list as MutableList<PurchasableReceipt>
                 showPurchaseDialog.value = true
             } else {
-                showAlert(activity, context.resources.getString(R.string.failed), exception.toJsonString())
+                showAlert(activity, context.resources.getString(R.string.failed), exception.printWithIndent())
             }
         }
     }
@@ -128,18 +129,17 @@ class DeveloperViewModel: ViewModel() {
                 purchaseItemList = list as MutableList<PurchasableReceipt>
                 showPurchaseDialog.value = true
             } else {
-                showAlert(activity, context.resources.getString(R.string.failed), exception.toJsonString())
+                showAlert(activity, context.resources.getString(R.string.failed), exception.printWithIndent())
             }
         }
     }
 
     private fun fetchPushCurrentSetting(activity: Activity) {
-        val context = activity as Context
         queryTokenInfo(activity) { pushTokenInfo, exception ->
             if (isSuccess(exception)) {
-                showAlert(activity, successTitle, pushTokenInfo.toJsonString())
+                showAlert(activity, successTitle, pushTokenInfo.printWithIndent())
             } else {
-                showAlert(activity, failedTitle, exception.toJsonString())
+                showAlert(activity, failedTitle, exception.printWithIndent())
             }
         }
     }

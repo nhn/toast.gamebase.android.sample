@@ -5,10 +5,12 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.auth.data.AuthToken
 import com.toast.android.gamebase.auth.data.BanInfo
 import com.toast.android.gamebase.base.GamebaseException
+import com.toast.android.gamebase.base.ValueObject
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.base.push.data.GamebasePushTokenInfo
 import com.toast.android.gamebase.event.data.PushAction
 import com.toast.android.gamebase.event.data.PushMessage
+import org.json.JSONObject
 
 fun printLoginSuccess(TAG: String, authToken: AuthToken) {
     Log.i(TAG, "Gamebase User Id : ${authToken.userId}")
@@ -77,4 +79,12 @@ fun printQueryTokenInfo(TAG: String, tokenInfo: GamebasePushTokenInfo) {
         "enableAdNightPush : " + tokenInfo.agreement.adAgreementNight
     )
     Log.d(TAG, "--------------------------------------")
+}
+
+fun ValueObject.printWithIndent(): String {
+    return JSONObject(this.toJsonString()).toString(4)
+}
+
+fun GamebaseException.printWithIndent(): String {
+    return JSONObject(this.toJsonString()).toString(4)
 }

@@ -9,6 +9,7 @@ import com.toast.android.gamebase.base.push.PushConfiguration
 import com.toast.android.gamebase.base.push.data.GamebaseNotificationOptions
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.util.printWithIndent
 
 const val NOTIFICATION_PRIORITY_MIN = -2
 const val NOTIFICATION_PRIORITY_MAX = 2
@@ -68,7 +69,7 @@ class DeveloperPushSettingViewModel(): ViewModel() {
 
         Gamebase.Push.registerPush(activity, pushConfiguration, notificationOptions) { exception ->
             if (!isSuccess(exception)) {
-                showAlert(activity, "Failed to register push", exception.toJsonString())
+                showAlert(activity, "Failed to register push", exception.printWithIndent())
             }
         }
     }

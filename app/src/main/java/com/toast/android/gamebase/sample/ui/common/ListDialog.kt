@@ -22,8 +22,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.toast.android.gamebase.base.ValueObject
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.theme.White
+import com.toast.android.gamebase.sample.util.printWithIndent
 
 @Composable
 fun ListDialog(
@@ -50,7 +52,12 @@ fun ListDialog(
                     }
                     LazyColumn(modifier = Modifier.heightIn(max = 500.dp)) {
                         items(items = data) { item ->
-                            Text(item.toString())
+                            val str = if (item is ValueObject) {
+                                item.printWithIndent()
+                            } else {
+                                item.toString()
+                            }
+                            Text(str)
                         }
                     }
                     Spacer(modifier = Modifier.height(12.dp))

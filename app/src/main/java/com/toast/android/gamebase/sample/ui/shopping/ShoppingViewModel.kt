@@ -13,6 +13,7 @@ import com.toast.android.gamebase.sample.gamebasemanager.requestNotConsumedItems
 import com.toast.android.gamebase.sample.gamebasemanager.requestPurchase
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.gamebasemanager.showToast
+import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
 
 private const val TAG: String = "ShoppingScreen"
@@ -37,7 +38,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
                 showAlert(
                     activity,
                     "requestItemNotConsumed error",
-                    exception.toJsonString()
+                    exception.printWithIndent()
                 )
                 Log.d(
                     TAG,
@@ -55,7 +56,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
                 showAlert(
                     activity,
                     "requestItemListPurchasable error",
-                    exception.toJsonString()
+                    exception.printWithIndent()
                 )
                 Log.d(
                     TAG,
@@ -87,7 +88,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
                     )
                 }
             } else {
-                showAlert(activity, "Error", exception.toJsonString())
+                showAlert(activity, "Error", exception.printWithIndent())
                 needLoadingDialog = false
                 Log.d(
                     TAG,
