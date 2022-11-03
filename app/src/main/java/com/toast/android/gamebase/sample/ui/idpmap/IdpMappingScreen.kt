@@ -1,6 +1,5 @@
 package com.toast.android.gamebase.sample.ui.idpmap
 
-import android.app.Activity
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
