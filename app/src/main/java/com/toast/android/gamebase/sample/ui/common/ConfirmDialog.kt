@@ -17,14 +17,14 @@ import com.toast.android.gamebase.sample.R
 
 @Composable
 fun ConfirmAlertDialog(
-    dialogOpened: Boolean,
+    isDialogOpened: Boolean,
     title: String,
     description: String,
     setDialogStatus: (Boolean) -> Unit,
     showCancel: Boolean = false,
     onOkButtonClicked: () -> Unit,
 ) {
-    if (dialogOpened) {
+    if (isDialogOpened) {
         AlertDialog(
             onDismissRequest = {
                 setDialogStatus(false)
@@ -69,7 +69,7 @@ fun ConfirmAlertDialog(
 @Composable
 fun PreviewConfirmDialog() {
     ConfirmAlertDialog(
-        dialogOpened = true,
+        isDialogOpened = true,
         title = "제목",
         description = "설명",
         setDialogStatus = {},
@@ -81,7 +81,7 @@ fun PreviewConfirmDialog() {
 @Composable
 fun PreviewConfirmDialogWithCancel() {
     ConfirmAlertDialog(
-        dialogOpened = true,
+        isDialogOpened = true,
         title = "제목",
         description = "설명",
         showCancel = true,

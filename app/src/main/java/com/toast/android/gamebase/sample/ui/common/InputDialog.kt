@@ -27,14 +27,14 @@ import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
 fun InputDialog(
-    dialogOpened: Boolean,
+    isDialogOpened: Boolean,
     setDialogStatus: (Boolean) -> Unit,
     inputTemplate: String = "",
     onOkButtonClicked: (inputText: String) -> Unit,
 ) {
     var inputText by remember { mutableStateOf(inputTemplate) }
 
-    if (dialogOpened) {
+    if (isDialogOpened) {
         Dialog(onDismissRequest = {  }) {
             Surface(
                 modifier = Modifier

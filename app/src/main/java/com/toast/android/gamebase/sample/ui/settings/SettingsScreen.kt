@@ -153,18 +153,18 @@ fun SettingsScreen(
             }
         }
         ConfirmAlertDialog(
-            dialogOpened = isLogoutDialogOpened.value,
+            isDialogOpened = isLogoutDialogOpened.value,
             title = stringResource(id = R.string.setting_logout_dialog_title),
             description = stringResource(id = R.string.setting_logout_dialog_description),
-            setDialogStatus = { opened -> isLogoutDialogOpened.value = opened },
+            setDialogStatus = { newState -> isLogoutDialogOpened.value = newState },
             showCancel = true,
             onOkButtonClicked = { settingsViewModel.logout(activity) }
         )
         ConfirmAlertDialog(
-            dialogOpened = isWithdrawDialogOpened.value,
+            isDialogOpened = isWithdrawDialogOpened.value,
             title = stringResource(id = R.string.setting_withdraw_dialog_title),
             description = stringResource(id = R.string.setting_withdraw_dialog_description),
-            setDialogStatus = { opened -> isWithdrawDialogOpened.value = opened },
+            setDialogStatus = { newState -> isWithdrawDialogOpened.value = newState },
             showCancel = true,
             onOkButtonClicked = { settingsViewModel.withdraw(activity) }
         )

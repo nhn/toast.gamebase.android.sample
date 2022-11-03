@@ -1,6 +1,5 @@
 package com.toast.android.gamebase.sample.ui.idpmap
 
-import android.app.Activity
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -54,7 +53,7 @@ fun IdpMappingScreen(
             currentSelectedItem.value = it
         }
         ConfirmAlertDialog(
-            dialogOpened = viewModel.uiState != IDP_MAPPING_UI_STATE.DEFAULT,
+            isDialogOpened = viewModel.uiState != IDP_MAPPING_UI_STATE.DEFAULT,
             title = stringResource(id = R.string.idp_mapping_dialog_title),
             description = getDialogDescription(
                 activity as Context,
