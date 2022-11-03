@@ -1,9 +1,12 @@
 package com.toast.android.gamebase.sample.ui.main
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -21,6 +24,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -130,17 +134,22 @@ fun MainDrawer(
     Column(
         Modifier
             .wrapContentWidth()
-            .padding(start = 24.dp, top = 48.dp)
+            .padding(horizontal = 24.dp, vertical = 48.dp)
     ) {
         screens.forEach { screen ->
-            Spacer(Modifier.height(24.dp))
-            Text(
-                text = stringResource(screen.resourceId),
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier.clickable {
-                    onDestinationClicked(screen.route)
-                }
-            )
+            Column (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        onDestinationClicked(screen.route)
+                    }
+                    .padding(12.dp)
+            ){
+                Text(
+                    text = stringResource(screen.resourceId),
+                    style = MaterialTheme.typography.body1,
+                )
+            }
         }
     }
 }
