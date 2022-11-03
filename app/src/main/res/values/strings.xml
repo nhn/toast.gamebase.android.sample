@@ -21,6 +21,8 @@
     <string name="button_cancel">Cancel</string>
     <string name="logout">logout</string>
     <string name="withdraw">withdraw</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
     <string name="copyright_nhn">© NHN Corp. All rights reserved.</string>
 
     <!-- home screen -->
@@ -189,6 +191,8 @@
     <string name="cancel_withdrawal_success">탈퇴 철회 요청이 성공하였습니다.</string>
 
     <!-- developer push setting -->
+    <string name="developer_push_configuration_sub_title">Push Configurations</string>
+    <string name="developer_push_notification_options_sub_title">Notification Options</string>
     <string name="developer_push_noti_enable_badge">뱃지 아이콘 사용</string>
     <string name="developer_push_noti_enable_set_priority">알림 우선 순위</string>
 

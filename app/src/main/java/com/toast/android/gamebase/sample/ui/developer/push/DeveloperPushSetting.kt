@@ -46,8 +46,12 @@ fun DeveloperPushSettingScreen(
     Column(modifier = Modifier
         .padding(20.dp)
         .verticalScroll(scrollState)) {
-        Text("Push Configurations", style = MaterialTheme.typography.caption)
+
+        Text(
+            text = stringResource(R.string.developer_push_configuration_sub_title),
+            style = MaterialTheme.typography.caption)
         Divider(modifier = Modifier.fillMaxWidth())
+
         SwitchWithLabel(
             stringId = R.string.setting_normal_push_title,
             state = viewModel.enablePush,
@@ -84,7 +88,9 @@ fun DeveloperPushSettingScreen(
         )
 
         Spacer(modifier = Modifier.height(12.dp))
-        Text(text = "Notification Options", style = MaterialTheme.typography.caption)
+        Text(
+            text = stringResource(R.string.developer_push_notification_options_sub_title),
+            style = MaterialTheme.typography.caption)
         Divider(modifier = Modifier.fillMaxWidth())
 
         SwitchWithLabel(

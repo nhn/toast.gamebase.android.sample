@@ -1,7 +1,7 @@
 package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
-import android.util.Log
+import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
@@ -22,6 +22,9 @@ class DeveloperViewModel: ViewModel() {
     var purchaseItemList = mutableListOf<PurchasableReceipt>()
         private set
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
+
+    private val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
+    private val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
 
     private fun createMenuMap(): MutableMap<String, List<DeveloperMenu>> {
         val developerMenuMap: MutableMap<String, List<DeveloperMenu>> = mutableMapOf()
@@ -61,15 +64,7 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.AUTH_SUSPEND_WITHDRAWAL_CANCEL -> cancelWithdrawal(activity)
             DeveloperMenu.PURCHASE_ACTIVATED_SUBSCRIPTION -> fetchActivatedPurchaseList(activity)
             DeveloperMenu.PURCHASE_NOT_CONSUMED_LIST -> fetchItemNotConsumedList(activity)
-            DeveloperMenu.PUSH_CURRENT_SETTING -> {
-                queryTokenInfo(activity) { pushTokenInfo, exception ->
-                    if (isSuccess(exception)) {
-                        showAlert(activity, "Success", pushTokenInfo.toJsonString())
-                    } else {
-                        showAlert(activity, "Failed", exception.toJsonString())
-                    }
-                }
-            }
+            DeveloperMenu.PUSH_CURRENT_SETTING -> fetchPushCurrentSetting(activity)
             DeveloperMenu.PUSH_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperPushSetting.route)
             }
@@ -82,13 +77,13 @@ class DeveloperViewModel: ViewModel() {
             if (isSuccess(exception)) {
                 showAlert(
                     activity,
-                    "requestWithdrawal success",
+                    successTitle,
                     context.resources.getString(R.string.request_withdrawal_success) + "${data.gracePeriodDate}"
                 )
             } else {
                 showAlert(
                     activity,
-                    "requestWithdrawal error",
+                    failedTitle,
                     exception.toJsonString()
                 )
             }
@@ -101,13 +96,13 @@ class DeveloperViewModel: ViewModel() {
             if (isSuccess(exception)) {
                 showAlert(
                     activity,
-                    "cancelWithdrawal success",
+                    successTitle,
                     context.resources.getString(R.string.cancel_withdrawal_success)
                 )
             } else {
                 showAlert(
                     activity,
-                    "cancelWithdrawal error",
+                    failedTitle,
                     exception.toJsonString()
                 )
             }
@@ -115,23 +110,36 @@ class DeveloperViewModel: ViewModel() {
     }
 
     private fun fetchActivatedPurchaseList(activity: Activity) {
+        val context = activity as Context
         requestActivatedPurchases(activity) { list, exception ->
             if (isSuccess(exception)) {
                 purchaseItemList = list as MutableList<PurchasableReceipt>
                 showPurchaseDialog.value = true
             } else {
-                showAlert(activity, "Fetch activated purchase item failed", exception.toJsonString())
+                showAlert(activity, context.resources.getString(R.string.failed), exception.toJsonString())
             }
         }
     }
 
     private fun fetchItemNotConsumedList(activity: Activity) {
+        val context = activity as Context
         requestItemListOfNotConsumed(activity) { list, exception ->
             if (isSuccess(exception)) {
                 purchaseItemList = list as MutableList<PurchasableReceipt>
                 showPurchaseDialog.value = true
             } else {
-                showAlert(activity, "Fetch not consumed item failed", exception.toJsonString())
+                showAlert(activity, context.resources.getString(R.string.failed), exception.toJsonString())
+            }
+        }
+    }
+
+    private fun fetchPushCurrentSetting(activity: Activity) {
+        val context = activity as Context
+        queryTokenInfo(activity) { pushTokenInfo, exception ->
+            if (isSuccess(exception)) {
+                showAlert(activity, successTitle, pushTokenInfo.toJsonString())
+            } else {
+                showAlert(activity, failedTitle, exception.toJsonString())
             }
         }
     }

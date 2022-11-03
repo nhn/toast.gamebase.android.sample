@@ -13,7 +13,6 @@ class DeveloperMenuFactory() {
                 name = context.getStringResourceByName(menu))
         }
     }
-
 }
 
 fun Context.getStringResourceByName(name: String): String {
