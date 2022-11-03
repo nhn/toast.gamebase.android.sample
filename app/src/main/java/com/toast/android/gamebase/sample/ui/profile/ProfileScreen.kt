@@ -36,8 +36,8 @@ fun ProfileScreen(
     }
 
     Column (modifier = Modifier
-        .padding(30.dp)
-        .verticalScroll(scrollState)){
+        .verticalScroll(scrollState)
+        .padding(30.dp)){
 
         Image (
             painter = painterResource(id = R.drawable.profile),
