@@ -58,14 +58,4 @@ class LoginViewModel() : ViewModel() {
             }
         }
     }
-
-    fun navigateToHome(navController: NavController) {
-        viewModelScope.launch {
-            navController.navigate(SampleAppScreens.Home.route) {
-                popUpTo(SampleAppScreens.Login.route) {
-                    inclusive = true
-                }
-            }
-        }
-    }
 }

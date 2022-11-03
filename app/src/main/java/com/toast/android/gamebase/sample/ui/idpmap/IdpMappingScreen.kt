@@ -1,5 +1,6 @@
 package com.toast.android.gamebase.sample.ui.idpmap
 
+import android.app.Activity
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -41,13 +43,12 @@ import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
 fun IdpMappingScreen(
-    activity: GamebaseActivity,
     viewModel: IdpMappingViewModel = viewModel()
 ) {
+    val activity = LocalContext.current as GamebaseActivity
     val currentSelectedItem = remember { mutableStateOf(supportedIdpList[0])}
     Box {
         MappingColumn(
-            activity,
             viewModel
         ){
             currentSelectedItem.value = it
@@ -109,7 +110,6 @@ private fun getDialogDescription(
 
 @Composable
 fun MappingColumn(
-    activity: GamebaseActivity,
     viewModel: IdpMappingViewModel,
     setCurrentSelectedItem: (String) -> Unit,
 ) {
@@ -129,7 +129,7 @@ fun MappingColumn(
             key = { item ->
                 item
             }) { idp ->
-                ListItem(activity, idp, viewModel) {
+                ListItem(idp, viewModel) {
                     setCurrentSelectedItem(idp)
                 }
             }
@@ -139,11 +139,11 @@ fun MappingColumn(
 
 @Composable
 fun ListItem(
-    activity: GamebaseActivity,
     idp: String,
     viewModel: IdpMappingViewModel,
     setCurrentSelectedItem: () -> Unit
 ) {
+    val activity = LocalContext.current as GamebaseActivity
     Box {
         Row(
             modifier = Modifier

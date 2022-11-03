@@ -3,7 +3,6 @@ package com.toast.android.gamebase.sample.ui.login
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,8 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
@@ -25,13 +22,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.getIconResourceById
@@ -41,17 +37,18 @@ import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 
 @Composable
 fun LoginScreen(
-    activity: GamebaseActivity,
     loginViewModel: LoginViewModel = viewModel(),
-    navController: NavController) {
+    navigateToHome: () -> Unit) {
+
+    val gamebaseActivity = LocalContext.current as GamebaseActivity
 
     LaunchedEffect(true) {
-        loginViewModel.tryLastIdpLogin(activity)
+        loginViewModel.tryLastIdpLogin(gamebaseActivity)
     }
 
     LaunchedEffect(loginViewModel.uiState) {
         if (loginViewModel.uiState == LoginState.LOGGED_IN) {
-            loginViewModel.navigateToHome(navController)
+            navigateToHome()
         }
     }
 
@@ -74,7 +71,7 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.height(40.dp))
                 }
                 itemsIndexed(supportedIdpList) { _, idp ->
-                    OutlineLoginButton(activity, loginViewModel, idp)
+                    OutlineLoginButton(loginViewModel, idp)
                     Spacer(modifier = Modifier.height(4.dp))
                 }
                 item {
@@ -86,7 +83,8 @@ fun LoginScreen(
 }
 
 @Composable
-fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewModel, idp: String) {
+fun OutlineLoginButton(loginViewModel: LoginViewModel, idp: String) {
+    val gamebaseActivity = LocalContext.current as GamebaseActivity
     OutlinedButton(
         modifier = Modifier
             .fillMaxWidth(0.9f),
@@ -95,7 +93,7 @@ fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewMode
             backgroundColor = Color.White
         ),
         onClick = {
-            loginViewModel.login(activity, idp)
+            loginViewModel.login(gamebaseActivity, idp)
         }) {
         Row(
             modifier = Modifier.fillMaxWidth(),
