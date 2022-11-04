@@ -4,12 +4,16 @@ import android.app.Activity
 import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.toast.android.gamebase.Gamebase
+import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.cancelWithdrawal
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
+import com.toast.android.gamebase.sample.gamebasemanager.queryTerms
 import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
 import com.toast.android.gamebase.sample.gamebasemanager.requestActivatedPurchases
 import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotConsumed
@@ -17,6 +21,7 @@ import com.toast.android.gamebase.sample.gamebasemanager.requestWithdrawal
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
+import kotlinx.coroutines.launch
 
 class DeveloperViewModel: ViewModel() {
     val showPurchaseDialog = mutableStateOf(false)
@@ -68,6 +73,10 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.PUSH_CURRENT_SETTING -> fetchPushCurrentSetting(activity)
             DeveloperMenu.PUSH_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperPushSetting.route)
+            }
+            DeveloperMenu.TERMS_INFO -> fetchTermsCurrentSetting(activity)
+            DeveloperMenu.TERMS_DETAIL_SETTING -> {
+                navController.navigate(SampleAppScreens.DeveloperTermsSetting.route)
             }
         }
     }
@@ -140,6 +149,24 @@ class DeveloperViewModel: ViewModel() {
                 showAlert(activity, successTitle, pushTokenInfo.printWithIndent())
             } else {
                 showAlert(activity, failedTitle, exception.printWithIndent())
+            }
+        }
+    }
+
+    private fun fetchTermsCurrentSetting(activity: Activity) {
+        viewModelScope.launch {
+            queryTerms(activity) { gamebaseQueryTermsResult, exception ->
+                if (Gamebase.isSuccess(exception)) {
+                    // Succeeded.
+
+                    showAlert(activity, successTitle, gamebaseQueryTermsResult.printWithIndent());
+                } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
+                    // Another country device.
+                    // Pass the 'terms and conditions' step.
+                    showAlert(activity, failedTitle,"NOT NEED TO SHOW THE T&C");
+                } else {
+                    showAlert(activity, failedTitle, exception.printWithIndent());
+                }
             }
         }
     }

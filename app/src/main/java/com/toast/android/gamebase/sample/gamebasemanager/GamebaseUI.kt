@@ -63,22 +63,19 @@ fun imageNoticesExample(activity: Activity, onCloseCallback: GamebaseCallback) {
 
 fun showTermsView(
     activity: Activity,
+    configuration: GamebaseTermsConfiguration? = null,
     callback: GamebaseDataCallback<GamebaseDataContainer?>?
 ) {
-    Gamebase.Terms.showTermsView(
-        activity,
-    ) { container, exception -> callback?.onCallback(container, exception) }
-}
-
-// You can show terms view force with setting setForceShow(true) configuration
-fun showTermsViewForceShow(
-    activity: Activity,
-    callback: GamebaseDataCallback<GamebaseDataContainer?>?
-) {
-    Gamebase.Terms.showTermsView(
-        activity,
-        GamebaseTermsConfiguration.newBuilder().setForceShow(true).build(),
-    ) { container, exception -> callback?.onCallback(container, exception) }
+    if (configuration != null) {
+        Gamebase.Terms.showTermsView(
+            activity,
+            configuration,
+        ) { container, exception -> callback?.onCallback(container, exception) }
+    } else {
+        Gamebase.Terms.showTermsView(
+            activity,
+        ) { container, exception -> callback?.onCallback(container, exception) }
+    }
 }
 
 fun queryTerms(
@@ -88,18 +85,6 @@ fun queryTerms(
     Gamebase.Terms.queryTerms(
         activity
     ) { gamebaseQueryTermsResult, exception ->
-        if (Gamebase.isSuccess(exception)) {
-            // Succeeded.
-            val termsSeq = gamebaseQueryTermsResult.termsSeq
-            val termsVersion = gamebaseQueryTermsResult.termsVersion
-            val termsCountryType = gamebaseQueryTermsResult.termsCountryType
-            val contents = gamebaseQueryTermsResult.contents
-        } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
-            // Another country device.
-            // Pass the 'terms and conditions' step.
-        } else {
-            // Failed.
-        }
         callback?.onCallback(gamebaseQueryTermsResult, exception)
     }
 }

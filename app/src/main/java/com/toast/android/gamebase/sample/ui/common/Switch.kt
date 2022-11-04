@@ -44,3 +44,29 @@ fun SwitchWithLabel(
         )
     }
 }
+
+@Composable
+fun SwitchWithLabel(
+    stringId: Int,
+    state: Boolean,
+    enableSwitch: Boolean,
+    event: (Boolean) -> Unit,
+) {
+    Row(
+        modifier = Modifier.fillMaxSize(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = stringResource(stringId),
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.common_switch_padding)),
+            fontWeight = FontWeight.Normal
+        )
+        Switch(
+            checked = state,
+            enabled = enableSwitch,
+            onCheckedChange = event,
+            colors = SwitchDefaults.colors(checkedThumbColor = Toast)
+        )
+    }
+}

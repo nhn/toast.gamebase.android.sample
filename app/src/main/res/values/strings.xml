@@ -196,4 +196,10 @@
     <string name="developer_push_noti_enable_badge">뱃지 아이콘 사용</string>
     <string name="developer_push_noti_enable_set_priority">알림 우선 순위</string>
 
+    <!-- developer terms setting -->
+    <string name="developer_terms_configuration_force_show">약관 강제 표시</string>
+    <string name="developer_terms_configuration_fixed_font_size">고정된 폰크 크기로 약관 표시</string>
+    <string name="developer_terms_show_terms_view">약관 보기</string>
+
+
 </resources>
