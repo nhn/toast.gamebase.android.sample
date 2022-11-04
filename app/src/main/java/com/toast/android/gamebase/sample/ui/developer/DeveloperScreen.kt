@@ -1,5 +1,6 @@
 package com.toast.android.gamebase.sample.ui.developer
 
+import android.app.Activity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -12,15 +13,17 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.toast.android.gamebase.sample.GamebaseActivity
+import androidx.navigation.Navigator
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 
 @Composable
 fun DeveloperScreen(
+    activity: Activity,
     viewModel: DeveloperViewModel = viewModel(),
     navController: NavController
 ) {
@@ -34,6 +37,7 @@ fun DeveloperScreen(
             )
             DeveloperMenuList(
                 groupedListMap = viewModel.menuMap,
+                activity,
                 viewModel,
                 navController
             )
@@ -45,6 +49,7 @@ fun DeveloperScreen(
 @Composable
 fun DeveloperMenuList(
     groupedListMap: Map<String, List<DeveloperMenu>>,
+    activity: Activity,
     viewModel: DeveloperViewModel,
     navController: NavController
 ) {
@@ -54,7 +59,7 @@ fun DeveloperMenuList(
                 CharacterHeader(category)
             }
             items(items = subMenuList) { subMenu ->
-                MenuItem(subMenu, viewModel, navController)
+                MenuItem(subMenu, activity, viewModel, navController)
             }
         }
     }
@@ -73,10 +78,10 @@ fun CharacterHeader(text: String) {
 
 @Composable
 fun MenuItem(developerMenuItem: DeveloperMenu,
+             activity: Activity,
              viewModel: DeveloperViewModel,
              navController: NavController
 ) {
-    val activity = LocalContext.current as GamebaseActivity
     Surface (
         color = MaterialTheme.colors.surface,
         modifier = Modifier

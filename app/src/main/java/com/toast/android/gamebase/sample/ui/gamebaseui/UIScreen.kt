@@ -10,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.GamebaseActivity
@@ -21,8 +20,9 @@ import com.toast.android.gamebase.sample.ui.common.InputDialog
 import com.toast.android.gamebase.sample.ui.common.RoundButton
 
 @Composable
-fun UIScreen() {
-    val activity = LocalContext.current as GamebaseActivity
+fun UIScreen(
+    activity: GamebaseActivity,
+) {
     var isDialogOpened by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     Column(
