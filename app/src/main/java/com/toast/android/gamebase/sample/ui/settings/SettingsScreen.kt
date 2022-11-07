@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -57,7 +58,9 @@ fun SettingsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 20.dp)
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.setting_screen_column_padding_horizontal)
+            )
             .verticalScroll(scrollState),
         horizontalAlignment = Alignment.Start
     ) {
@@ -69,12 +72,15 @@ fun SettingsScreen(
             ) {
                 Text(
                     text = stringResource(R.string.setting_version_title),
-                    modifier = Modifier.padding(10.dp),
+                    modifier = Modifier.padding(
+                        dimensionResource(id = R.dimen.setting_screen_menu_title_text_padding)
+                    ),
                     fontWeight = FontWeight.Normal
                 )
                 Text(
                     text = Gamebase.getSDKVersion().toString(),
-                    modifier = Modifier.padding(8.dp),
+                    modifier = Modifier.padding(
+                        dimensionResource(id = R.dimen.setting_screen_menu_description_text_padding)),
                     fontWeight = FontWeight.Normal
                 )
             }
@@ -167,7 +173,9 @@ private fun ListItem(stringId: Int, event: () -> Unit) {
             .clickable {
                 event()
             }
-            .padding(10.dp)
+            .padding(
+                dimensionResource(id = R.dimen.setting_screen_list_item_text_padding)
+            )
         ,
         fontWeight = FontWeight.Normal
     )

@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,7 +40,9 @@ fun ConfirmAlertDialog(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 20.dp),
+                        .padding(
+                            bottom = dimensionResource(id = R.dimen.common_confirm_dialog_padding_bottom)
+                        ),
                     horizontalArrangement = Arrangement.SpaceEvenly) {
                     TextButton(
                         onClick = {
@@ -60,7 +63,8 @@ fun ConfirmAlertDialog(
                     }
                 }
             },
-            shape = RoundedCornerShape(24.dp)
+            shape = RoundedCornerShape(
+                dimensionResource(id = R.dimen.common_confirm_dialog_round_corner_radius))
         )
     }
 }

@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,6 +34,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.toast.android.gamebase.sample.GamebaseActivity
+import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppNavHost
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.ui.navigation.screens
@@ -134,7 +136,10 @@ fun MainDrawer(
     Column(
         Modifier
             .wrapContentWidth()
-            .padding(horizontal = 24.dp, vertical = 48.dp)
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.main_screen_drawer_padding_horizontal),
+                vertical = dimensionResource(id = R.dimen.main_screen_drawer_padding_vertical)
+            )
     ) {
         screens.forEach { screen ->
             Column (
@@ -143,7 +148,9 @@ fun MainDrawer(
                     .clickable {
                         onDestinationClicked(screen.route)
                     }
-                    .padding(12.dp)
+                    .padding(
+                        dimensionResource(id = R.dimen.main_screen_screen_menu_padding)
+                    )
             ){
                 Text(
                     text = stringResource(screen.resourceId),

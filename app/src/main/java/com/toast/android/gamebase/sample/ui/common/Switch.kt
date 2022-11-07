@@ -11,9 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.theme.Toast
 
 @Composable
@@ -30,7 +32,9 @@ fun SwitchWithLabel(
     ) {
         Text(
             text = stringResource(stringId),
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(
+                dimensionResource(id = R.dimen.common_switch_padding)
+            ),
             fontWeight = FontWeight.Normal
         )
         Switch(

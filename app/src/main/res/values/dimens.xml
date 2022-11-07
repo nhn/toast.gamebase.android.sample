@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_confirm_dialog_padding_bottom">20dp</dimen>
+    <dimen name="common_confirm_dialog_round_corner_radius">24dp</dimen>
+    <dimen name="common_copyright_footer_font_size">12sp</dimen>
+    <dimen name="common_copyright_footer_margin_top">40dp</dimen>
+    <dimen name="common_copyright_footer_margin_bottom">48dp</dimen>
+
+    <dimen name="common_submenu_divider_margin_top">12dp</dimen>
+    <dimen name="common_switch_padding">10dp</dimen>
+
+    <dimen name="main_screen_drawer_padding_horizontal">24dp</dimen>
+    <dimen name="main_screen_drawer_padding_vertical">48dp</dimen>
+    <dimen name="main_screen_screen_menu_padding">12dp</dimen>
+
+    <dimen name="setting_screen_column_padding_horizontal">20dp</dimen>
+    <dimen name="setting_screen_menu_title_text_padding">10dp</dimen>
+    <dimen name="setting_screen_menu_description_text_padding">8dp</dimen>
+    <dimen name="setting_screen_list_item_text_padding">10dp</dimen>
+</resources>
