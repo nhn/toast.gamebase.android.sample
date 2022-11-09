@@ -17,12 +17,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
@@ -30,21 +30,21 @@ import com.toast.android.gamebase.sample.ui.common.ConfirmAlertDialog
 import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
 import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
 import com.toast.android.gamebase.sample.ui.login.LoginState
+import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 
 @Composable
 fun SettingsScreen(
-    settingsViewModel: SettingsViewModel = viewModel(),
-    navigateToLogin: () -> Unit,
-    navigateToIdpMappingScreen: () -> Unit
+    activity: GamebaseActivity,
+    navController: NavController,
+    settingsViewModel: SettingsViewModel = viewModel()
 ) {
-    val activity = LocalContext.current as GamebaseActivity
     val scrollState = rememberScrollState()
     val isLogoutDialogOpened = remember { mutableStateOf(false) }
     val isWithdrawDialogOpened = remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = settingsViewModel.uiState) {
         if (settingsViewModel.uiState == LoginState.LOGGED_OUT) {
-            navigateToLogin()
+            settingsViewModel.navigateToLogin(navController)
         }
     }
 
@@ -91,7 +91,7 @@ fun SettingsScreen(
             SubMenuDivider(R.string.setting_account_title)
             // TODO : idp 계정 연동 구현 완료시 event 추가
             ListItem(R.string.setting_account_connected_idp_title) {
-                navigateToIdpMappingScreen()
+                settingsViewModel.navigateToIdpMapping(navController)
                 Log.d("SettingScreen", "idp 계정 연동 listen 활성화")
             }
             ListItem(R.string.logout) {
@@ -156,6 +156,12 @@ fun SettingsScreen(
             showCancel = true,
             onOkButtonClicked = { settingsViewModel.withdraw(activity) }
         )
+        Text(text = stringResource(id = R.string.idp_mapping_button_do_mapping),
+            modifier = Modifier
+                .padding(6.dp)
+                .clickable {
+                    navController.navigate(SampleAppScreens.IdpMapping.route)
+                })
     }
 }
 
@@ -173,12 +179,4 @@ private fun ListItem(stringId: Int, event: () -> Unit) {
             ),
         fontWeight = FontWeight.Normal
     )
-}
-
-@Preview
-@Composable
-fun PreviewSetting() {
-    SettingsScreen(navigateToLogin = { /*TODO*/ }) {
-        
-    }
 }

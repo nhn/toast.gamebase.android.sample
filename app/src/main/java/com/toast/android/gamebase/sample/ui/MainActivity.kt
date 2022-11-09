@@ -33,19 +33,15 @@ class MainActivity : GamebaseActivity() {
         if (getIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, -1) == BuildConfig.VERSION_CODE) {
             shouldShowAccessInformationScreen = false
         }
-
         setContent {
             GamebaseSampleProjectTheme {
                 LoadStartScreen(
+                    activity = this,
                     startRoute = startRoute,
                     shouldShowAccessInformationScreen = shouldShowAccessInformationScreen
                 ) {
                     shouldShowAccessInformationScreen = false
-                    putIntInPreference(
-                        applicationContext,
-                        KEY_LAST_ACCESS_INFO_SHOWN_VERSION,
-                        BuildConfig.VERSION_CODE
-                    )
+                    putIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, BuildConfig.VERSION_CODE)
                 }
             }
         }
@@ -56,6 +52,7 @@ class MainActivity : GamebaseActivity() {
 
 @Composable
 fun LoadStartScreen(
+    activity: GamebaseActivity,
     startRoute: String,
     shouldShowAccessInformationScreen: Boolean,
     updateVersionInPreferenceAndState: () -> Unit
@@ -64,6 +61,7 @@ fun LoadStartScreen(
         AccessInformationScreen(updateVersionInPreferenceAndState)
     } else {
         MainScreen(
+            activity = activity,
             startRoute = startRoute
         )
     }

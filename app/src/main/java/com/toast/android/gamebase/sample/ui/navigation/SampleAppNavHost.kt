@@ -2,7 +2,6 @@ package com.toast.android.gamebase.sample.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,10 +16,10 @@ import com.toast.android.gamebase.sample.ui.idpmap.IdpMappingScreen
 import com.toast.android.gamebase.sample.ui.login.LoginScreen
 import com.toast.android.gamebase.sample.ui.settings.SettingsScreen
 import com.toast.android.gamebase.sample.ui.gamebaseui.UIScreen
-import kotlinx.coroutines.launch
 
 @Composable
 fun SampleAppNavHost(
+    activity: GamebaseActivity,
     navController: NavHostController,
     modifier: Modifier = Modifier,
     startRoute: String = SampleAppScreens.Login.route
@@ -31,48 +30,26 @@ fun SampleAppNavHost(
         modifier = modifier
     ) {
         composable(SampleAppScreens.Login.route) {
-            LoginScreen(
-                navigateToHome = {
-                    navController.navigate(SampleAppScreens.Home.route) {
-                        popUpTo(SampleAppScreens.Login.route) {
-                            inclusive = true
-                        }
-                    }
-                }
-            )
+            LoginScreen(activity, navController = navController)
         }
         composable(SampleAppScreens.Home.route) {
-            HomeScreen()
+            HomeScreen(activity)
         }
         composable(SampleAppScreens.Shopping.route) {
-            ShoppingScreen()
+            ShoppingScreen(activity)
         }
         composable(SampleAppScreens.Profile.route) {
             ProfileScreen()
         }
         composable(SampleAppScreens.Settings.route) {
-            SettingsScreen(
-                navigateToLogin = {
-                    navController.navigate(SampleAppScreens.Login.route) {
-                        popUpTo(SampleAppScreens.Home.route) {
-                            inclusive = true
-                        }
-                        launchSingleTop = true
-                    }
-                },
-                navigateToIdpMappingScreen = {
-                    navController.navigate(SampleAppScreens.IdpMapping.route) {
-                        launchSingleTop = true
-                    }
-                }
-            )
+            SettingsScreen(activity, navController = navController)
         }
         composable(SampleAppScreens.IdpMapping.route) {
-            IdpMappingScreen()
+            IdpMappingScreen(activity = activity)
         }
         composable(SampleAppScreens.UI.route) {
-            UIScreen()
+            UIScreen(activity = activity)
         }
-        developerGraph(navController)
+        developerGraph(navController, activity)
     }
 }

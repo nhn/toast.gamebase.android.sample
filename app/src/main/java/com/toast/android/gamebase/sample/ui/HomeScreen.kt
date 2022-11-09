@@ -10,15 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.showImageNotices
 
 @Composable
-fun HomeScreen() {
-    val activity = LocalContext.current as Activity
+fun HomeScreen(activity: Activity) {
     Surface {
         Column (
             modifier = Modifier.fillMaxSize(),

@@ -43,6 +43,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MainScreen(
+    activity: GamebaseActivity,
     startRoute: String
 ) {
     val navController = rememberNavController()
@@ -59,6 +60,7 @@ fun MainScreen(
     ) {
         if (currentScreen.route == SampleAppScreens.Login.route) {
             SampleAppNavHost(
+                activity = activity,
                 navController = navController,
                 startRoute = startRoute
             )
@@ -79,6 +81,7 @@ fun MainScreen(
                 }
             ) { innerPadding ->
                 SampleAppNavHost(
+                    activity = activity,
                     navController = navController,
                     modifier = Modifier.padding(innerPadding),
                     startRoute = startRoute

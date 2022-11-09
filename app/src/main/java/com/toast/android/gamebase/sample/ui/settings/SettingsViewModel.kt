@@ -5,7 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.toast.android.gamebase.base.push.PushConfiguration
 import com.toast.android.gamebase.base.push.data.GamebaseNotificationOptions
 import com.toast.android.gamebase.sample.GamebaseActivity
@@ -15,7 +16,9 @@ import com.toast.android.gamebase.sample.gamebasemanager.openContact
 import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.ui.login.LoginState
+import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
+import kotlinx.coroutines.launch
 import com.toast.android.gamebase.sample.gamebasemanager.logout as gamebaseLogout
 import com.toast.android.gamebase.sample.gamebasemanager.registerPush as gamebaseRegisterPush
 import com.toast.android.gamebase.sample.gamebasemanager.withdraw as gamebaseWithdraw
@@ -54,6 +57,17 @@ class SettingsViewModel : ViewModel() {
         private set
     var foregroundState = mutableStateOf(false)
         private set
+
+    fun navigateToLogin(navController: NavController) {
+        viewModelScope.launch {
+            navController.navigate(SampleAppScreens.Login.route) {
+                popUpTo(SampleAppScreens.Home.route) {
+                    inclusive = true
+                }
+                launchSingleTop = true
+            }
+        }
+    }
 
     fun logout(activity: GamebaseActivity) {
         gamebaseLogout(activity) { isSuccess, errorMessage ->
@@ -160,6 +174,14 @@ class SettingsViewModel : ViewModel() {
 
     fun loadServiceCenter(activity: GamebaseActivity, userName: String?) {
         openContact(activity, userName) {
+        }
+    }
+
+    fun navigateToIdpMapping(navController: NavController) {
+        viewModelScope.launch {
+            navController.navigate(SampleAppScreens.IdpMapping.route) {
+                launchSingleTop = true
+            }
         }
     }
 }

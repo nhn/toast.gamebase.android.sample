@@ -1,6 +1,5 @@
 package com.toast.android.gamebase.sample.ui
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,7 +12,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,8 +31,7 @@ import com.toast.android.gamebase.sample.ui.theme.Grey500
 import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
-fun ShoppingScreen(shoppingViewModel: ShoppingViewModel = viewModel()) {
-    val activity = LocalContext.current as GamebaseActivity
+fun ShoppingScreen(activity: GamebaseActivity, shoppingViewModel: ShoppingViewModel = viewModel()) {
     if (shoppingViewModel.needLoadingDialog) {
         Dialog(
             onDismissRequest = { shoppingViewModel.needLoadingDialog = false },
