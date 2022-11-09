@@ -199,39 +199,26 @@ class DeveloperViewModel: ViewModel() {
         }
     }
 
-    fun sendLogger(
-        loggerMessage: String,
-        loggerUserKey: String,
-        loggerUserValue: String,
-        loggerLevel: Int
-    ) {
+    fun sendLogger(loggerInformation: LoggerInformation) {
         val userField = HashMap<String?, String?>()
-        if (loggerUserKey.isNotEmpty() && loggerUserValue.isNotEmpty()) {
-            userField[loggerUserKey] = loggerUserValue
+        if (loggerInformation.loggerUserKey.value.isNotEmpty() && loggerInformation.loggerUserValue.value.isNotEmpty()) {
+            userField[loggerInformation.loggerUserKey.value] =
+                loggerInformation.loggerUserValue.value
         }
-        getSendLoggerType(loggerLevel).sendLog(loggerMessage, userField)
+        getSendLoggerType(loggerInformation.loggerLevel.value).sendLog(
+            loggerInformation.loggerMessage.value,
+            userField
+        )
     }
 
     private fun getSendLoggerType(loggerLevel: Int): LoggerLevel {
-        when (loggerLevel) {
-            0 -> {
-                return Debug()
-            }
-            1 -> {
-                return Info()
-            }
-            2 -> {
-                return Warn()
-            }
-            3 -> {
-                return Error()
-            }
-            4 -> {
-                return Fatal()
-            }
-            else -> {
-                return Debug()
-            }
+        return when (loggerLevel) {
+            0 -> Debug()
+            1 -> Info()
+            2 -> Warn()
+            3 -> Error()
+            4 -> Fatal()
+            else -> Debug()
         }
     }
 

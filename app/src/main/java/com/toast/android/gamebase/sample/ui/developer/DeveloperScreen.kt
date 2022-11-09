@@ -70,12 +70,7 @@ fun DeveloperScreen(
         loggerInformation = viewModel.loggerInformation,
         loggerLevelExpanded = viewModel.loggerLevelExpanded,
         onOkButtonClicked = { loggerInformation ->
-            viewModel.sendLogger(
-                loggerInformation.loggerMessage.value,
-                loggerInformation.loggerUserKey.value,
-                loggerInformation.loggerUserValue.value,
-                loggerInformation.loggerLevel.value
-            )
+            viewModel.sendLogger(loggerInformation)
             viewModel.refreshLoggerInformation()
         },
         onCancelButtonClicked = {
