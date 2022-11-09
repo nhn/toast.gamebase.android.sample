@@ -26,7 +26,7 @@ import com.toast.android.gamebase.sample.util.printWithIndent
 import com.toast.android.gamebase.terms.GamebaseTermsConfiguration
 
 @Composable
-fun DeveloperTermsSettingScreen() {
+fun TermsSettingScreen() {
     val scrollState = rememberScrollState()
     val activity: Activity = LocalContext.current as Activity
     var termsPopupShowing by remember {

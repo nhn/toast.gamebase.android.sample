@@ -78,6 +78,9 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.TERMS_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperTermsSetting.route)
             }
+            DeveloperMenu.TERMS_AGREEMENT_SAVE -> {
+                navController.navigate(SampleAppScreens.DeveloperCustomTermsSetting.route)
+            }
         }
     }
 
@@ -158,7 +161,6 @@ class DeveloperViewModel: ViewModel() {
             queryTerms(activity) { gamebaseQueryTermsResult, exception ->
                 if (Gamebase.isSuccess(exception)) {
                     // Succeeded.
-
                     showAlert(activity, successTitle, gamebaseQueryTermsResult.printWithIndent());
                 } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
                     // Another country device.

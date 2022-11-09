@@ -8,7 +8,6 @@ import com.toast.android.gamebase.GamebaseCallback
 import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.GamebaseWebViewConfiguration
 import com.toast.android.gamebase.GamebaseWebViewStyle
-import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.ScreenOrientation
 import com.toast.android.gamebase.base.data.GamebaseDataContainer
 import com.toast.android.gamebase.imagenotice.ImageNoticeConfiguration
@@ -91,36 +90,25 @@ fun queryTerms(
 
 fun updateTerms(
     activity: Activity,
-    configuration: GamebaseUpdateTermsConfiguration,
+    termsSeq: Int?,
+    termsVersion: String?,
+    contents: List<GamebaseTermsContent>?,
     callback: GamebaseCallback?
 ) {
+    if (termsVersion == null || termsSeq == null || contents == null) {
+        Log.e(TAG, "update Terms argument is null")
+        return
+    }
+    val configuration =
+        GamebaseUpdateTermsConfiguration
+            .newBuilder(termsSeq, termsVersion, contents)
+            .build()
+
     Gamebase.Terms.updateTerms(
         activity, configuration
-    ) { exception -> callback?.onCallback(exception) }
-}
-
-fun updateTermsExample(
-    activity: Activity,
-    callback: GamebaseCallback?
-) {
-    queryTerms(activity,
-        GamebaseDataCallback<GamebaseQueryTermsResult>() { (termsSeq, termsVersion, _, contents1), queryTermsException ->
-            val contents: MutableList<GamebaseTermsContent> = ArrayList()
-            for (detail in contents1) {
-                val content = GamebaseTermsContent.from(detail)
-                if (content != null) {
-                    // Change 'agreed' value for test.
-                    content.agreed = !content.agreed
-                    contents.add(content)
-                }
-            }
-            val configuration =
-                GamebaseUpdateTermsConfiguration.newBuilder(termsSeq, termsVersion, contents)
-                    .build()
-            updateTerms(
-                activity, configuration
-            ) { updateTermsException -> callback?.onCallback(updateTermsException) }
-        })
+    ) { updateTermsException ->
+        callback?.onCallback(updateTermsException)
+    }
 }
 
 fun showWebView(activity: Activity, urlString: String) {

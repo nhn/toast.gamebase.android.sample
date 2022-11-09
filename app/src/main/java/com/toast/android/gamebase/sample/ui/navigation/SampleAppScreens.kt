@@ -2,7 +2,6 @@ package com.toast.android.gamebase.sample.ui.navigation
 
 import androidx.annotation.StringRes
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.developer.terms.DeveloperTermsSettingScreen
 
 sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int) {
     object Login: SampleAppScreens("login", R.string.login)
@@ -17,6 +16,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object DeveloperRoot: SampleAppScreens("dev_home", R.string.developer)
     object DeveloperPushSetting: SampleAppScreens("push_setting", R.string.developer_menu_category_push)
     object DeveloperTermsSetting: SampleAppScreens("terms_setting", R.string.developer_menu_category_terms)
+    object DeveloperCustomTermsSetting: SampleAppScreens("terms_custom_setting", R.string.developer_menu_category_terms)
 
     companion object {
         fun fromRoute(route: String?): SampleAppScreens =
@@ -32,6 +32,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
                 DeveloperRoot.route -> DeveloperRoot
                 DeveloperPushSetting.route -> DeveloperPushSetting
                 DeveloperTermsSetting.route -> DeveloperTermsSetting
+                DeveloperCustomTermsSetting.route -> DeveloperCustomTermsSetting
                 null -> Home
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
             }
