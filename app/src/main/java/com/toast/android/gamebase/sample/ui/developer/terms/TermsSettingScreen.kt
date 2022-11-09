@@ -43,7 +43,7 @@ fun TermsSettingScreen(
 
         SwitchWithLabel(
             stringId = R.string.developer_terms_configuration_force_show,
-            state = viewModel.forceShow,
+            state = viewModel.forceShow.value,
             enableSwitch = true,
             event = { newState ->
                 viewModel.forceShow.value = newState
@@ -51,7 +51,7 @@ fun TermsSettingScreen(
         )
         SwitchWithLabel(
             stringId = R.string.developer_terms_configuration_fixed_font_size,
-            state = viewModel.fixedFontSize,
+            state = viewModel.fixedFontSize.value,
             enableSwitch = true,
             event = { newState ->
                 viewModel.fixedFontSize.value = newState

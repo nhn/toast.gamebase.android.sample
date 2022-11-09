@@ -28,21 +28,6 @@ import com.toast.android.gamebase.sample.ui.theme.Toast
 @Composable
 fun SwitchWithLabel(
     stringId: Int,
-    state: MutableState<Boolean>,
-    enableSwitch: Boolean,
-    event: (Boolean) -> Unit,
-) {
-    SwitchWithLabel(
-        label = stringResource(id = stringId),
-        state = state,
-        enableSwitch = enableSwitch,
-        event = event
-    )
-}
-
-@Composable
-fun SwitchWithLabel(
-    stringId: Int,
     state: Boolean,
     enableSwitch: Boolean,
     event: (Boolean) -> Unit,
@@ -91,20 +76,6 @@ fun SwitchWithLabel(
             colors = SwitchDefaults.colors(checkedThumbColor = Toast)
         )
     }
-}
-@Composable
-fun SwitchWithLabel(
-    label: String,
-    state: MutableState<Boolean>,
-    enableSwitch: Boolean,
-    event: (Boolean) -> Unit,
-) {
-    SwitchWithLabel(
-        label = label,
-        state = state.value,
-        enableSwitch = enableSwitch,
-        event = event
-    )
 }
 
 @Preview
