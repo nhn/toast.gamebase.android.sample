@@ -1,7 +1,10 @@
 package com.toast.android.gamebase.sample.ui.developer
 
 import android.content.Context
+import android.content.res.Resources.NotFoundException
+import android.util.Log
 
+private const val TAG = "DeveloperMenuFactory"
 class DeveloperMenuFactory() {
     fun createMenu(context: Context,
                    categoryId: Int): List<DeveloperMenu> {
@@ -17,5 +20,10 @@ class DeveloperMenuFactory() {
 
 fun Context.getStringResourceByName(name: String): String {
     val defType = "string"
-    return getString(resources.getIdentifier(name, defType, packageName))
+    return try {
+        getString(resources.getIdentifier(name, defType, packageName))
+    } catch (exception: NotFoundException) {
+        Log.e(TAG, exception.toString())
+        ""
+    }
 }
