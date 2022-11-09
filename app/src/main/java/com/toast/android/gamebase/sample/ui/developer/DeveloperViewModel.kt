@@ -160,12 +160,12 @@ class DeveloperViewModel: ViewModel() {
         viewModelScope.launch {
             queryTerms(activity) { gamebaseQueryTermsResult, exception ->
                 if (Gamebase.isSuccess(exception)) {
-                    // Succeeded.
                     showAlert(activity, successTitle, gamebaseQueryTermsResult.printWithIndent());
                 } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
                     // Another country device.
                     // Pass the 'terms and conditions' step.
-                    showAlert(activity, failedTitle,"NOT NEED TO SHOW THE T&C");
+                    showAlert(activity, failedTitle,
+                        (activity as Context).getString(R.string.developer_terms_no_need_to_show_terms));
                 } else {
                     showAlert(activity, failedTitle, exception.printWithIndent());
                 }

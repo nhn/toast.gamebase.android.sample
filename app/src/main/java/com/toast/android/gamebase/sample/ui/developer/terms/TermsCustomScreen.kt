@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -30,15 +31,12 @@ fun TermsCustomScreen(
         viewModel.fetchTermsAndUpdateUiState(activity)
     }
 
-    Column(modifier = Modifier
-        .padding(20.dp)) {
+    Column(modifier = Modifier.padding(
+        dimensionResource(id = R.dimen.setting_screen_column_padding_horizontal))) {
+
         when(viewModel.uiState.value) {
-            TermsUIState.LOADING -> {
-                LoadingScreen()
-            }
-            TermsUIState.NO_TERMS -> {
-                EmptyListScreen()
-            }
+            TermsUIState.LOADING -> LoadingScreen()
+            TermsUIState.NO_TERMS -> EmptyListScreen()
             TermsUIState.ERROR_TERMS -> {
                 ErrorScreen(errorString =
                     viewModel.currentException.value?.printWithIndent() ?:
@@ -57,7 +55,9 @@ fun TermsContentLazyColumn(viewModel: TermsCustomViewModel) {
     val activity = LocalContext.current as Activity
     val queryTermResultValue = viewModel.queryTermsResultState.value ?: return
 
-    LazyColumn(contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)) {
+    LazyColumn(contentPadding = PaddingValues(
+        horizontal = dimensionResource(id = R.dimen.setting_screen_terms_lazy_column_content_padding),
+        vertical = dimensionResource(id = R.dimen.setting_screen_terms_lazy_column_content_padding))) {
         items(items = queryTermResultValue.contents) { item ->
             val state = viewModel.agreedMap[item.termsContentSeq]?.value ?: false
             val label = item.name ?: ""

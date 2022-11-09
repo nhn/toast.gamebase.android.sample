@@ -11,7 +11,6 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object Settings: SampleAppScreens("settings", R.string.settings)
     object IdpMapping: SampleAppScreens("idp_mapping", R.string.idp_mapping)
     object UI: SampleAppScreens("ui", R.string.ui)
-
     object Developer: SampleAppScreens("developer", R.string.developer)
     object DeveloperRoot: SampleAppScreens("dev_home", R.string.developer)
     object DeveloperPushSetting: SampleAppScreens("push_setting", R.string.developer_menu_category_push)

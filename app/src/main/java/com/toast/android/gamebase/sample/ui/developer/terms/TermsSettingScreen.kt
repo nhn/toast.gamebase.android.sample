@@ -13,8 +13,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
@@ -26,83 +28,43 @@ import com.toast.android.gamebase.sample.util.printWithIndent
 import com.toast.android.gamebase.terms.GamebaseTermsConfiguration
 
 @Composable
-fun TermsSettingScreen() {
+fun TermsSettingScreen(
+    viewModel: TermsSettingViewModel = viewModel()) {
     val scrollState = rememberScrollState()
     val activity: Activity = LocalContext.current as Activity
-    var termsPopupShowing by remember {
-        mutableStateOf<Boolean>(false)
-    }
-    var forceShow by remember {
-        mutableStateOf<Boolean>(false)
-    }
-    var fixedFontSize by remember {
-        mutableStateOf<Boolean>(false)
-    }
 
-    BackHandler(termsPopupShowing) {
+    BackHandler(viewModel.termsPopupShowing.value) {
         // do nothing. just disable back key when terms popup is showing
     }
 
     Column(modifier = Modifier
-        .padding(20.dp)
+        .padding(dimensionResource(id = R.dimen.setting_screen_column_padding_horizontal))
         .verticalScroll(scrollState)) {
 
         SwitchWithLabel(
             stringId = R.string.developer_terms_configuration_force_show,
-            state = forceShow,
+            state = viewModel.forceShow,
             enableSwitch = true,
             event = { newState ->
-                forceShow = newState
+                viewModel.forceShow.value = newState
             }
         )
         SwitchWithLabel(
             stringId = R.string.developer_terms_configuration_fixed_font_size,
-            state = fixedFontSize,
+            state = viewModel.fixedFontSize,
             enableSwitch = true,
             event = { newState ->
-                fixedFontSize = newState
+                viewModel.fixedFontSize.value = newState
             }
         )
         RoundButton(stringResource(id = R.string.developer_terms_show_terms_view)) {
-            showTermsViewAndCallback(
+            viewModel.showTermsViewAndCallback(
                 activity,
-                fixedFontSize = fixedFontSize,
-                forceShow = forceShow
+                fixedFontSize = viewModel.fixedFontSize.value,
+                forceShow = viewModel.forceShow.value
             ) { status ->
-                termsPopupShowing = status
+                viewModel.termsPopupShowing.value = status
             }
         }
-    }
-}
-
-private fun showTermsViewAndCallback(
-    activity: Activity,
-    forceShow: Boolean,
-    fixedFontSize: Boolean,
-    updateTermsPopupStatus: (Boolean) -> Unit
-) {
-    val termsConfiguration = GamebaseTermsConfiguration.newBuilder()
-        .setForceShow(forceShow)
-        .enableFixedFontSize(fixedFontSize)
-        .build()
-
-    val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
-    val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
-
-    updateTermsPopupStatus(true)
-    showTermsView(
-        activity = activity,
-        configuration = termsConfiguration) { dataContainer, exception ->
-
-        if (isSuccess(exception)) {
-            if (dataContainer != null) {
-                showAlert(activity, successTitle, dataContainer.printWithIndent())
-            } else {
-                showAlert(activity, successTitle, "Empty Gamebase data container")
-            }
-        } else {
-            showAlert(activity, failedTitle, exception.printWithIndent())
-        }
-        updateTermsPopupStatus(false)
     }
 }

@@ -202,6 +202,7 @@
     <string name="developer_terms_configuration_force_show">약관 강제 표시</string>
     <string name="developer_terms_configuration_fixed_font_size">고정된 폰크 크기로 약관 표시</string>
     <string name="developer_terms_show_terms_view">약관 보기</string>
+    <string name="developer_terms_no_need_to_show_terms">단말기 국가코드에 맞는 약관 정보가 콘솔에 등록되어 있지 않습니다.\n약관을 표시하지 않도록 처리하시기 바랍니다.</string>
 
 
 </resources>
