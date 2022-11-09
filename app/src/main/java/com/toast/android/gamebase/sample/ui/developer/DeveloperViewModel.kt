@@ -24,35 +24,7 @@ import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
 import com.toast.android.gamebase.sample.gamebasemanager.*
 import com.toast.android.gamebase.sample.gamebasemanager.LOG_AND_CRASH_APPKEY
-
-enum class LogLevel() {
-    DEBUG {
-        override fun sendLog(message: String, userField: Map<String?, String?>) {
-            sendLogDebug(message, userField)
-        }
-    },
-    INFO {
-        override fun sendLog(message: String, userField: Map<String?, String?>) {
-            sendLogInfo(message, userField)
-        }
-    },
-    WARN {
-        override fun sendLog(message: String, userField: Map<String?, String?>) {
-            sendLogWarn(message, userField)
-        }
-    },
-    ERROR {
-        override fun sendLog(message: String, userField: Map<String?, String?>) {
-            sendLogError(message, userField)
-        }
-    },
-    FATAL {
-        override fun sendLog(message: String, userField: Map<String?, String?>) {
-            sendLogFatal(message, userField)
-        }
-    };
-    abstract fun sendLog(message: String, userField: Map<String?, String?>)
-}
+import com.toast.android.gamebase.sample.ui.logger.*
 
 class DeveloperViewModel: ViewModel() {
     val showPurchaseDialog = mutableStateOf(false)
@@ -61,20 +33,13 @@ class DeveloperViewModel: ViewModel() {
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
     val isLoggerInitializeOpened = mutableStateOf(false)
     val isSendLogOpened = mutableStateOf(false)
-    var loggerLevel = mutableStateOf(0)
-        private set
     var loggerAppKey = mutableStateOf(LOG_AND_CRASH_APPKEY)
         private set
     var isLoggerAppKeyValid = mutableStateOf(!LOG_AND_CRASH_APPKEY.isNullOrEmpty())
         private set
     var loggerLevelExpanded = mutableStateOf(false)
         private set
-    var loggerMessage = mutableStateOf("")
-        private set
-    var loggerUserKey = mutableStateOf("")
-        private set
-    var loggerUserValue = mutableStateOf("")
-        private set
+    val loggerInformation = LoggerInformation(mutableStateOf(0), mutableStateOf(""), mutableStateOf(""), mutableStateOf(""))
 
     private val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
     private val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
@@ -241,34 +206,36 @@ class DeveloperViewModel: ViewModel() {
         loggerLevel: Int
     ) {
         val userField = HashMap<String?, String?>()
-        if (!loggerUserKey.isNullOrEmpty() && !loggerUserValue.isNullOrEmpty()) {
+        if (loggerUserKey.isNotEmpty() && loggerUserValue.isNotEmpty()) {
             userField[loggerUserKey] = loggerUserValue
         }
+        getSendLoggerType(loggerLevel).sendLog(loggerMessage, userField)
+    }
+
+    private fun getSendLoggerType(loggerLevel: Int): LoggerLevel {
         when (loggerLevel) {
             0 -> {
-                LogLevel.DEBUG.sendLog(loggerMessage, userField)
+                return Debug()
             }
             1 -> {
-                LogLevel.INFO.sendLog(loggerMessage, userField)
+                return Info()
             }
             2 -> {
-                LogLevel.WARN.sendLog(loggerMessage, userField)
+                return Warn()
             }
             3 -> {
-                LogLevel.ERROR.sendLog(loggerMessage, userField)
+                return Error()
             }
             4 -> {
-                LogLevel.FATAL.sendLog(loggerMessage, userField)
+                return Fatal()
             }
             else -> {
+                return Debug()
             }
         }
     }
 
     fun refreshLoggerInformation() {
-        loggerMessage.value = ""
-        loggerUserKey.value = ""
-        loggerUserValue.value = ""
-        loggerLevel.value = 0
+        loggerInformation.refreshData()
     }
 }

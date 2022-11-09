@@ -67,13 +67,15 @@ fun DeveloperScreen(
         setDialogStatus = { newState ->
             viewModel.isSendLogOpened.value = newState
         },
-        loggerMessage = viewModel.loggerMessage,
-        loggerUserKey = viewModel.loggerUserKey,
-        loggerUserValue = viewModel.loggerUserValue,
-        loggerLevel = viewModel.loggerLevel,
+        loggerInformation = viewModel.loggerInformation,
         loggerLevelExpanded = viewModel.loggerLevelExpanded,
-        onOkButtonClicked = { loggerMessage, loggerUserKey, loggerUserValue, loggerLevel ->
-            viewModel.sendLogger(loggerMessage, loggerUserKey, loggerUserValue, loggerLevel)
+        onOkButtonClicked = { loggerInformation ->
+            viewModel.sendLogger(
+                loggerInformation.loggerMessage.value,
+                loggerInformation.loggerUserKey.value,
+                loggerInformation.loggerUserValue.value,
+                loggerInformation.loggerLevel.value
+            )
             viewModel.refreshLoggerInformation()
         },
         onCancelButtonClicked = {

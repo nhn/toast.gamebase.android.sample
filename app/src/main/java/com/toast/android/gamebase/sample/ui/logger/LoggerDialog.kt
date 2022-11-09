@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.ui.logger.LoggerInformation
 
 @Composable
 fun LoggerInitializeDialog(
@@ -37,7 +38,7 @@ fun LoggerInitializeDialog(
                 )
             },
             text = {
-                TextField(
+                TextFieldWithLabel(
                     labelName = stringResource(id = R.string.app_key),
                     fieldMessage = textMessage,
                     fieldEnabled = isLoggerAppKeyValid
@@ -79,12 +80,9 @@ fun SendLogDialog(
     isDialogOpened: Boolean,
     title: String,
     setDialogStatus: (Boolean) -> Unit,
-    loggerMessage: MutableState<String>,
-    loggerUserKey: MutableState<String>,
-    loggerUserValue: MutableState<String>,
-    loggerLevel: MutableState<Int>,
+    loggerInformation: LoggerInformation,
     loggerLevelExpanded: MutableState<Boolean>,
-    onOkButtonClicked: (String, String, String, Int) -> Unit,
+    onOkButtonClicked: (LoggerInformation) -> Unit,
     onCancelButtonClicked: () -> Unit,
     stringArrayResources: Int,
 ) {
@@ -103,17 +101,17 @@ fun SendLogDialog(
             },
             text = {
                 Column(modifier = Modifier.fillMaxWidth()) {
-                    TextField(
+                    TextFieldWithLabel(
                         labelName = stringResource(id = R.string.message),
-                        fieldMessage = loggerMessage
+                        fieldMessage = loggerInformation.loggerMessage
                     )
-                    TextField(
+                    TextFieldWithLabel(
                         labelName = stringResource(id = R.string.user_key),
-                        fieldMessage = loggerUserKey
+                        fieldMessage = loggerInformation.loggerUserKey
                     )
-                    TextField(
+                    TextFieldWithLabel(
                         labelName = stringResource(id = R.string.user_value),
-                        fieldMessage = loggerUserValue
+                        fieldMessage = loggerInformation.loggerUserValue
                     )
                     Spacer(modifier = Modifier.height(5.dp))
                     Row(
@@ -126,9 +124,9 @@ fun SendLogDialog(
                             options = stringArrayResource(id = stringArrayResources).toList(),
                             expanded = loggerLevelExpanded.value,
                             onExpandChanged = { expand -> loggerLevelExpanded.value = expand },
-                            selected = loggerLevel.value,
+                            selected = loggerInformation.loggerLevel.value,
                             onSelected = { selectedId ->
-                                loggerLevel.value = selectedId
+                                loggerInformation.loggerLevel.value = selectedId
                             },
                             modifier = Modifier.width(150.dp)
                         )
@@ -145,10 +143,7 @@ fun SendLogDialog(
                     TextButton(
                         onClick = {
                             onOkButtonClicked(
-                                loggerMessage.value,
-                                loggerUserKey.value,
-                                loggerUserValue.value,
-                                loggerLevel.value
+                                loggerInformation
                             )
                             setDialogStatus(false)
                         }
@@ -193,12 +188,14 @@ fun PreviewSendLogDialog() {
         isDialogOpened = true,
         title = "제목",
         setDialogStatus = {},
-        loggerMessage = mutableStateOf("test"),
-        loggerUserKey = mutableStateOf("test"),
-        loggerUserValue = mutableStateOf("test"),
-        loggerLevel = mutableStateOf(0),
+        loggerInformation = LoggerInformation(
+            mutableStateOf(0),
+            mutableStateOf("test"),
+            mutableStateOf("test"),
+            mutableStateOf("test")
+        ),
         loggerLevelExpanded = mutableStateOf(false),
-        onOkButtonClicked = { loggerMessage, loggerUserKey, loggerUserValue, loggerLevel -> },
+        onOkButtonClicked = { },
         onCancelButtonClicked = {},
         R.array.logger_level
     )

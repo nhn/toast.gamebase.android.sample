@@ -73,7 +73,7 @@ fun InputDialog(
 }
 
 @Composable
-fun TextField(
+fun TextFieldWithLabel(
     labelName: String,
     fieldMessage: MutableState<String>,
     fieldEnabled: MutableState<Boolean> = mutableStateOf(false)
