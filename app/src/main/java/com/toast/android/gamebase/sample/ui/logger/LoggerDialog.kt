@@ -1,28 +1,29 @@
 package com.toast.android.gamebase.sample.ui.common
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.logger.LoggerInformation
+import com.toast.android.gamebase.sample.ui.logger.LoggerInitializeDialogState
+import com.toast.android.gamebase.sample.ui.logger.SendLogDialogState
 
 @Composable
 fun LoggerInitializeDialog(
+    activity: Activity,
     isDialogOpened: Boolean,
     title: String,
     setDialogStatus: (Boolean) -> Unit,
-    textMessage: MutableState<String>,
-    onOkButtonClicked: (String) -> Unit,
-    onCancelButtonClicked: () -> Unit,
-    isLoggerAppKeyValid: MutableState<Boolean>
+    loggerInitializeDialogState: LoggerInitializeDialogState,
+    isLoggerAppKeyValid: Boolean,
 ) {
     if (isDialogOpened) {
         AlertDialog(onDismissRequest = {
@@ -40,8 +41,11 @@ fun LoggerInitializeDialog(
             text = {
                 TextFieldWithLabel(
                     labelName = stringResource(id = R.string.app_key),
-                    fieldMessage = textMessage,
-                    fieldEnabled = isLoggerAppKeyValid
+                    fieldMessage = loggerInitializeDialogState.loggerAppKey.value,
+                    fieldEnabled = isLoggerAppKeyValid,
+                    onValueChanged = { value ->
+                        loggerInitializeDialogState.loggerAppKey.value = value
+                    }
                 )
             },
             buttons = {
@@ -53,7 +57,11 @@ fun LoggerInitializeDialog(
                 ) {
                     TextButton(
                         onClick = {
-                            onOkButtonClicked(textMessage.value)
+                            loggerInitializeDialogState.initializeLogger(
+                                activity = activity,
+                                loggerInitializeDialogState.loggerAppKey.value
+                            )
+                            loggerInitializeDialogState.refreshAppKey()
                             setDialogStatus(false)
                         }
                     ) {
@@ -61,7 +69,7 @@ fun LoggerInitializeDialog(
                     }
                     TextButton(
                         onClick = {
-                            onCancelButtonClicked()
+                            loggerInitializeDialogState.refreshAppKey()
                             setDialogStatus(false)
                         }
                     ) {
@@ -74,17 +82,13 @@ fun LoggerInitializeDialog(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Composable
 fun SendLogDialog(
     isDialogOpened: Boolean,
     title: String,
     setDialogStatus: (Boolean) -> Unit,
-    loggerInformation: LoggerInformation,
-    loggerLevelExpanded: MutableState<Boolean>,
-    onOkButtonClicked: (LoggerInformation) -> Unit,
-    onCancelButtonClicked: () -> Unit,
-    stringArrayResources: Int,
+    sendLogDialogState: SendLogDialogState,
+    stringArrayResources: Int
 ) {
     if (isDialogOpened) {
         AlertDialog(modifier = Modifier.fillMaxWidth(), onDismissRequest = {
@@ -103,15 +107,24 @@ fun SendLogDialog(
                 Column(modifier = Modifier.fillMaxWidth()) {
                     TextFieldWithLabel(
                         labelName = stringResource(id = R.string.message),
-                        fieldMessage = loggerInformation.loggerMessage
+                        fieldMessage = sendLogDialogState.loggerMessage.value,
+                        onValueChanged = { value ->
+                            sendLogDialogState.loggerMessage.value = value
+                        }
                     )
                     TextFieldWithLabel(
                         labelName = stringResource(id = R.string.user_key),
-                        fieldMessage = loggerInformation.loggerUserKey
+                        fieldMessage = sendLogDialogState.loggerUserKey.value,
+                        onValueChanged = { value ->
+                            sendLogDialogState.loggerUserKey.value = value
+                        }
                     )
                     TextFieldWithLabel(
                         labelName = stringResource(id = R.string.user_value),
-                        fieldMessage = loggerInformation.loggerUserValue
+                        fieldMessage = sendLogDialogState.loggerUserValue.value,
+                        onValueChanged = { value ->
+                            sendLogDialogState.loggerUserValue.value = value
+                        }
                     )
                     Spacer(modifier = Modifier.height(5.dp))
                     Row(
@@ -122,11 +135,13 @@ fun SendLogDialog(
                         Text(text = stringResource(id = R.string.developer_push_noti_enable_set_priority))
                         DropdownMenuBox(
                             options = stringArrayResource(id = stringArrayResources).toList(),
-                            expanded = loggerLevelExpanded.value,
-                            onExpandChanged = { expand -> loggerLevelExpanded.value = expand },
-                            selected = loggerInformation.loggerLevel.value,
+                            expanded = sendLogDialogState.loggerLevelExpanded.value,
+                            onExpandChanged = { expand ->
+                                sendLogDialogState.loggerLevelExpanded.value = expand
+                            },
+                            selected = sendLogDialogState.loggerLevel.value,
                             onSelected = { selectedId ->
-                                loggerInformation.loggerLevel.value = selectedId
+                                sendLogDialogState.loggerLevel.value = selectedId
                             },
                             modifier = Modifier.width(150.dp)
                         )
@@ -142,9 +157,8 @@ fun SendLogDialog(
                 ) {
                     TextButton(
                         onClick = {
-                            onOkButtonClicked(
-                                loggerInformation
-                            )
+                            sendLogDialogState.sendLogger()
+                            sendLogDialogState.refreshLoggerInformation()
                             setDialogStatus(false)
                         }
                     ) {
@@ -152,7 +166,7 @@ fun SendLogDialog(
                     }
                     TextButton(
                         onClick = {
-                            onCancelButtonClicked()
+                            sendLogDialogState.refreshLoggerInformation()
                             setDialogStatus(false)
                         }
                     ) {
@@ -164,23 +178,20 @@ fun SendLogDialog(
     }
 }
 
-
-@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
 fun PreviewLoggerInitializeDialog() {
+    var activity = LocalContext.current as Activity
     LoggerInitializeDialog(
+        activity = activity,
         isDialogOpened = true,
         title = "제목",
         setDialogStatus = {},
-        textMessage = mutableStateOf("test"),
-        onOkButtonClicked = {},
-        onCancelButtonClicked = {},
-        isLoggerAppKeyValid = mutableStateOf(true)
+        loggerInitializeDialogState = LoggerInitializeDialogState(),
+        isLoggerAppKeyValid = true
     )
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
 fun PreviewSendLogDialog() {
@@ -188,15 +199,7 @@ fun PreviewSendLogDialog() {
         isDialogOpened = true,
         title = "제목",
         setDialogStatus = {},
-        loggerInformation = LoggerInformation(
-            mutableStateOf(0),
-            mutableStateOf("test"),
-            mutableStateOf("test"),
-            mutableStateOf("test")
-        ),
-        loggerLevelExpanded = mutableStateOf(false),
-        onOkButtonClicked = { },
-        onCancelButtonClicked = {},
-        R.array.logger_level
+        sendLogDialogState = SendLogDialogState(),
+        stringArrayResources = R.array.logger_level
     )
 }

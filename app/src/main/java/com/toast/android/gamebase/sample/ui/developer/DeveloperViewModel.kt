@@ -22,9 +22,6 @@ import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
-import com.toast.android.gamebase.sample.gamebasemanager.*
-import com.toast.android.gamebase.sample.gamebasemanager.LOG_AND_CRASH_APPKEY
-import com.toast.android.gamebase.sample.ui.logger.*
 
 class DeveloperViewModel: ViewModel() {
     val showPurchaseDialog = mutableStateOf(false)
@@ -33,13 +30,6 @@ class DeveloperViewModel: ViewModel() {
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
     val isLoggerInitializeOpened = mutableStateOf(false)
     val isSendLogOpened = mutableStateOf(false)
-    var loggerAppKey = mutableStateOf(LOG_AND_CRASH_APPKEY)
-        private set
-    var isLoggerAppKeyValid = mutableStateOf(!LOG_AND_CRASH_APPKEY.isNullOrEmpty())
-        private set
-    var loggerLevelExpanded = mutableStateOf(false)
-        private set
-    val loggerInformation = LoggerInformation(mutableStateOf(0), mutableStateOf(""), mutableStateOf(""), mutableStateOf(""))
 
     private val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
     private val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
@@ -185,44 +175,5 @@ class DeveloperViewModel: ViewModel() {
                 }
             }
         }
-    }
-
-    fun initializeLogger(activity: Activity, appKey: String) {
-        val context = activity as Context
-        initializeNhnCloudLogger(context, appKey)
-        setNhnCloudLoggerListener()
-    }
-
-    fun refreshAppKey() {
-        if (!isLoggerAppKeyValid.value) {
-            loggerAppKey.value = ""
-        }
-    }
-
-    fun sendLogger(loggerInformation: LoggerInformation) {
-        val userField = HashMap<String?, String?>()
-        if (loggerInformation.loggerUserKey.value.isNotEmpty() && loggerInformation.loggerUserValue.value.isNotEmpty()) {
-            userField[loggerInformation.loggerUserKey.value] =
-                loggerInformation.loggerUserValue.value
-        }
-        getSendLoggerType(loggerInformation.loggerLevel.value).sendLog(
-            loggerInformation.loggerMessage.value,
-            userField
-        )
-    }
-
-    private fun getSendLoggerType(loggerLevel: Int): LoggerLevel {
-        return when (loggerLevel) {
-            0 -> Debug()
-            1 -> Info()
-            2 -> Warn()
-            3 -> Error()
-            4 -> Fatal()
-            else -> Debug()
-        }
-    }
-
-    fun refreshLoggerInformation() {
-        loggerInformation.refreshData()
     }
 }

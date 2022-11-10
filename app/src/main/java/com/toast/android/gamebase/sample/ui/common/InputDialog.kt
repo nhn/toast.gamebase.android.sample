@@ -75,8 +75,9 @@ fun InputDialog(
 @Composable
 fun TextFieldWithLabel(
     labelName: String,
-    fieldMessage: MutableState<String>,
-    fieldEnabled: MutableState<Boolean> = mutableStateOf(false)
+    fieldMessage: String,
+    fieldEnabled: Boolean = false,
+    onValueChanged: (String) -> Unit,
 ) {
     Column() {
         Text(
@@ -89,12 +90,10 @@ fun TextFieldWithLabel(
         )
         TextField(
             modifier = Modifier.fillMaxWidth(),
-            value = fieldMessage.value,
-            enabled = !fieldEnabled.value,
-            readOnly = fieldEnabled.value,
-            onValueChange = { text ->
-                fieldMessage.value = text
-            },
+            value = fieldMessage,
+            enabled = !fieldEnabled,
+            readOnly = fieldEnabled,
+            onValueChange = onValueChanged,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = TextFieldColor,
                 cursorColor = Black,

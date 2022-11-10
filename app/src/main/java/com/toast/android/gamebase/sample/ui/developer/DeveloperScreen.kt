@@ -17,11 +17,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
-import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.common.LoggerInitializeDialog
 import com.toast.android.gamebase.sample.ui.common.SendLogDialog
+import com.toast.android.gamebase.sample.ui.logger.LoggerInitializeDialogState
+import com.toast.android.gamebase.sample.ui.logger.SendLogDialogState
 
 @Composable
 fun DeveloperScreen(
@@ -46,20 +49,14 @@ fun DeveloperScreen(
         }
     }
     LoggerInitializeDialog(
+        activity = activity,
         isDialogOpened = viewModel.isLoggerInitializeOpened.value,
         title = stringResource(id = R.string.logger_initialize),
         setDialogStatus = { newState ->
             viewModel.isLoggerInitializeOpened.value = newState
         },
-        viewModel.loggerAppKey,
-        onOkButtonClicked = { text ->
-            viewModel.initializeLogger(activity, text)
-            viewModel.refreshAppKey()
-        },
-        onCancelButtonClicked = {
-            viewModel.refreshAppKey()
-        },
-        isLoggerAppKeyValid = viewModel.isLoggerAppKeyValid
+        loggerInitializeDialogState = LoggerInitializeDialogState(),
+        isLoggerAppKeyValid = getAppKey().isNotEmpty()
     )
     SendLogDialog(
         isDialogOpened = viewModel.isSendLogOpened.value,
@@ -67,15 +64,7 @@ fun DeveloperScreen(
         setDialogStatus = { newState ->
             viewModel.isSendLogOpened.value = newState
         },
-        loggerInformation = viewModel.loggerInformation,
-        loggerLevelExpanded = viewModel.loggerLevelExpanded,
-        onOkButtonClicked = { loggerInformation ->
-            viewModel.sendLogger(loggerInformation)
-            viewModel.refreshLoggerInformation()
-        },
-        onCancelButtonClicked = {
-            viewModel.refreshLoggerInformation()
-        },
+        sendLogDialogState = SendLogDialogState(),
         stringArrayResources = R.array.logger_level
     )
 }
