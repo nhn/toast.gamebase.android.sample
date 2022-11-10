@@ -2,6 +2,8 @@ package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,6 +21,7 @@ import com.toast.android.gamebase.sample.gamebasemanager.requestActivatedPurchas
 import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotConsumed
 import com.toast.android.gamebase.sample.gamebasemanager.requestWithdrawal
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.gamebasemanager.showToast
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
@@ -83,6 +86,9 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.TERMS_AGREEMENT_SAVE -> {
                 navController.navigate(SampleAppScreens.DeveloperCustomTermsSetting.route)
             }
+            DeveloperMenu.SHOW_ALERT -> showAlertDialogWithCallback(activity)
+            DeveloperMenu.SHOW_SHORT_TOAST -> showSampleToast(activity, Toast.LENGTH_SHORT)
+            DeveloperMenu.SHOW_LONG_TOAST -> showSampleToast(activity, Toast.LENGTH_LONG)
             DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
             DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
         }
@@ -158,6 +164,29 @@ class DeveloperViewModel: ViewModel() {
                 showAlert(activity, failedTitle, exception.printWithIndent())
             }
         }
+    }
+
+
+    private fun showAlertDialogWithCallback(activity: Activity) {
+        val resources = (activity as Context).resources
+        showAlert(
+            activity,
+            resources.getString(R.string.developer_alert_sample_title),
+            resources.getString(R.string.developer_alert_sample_message)
+        ) { dialog, which -> {
+                // create own callback
+            }
+        }
+    }
+
+    private fun showSampleToast(activity: Activity, duration: Int) {
+        val resources = (activity as Context).resources
+        val toastMessage = if (duration == Toast.LENGTH_LONG)
+            resources.getString(R.string.developer_toast_long_sample_message)
+        else
+            resources.getString(R.string.developer_toast_short_sample_message)
+
+        showToast(activity, toastMessage, duration)
     }
 
     private fun fetchTermsCurrentSetting(activity: Activity) {
