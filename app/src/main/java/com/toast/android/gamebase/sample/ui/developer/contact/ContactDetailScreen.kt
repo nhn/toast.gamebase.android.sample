@@ -179,7 +179,10 @@ fun PreviewEmptyLazyColumnForMap() {
 @Preview
 @Composable
 fun PreviewMapItemLong() {
-    MapItem("이름이름이름이름이름이름이름이름이름이름이름이름이름이름이름이름이름", "김철수김철수김철수김철수김철수김철수김철수김철수김철수김철수김철수김철수김철수")
+    val longString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."+
+            "Mauris egestas, magna nec luctus pellentesque, turpis tellus pulvinar ipsum," +
+            " scelerisque auctor magna purus nec odio."
+    MapItem(longString, longString)
 }
 
 @Preview
