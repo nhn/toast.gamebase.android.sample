@@ -33,6 +33,25 @@ fun showImageNotices(activity: Activity, onCloseCallback: GamebaseCallback) {
         })
 }
 
+fun showImageNotices(
+    activity: Activity,
+    configuration: ImageNoticeConfiguration,
+    onCloseCallback: GamebaseCallback
+) {
+    Gamebase.ImageNotice.showImageNotices(
+        activity,
+        configuration,
+        { exception -> onCloseCallback.onCallback(exception) },
+        { payload, exception ->
+            if (Gamebase.isSuccess(exception)) {
+                Log.i(TAG, "Clicked Image Notice Payload: $payload")
+                if (payload.equals("mygame://some_custom_scheme", ignoreCase = true)) {
+                    // Do something with your custom scheme
+                }
+            }
+        })
+}
+
 fun closeImageNotices(activity: Activity?) {
     Gamebase.ImageNotice.closeImageNotices(activity!!)
 }

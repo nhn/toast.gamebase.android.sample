@@ -29,7 +29,7 @@ fun InputDialog(
     var inputText by remember { mutableStateOf(inputTemplate) }
 
     if (isDialogOpened) {
-        Dialog(onDismissRequest = {  }) {
+        Dialog(onDismissRequest = { }) {
             Surface(
                 modifier = Modifier
                     .fillMaxWidth(80f)
@@ -37,9 +37,11 @@ fun InputDialog(
                 shape = RoundedCornerShape(12.dp),
                 color = White
             ) {
-                Column (modifier = Modifier.padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center) {
+                Column(
+                    modifier = Modifier.padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
                     OutlinedTextField(
                         modifier = Modifier.width(250.dp),
                         value = inputText,
@@ -49,7 +51,8 @@ fun InputDialog(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly) {
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
                         TextButton(
                             onClick = {
                                 onOkButtonClicked(inputText)
@@ -75,6 +78,7 @@ fun InputDialog(
 @Composable
 fun InputDialog(
     title: String,
+    labelName: String,
     fieldMessage: String,
     setDialogStatus: (Boolean) -> Unit,
     fieldEnabled: Boolean,
@@ -94,7 +98,7 @@ fun InputDialog(
         },
         text = {
             TextFieldWithLabel(
-                labelName = stringResource(id = R.string.app_key),
+                labelName = labelName,
                 fieldMessage = inputText,
                 fieldEnabled = fieldEnabled,
                 onValueChanged = { value ->

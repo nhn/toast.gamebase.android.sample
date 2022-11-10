@@ -30,6 +30,7 @@ fun LoggerInitializeDialog(
         val loggerInitializeDialogStateHolder = LoggerInitializeDialogStateHolder()
         InputDialog(
             title = title,
+            labelName = stringResource(id = R.string.app_key),
             fieldMessage = message,
             setDialogStatus = setDialogStatus,
             fieldEnabled = isLoggerAppKeyValid,

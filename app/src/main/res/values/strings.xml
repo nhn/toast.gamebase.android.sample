@@ -220,4 +220,12 @@
     <string name="message">Message</string>
     <string name="user_key">UserKey</string>
     <string name="user_value">UserValue</string>
+
+    <!-- developer image notice setting -->
+    <string name="developer_image_notice_configuration_background_color">배경색 설정</string>
+    <string name="developer_image_notice_configuration_background_color_label_name">배경색</string>
+    <string name="developer_image_notice_configuration_time_out">최대 로딩 시간 설정</string>
+    <string name="developer_image_notice_configuration_time_out_label_name">최대 로딩 시간</string>
+    <string name="developer_image_notice_configuration_auto_close_custom_scheme">Custom scheme 발생 시 공지 닫기</string>
+    <string name="developer_image_notice_show">이미지 공지 보기</string>
 </resources>

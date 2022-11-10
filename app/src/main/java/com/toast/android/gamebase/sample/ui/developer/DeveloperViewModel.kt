@@ -11,14 +11,7 @@ import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebasemanager.cancelWithdrawal
-import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.queryTerms
-import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
-import com.toast.android.gamebase.sample.gamebasemanager.requestActivatedPurchases
-import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotConsumed
-import com.toast.android.gamebase.sample.gamebasemanager.requestWithdrawal
-import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.gamebasemanager.*
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
@@ -85,6 +78,10 @@ class DeveloperViewModel: ViewModel() {
             }
             DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
             DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
+            DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity) {}
+            DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> {
+                navController.navigate(SampleAppScreens.DeveloperCustomImageNoticeSetting.route)
+            }
         }
     }
 
