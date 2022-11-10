@@ -37,6 +37,7 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.common.InputDialog
 import com.toast.android.gamebase.sample.ui.common.KeyValueInputDialog
 import com.toast.android.gamebase.sample.ui.common.RoundButton
+import com.toast.android.gamebase.sample.ui.common.TextFieldWithLabel
 import com.toast.android.gamebase.sample.ui.developer.MenuItem
 
 @Composable
@@ -51,21 +52,21 @@ fun ContactDetailScreen(
                     dimensionResource(id = R.dimen.setting_screen_column_padding_horizontal)
                 )
             ) {
-                Text(stringResource(id = R.string.developer_contact_user_name))
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = viewModel.userName.value,
-                    onValueChange = { textFieldValue ->
+                TextFieldWithLabel(
+                    labelName = stringResource(id = R.string.developer_contact_user_name),
+                    fieldEnabled = true,
+                    fieldMessage = viewModel.userName.value,
+                    onValueChanged = { textFieldValue ->
                         viewModel.userName.value = textFieldValue
                     }
                 )
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.setting_screen_list_item_text_padding)))
-                Text(stringResource(id = R.string.developer_contact_additional_url))
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = viewModel.additionalUrl.value,
-                    onValueChange = { textFieldValue ->
+                TextFieldWithLabel(
+                    labelName = stringResource(id = R.string.developer_contact_additional_url),
+                    fieldEnabled = true,
+                    fieldMessage = viewModel.additionalUrl.value,
+                    onValueChanged = { textFieldValue ->
                         viewModel.additionalUrl.value = textFieldValue
                     }
                 )
