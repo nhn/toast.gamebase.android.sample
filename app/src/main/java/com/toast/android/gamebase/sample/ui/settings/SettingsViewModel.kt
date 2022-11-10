@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.toast.android.gamebase.base.push.PushConfiguration
 import com.toast.android.gamebase.base.push.data.GamebaseNotificationOptions
+import com.toast.android.gamebase.contact.ContactConfiguration
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.gamebasemanager.getNotificationOptions
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
@@ -172,8 +173,9 @@ class SettingsViewModel : ViewModel() {
         foregroundState.value = notificationOptions.isForegroundEnabled
     }
 
-    fun loadServiceCenter(activity: GamebaseActivity, userName: String?) {
-        openContact(activity, userName) {
+    fun loadServiceCenter(activity: GamebaseActivity, userName: String) {
+        val configuration = ContactConfiguration.newBuilder().setUserName(userName).build()
+        openContact(activity, configuration) {
         }
     }
 

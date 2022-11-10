@@ -23,6 +23,7 @@
     <string name="withdraw">withdraw</string>
     <string name="success">Success</string>
     <string name="failed">Failed</string>
+    <string name="empty_list_message">리스트가 비어있습니다.</string>
     <string name="copyright_nhn">© NHN Corp. All rights reserved.</string>
 
     <!-- home screen -->
@@ -196,4 +197,12 @@
     <string name="developer_push_noti_enable_badge">뱃지 아이콘 사용</string>
     <string name="developer_push_noti_enable_set_priority">알림 우선 순위</string>
 
+    <!-- developer menu contact -->
+    <string name="developer_contact_url_alert_title">고객센터 URL</string>
+    <string name="developer_contact_user_name">사용자 이름 입력</string>
+    <string name="developer_contact_additional_url">additional URL</string>
+    <string name="developer_contact_additional_url_description">고객 센터 타입이 CUSTOM 인 경우에만 사용하시기 바랍니다.</string>
+    <string name="developer_contact_additional_parameter">URL 파라미터</string>
+    <string name="developer_contact_extra_data">Extra data</string>
+    <string name="developer_contact_open_contact">고객센터 열기</string>
 </resources>
