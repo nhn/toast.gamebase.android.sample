@@ -31,6 +31,8 @@ class DeveloperViewModel: ViewModel() {
     var purchaseItemList = mutableListOf<PurchasableReceipt>()
         private set
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
+    val isLoggerInitializeOpened = mutableStateOf(false)
+    val isSendLogOpened = mutableStateOf(false)
 
     private val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
     private val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
@@ -87,6 +89,8 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.SHOW_ALERT -> showAlertDialogWithCallback(activity)
             DeveloperMenu.SHOW_SHORT_TOAST -> showSampleToast(activity, Toast.LENGTH_SHORT)
             DeveloperMenu.SHOW_LONG_TOAST -> showSampleToast(activity, Toast.LENGTH_LONG)
+            DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
+            DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
         }
     }
 
