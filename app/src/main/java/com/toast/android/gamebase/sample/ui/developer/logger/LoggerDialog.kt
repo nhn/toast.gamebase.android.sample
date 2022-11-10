@@ -1,4 +1,4 @@
-package com.toast.android.gamebase.sample.ui.common
+package com.toast.android.gamebase.sample.ui.developer.logger
 
 import android.app.Activity
 import androidx.compose.foundation.layout.*
@@ -13,70 +13,31 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.logger.LoggerInitializeDialogState
-import com.toast.android.gamebase.sample.ui.logger.SendLogDialogState
+import com.toast.android.gamebase.sample.ui.common.DropdownMenuBox
+import com.toast.android.gamebase.sample.ui.common.InputDialog
+import com.toast.android.gamebase.sample.ui.common.TextFieldWithLabel
 
 @Composable
 fun LoggerInitializeDialog(
     activity: Activity,
     isDialogOpened: Boolean,
     title: String,
+    message: String,
     setDialogStatus: (Boolean) -> Unit,
-    loggerInitializeDialogState: LoggerInitializeDialogState,
     isLoggerAppKeyValid: Boolean,
 ) {
     if (isDialogOpened) {
-        AlertDialog(onDismissRequest = {
-            setDialogStatus(false)
-        },
-            title = {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 50.dp),
-                    text = title,
-                    textAlign = TextAlign.Center
+        val loggerInitializeDialogStateHolder = LoggerInitializeDialogStateHolder()
+        InputDialog(
+            title = title,
+            fieldMessage = message,
+            setDialogStatus = setDialogStatus,
+            fieldEnabled = isLoggerAppKeyValid,
+            onOkButtonClicked = { value ->
+                loggerInitializeDialogStateHolder.initializeLogger(
+                    activity = activity,
+                    appKey = value
                 )
-            },
-            text = {
-                TextFieldWithLabel(
-                    labelName = stringResource(id = R.string.app_key),
-                    fieldMessage = loggerInitializeDialogState.loggerAppKey.value,
-                    fieldEnabled = isLoggerAppKeyValid,
-                    onValueChanged = { value ->
-                        loggerInitializeDialogState.loggerAppKey.value = value
-                    }
-                )
-            },
-            buttons = {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 20.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    TextButton(
-                        onClick = {
-                            loggerInitializeDialogState.initializeLogger(
-                                activity = activity,
-                                loggerInitializeDialogState.loggerAppKey.value
-                            )
-                            loggerInitializeDialogState.refreshAppKey()
-                            setDialogStatus(false)
-                        }
-                    ) {
-                        Text(stringResource(id = R.string.button_ok))
-                    }
-                    TextButton(
-                        onClick = {
-                            loggerInitializeDialogState.refreshAppKey()
-                            setDialogStatus(false)
-                        }
-                    ) {
-                        Text(stringResource(id = R.string.button_cancel))
-                    }
-
-                }
             }
         )
     }
@@ -87,10 +48,10 @@ fun SendLogDialog(
     isDialogOpened: Boolean,
     title: String,
     setDialogStatus: (Boolean) -> Unit,
-    sendLogDialogState: SendLogDialogState,
     stringArrayResources: Int
 ) {
     if (isDialogOpened) {
+        val sendLogDialogStateHolder = SendLogDialogStateHolder()
         AlertDialog(modifier = Modifier.fillMaxWidth(), onDismissRequest = {
             setDialogStatus(false)
         },
@@ -107,23 +68,23 @@ fun SendLogDialog(
                 Column(modifier = Modifier.fillMaxWidth()) {
                     TextFieldWithLabel(
                         labelName = stringResource(id = R.string.message),
-                        fieldMessage = sendLogDialogState.loggerMessage.value,
+                        fieldMessage = sendLogDialogStateHolder.loggerMessage.value,
                         onValueChanged = { value ->
-                            sendLogDialogState.loggerMessage.value = value
+                            sendLogDialogStateHolder.loggerMessage.value = value
                         }
                     )
                     TextFieldWithLabel(
                         labelName = stringResource(id = R.string.user_key),
-                        fieldMessage = sendLogDialogState.loggerUserKey.value,
+                        fieldMessage = sendLogDialogStateHolder.loggerUserKey.value,
                         onValueChanged = { value ->
-                            sendLogDialogState.loggerUserKey.value = value
+                            sendLogDialogStateHolder.loggerUserKey.value = value
                         }
                     )
                     TextFieldWithLabel(
                         labelName = stringResource(id = R.string.user_value),
-                        fieldMessage = sendLogDialogState.loggerUserValue.value,
+                        fieldMessage = sendLogDialogStateHolder.loggerUserValue.value,
                         onValueChanged = { value ->
-                            sendLogDialogState.loggerUserValue.value = value
+                            sendLogDialogStateHolder.loggerUserValue.value = value
                         }
                     )
                     Spacer(modifier = Modifier.height(5.dp))
@@ -135,13 +96,13 @@ fun SendLogDialog(
                         Text(text = stringResource(id = R.string.developer_push_noti_enable_set_priority))
                         DropdownMenuBox(
                             options = stringArrayResource(id = stringArrayResources).toList(),
-                            expanded = sendLogDialogState.loggerLevelExpanded.value,
+                            expanded = sendLogDialogStateHolder.loggerLevelExpanded.value,
                             onExpandChanged = { expand ->
-                                sendLogDialogState.loggerLevelExpanded.value = expand
+                                sendLogDialogStateHolder.loggerLevelExpanded.value = expand
                             },
-                            selected = sendLogDialogState.loggerLevel.value,
+                            selected = sendLogDialogStateHolder.loggerLevel.value,
                             onSelected = { selectedId ->
-                                sendLogDialogState.loggerLevel.value = selectedId
+                                sendLogDialogStateHolder.loggerLevel.value = selectedId
                             },
                             modifier = Modifier.width(150.dp)
                         )
@@ -157,8 +118,7 @@ fun SendLogDialog(
                 ) {
                     TextButton(
                         onClick = {
-                            sendLogDialogState.sendLogger()
-                            sendLogDialogState.refreshLoggerInformation()
+                            sendLogDialogStateHolder.sendLogger()
                             setDialogStatus(false)
                         }
                     ) {
@@ -166,7 +126,6 @@ fun SendLogDialog(
                     }
                     TextButton(
                         onClick = {
-                            sendLogDialogState.refreshLoggerInformation()
                             setDialogStatus(false)
                         }
                     ) {
@@ -186,8 +145,8 @@ fun PreviewLoggerInitializeDialog() {
         activity = activity,
         isDialogOpened = true,
         title = "제목",
+        message = "test",
         setDialogStatus = {},
-        loggerInitializeDialogState = LoggerInitializeDialogState(),
         isLoggerAppKeyValid = true
     )
 }
@@ -199,7 +158,6 @@ fun PreviewSendLogDialog() {
         isDialogOpened = true,
         title = "제목",
         setDialogStatus = {},
-        sendLogDialogState = SendLogDialogState(),
         stringArrayResources = R.array.logger_level
     )
 }

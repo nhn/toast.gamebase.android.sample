@@ -73,6 +73,63 @@ fun InputDialog(
 }
 
 @Composable
+fun InputDialog(
+    title: String,
+    fieldMessage: String,
+    setDialogStatus: (Boolean) -> Unit,
+    fieldEnabled: Boolean,
+    onOkButtonClicked: (String) -> Unit
+) {
+    var inputText by remember { mutableStateOf(fieldMessage) }
+
+    AlertDialog(onDismissRequest = { setDialogStatus(false) },
+        title = {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 50.dp),
+                text = title,
+                textAlign = TextAlign.Center
+            )
+        },
+        text = {
+            TextFieldWithLabel(
+                labelName = stringResource(id = R.string.app_key),
+                fieldMessage = inputText,
+                fieldEnabled = fieldEnabled,
+                onValueChanged = { value ->
+                    inputText = value
+                }
+            )
+        },
+        buttons = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 20.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                TextButton(
+                    onClick = {
+                        onOkButtonClicked(inputText)
+                        setDialogStatus(false)
+                    }
+                ) {
+                    Text(stringResource(id = R.string.button_ok))
+                }
+                TextButton(
+                    onClick = {
+                        setDialogStatus(false)
+                    }
+                ) {
+                    Text(stringResource(id = R.string.button_cancel))
+                }
+            }
+        }
+    )
+}
+
+@Composable
 fun TextFieldWithLabel(
     labelName: String,
     fieldMessage: String,

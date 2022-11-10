@@ -1,7 +1,6 @@
 package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,10 +20,8 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
-import com.toast.android.gamebase.sample.ui.common.LoggerInitializeDialog
-import com.toast.android.gamebase.sample.ui.common.SendLogDialog
-import com.toast.android.gamebase.sample.ui.logger.LoggerInitializeDialogState
-import com.toast.android.gamebase.sample.ui.logger.SendLogDialogState
+import com.toast.android.gamebase.sample.ui.developer.logger.LoggerInitializeDialog
+import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
 
 @Composable
 fun DeveloperScreen(
@@ -52,10 +49,10 @@ fun DeveloperScreen(
         activity = activity,
         isDialogOpened = viewModel.isLoggerInitializeOpened.value,
         title = stringResource(id = R.string.logger_initialize),
+        message = getAppKey(),
         setDialogStatus = { newState ->
             viewModel.isLoggerInitializeOpened.value = newState
         },
-        loggerInitializeDialogState = LoggerInitializeDialogState(),
         isLoggerAppKeyValid = getAppKey().isNotEmpty()
     )
     SendLogDialog(
@@ -64,12 +61,10 @@ fun DeveloperScreen(
         setDialogStatus = { newState ->
             viewModel.isSendLogOpened.value = newState
         },
-        sendLogDialogState = SendLogDialogState(),
         stringArrayResources = R.array.logger_level
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DeveloperMenuList(
     groupedListMap: Map<String, List<DeveloperMenu>>,

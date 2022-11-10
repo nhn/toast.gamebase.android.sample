@@ -1,4 +1,4 @@
-package com.toast.android.gamebase.sample.ui.logger
+package com.toast.android.gamebase.sample.ui.developer.logger
 
 import com.toast.android.gamebase.sample.gamebasemanager.*
 
