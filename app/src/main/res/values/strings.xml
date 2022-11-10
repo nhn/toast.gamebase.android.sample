@@ -204,7 +204,7 @@
     <!-- developer menu contact -->
     <string name="developer_contact_url_alert_title">고객센터 URL</string>
     <string name="developer_contact_user_name">사용자 이름 입력</string>
-    <string name="developer_contact_additional_url">additional URL</string>
+    <string name="developer_contact_additional_url">Additional URL</string>
     <string name="developer_contact_additional_url_description">고객 센터 타입이 CUSTOM 인 경우에만 사용하시기 바랍니다.</string>
     <string name="developer_contact_additional_parameter">URL 파라미터</string>
     <string name="developer_contact_extra_data">Extra data</string>

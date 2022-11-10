@@ -96,7 +96,7 @@ fun InputDialog(
             TextFieldWithLabel(
                 labelName = stringResource(id = R.string.app_key),
                 fieldMessage = inputText,
-                fieldEnabled = fieldEnabled,
+                fieldDisabled = fieldEnabled,
                 onValueChanged = { value ->
                     inputText = value
                 }

@@ -6,10 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,28 +15,22 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierInfo
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.common.InputDialog
 import com.toast.android.gamebase.sample.ui.common.KeyValueInputDialog
 import com.toast.android.gamebase.sample.ui.common.RoundButton
 import com.toast.android.gamebase.sample.ui.common.TextFieldWithLabel
-import com.toast.android.gamebase.sample.ui.developer.MenuItem
 
 @Composable
 fun ContactDetailScreen(
@@ -54,7 +46,6 @@ fun ContactDetailScreen(
             ) {
                 TextFieldWithLabel(
                     labelName = stringResource(id = R.string.developer_contact_user_name),
-                    fieldEnabled = true,
                     fieldMessage = viewModel.userName.value,
                     onValueChanged = { textFieldValue ->
                         viewModel.userName.value = textFieldValue
@@ -64,7 +55,6 @@ fun ContactDetailScreen(
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.setting_screen_list_item_text_padding)))
                 TextFieldWithLabel(
                     labelName = stringResource(id = R.string.developer_contact_additional_url),
-                    fieldEnabled = true,
                     fieldMessage = viewModel.additionalUrl.value,
                     onValueChanged = { textFieldValue ->
                         viewModel.additionalUrl.value = textFieldValue

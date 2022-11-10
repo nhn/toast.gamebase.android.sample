@@ -20,7 +20,7 @@ import com.toast.android.gamebase.sample.ui.theme.Transparent
 fun TextFieldWithLabel(
     labelName: String,
     fieldMessage: String,
-    fieldEnabled: Boolean = false,
+    fieldDisabled: Boolean = false,
     onValueChanged: (String) -> Unit,
 ) {
     Column() {
@@ -35,8 +35,8 @@ fun TextFieldWithLabel(
         TextField(
             modifier = Modifier.fillMaxWidth(),
             value = fieldMessage,
-            enabled = !fieldEnabled,
-            readOnly = fieldEnabled,
+            enabled = !fieldDisabled,
+            readOnly = fieldDisabled,
             onValueChange = onValueChanged,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = TextFieldColor,
