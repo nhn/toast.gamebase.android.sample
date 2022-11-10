@@ -8,7 +8,6 @@ import com.toast.android.gamebase.GamebaseCallback
 import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.GamebaseWebViewConfiguration
 import com.toast.android.gamebase.GamebaseWebViewStyle
-import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.ScreenOrientation
 import com.toast.android.gamebase.base.data.GamebaseDataContainer
 import com.toast.android.gamebase.imagenotice.ImageNoticeConfiguration
@@ -63,22 +62,19 @@ fun imageNoticesExample(activity: Activity, onCloseCallback: GamebaseCallback) {
 
 fun showTermsView(
     activity: Activity,
+    configuration: GamebaseTermsConfiguration? = null,
     callback: GamebaseDataCallback<GamebaseDataContainer?>?
 ) {
-    Gamebase.Terms.showTermsView(
-        activity,
-    ) { container, exception -> callback?.onCallback(container, exception) }
-}
-
-// You can show terms view force with setting setForceShow(true) configuration
-fun showTermsViewForceShow(
-    activity: Activity,
-    callback: GamebaseDataCallback<GamebaseDataContainer?>?
-) {
-    Gamebase.Terms.showTermsView(
-        activity,
-        GamebaseTermsConfiguration.newBuilder().setForceShow(true).build(),
-    ) { container, exception -> callback?.onCallback(container, exception) }
+    if (configuration != null) {
+        Gamebase.Terms.showTermsView(
+            activity,
+            configuration,
+        ) { container, exception -> callback?.onCallback(container, exception) }
+    } else {
+        Gamebase.Terms.showTermsView(
+            activity,
+        ) { container, exception -> callback?.onCallback(container, exception) }
+    }
 }
 
 fun queryTerms(
@@ -88,54 +84,31 @@ fun queryTerms(
     Gamebase.Terms.queryTerms(
         activity
     ) { gamebaseQueryTermsResult, exception ->
-        if (Gamebase.isSuccess(exception)) {
-            // Succeeded.
-            val termsSeq = gamebaseQueryTermsResult.termsSeq
-            val termsVersion = gamebaseQueryTermsResult.termsVersion
-            val termsCountryType = gamebaseQueryTermsResult.termsCountryType
-            val contents = gamebaseQueryTermsResult.contents
-        } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
-            // Another country device.
-            // Pass the 'terms and conditions' step.
-        } else {
-            // Failed.
-        }
         callback?.onCallback(gamebaseQueryTermsResult, exception)
     }
 }
 
 fun updateTerms(
     activity: Activity,
-    configuration: GamebaseUpdateTermsConfiguration,
+    termsSeq: Int?,
+    termsVersion: String?,
+    contents: List<GamebaseTermsContent>?,
     callback: GamebaseCallback?
 ) {
+    if (termsVersion == null || termsSeq == null || contents == null) {
+        Log.e(TAG, "update Terms argument is null")
+        return
+    }
+    val configuration =
+        GamebaseUpdateTermsConfiguration
+            .newBuilder(termsSeq, termsVersion, contents)
+            .build()
+
     Gamebase.Terms.updateTerms(
         activity, configuration
-    ) { exception -> callback?.onCallback(exception) }
-}
-
-fun updateTermsExample(
-    activity: Activity,
-    callback: GamebaseCallback?
-) {
-    queryTerms(activity,
-        GamebaseDataCallback<GamebaseQueryTermsResult>() { (termsSeq, termsVersion, _, contents1), queryTermsException ->
-            val contents: MutableList<GamebaseTermsContent> = ArrayList()
-            for (detail in contents1) {
-                val content = GamebaseTermsContent.from(detail)
-                if (content != null) {
-                    // Change 'agreed' value for test.
-                    content.agreed = !content.agreed
-                    contents.add(content)
-                }
-            }
-            val configuration =
-                GamebaseUpdateTermsConfiguration.newBuilder(termsSeq, termsVersion, contents)
-                    .build()
-            updateTerms(
-                activity, configuration
-            ) { updateTermsException -> callback?.onCallback(updateTermsException) }
-        })
+    ) { updateTermsException ->
+        callback?.onCallback(updateTermsException)
+    }
 }
 
 fun showWebView(activity: Activity, urlString: String) {

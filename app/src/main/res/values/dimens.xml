@@ -17,4 +17,5 @@
     <dimen name="setting_screen_menu_title_text_padding">10dp</dimen>
     <dimen name="setting_screen_menu_description_text_padding">8dp</dimen>
     <dimen name="setting_screen_list_item_text_padding">10dp</dimen>
+    <dimen name="setting_screen_terms_lazy_column_content_padding">8dp</dimen>
 </resources>
