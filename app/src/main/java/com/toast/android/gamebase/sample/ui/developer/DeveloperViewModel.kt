@@ -2,11 +2,14 @@ package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
 import android.content.Context
-import android.content.ContextParams
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
+import com.toast.android.gamebase.Gamebase
+import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.contact.ContactConfiguration
 import com.toast.android.gamebase.sample.GamebaseApplication
@@ -14,19 +17,24 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.cancelWithdrawal
 import com.toast.android.gamebase.sample.gamebasemanager.getContactUrl
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
+import com.toast.android.gamebase.sample.gamebasemanager.queryTerms
 import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
 import com.toast.android.gamebase.sample.gamebasemanager.requestActivatedPurchases
 import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotConsumed
 import com.toast.android.gamebase.sample.gamebasemanager.requestWithdrawal
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.gamebasemanager.showToast
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
+import kotlinx.coroutines.launch
 
 class DeveloperViewModel: ViewModel() {
     val showPurchaseDialog = mutableStateOf(false)
     var purchaseItemList = mutableListOf<PurchasableReceipt>()
         private set
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
+    val isLoggerInitializeOpened = mutableStateOf(false)
+    val isSendLogOpened = mutableStateOf(false)
 
     private val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
     private val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
@@ -77,6 +85,18 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.CONTACT_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperContactDetail.route)
             }
+            DeveloperMenu.TERMS_INFO -> fetchTermsCurrentSetting(activity)
+            DeveloperMenu.TERMS_DETAIL_SETTING -> {
+                navController.navigate(SampleAppScreens.DeveloperTermsSetting.route)
+            }
+            DeveloperMenu.TERMS_AGREEMENT_SAVE -> {
+                navController.navigate(SampleAppScreens.DeveloperCustomTermsSetting.route)
+            }
+            DeveloperMenu.SHOW_ALERT -> showAlertDialogWithCallback(activity)
+            DeveloperMenu.SHOW_SHORT_TOAST -> showSampleToast(activity, Toast.LENGTH_SHORT)
+            DeveloperMenu.SHOW_LONG_TOAST -> showSampleToast(activity, Toast.LENGTH_LONG)
+            DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
+            DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
         }
     }
 
@@ -163,6 +183,45 @@ class DeveloperViewModel: ViewModel() {
                 // Please check the url field in the TOAST Gamebase Console.
             } else {
                 // An error occur when requesting the contact web view url.
+            }
+        }
+    }
+
+    private fun showAlertDialogWithCallback(activity: Activity) {
+        val resources = (activity as Context).resources
+        showAlert(
+            activity,
+            resources.getString(R.string.developer_alert_sample_title),
+            resources.getString(R.string.developer_alert_sample_message)
+        ) { dialog, which -> {
+                // create own callback
+            }
+        }
+    }
+
+    private fun showSampleToast(activity: Activity, duration: Int) {
+        val resources = (activity as Context).resources
+        val toastMessage = if (duration == Toast.LENGTH_LONG)
+            resources.getString(R.string.developer_toast_long_sample_message)
+        else
+            resources.getString(R.string.developer_toast_short_sample_message)
+
+        showToast(activity, toastMessage, duration)
+    }
+
+    private fun fetchTermsCurrentSetting(activity: Activity) {
+        viewModelScope.launch {
+            queryTerms(activity) { gamebaseQueryTermsResult, exception ->
+                if (Gamebase.isSuccess(exception)) {
+                    showAlert(activity, successTitle, gamebaseQueryTermsResult.printWithIndent());
+                } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
+                    // Another country device.
+                    // Pass the 'terms and conditions' step.
+                    showAlert(activity, failedTitle,
+                        (activity as Context).getString(R.string.developer_terms_no_need_to_show_terms));
+                } else {
+                    showAlert(activity, failedTitle, exception.printWithIndent());
+                }
             }
         }
     }

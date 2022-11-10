@@ -14,6 +14,8 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object Developer: SampleAppScreens("developer", R.string.developer)
     object DeveloperRoot: SampleAppScreens("dev_home", R.string.developer)
     object DeveloperPushSetting: SampleAppScreens("push_setting", R.string.developer_menu_category_push)
+    object DeveloperTermsSetting: SampleAppScreens("terms_setting", R.string.developer_menu_category_terms)
+    object DeveloperCustomTermsSetting: SampleAppScreens("terms_custom_setting", R.string.developer_menu_category_terms)
     object DeveloperContactDetail: SampleAppScreens("contact_detail", R.string.developer_menu_category_contact)
 
     companion object {
@@ -27,10 +29,12 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
                 IdpMapping.route -> IdpMapping
                 UI.route -> UI
                 Developer.route -> Developer
-                null -> Home
                 DeveloperRoot.route -> DeveloperRoot
                 DeveloperPushSetting.route -> DeveloperPushSetting
+                DeveloperTermsSetting.route -> DeveloperTermsSetting
+                DeveloperCustomTermsSetting.route -> DeveloperCustomTermsSetting
                 DeveloperContactDetail.route -> DeveloperContactDetail
+                null -> Home
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
             }
     }

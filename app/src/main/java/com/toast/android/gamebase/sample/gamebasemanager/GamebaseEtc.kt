@@ -1,6 +1,7 @@
 package com.toast.android.gamebase.sample.gamebasemanager
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.util.Log
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.auth.data.AuthToken
@@ -32,6 +33,10 @@ fun isSuccess(exception: GamebaseException?): Boolean =
 
 fun showAlert(activity: Activity, title: String, message: String) {
     Gamebase.Util.showAlert(activity, title, message)
+}
+
+fun showAlert(activity: Activity, title: String, message: String, callback: DialogInterface.OnClickListener) {
+    Gamebase.Util.showAlert(activity, title, message, callback)
 }
 
 fun showToast(activity: Activity, message: String, duration: Int) {
