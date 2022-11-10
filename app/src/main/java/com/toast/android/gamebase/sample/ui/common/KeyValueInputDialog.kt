@@ -41,11 +41,10 @@ fun KeyValueInputDialog(
     inputLabelForValue: String = "value",
     onOkButtonClicked: (inputKey: String, inputValue: String) -> Unit,
 ) {
-    var inputKey by remember { mutableStateOf("") }
-    var inputValue by remember { mutableStateOf("") }
-    val scrollState = rememberScrollState()
-
     if (isDialogOpened) {
+        var inputKey by remember { mutableStateOf("") }
+        var inputValue by remember { mutableStateOf("") }
+        val scrollState = rememberScrollState()
         Dialog(onDismissRequest = {  }) {
             Surface(
                 modifier = Modifier
