@@ -105,30 +105,34 @@ fun SettingsScreen(
             SubMenuDivider(R.string.setting_notification_title)
             SwitchWithLabel(
                 stringId = R.string.setting_normal_push_title,
-                state = settingsViewModel.pushState,
+                state = settingsViewModel.pushState.value,
                 enableSwitch = true
-            ) {
+            ) { newState ->
+                settingsViewModel.pushState.value = newState
                 settingsViewModel.registerPush(activity, PUSH_TYPE.NORMAL_PUSH)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_advertising_push_title,
-                state = settingsViewModel.advertisePushState,
+                state = settingsViewModel.advertisePushState.value,
                 enableSwitch = settingsViewModel.pushState.value
-            ) {
+            ) { newState ->
+                settingsViewModel.advertisePushState.value = newState
                 settingsViewModel.registerPush(activity, PUSH_TYPE.ADVERTISING_PUSH)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_night_advertising_push_title,
-                state = settingsViewModel.nightAdvertisePushState,
+                state = settingsViewModel.nightAdvertisePushState.value,
                 enableSwitch = (settingsViewModel.pushState.value && settingsViewModel.advertisePushState.value)
-            ) {
+            ) { newState ->
+                settingsViewModel.nightAdvertisePushState.value = newState
                 settingsViewModel.registerPush(activity, PUSH_TYPE.NIGHT_ADVERTISING_PUSH)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_push_foreground_title,
-                state = settingsViewModel.foregroundState,
+                state = settingsViewModel.foregroundState.value,
                 enableSwitch = settingsViewModel.pushState.value
-            ) {
+            ) { newState ->
+                settingsViewModel.foregroundState.value = newState
                 settingsViewModel.registerPushForeground(activity)
             }
         }
@@ -175,8 +179,7 @@ private fun ListItem(stringId: Int, event: () -> Unit) {
             }
             .padding(
                 dimensionResource(id = R.dimen.setting_screen_list_item_text_padding)
-            )
-        ,
+            ),
         fontWeight = FontWeight.Normal
     )
 }

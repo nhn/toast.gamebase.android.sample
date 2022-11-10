@@ -7,6 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.toast.android.gamebase.sample.ui.developer.DeveloperScreen
 import com.toast.android.gamebase.sample.ui.developer.push.DeveloperPushSettingScreen
+import com.toast.android.gamebase.sample.ui.developer.terms.TermsCustomScreen
+import com.toast.android.gamebase.sample.ui.developer.terms.TermsSettingScreen
 
 fun NavGraphBuilder.developerGraph(navController: NavController, activity: Activity) {
     navigation(
@@ -18,6 +20,12 @@ fun NavGraphBuilder.developerGraph(navController: NavController, activity: Activ
         }
         composable(SampleAppScreens.DeveloperPushSetting.route) {
             DeveloperPushSettingScreen()
+        }
+        composable(SampleAppScreens.DeveloperTermsSetting.route) {
+            TermsSettingScreen()
+        }
+        composable(SampleAppScreens.DeveloperCustomTermsSetting.route) {
+            TermsCustomScreen()
         }
     }
 }

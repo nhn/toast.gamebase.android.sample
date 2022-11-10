@@ -4,16 +4,12 @@ import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -51,7 +47,7 @@ fun DeveloperPushSettingScreen(
         SubMenuDivider(R.string.developer_push_configuration_sub_title)
         SwitchWithLabel(
             stringId = R.string.setting_normal_push_title,
-            state = viewModel.enablePush,
+            state = viewModel.enablePush.value,
             enableSwitch = true,
             event = { newState ->
                 viewModel.enablePush.value = newState
@@ -64,7 +60,7 @@ fun DeveloperPushSettingScreen(
         )
         SwitchWithLabel(
             stringId = R.string.setting_advertising_push_title,
-            state = viewModel.enableAdAgreement,
+            state = viewModel.enableAdAgreement.value,
             enableSwitch = viewModel.enablePush.value, // depends on enable push
             event = { newState ->
                 viewModel.enableAdAgreement.value = newState
@@ -76,7 +72,7 @@ fun DeveloperPushSettingScreen(
         )
         SwitchWithLabel(
             stringId = R.string.setting_night_advertising_push_title,
-            state = viewModel.enableAdAgreementNight,
+            state = viewModel.enableAdAgreementNight.value,
             enableSwitch = viewModel.enablePush.value && viewModel.enableAdAgreement.value,
             event = { newState ->
                 viewModel.enableAdAgreementNight.value = newState
@@ -87,7 +83,7 @@ fun DeveloperPushSettingScreen(
         SubMenuDivider(R.string.developer_push_notification_options_sub_title)
         SwitchWithLabel(
             stringId = R.string.setting_push_foreground_title,
-            state = viewModel.enableForeground,
+            state = viewModel.enableForeground.value,
             enableSwitch = true,
             event = { newState ->
                 viewModel.enableForeground.value = newState
@@ -96,7 +92,7 @@ fun DeveloperPushSettingScreen(
         )
         SwitchWithLabel(
             stringId = R.string.developer_push_noti_enable_badge,
-            state = viewModel.enableBadge,
+            state = viewModel.enableBadge.value,
             enableSwitch = true,
             event = { newState ->
                 viewModel.enableBadge.value = newState
