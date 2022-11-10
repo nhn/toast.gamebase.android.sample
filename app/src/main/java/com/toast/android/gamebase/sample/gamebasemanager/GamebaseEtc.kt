@@ -3,7 +3,6 @@ package com.toast.android.gamebase.sample.gamebasemanager
 import android.app.Activity
 import android.util.Log
 import com.toast.android.gamebase.Gamebase
-import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.auth.data.AuthToken
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
@@ -141,23 +140,23 @@ private fun onPushReceiveMessage(message: GamebaseEventMessage) {
 ////////////////////////////////////////////////////////////////////////////////
 fun getContactUrl(
     configuration: ContactConfiguration? = null,
-    callback: ((String, GamebaseException?) -> Unit)
+    onClosedCallback: ((String, GamebaseException?) -> Unit)
 ) {
     if (configuration == null) {
-        Gamebase.Contact.requestContactURL(callback)
+        Gamebase.Contact.requestContactURL(onClosedCallback)
     } else {
-        Gamebase.Contact.requestContactURL(configuration, callback)
+        Gamebase.Contact.requestContactURL(configuration, onClosedCallback)
     }
 }
 
 fun openContact(
     activity: Activity,
     configuration: ContactConfiguration?,
-    callback: ((GamebaseException) -> Unit)
+    onClosedCallback: ((GamebaseException?) -> Unit)
 ) {
     if (configuration != null) {
-        Gamebase.Contact.openContact(activity, configuration, callback)
+        Gamebase.Contact.openContact(activity, configuration, onClosedCallback)
     } else {
-        Gamebase.Contact.openContact(activity, callback)
+        Gamebase.Contact.openContact(activity, onClosedCallback)
     }
 }
