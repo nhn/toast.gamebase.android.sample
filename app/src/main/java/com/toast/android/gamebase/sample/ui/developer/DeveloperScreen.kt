@@ -13,11 +13,15 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
+import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.ui.common.LoggerInitializeDialog
+import com.toast.android.gamebase.sample.ui.common.SendLogDialog
 
 @Composable
 fun DeveloperScreen(
@@ -41,6 +45,42 @@ fun DeveloperScreen(
             )
         }
     }
+    LoggerInitializeDialog(
+        isDialogOpened = viewModel.isLoggerInitializeOpened.value,
+        title = stringResource(id = R.string.logger_initialize),
+        setDialogStatus = { newState ->
+            viewModel.isLoggerInitializeOpened.value = newState
+        },
+        viewModel.loggerAppKey,
+        onOkButtonClicked = { text ->
+            viewModel.initializeLogger(activity, text)
+            viewModel.refreshAppKey()
+        },
+        onCancelButtonClicked = {
+            viewModel.refreshAppKey()
+        },
+        isLoggerAppKeyValid = viewModel.isLoggerAppKeyValid
+    )
+    SendLogDialog(
+        isDialogOpened = viewModel.isSendLogOpened.value,
+        title = stringResource(id = R.string.send_logger),
+        setDialogStatus = { newState ->
+            viewModel.isSendLogOpened.value = newState
+        },
+        loggerMessage = viewModel.loggerMessage,
+        loggerUserKey = viewModel.loggerUserKey,
+        loggerUserValue = viewModel.loggerUserValue,
+        loggerLevel = viewModel.loggerLevel,
+        loggerLevelExpanded = viewModel.loggerLevelExpanded,
+        onOkButtonClicked = { loggerMessage, loggerUserKey, loggerUserValue, loggerLevel ->
+            viewModel.sendLogger(loggerMessage, loggerUserKey, loggerUserValue, loggerLevel)
+            viewModel.refreshLoggerInformation()
+        },
+        onCancelButtonClicked = {
+            viewModel.refreshLoggerInformation()
+        },
+        stringArrayResources = R.array.logger_level
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)

@@ -8,22 +8,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.theme.White
+import com.toast.android.gamebase.sample.ui.theme.*
 
 @Composable
 fun InputDialog(
@@ -75,5 +69,41 @@ fun InputDialog(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun TextField(
+    labelName: String,
+    fieldMessage: MutableState<String>,
+    fieldEnabled: MutableState<Boolean> = mutableStateOf(false)
+) {
+    Column() {
+        Text(
+            text = labelName,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp, bottom = 4.dp),
+            textAlign = TextAlign.Start,
+            color = Toast
+        )
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = fieldMessage.value,
+            enabled = !fieldEnabled.value,
+            readOnly = fieldEnabled.value,
+            onValueChange = { text ->
+                fieldMessage.value = text
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = TextFieldColor,
+                cursorColor = Black,
+                disabledLabelColor = TextFieldColor,
+                focusedIndicatorColor = Transparent,
+                unfocusedIndicatorColor = Transparent
+            ),
+            shape = RoundedCornerShape(8.dp),
+            singleLine = true
+        )
     }
 }

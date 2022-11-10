@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- TODO: [Fix me] Set your Facebook App ID -->
     <string name="facebook_app_id">252590081934203</string>
@@ -204,5 +204,20 @@
     <string name="developer_terms_show_terms_view">약관 보기</string>
     <string name="developer_terms_no_need_to_show_terms">단말기 국가코드에 맞는 약관 정보가 콘솔에 등록되어 있지 않습니다.\n약관을 표시하지 않도록 처리하시기 바랍니다.</string>
 
+    <!-- Logger type -->
+    <string-array name="logger_level">
+        <item>DEBUG</item>
+        <item>INFO</item>
+        <item>WARN</item>
+        <item>ERROR</item>
+        <item>FATAL</item>
+    </string-array>
 
+    <!-- logger dialog -->
+    <string name="logger_initialize">Logger 초기화</string>
+    <string name="send_logger">Log 전송</string>
+    <string name="app_key">AppKey</string>
+    <string name="message">Message</string>
+    <string name="user_key">UserKey</string>
+    <string name="user_value">UserValue</string>
 </resources>

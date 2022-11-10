@@ -22,12 +22,59 @@ import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
+import com.toast.android.gamebase.sample.gamebasemanager.*
+import com.toast.android.gamebase.sample.gamebasemanager.LOG_AND_CRASH_APPKEY
+
+enum class LogLevel() {
+    DEBUG {
+        override fun sendLog(message: String, userField: Map<String?, String?>) {
+            sendLogDebug(message, userField)
+        }
+    },
+    INFO {
+        override fun sendLog(message: String, userField: Map<String?, String?>) {
+            sendLogInfo(message, userField)
+        }
+    },
+    WARN {
+        override fun sendLog(message: String, userField: Map<String?, String?>) {
+            sendLogWarn(message, userField)
+        }
+    },
+    ERROR {
+        override fun sendLog(message: String, userField: Map<String?, String?>) {
+            sendLogError(message, userField)
+        }
+    },
+    FATAL {
+        override fun sendLog(message: String, userField: Map<String?, String?>) {
+            sendLogFatal(message, userField)
+        }
+    };
+    abstract fun sendLog(message: String, userField: Map<String?, String?>)
+}
 
 class DeveloperViewModel: ViewModel() {
     val showPurchaseDialog = mutableStateOf(false)
     var purchaseItemList = mutableListOf<PurchasableReceipt>()
         private set
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
+    val isLoggerInitializeOpened = mutableStateOf(false)
+    val isSendLogOpened = mutableStateOf(false)
+    var loggerLevel = mutableStateOf(0)
+        private set
+    var loggerAppKey = mutableStateOf(LOG_AND_CRASH_APPKEY)
+        private set
+    var isLoggerAppKeyValid = mutableStateOf(!LOG_AND_CRASH_APPKEY.isNullOrEmpty())
+        private set
+    var loggerLevelExpanded = mutableStateOf(false)
+        private set
+    var loggerMessage = mutableStateOf("")
+        private set
+    var loggerUserKey = mutableStateOf("")
+        private set
+    var loggerUserValue = mutableStateOf("")
+        private set
 
     private val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
     private val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
@@ -81,6 +128,8 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.TERMS_AGREEMENT_SAVE -> {
                 navController.navigate(SampleAppScreens.DeveloperCustomTermsSetting.route)
             }
+            DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
+            DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
         }
     }
 
@@ -171,5 +220,55 @@ class DeveloperViewModel: ViewModel() {
                 }
             }
         }
+    }
+
+    fun initializeLogger(activity: Activity, appKey: String) {
+        val context = activity as Context
+        initializeNhnCloudLogger(context, appKey)
+        setNhnCloudLoggerListener()
+    }
+
+    fun refreshAppKey() {
+        if (!isLoggerAppKeyValid.value) {
+            loggerAppKey.value = ""
+        }
+    }
+
+    fun sendLogger(
+        loggerMessage: String,
+        loggerUserKey: String,
+        loggerUserValue: String,
+        loggerLevel: Int
+    ) {
+        val userField = HashMap<String?, String?>()
+        if (!loggerUserKey.isNullOrEmpty() && !loggerUserValue.isNullOrEmpty()) {
+            userField[loggerUserKey] = loggerUserValue
+        }
+        when (loggerLevel) {
+            0 -> {
+                LogLevel.DEBUG.sendLog(loggerMessage, userField)
+            }
+            1 -> {
+                LogLevel.INFO.sendLog(loggerMessage, userField)
+            }
+            2 -> {
+                LogLevel.WARN.sendLog(loggerMessage, userField)
+            }
+            3 -> {
+                LogLevel.ERROR.sendLog(loggerMessage, userField)
+            }
+            4 -> {
+                LogLevel.FATAL.sendLog(loggerMessage, userField)
+            }
+            else -> {
+            }
+        }
+    }
+
+    fun refreshLoggerInformation() {
+        loggerMessage.value = ""
+        loggerUserKey.value = ""
+        loggerUserValue.value = ""
+        loggerLevel.value = 0
     }
 }

@@ -25,25 +25,34 @@ fun initializeNhnCloudLogger(context: Context) {
     Gamebase.Logger.initialize(context, configBuilder.build())
 }
 
+fun initializeNhnCloudLogger(context: Context, appKey: String) {
+    Log.d(TAG, "Initialize NHN Cloud Logger")
+    val configBuilder: LoggerConfiguration.Builder = LoggerConfiguration.newBuilder(
+        appKey,
+        SEND_CRASH_LOG
+    )
+    Gamebase.Logger.initialize(context, configBuilder.build())
+}
+
 // 로그 레벨은 다음과 같습니다.
 // DEBUG > INFO > WARN > ERROR > FATAL
-fun sendLogDebug(message: String, userField: Map<String?, Any?>) {
+fun sendLogDebug(message: String, userField: Map<String?, String?>) {
     Gamebase.Logger.debug(message, userField)
 }
 
-fun sendLogInfo(message: String, userField: Map<String?, Any?>) {
+fun sendLogInfo(message: String, userField: Map<String?, String?>) {
     Gamebase.Logger.info(message, userField)
 }
 
-fun sendLogWarn(message: String, userField: Map<String?, Any?>) {
+fun sendLogWarn(message: String, userField: Map<String?, String?>) {
     Gamebase.Logger.warn(message, userField)
 }
 
-fun sendLogError(message: String, userField: Map<String?, Any?>) {
+fun sendLogError(message: String, userField: Map<String?, String?>) {
     Gamebase.Logger.error(message, userField)
 }
 
-fun sendLogFatal(message: String, userField: Map<String?, Any?>) {
+fun sendLogFatal(message: String, userField: Map<String?, String?>) {
     Gamebase.Logger.fatal(message, userField)
 }
 
