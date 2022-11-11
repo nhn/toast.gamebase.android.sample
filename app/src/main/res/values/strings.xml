@@ -209,6 +209,7 @@
     <string name="developer_contact_additional_parameter">URL 파라미터</string>
     <string name="developer_contact_extra_data">Extra data</string>
     <string name="developer_contact_open_contact">고객센터 열기</string>
+    <string name="developer_contact_remove_item_button_content_description">remove item</string>
 
     <!-- alert -->
     <string name="developer_alert_sample_title">제목</string>
