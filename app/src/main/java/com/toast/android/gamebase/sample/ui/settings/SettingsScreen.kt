@@ -34,8 +34,9 @@ import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 @Composable
 fun SettingsScreen(
     activity: GamebaseActivity,
-    navController: NavController,
-    settingsViewModel: SettingsViewModel = viewModel()
+    settingsViewModel: SettingsViewModel = viewModel(),
+    onLoggedOut: () -> Unit,
+    navigateToIdpMapping: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
     val isLogoutDialogOpened = remember { mutableStateOf(false) }
@@ -43,7 +44,7 @@ fun SettingsScreen(
 
     LaunchedEffect(key1 = settingsViewModel.uiState) {
         if (settingsViewModel.uiState == LoginState.LOGGED_OUT) {
-            settingsViewModel.navigateToLogin(navController)
+            onLoggedOut()
         }
     }
 
@@ -90,7 +91,7 @@ fun SettingsScreen(
             SubMenuDivider(R.string.setting_account_title)
             // TODO : idp 계정 연동 구현 완료시 event 추가
             ListItem(R.string.setting_account_connected_idp_title) {
-                settingsViewModel.navigateToIdpMapping(navController)
+                navigateToIdpMapping()
                 Log.d("SettingScreen", "idp 계정 연동 listen 활성화")
             }
             ListItem(R.string.logout) {
@@ -163,7 +164,7 @@ fun SettingsScreen(
             modifier = Modifier
                 .padding(6.dp)
                 .clickable {
-                    navController.navigate(SampleAppScreens.IdpMapping.route)
+                    navigateToIdpMapping()
                 })
     }
 }

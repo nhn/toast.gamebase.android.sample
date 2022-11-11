@@ -43,7 +43,8 @@ import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 fun LoginScreen(
     activity: GamebaseActivity,
     loginViewModel: LoginViewModel = viewModel(),
-    navController: NavController) {
+    onLoggedIn: () -> Unit,
+) {
 
     LaunchedEffect(true) {
         loginViewModel.tryLastIdpLogin(activity)
@@ -51,7 +52,7 @@ fun LoginScreen(
 
     LaunchedEffect(loginViewModel.uiState) {
         if (loginViewModel.uiState == LoginState.LOGGED_IN) {
-            loginViewModel.navigateToHome(navController)
+            onLoggedIn()
         }
     }
 

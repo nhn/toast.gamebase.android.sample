@@ -59,17 +59,6 @@ class SettingsViewModel : ViewModel() {
     var foregroundState = mutableStateOf(false)
         private set
 
-    fun navigateToLogin(navController: NavController) {
-        viewModelScope.launch {
-            navController.navigate(SampleAppScreens.Login.route) {
-                popUpTo(SampleAppScreens.Home.route) {
-                    inclusive = true
-                }
-                launchSingleTop = true
-            }
-        }
-    }
-
     fun logout(activity: GamebaseActivity) {
         gamebaseLogout(activity) { isSuccess, errorMessage ->
             if (isSuccess) {
@@ -176,14 +165,6 @@ class SettingsViewModel : ViewModel() {
     fun loadServiceCenter(activity: GamebaseActivity, userName: String) {
         val configuration = ContactConfiguration.newBuilder().setUserName(userName).build()
         openContact(activity, configuration) {
-        }
-    }
-
-    fun navigateToIdpMapping(navController: NavController) {
-        viewModelScope.launch {
-            navController.navigate(SampleAppScreens.IdpMapping.route) {
-                launchSingleTop = true
-            }
         }
     }
 }

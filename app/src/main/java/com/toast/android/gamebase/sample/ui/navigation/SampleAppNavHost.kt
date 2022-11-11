@@ -2,6 +2,8 @@ package com.toast.android.gamebase.sample.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,7 +28,15 @@ fun SampleAppNavHost(
         modifier = modifier
     ) {
         composable(SampleAppScreens.Login.route) {
-            LoginScreen(activity, navController = navController)
+            LoginScreen(
+                activity = activity,
+                onLoggedIn = {
+                    navController.navigate(SampleAppScreens.Home.route) {
+                    popUpTo(SampleAppScreens.Login.route) {
+                        inclusive = true
+                    }
+                }
+            })
         }
         composable(SampleAppScreens.Home.route) {
             HomeScreen(activity)
@@ -38,7 +48,21 @@ fun SampleAppNavHost(
             ProfileScreen()
         }
         composable(SampleAppScreens.Settings.route) {
-            SettingsScreen(activity, navController = navController)
+            SettingsScreen(
+                activity = activity,
+                onLoggedOut = {
+                    navController.navigate(SampleAppScreens.Login.route) {
+                        popUpTo(SampleAppScreens.Home.route) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                },
+                navigateToIdpMapping = {
+                    navController.navigate(SampleAppScreens.IdpMapping.route) {
+                        launchSingleTop = true
+                    }
+                })
         }
         composable(SampleAppScreens.IdpMapping.route) {
             IdpMappingScreen(activity = activity)
