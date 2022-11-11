@@ -143,20 +143,25 @@ private fun onPushReceiveMessage(message: GamebaseEventMessage) {
 // Contact
 //
 ////////////////////////////////////////////////////////////////////////////////
+fun getContactUrl(
+    configuration: ContactConfiguration? = null,
+    onClosedCallback: ((String, GamebaseException?) -> Unit)
+) {
+    if (configuration == null) {
+        Gamebase.Contact.requestContactURL(onClosedCallback)
+    } else {
+        Gamebase.Contact.requestContactURL(configuration, onClosedCallback)
+    }
+}
+
 fun openContact(
     activity: Activity,
-    userName: String?,
-    callback: (() -> Unit)?
+    configuration: ContactConfiguration?,
+    onClosedCallback: ((GamebaseException?) -> Unit)
 ) {
-    val builder = ContactConfiguration.newBuilder()
-    if (userName != null) {
-        builder.setUserName(userName)
-    }
-    Gamebase.Contact.openContact(
-        activity, builder.build()
-    ) {
-        if (callback != null) {
-            callback()
-        }
+    if (configuration != null) {
+        Gamebase.Contact.openContact(activity, configuration, onClosedCallback)
+    } else {
+        Gamebase.Contact.openContact(activity, onClosedCallback)
     }
 }

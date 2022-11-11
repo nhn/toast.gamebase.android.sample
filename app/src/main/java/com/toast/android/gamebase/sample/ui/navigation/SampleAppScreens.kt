@@ -16,6 +16,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object DeveloperPushSetting: SampleAppScreens("push_setting", R.string.developer_menu_category_push)
     object DeveloperTermsSetting: SampleAppScreens("terms_setting", R.string.developer_menu_category_terms)
     object DeveloperCustomTermsSetting: SampleAppScreens("terms_custom_setting", R.string.developer_menu_category_terms)
+    object DeveloperContactDetail: SampleAppScreens("contact_detail", R.string.developer_menu_category_contact)
     object DeveloperCustomImageNoticeSetting: SampleAppScreens("image_notice_setting", R.string.developer_menu_category_image_notice)
     object DeveloperCustomWebViewSetting: SampleAppScreens("web_view_setting", R.string.developer_menu_category_webview)
 
@@ -34,6 +35,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
                 DeveloperPushSetting.route -> DeveloperPushSetting
                 DeveloperTermsSetting.route -> DeveloperTermsSetting
                 DeveloperCustomTermsSetting.route -> DeveloperCustomTermsSetting
+                DeveloperContactDetail.route -> DeveloperContactDetail
                 DeveloperCustomImageNoticeSetting.route -> DeveloperCustomImageNoticeSetting
                 DeveloperCustomWebViewSetting.route -> DeveloperCustomWebViewSetting
                 null -> Home

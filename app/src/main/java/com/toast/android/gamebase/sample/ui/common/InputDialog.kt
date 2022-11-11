@@ -100,7 +100,7 @@ fun InputDialog(
             TextFieldWithLabel(
                 labelName = labelName,
                 fieldMessage = inputText,
-                fieldEnabled = fieldEnabled,
+                fieldDisabled = fieldEnabled,
                 onValueChanged = { value ->
                     inputText = value
                 }
@@ -131,39 +131,4 @@ fun InputDialog(
             }
         }
     )
-}
-
-@Composable
-fun TextFieldWithLabel(
-    labelName: String,
-    fieldMessage: String,
-    fieldEnabled: Boolean = false,
-    onValueChanged: (String) -> Unit,
-) {
-    Column() {
-        Text(
-            text = labelName,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 4.dp, bottom = 4.dp),
-            textAlign = TextAlign.Start,
-            color = Toast
-        )
-        TextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = fieldMessage,
-            enabled = !fieldEnabled,
-            readOnly = fieldEnabled,
-            onValueChange = onValueChanged,
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = TextFieldColor,
-                cursorColor = Black,
-                disabledLabelColor = TextFieldColor,
-                focusedIndicatorColor = Transparent,
-                unfocusedIndicatorColor = Transparent
-            ),
-            shape = RoundedCornerShape(8.dp),
-            singleLine = true
-        )
-    }
 }

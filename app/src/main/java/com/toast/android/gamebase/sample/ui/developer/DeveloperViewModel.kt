@@ -7,13 +7,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
+import com.toast.android.gamebase.contact.ContactConfiguration
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.*
 import com.toast.android.gamebase.sample.gamebasemanager.cancelWithdrawal
+import com.toast.android.gamebase.sample.gamebasemanager.getContactUrl
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
 import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
 import com.toast.android.gamebase.sample.gamebasemanager.requestActivatedPurchases
@@ -86,6 +89,10 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.PUSH_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperPushSetting.route)
             }
+            DeveloperMenu.CONTACT_URL -> requestContactUrl(activity)
+            DeveloperMenu.CONTACT_DETAIL_SETTING -> {
+                navController.navigate(SampleAppScreens.DeveloperContactDetail.route)
+            }
             DeveloperMenu.TERMS_INFO -> fetchTermsCurrentSetting(activity)
             DeveloperMenu.TERMS_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperTermsSetting.route)
@@ -93,6 +100,9 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.TERMS_AGREEMENT_SAVE -> {
                 navController.navigate(SampleAppScreens.DeveloperCustomTermsSetting.route)
             }
+            DeveloperMenu.SHOW_ALERT -> showAlertDialogWithCallback(activity)
+            DeveloperMenu.SHOW_SHORT_TOAST -> showSampleToast(activity, Toast.LENGTH_SHORT)
+            DeveloperMenu.SHOW_LONG_TOAST -> showSampleToast(activity, Toast.LENGTH_LONG)
             DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
             DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
             DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity)
@@ -104,9 +114,6 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.WEBIVEW_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperCustomWebViewSetting.route)
             }
-            DeveloperMenu.SHOW_ALERT -> showAlertDialogWithCallback(activity)
-            DeveloperMenu.SHOW_SHORT_TOAST -> showSampleToast(activity, Toast.LENGTH_SHORT)
-            DeveloperMenu.SHOW_LONG_TOAST -> showSampleToast(activity, Toast.LENGTH_LONG)
         }
     }
 
@@ -209,14 +216,28 @@ class DeveloperViewModel: ViewModel() {
         }
     }
 
+    private fun requestContactUrl(activity: Activity) {
+        val title = (activity as Context).getString(R.string.developer_contact_url_alert_title)
+        getContactUrl() { contactUrl, exception ->
+            if (isSuccess(exception)) {
+                // do job with Contact url
+                showAlert(activity, title, contactUrl)
+            } else if (exception?.code == UI_CONTACT_FAIL_INVALID_URL) { // 6911
+                // TODO: Gamebase Console Service Center URL is invalid.
+                // Please check the url field in the TOAST Gamebase Console.
+            } else {
+                // An error occur when requesting the contact web view url.
+            }
+        }
+    }
+
     private fun showAlertDialogWithCallback(activity: Activity) {
         val resources = (activity as Context).resources
         showAlert(
             activity,
             resources.getString(R.string.developer_alert_sample_title),
             resources.getString(R.string.developer_alert_sample_message)
-        ) { dialog, which ->
-            {
+        ) { dialog, which -> {
                 // create own callback
             }
         }
