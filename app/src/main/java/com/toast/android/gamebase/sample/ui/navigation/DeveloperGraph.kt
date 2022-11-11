@@ -10,6 +10,7 @@ import com.toast.android.gamebase.sample.ui.developer.imagenotice.ImageNoticeSet
 import com.toast.android.gamebase.sample.ui.developer.push.DeveloperPushSettingScreen
 import com.toast.android.gamebase.sample.ui.developer.terms.TermsCustomScreen
 import com.toast.android.gamebase.sample.ui.developer.terms.TermsSettingScreen
+import com.toast.android.gamebase.sample.ui.developer.webview.WebViewSettingScreen
 
 fun NavGraphBuilder.developerGraph(navController: NavController, activity: Activity) {
     navigation(
@@ -31,6 +32,9 @@ fun NavGraphBuilder.developerGraph(navController: NavController, activity: Activ
         }
         composable(SampleAppScreens.DeveloperCustomImageNoticeSetting.route) {
             ImageNoticeSettingScreen()
+        }
+        composable(SampleAppScreens.DeveloperCustomWebViewSetting.route) {
+            WebViewSettingScreen()
         }
     }
 }

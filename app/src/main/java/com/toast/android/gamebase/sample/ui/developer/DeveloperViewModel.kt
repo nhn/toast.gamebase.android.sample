@@ -23,6 +23,8 @@ class DeveloperViewModel: ViewModel() {
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
     val isLoggerInitializeOpened = mutableStateOf(false)
     val isSendLogOpened = mutableStateOf(false)
+    val isOpenWebViewOpened = mutableStateOf(false)
+    val isOpenWebBrowserOpened = mutableStateOf(false)
 
     private val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
     private val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
@@ -81,6 +83,11 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity) {}
             DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperCustomImageNoticeSetting.route)
+            }
+            DeveloperMenu.OPEN_WEBVIEW -> isOpenWebViewOpened.value = true
+            DeveloperMenu.OPEN_OUTSIDE_BROWSER -> isOpenWebBrowserOpened.value = true
+            DeveloperMenu.WEBIVEW_DETAIL_SETTING -> {
+                navController.navigate(SampleAppScreens.DeveloperCustomWebViewSetting.route)
             }
         }
     }
