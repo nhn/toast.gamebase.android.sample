@@ -16,12 +16,9 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object DeveloperPushSetting: SampleAppScreens("push_setting", R.string.developer_menu_category_push)
     object DeveloperTermsSetting: SampleAppScreens("terms_setting", R.string.developer_menu_category_terms)
     object DeveloperCustomTermsSetting: SampleAppScreens("terms_custom_setting", R.string.developer_menu_category_terms)
-<<<<<<< HEAD
     object DeveloperContactDetail: SampleAppScreens("contact_detail", R.string.developer_menu_category_contact)
-=======
     object DeveloperCustomImageNoticeSetting: SampleAppScreens("image_notice_setting", R.string.developer_menu_category_image_notice)
     object DeveloperCustomWebViewSetting: SampleAppScreens("web_view_setting", R.string.developer_menu_category_webview)
->>>>>>> develop
 
     companion object {
         fun fromRoute(route: String?): SampleAppScreens =

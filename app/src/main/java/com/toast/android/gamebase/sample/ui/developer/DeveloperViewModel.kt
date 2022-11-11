@@ -197,6 +197,25 @@ class DeveloperViewModel: ViewModel() {
         }
     }
 
+    private fun fetchTermsCurrentSetting(activity: Activity) {
+        viewModelScope.launch {
+            queryTerms(activity) { gamebaseQueryTermsResult, exception ->
+                if (Gamebase.isSuccess(exception)) {
+                    showAlert(activity, successTitle, gamebaseQueryTermsResult.printWithIndent());
+                } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
+                    // Another country device.
+                    // Pass the 'terms and conditions' step.
+                    showAlert(
+                        activity, failedTitle,
+                        (activity as Context).getString(R.string.developer_terms_no_need_to_show_terms)
+                    )
+                } else {
+                    showAlert(activity, failedTitle, exception.printWithIndent());
+                }
+            }
+        }
+    }
+
     private fun requestContactUrl(activity: Activity) {
         val title = (activity as Context).getString(R.string.developer_contact_url_alert_title)
         getContactUrl() { contactUrl, exception ->
@@ -232,24 +251,5 @@ class DeveloperViewModel: ViewModel() {
             resources.getString(R.string.developer_toast_short_sample_message)
 
         showToast(activity, toastMessage, duration)
-    }
-
-    private fun fetchTermsCurrentSetting(activity: Activity) {
-        viewModelScope.launch {
-            queryTerms(activity) { gamebaseQueryTermsResult, exception ->
-                if (Gamebase.isSuccess(exception)) {
-                    showAlert(activity, successTitle, gamebaseQueryTermsResult.printWithIndent());
-                } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
-                    // Another country device.
-                    // Pass the 'terms and conditions' step.
-                    showAlert(
-                        activity, failedTitle,
-                        (activity as Context).getString(R.string.developer_terms_no_need_to_show_terms)
-                    )
-                } else {
-                    showAlert(activity, failedTitle, exception.printWithIndent());
-                }
-            }
-        }
     }
 }
