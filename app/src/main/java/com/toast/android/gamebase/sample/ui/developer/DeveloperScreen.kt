@@ -18,10 +18,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
+import com.toast.android.gamebase.sample.gamebasemanager.showWebView
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
 import com.toast.android.gamebase.sample.ui.developer.logger.LoggerInitializeDialog
 import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
+import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
+import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewDialog
 
 @Composable
 fun DeveloperScreen(
@@ -62,6 +65,26 @@ fun DeveloperScreen(
             viewModel.isSendLogOpened.value = newState
         },
         stringArrayResources = R.array.logger_level
+    )
+    OpenCustomWebViewDialog(
+        isDialogOpened = viewModel.isOpenWebViewOpened.value,
+        title = stringResource(id = R.string.developer_menu_open_webview),
+        setDialogStatus = { newState ->
+            viewModel.isOpenWebViewOpened.value = newState
+        },
+        fieldDisabled = false,
+        onOkButtonClicked = { value ->
+            showWebView(activity, value)
+        }
+    )
+    OpenBrowserDialog(
+        activity = activity,
+        isDialogOpened = viewModel.isOpenWebBrowserOpened.value,
+        title = stringResource(id = R.string.developer_menu_open_outside_browser),
+        setDialogStatus = { newState ->
+            viewModel.isOpenWebBrowserOpened.value = newState
+        },
+        fieldDisabled = false
     )
 }
 

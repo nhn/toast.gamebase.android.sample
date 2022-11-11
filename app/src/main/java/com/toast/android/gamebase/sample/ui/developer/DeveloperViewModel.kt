@@ -14,10 +14,10 @@ import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.contact.ContactConfiguration
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.gamebasemanager.*
 import com.toast.android.gamebase.sample.gamebasemanager.cancelWithdrawal
 import com.toast.android.gamebase.sample.gamebasemanager.getContactUrl
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.queryTerms
 import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
 import com.toast.android.gamebase.sample.gamebasemanager.requestActivatedPurchases
 import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotConsumed
@@ -35,9 +35,13 @@ class DeveloperViewModel: ViewModel() {
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
     val isLoggerInitializeOpened = mutableStateOf(false)
     val isSendLogOpened = mutableStateOf(false)
+    val isOpenWebViewOpened = mutableStateOf(false)
+    val isOpenWebBrowserOpened = mutableStateOf(false)
 
-    private val failedTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.failed)
-    private val successTitle: String = GamebaseApplication.instance.applicationContext.getString(R.string.success)
+    private val failedTitle: String =
+        GamebaseApplication.instance.applicationContext.getString(R.string.failed)
+    private val successTitle: String =
+        GamebaseApplication.instance.applicationContext.getString(R.string.success)
 
     private fun createMenuMap(): MutableMap<String, List<DeveloperMenu>> {
         val developerMenuMap: MutableMap<String, List<DeveloperMenu>> = mutableMapOf()
@@ -71,7 +75,11 @@ class DeveloperViewModel: ViewModel() {
     }
 
 
-    fun onMenuClick(activity: Activity, developerMenuItem: DeveloperMenu, navController: NavController) {
+    fun onMenuClick(
+        activity: Activity,
+        developerMenuItem: DeveloperMenu,
+        navController: NavController
+    ) {
         when (developerMenuItem.id) {
             DeveloperMenu.AUTH_SUSPEND_WITHDRAWAL -> requestWithdrawal(activity)
             DeveloperMenu.AUTH_SUSPEND_WITHDRAWAL_CANCEL -> cancelWithdrawal(activity)
@@ -97,6 +105,15 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.SHOW_LONG_TOAST -> showSampleToast(activity, Toast.LENGTH_LONG)
             DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
             DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
+            DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity)
+            DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> {
+                navController.navigate(SampleAppScreens.DeveloperCustomImageNoticeSetting.route)
+            }
+            DeveloperMenu.OPEN_WEBVIEW -> isOpenWebViewOpened.value = true
+            DeveloperMenu.OPEN_OUTSIDE_BROWSER -> isOpenWebBrowserOpened.value = true
+            DeveloperMenu.WEBIVEW_DETAIL_SETTING -> {
+                navController.navigate(SampleAppScreens.DeveloperCustomWebViewSetting.route)
+            }
         }
     }
 
@@ -145,7 +162,11 @@ class DeveloperViewModel: ViewModel() {
                 purchaseItemList = list as MutableList<PurchasableReceipt>
                 showPurchaseDialog.value = true
             } else {
-                showAlert(activity, context.resources.getString(R.string.failed), exception.printWithIndent())
+                showAlert(
+                    activity,
+                    context.resources.getString(R.string.failed),
+                    exception.printWithIndent()
+                )
             }
         }
     }
@@ -157,7 +178,11 @@ class DeveloperViewModel: ViewModel() {
                 purchaseItemList = list as MutableList<PurchasableReceipt>
                 showPurchaseDialog.value = true
             } else {
-                showAlert(activity, context.resources.getString(R.string.failed), exception.printWithIndent())
+                showAlert(
+                    activity,
+                    context.resources.getString(R.string.failed),
+                    exception.printWithIndent()
+                )
             }
         }
     }
@@ -217,8 +242,10 @@ class DeveloperViewModel: ViewModel() {
                 } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
                     // Another country device.
                     // Pass the 'terms and conditions' step.
-                    showAlert(activity, failedTitle,
-                        (activity as Context).getString(R.string.developer_terms_no_need_to_show_terms));
+                    showAlert(
+                        activity, failedTitle,
+                        (activity as Context).getString(R.string.developer_terms_no_need_to_show_terms)
+                    )
                 } else {
                     showAlert(activity, failedTitle, exception.printWithIndent());
                 }
