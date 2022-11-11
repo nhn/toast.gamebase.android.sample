@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toast.android.gamebase.sample.R
 
 @Composable
 fun ClickableText(
@@ -17,7 +19,7 @@ fun ClickableText(
     Text(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(dimensionResource(id = R.dimen.setting_screen_menu_title_text_padding))
             .clickable() {
                 onClick()
             }, text = stringResource(id = stringId)

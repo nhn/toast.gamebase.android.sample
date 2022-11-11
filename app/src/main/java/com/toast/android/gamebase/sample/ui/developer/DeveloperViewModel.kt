@@ -80,7 +80,7 @@ class DeveloperViewModel: ViewModel() {
             }
             DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
             DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
-            DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity) {}
+            DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity)
             DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperCustomImageNoticeSetting.route)
             }

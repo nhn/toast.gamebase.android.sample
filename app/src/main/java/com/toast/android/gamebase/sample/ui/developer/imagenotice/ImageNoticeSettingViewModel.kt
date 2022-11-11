@@ -21,6 +21,6 @@ class ImageNoticeSettingViewModel() : ViewModel() {
             .enableAutoCloseByCustomScheme(autoCloseCustomSchemeSwitchStatue.value)
             .build()
 
-        showImageNotices(activity = activity, configuration = configuration) {}
+        showImageNotices(activity = activity, configuration = configuration)
     }
 }

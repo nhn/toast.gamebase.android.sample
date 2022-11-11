@@ -16,18 +16,20 @@ import com.toast.android.gamebase.terms.data.GamebaseQueryTermsResult
 import com.toast.android.gamebase.terms.data.GamebaseTermsContent
 import com.toast.android.gamebase.terms.data.GamebaseUpdateTermsConfiguration
 
-fun showImageNotices(activity: Activity, onCloseCallback: GamebaseCallback) {
+fun showImageNotices(activity: Activity, onCloseCallback: GamebaseCallback? = null) {
     val configuration = ImageNoticeConfiguration.newBuilder()
         .build()
     Gamebase.ImageNotice.showImageNotices(
         activity,
         configuration,
-        { exception -> onCloseCallback.onCallback(exception) },
+        { exception -> onCloseCallback?.onCallback(exception) },
         { payload, exception ->
             if (Gamebase.isSuccess(exception)) {
                 Log.i(TAG, "Clicked Image Notice Payload: $payload")
                 if (payload.equals("mygame://some_custom_scheme", ignoreCase = true)) {
                     // Do something with your custom scheme
+                } else {
+                    showAlert(activity, TAG, exception.toJsonString())
                 }
             }
         })
@@ -36,18 +38,21 @@ fun showImageNotices(activity: Activity, onCloseCallback: GamebaseCallback) {
 fun showImageNotices(
     activity: Activity,
     configuration: ImageNoticeConfiguration,
-    onCloseCallback: GamebaseCallback
+    onCloseCallback: GamebaseCallback? = null
 ) {
     Gamebase.ImageNotice.showImageNotices(
         activity,
         configuration,
-        { exception -> onCloseCallback.onCallback(exception) },
+        { exception -> onCloseCallback?.onCallback(exception) },
         { payload, exception ->
             if (Gamebase.isSuccess(exception)) {
                 Log.i(TAG, "Clicked Image Notice Payload: $payload")
                 if (payload.equals("mygame://some_custom_scheme", ignoreCase = true)) {
                     // Do something with your custom scheme
                 }
+                showAlert(activity, "Payload", payload)
+            } else {
+                showAlert(activity, TAG, exception.toJsonString())
             }
         })
 }

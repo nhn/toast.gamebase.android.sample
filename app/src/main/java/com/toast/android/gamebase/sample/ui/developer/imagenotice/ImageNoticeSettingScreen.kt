@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.common.ClickableText
+import com.toast.android.gamebase.sample.ui.common.InputDialog
 import com.toast.android.gamebase.sample.ui.common.RoundButton
 import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
 
@@ -47,32 +48,32 @@ fun ImageNoticeSettingScreen(
             viewModel.showUserSettingImageNotice(activicty)
         }
     }
-
-    ImageNoticeSettingDialog(
-        isDialogOpened = viewModel.imageNoticeBackgroundDialogStatue.value,
-        title = stringResource(id = R.string.developer_image_notice_configuration_background_color),
-        labelName = stringResource(id = R.string.developer_image_notice_configuration_background_color_label_name),
-        message = viewModel.imageNoticeBackgroundColor.value,
-        setDialogStatus = { newState ->
-            viewModel.imageNoticeBackgroundDialogStatue.value = newState
-        },
-        fieldEnabled = false,
-        onOkButtonClicked = { value ->
-            viewModel.imageNoticeBackgroundColor.value = value
-        }
-    )
-
-    ImageNoticeSettingDialog(
-        isDialogOpened = viewModel.imageNoticeTimeOutDialogStatus.value,
-        title = stringResource(id = R.string.developer_image_notice_configuration_time_out),
-        labelName = stringResource(id = R.string.developer_image_notice_configuration_time_out_label_name),
-        message = viewModel.imageNoticeTimeOut.value.toString(),
-        setDialogStatus = { newState ->
-            viewModel.imageNoticeTimeOutDialogStatus.value = newState
-        },
-        fieldEnabled = false,
-        onOkButtonClicked = { value ->
-            viewModel.imageNoticeTimeOut.value = value.toLong()
-        }
-    )
+    if (viewModel.imageNoticeBackgroundDialogStatue.value) {
+        InputDialog(
+            title = stringResource(id = R.string.developer_image_notice_configuration_background_color),
+            labelName = stringResource(id = R.string.developer_image_notice_configuration_background_color_label_name),
+            fieldMessage = viewModel.imageNoticeBackgroundColor.value,
+            setDialogStatus = { newState ->
+                viewModel.imageNoticeBackgroundDialogStatue.value = newState
+            },
+            fieldEnabled = false,
+            onOkButtonClicked = { value ->
+                viewModel.imageNoticeBackgroundColor.value = value
+            }
+        )
+    }
+    if (viewModel.imageNoticeTimeOutDialogStatus.value) {
+        InputDialog(
+            title = stringResource(id = R.string.developer_image_notice_configuration_time_out),
+            labelName = stringResource(id = R.string.developer_image_notice_configuration_time_out_label_name),
+            fieldMessage = viewModel.imageNoticeTimeOut.value.toString(),
+            setDialogStatus = { newState ->
+                viewModel.imageNoticeTimeOutDialogStatus.value = newState
+            },
+            fieldEnabled = false,
+            onOkButtonClicked = { value ->
+                viewModel.imageNoticeTimeOut.value = value.toLong()
+            }
+        )
+    }
 }
