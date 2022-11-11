@@ -1,5 +1,6 @@
 package com.toast.android.gamebase.sample.ui.main
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -58,6 +59,7 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background,
     ) {
+        // Login Screen
         if (currentScreen.route == SampleAppScreens.Login.route) {
             SampleAppNavHost(
                 activity = activity,
@@ -80,6 +82,11 @@ fun MainScreen(
                     }
                 }
             ) { innerPadding ->
+                BackHandler(scaffoldState.drawerState.isOpen) {
+                    scope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                }
                 SampleAppNavHost(
                     activity = activity,
                     navController = navController,
