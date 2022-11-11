@@ -140,7 +140,8 @@
     </string-array>
     <string-array name="Alert">
         <item>developer_menu_show_alert</item>
-        <item>developer_menu_show_toast</item>
+        <item>developer_menu_show_short_toast</item>
+        <item>developer_menu_show_long_toast</item>
     </string-array>
     <string-array name="Analytics">
         <item>developer_menu_user_level_info_setting</item>
@@ -176,7 +177,8 @@
     <string name="developer_menu_open_outside_browser">외부 브라우저 열기</string>
     <string name="developer_menu_webview_detail_setting">웹뷰 상세설정</string>
     <string name="developer_menu_show_alert">Alert</string>
-    <string name="developer_menu_show_toast">토스트 메시지</string>
+    <string name="developer_menu_show_short_toast">짧은 토스트 메시지</string>
+    <string name="developer_menu_show_long_toast">긴 토스트 메시지</string>
     <string name="developer_menu_user_level_info_setting">유저 레벨 정보 설정</string>
     <string name="developer_menu_user_level_up_info_setting">유저 레벨업 정보 설정</string>
     <string name="developer_menu_contact_url">고객센터 URL 조회</string>
@@ -247,4 +249,10 @@
         <item>가로 모드</item>
         <item>역가로 모드</item>
     </string-array>
+
+    <!-- alert -->
+    <string name="developer_alert_sample_title">제목</string>
+    <string name="developer_alert_sample_message">Alert 입니다.</string>
+    <string name="developer_toast_short_sample_message">짧은 토스트 입니다.</string>
+    <string name="developer_toast_long_sample_message">긴 토스트 입니다.</string>
 </resources>
