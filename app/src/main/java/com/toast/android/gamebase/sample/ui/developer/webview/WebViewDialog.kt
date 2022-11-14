@@ -18,7 +18,7 @@ fun OpenCustomWebViewDialog(
     if (isDialogOpened) {
         InputDialog(
             title = title,
-            labelName = stringResource(id = R.string.ui_screen_url),
+            labelName = stringResource(id = R.string.url),
             fieldMessage = "",
             setDialogStatus = setDialogStatus,
             fieldEnabled = fieldDisabled,
@@ -38,7 +38,7 @@ fun OpenBrowserDialog(
     if (isDialogOpened) {
         InputDialog(
             title = title,
-            labelName = stringResource(id = R.string.ui_screen_url),
+            labelName = stringResource(id = R.string.url),
             fieldMessage = "",
             setDialogStatus = setDialogStatus,
             fieldEnabled = fieldDisabled,

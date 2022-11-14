@@ -10,8 +10,8 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object Profile: SampleAppScreens("profile", R.string.profile)
     object Settings: SampleAppScreens("settings", R.string.settings)
     object IdpMapping: SampleAppScreens("idp_mapping", R.string.idp_mapping)
-    object UI: SampleAppScreens("ui", R.string.ui)
     object Developer: SampleAppScreens("developer", R.string.developer)
+
     object DeveloperRoot: SampleAppScreens("dev_home", R.string.developer)
     object DeveloperPushSetting: SampleAppScreens("push_setting", R.string.developer_menu_category_push)
     object DeveloperTermsSetting: SampleAppScreens("terms_setting", R.string.developer_menu_category_terms)
@@ -29,7 +29,6 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
                 Profile.route -> Profile
                 Settings.route -> Settings
                 IdpMapping.route -> IdpMapping
-                UI.route -> UI
                 Developer.route -> Developer
                 DeveloperRoot.route -> DeveloperRoot
                 DeveloperPushSetting.route -> DeveloperPushSetting
@@ -48,8 +47,6 @@ val screens = listOf(
     SampleAppScreens.Home,
     SampleAppScreens.Shopping,
     SampleAppScreens.Profile,
-    SampleAppScreens.UI,
     SampleAppScreens.Settings,
     SampleAppScreens.Developer
-    /*TODO: Add Screens*/
 )
