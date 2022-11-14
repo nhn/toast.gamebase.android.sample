@@ -51,23 +51,23 @@ fun initializeGamebase(
      */
     Gamebase.setDebugMode(DEBUG_MODE)
 
-    val configuration =
-        GamebaseConfiguration.newBuilder(
+    val configuration = GamebaseConfiguration
+        .newBuilder(
             PROJECT_ID,
             APP_CLIENT_VERSION,
             STORE_CODE
         )
-            .enablePopup(ENABLE_POPUP)
-            .enableLaunchingStatusPopup(ENABLE_LAUNCHING_STATUS_POPUP)
-            .enableBanPopup(ENABLE_BAN_POPUP)
-            .build()
+        .enablePopup(ENABLE_POPUP)
+        .enableLaunchingStatusPopup(ENABLE_LAUNCHING_STATUS_POPUP)
+        .enableBanPopup(ENABLE_BAN_POPUP)
+        .build()
 
     Gamebase.initialize(
         activity, configuration,
         GamebaseDataCallback { launchingInfo, exception ->
-            val launchingStatusCode = launchingInfo.status.code
             if (Gamebase.isSuccess(exception)) {
                 // 게임 진입을 허용할지 여부를 론칭 코드에 따라 판단하십시오.
+                val launchingStatusCode = launchingInfo?.status?.code
                 val (canPlay, errorLog) = checkIfGameCanPlay(launchingStatusCode)
 
                 if (canPlay == GamePlayStatus.PLAYABLE) {
@@ -107,7 +107,7 @@ fun initializeGamebase(
         })
 }
 
-private fun checkIfGameCanPlay(launchingStatusCode: Int): Pair<GamePlayStatus, String> {
+private fun checkIfGameCanPlay(launchingStatusCode: Int?): Pair<GamePlayStatus, String> {
     var canPlay: GamePlayStatus = GamePlayStatus.PLAYABLE
     var errorLog = ""
 
