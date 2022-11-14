@@ -24,6 +24,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.base.purchase.PurchasableItem
 import com.toast.android.gamebase.sample.GamebaseActivity
+import com.toast.android.gamebase.sample.ui.common.EmptyListScreen
+import com.toast.android.gamebase.sample.ui.common.ErrorScreen
+import com.toast.android.gamebase.sample.ui.common.LoadingScreen
+import com.toast.android.gamebase.sample.ui.shopping.ShoppingUIState
 import com.toast.android.gamebase.sample.ui.shopping.ShoppingViewModel
 import com.toast.android.gamebase.sample.ui.shopping.observeShoppingLifecycle
 import com.toast.android.gamebase.sample.ui.theme.Black
@@ -32,6 +36,24 @@ import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
 fun ShoppingScreen(activity: GamebaseActivity, shoppingViewModel: ShoppingViewModel = viewModel()) {
+    shoppingViewModel.setGamebaseActivity(activity)
+    shoppingViewModel.observeShoppingLifecycle(LocalLifecycleOwner.current.lifecycle)
+
+    when (shoppingViewModel.uiState.value) {
+        ShoppingUIState.REQUEST_SUCCESS -> ShoppingRequestSuccessScreen(
+            activity = activity,
+            shoppingViewModel = shoppingViewModel
+        )
+        ShoppingUIState.REQUEST_ERROR -> {
+            ErrorScreen(errorString = stringResource(id = R.string.request_shopping_list_error))
+        }
+        ShoppingUIState.REQUEST_LOADING -> LoadingScreen()
+        ShoppingUIState.EMPTY_ITEM -> EmptyListScreen()
+    }
+}
+
+@Composable
+fun ShoppingRequestSuccessScreen(activity: GamebaseActivity, shoppingViewModel: ShoppingViewModel) {
     if (shoppingViewModel.needLoadingDialog) {
         Dialog(
             onDismissRequest = { shoppingViewModel.needLoadingDialog = false },
@@ -62,8 +84,6 @@ fun ShoppingScreen(activity: GamebaseActivity, shoppingViewModel: ShoppingViewMo
             .fillMaxSize()
             .background(White)
     ) {
-        shoppingViewModel.setGamebaseActivity(activity)
-        shoppingViewModel.observeShoppingLifecycle(LocalLifecycleOwner.current.lifecycle)
         LazyColumn() {
             items(items = shoppingViewModel.itemList) { item ->
                 ListItems(activity = activity, item = item, shoppingViewModel = shoppingViewModel)

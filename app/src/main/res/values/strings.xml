@@ -78,6 +78,7 @@
 
     <!-- shopping screen -->
     <string name="loading">loading...</string>
+    <string name="request_shopping_list_error">request shopping list error occurred</string>
 
     <!-- idp mapping screen -->
     <string name="idp_mapping_button_mapped">연동됨</string>

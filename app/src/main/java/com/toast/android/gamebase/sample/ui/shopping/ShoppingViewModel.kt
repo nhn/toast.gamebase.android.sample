@@ -18,11 +18,20 @@ import kotlinx.coroutines.launch
 
 private const val TAG: String = "ShoppingScreen"
 
+enum class ShoppingUIState() {
+    REQUEST_SUCCESS,
+    REQUEST_ERROR,
+    REQUEST_LOADING,
+    EMPTY_ITEM
+}
+
 @SuppressLint("StaticFieldLeak")
 class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
     var itemList: List<PurchasableItem> by mutableStateOf(mutableListOf())
         private set
     var needLoadingDialog: Boolean by mutableStateOf(false)
+    val uiState = mutableStateOf(ShoppingUIState.REQUEST_LOADING)
+
     // TODO : viewModel에서 activity를 멤버 변수로 가지고 있는 사항 수정
     lateinit var mActivity: GamebaseActivity
 
@@ -51,8 +60,14 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
     private fun requestItemList(activity: GamebaseActivity) {
         gamebaseRequestItemList(activity = activity) { data, exception ->
             if (isSuccess(exception)) {
-                itemList = data
+                if (data.isEmpty()) {
+                    uiState.value = ShoppingUIState.EMPTY_ITEM
+                } else {
+                    itemList = data
+                    uiState.value = ShoppingUIState.REQUEST_SUCCESS
+                }
             } else {
+                uiState.value = ShoppingUIState.REQUEST_ERROR
                 showAlert(
                     activity,
                     "requestItemListPurchasable error",
