@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.gamebasemanager.showWebView
@@ -32,7 +31,7 @@ import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewD
 fun DeveloperScreen(
     activity: Activity,
     viewModel: DeveloperViewModel = viewModel(),
-    navController: NavController
+    menuNavigator: DeveloperMenuNavigator
 ) {
     Box {
         Surface(color = MaterialTheme.colors.surface) {
@@ -46,7 +45,7 @@ fun DeveloperScreen(
                 groupedListMap = viewModel.menuMap,
                 activity,
                 viewModel,
-                navController
+                menuNavigator
             )
         }
     }
@@ -117,7 +116,7 @@ fun DeveloperMenuList(
     groupedListMap: Map<String, List<DeveloperMenu>>,
     activity: Activity,
     viewModel: DeveloperViewModel,
-    navController: NavController
+    menuNavigator: DeveloperMenuNavigator
 ) {
     LazyColumn(modifier = Modifier.padding(horizontal = 20.dp)) {
         groupedListMap.forEach { (category, subMenuList) ->
@@ -125,7 +124,7 @@ fun DeveloperMenuList(
                 SubMenuDivider(category)
             }
             items(items = subMenuList) { subMenu ->
-                MenuItem(subMenu, activity, viewModel, navController)
+                MenuItem(subMenu, activity, viewModel, menuNavigator)
             }
         }
     }
@@ -135,14 +134,14 @@ fun DeveloperMenuList(
 fun MenuItem(developerMenuItem: DeveloperMenu,
              activity: Activity,
              viewModel: DeveloperViewModel,
-             navController: NavController
+             menuNavigator: DeveloperMenuNavigator
 ) {
     Surface (
         color = MaterialTheme.colors.surface,
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                viewModel.onMenuClick(activity, developerMenuItem, navController)
+                viewModel.onMenuClick(activity, developerMenuItem, menuNavigator)
             }
             .padding(vertical = 12.dp, horizontal = 10.dp)
     ) {

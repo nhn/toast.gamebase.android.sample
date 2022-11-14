@@ -29,8 +29,8 @@ import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
 import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
 
 @Composable
-fun DeveloperPushSettingScreen(
-    viewModel: DeveloperPushSettingViewModel = viewModel()
+fun PushSettingScreen(
+    viewModel: PushSettingViewModel = viewModel()
 ) {
     val scrollState = rememberScrollState()
     val activity: Activity = LocalContext.current as Activity

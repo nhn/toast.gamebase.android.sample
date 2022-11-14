@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.GamebaseError
@@ -28,7 +27,6 @@ import com.toast.android.gamebase.sample.gamebasemanager.requestItemListOfNotCon
 import com.toast.android.gamebase.sample.gamebasemanager.requestWithdrawal
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.gamebasemanager.showToast
-import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
 
@@ -84,7 +82,7 @@ class DeveloperViewModel: ViewModel() {
     fun onMenuClick(
         activity: Activity,
         developerMenuItem: DeveloperMenu,
-        navController: NavController
+        menuNavigator: DeveloperMenuNavigator
     ) {
         when (developerMenuItem.id) {
             DeveloperMenu.AUTH_SUSPEND_WITHDRAWAL -> requestWithdrawal(activity)
@@ -92,34 +90,22 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.PURCHASE_ACTIVATED_SUBSCRIPTION -> fetchActivatedPurchaseList(activity)
             DeveloperMenu.PURCHASE_NOT_CONSUMED_LIST -> fetchItemNotConsumedList(activity)
             DeveloperMenu.PUSH_CURRENT_SETTING -> fetchPushCurrentSetting(activity)
-            DeveloperMenu.PUSH_DETAIL_SETTING -> {
-                navController.navigate(SampleAppScreens.DeveloperPushSetting.route)
-            }
+            DeveloperMenu.PUSH_DETAIL_SETTING -> menuNavigator.onPushSettingMenu()
             DeveloperMenu.CONTACT_URL -> requestContactUrl(activity)
-            DeveloperMenu.CONTACT_DETAIL_SETTING -> {
-                navController.navigate(SampleAppScreens.DeveloperContactDetail.route)
-            }
+            DeveloperMenu.CONTACT_DETAIL_SETTING -> menuNavigator.onContactDetailMenu()
             DeveloperMenu.TERMS_INFO -> fetchTermsCurrentSetting(activity)
-            DeveloperMenu.TERMS_DETAIL_SETTING -> {
-                navController.navigate(SampleAppScreens.DeveloperTermsSetting.route)
-            }
-            DeveloperMenu.TERMS_AGREEMENT_SAVE -> {
-                navController.navigate(SampleAppScreens.DeveloperCustomTermsSetting.route)
-            }
+            DeveloperMenu.TERMS_DETAIL_SETTING -> menuNavigator.onTermsSettingMenu()
+            DeveloperMenu.TERMS_AGREEMENT_SAVE -> menuNavigator.onTermsCustomMenu()
             DeveloperMenu.SHOW_ALERT -> showAlertDialogWithCallback(activity)
             DeveloperMenu.SHOW_SHORT_TOAST -> showSampleToast(activity, Toast.LENGTH_SHORT)
             DeveloperMenu.SHOW_LONG_TOAST -> showSampleToast(activity, Toast.LENGTH_LONG)
             DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
             DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
             DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity)
-            DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> {
-                navController.navigate(SampleAppScreens.DeveloperCustomImageNoticeSetting.route)
-            }
+            DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> menuNavigator.onImageNoticeSettingMenu()
             DeveloperMenu.OPEN_WEBVIEW -> isOpenWebViewOpened.value = true
             DeveloperMenu.OPEN_OUTSIDE_BROWSER -> isOpenWebBrowserOpened.value = true
-            DeveloperMenu.WEBIVEW_DETAIL_SETTING -> {
-                navController.navigate(SampleAppScreens.DeveloperCustomWebViewSetting.route)
-            }
+            DeveloperMenu.WEBIVEW_DETAIL_SETTING -> menuNavigator.onWebViewSettingMenu()
             DeveloperMenu.USER_LEVEL_INFO_SETTING -> isUserLevelInfoSettingOpened.value = true
             DeveloperMenu.USER_LEVEL_UP_INFO_SETTING -> isUserLevelUpInfoSettingOpened.value = true
             DeveloperMenu.DEVICE_LANGUAGE -> showMenuNameAlert(activity, developerMenuItem.id, getDeviceLanguage())

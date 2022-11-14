@@ -14,7 +14,7 @@ import com.toast.android.gamebase.sample.util.printWithIndent
 const val NOTIFICATION_PRIORITY_MIN = -2
 const val NOTIFICATION_PRIORITY_MAX = 2
 
-class DeveloperPushSettingViewModel(): ViewModel() {
+class PushSettingViewModel(): ViewModel() {
     // push options
     var enablePush = mutableStateOf(false)
     // 아래 옵션은 한국에서만 설정이 가능합니다.
