@@ -32,11 +32,12 @@ fun SampleAppNavHost(
                 activity = activity,
                 onLoggedIn = {
                     navController.navigate(SampleAppScreens.Home.route) {
-                    popUpTo(SampleAppScreens.Login.route) {
-                        inclusive = true
+                        popUpTo(SampleAppScreens.Login.route) {
+                            inclusive = true
+                        }
                     }
                 }
-            })
+            )
         }
         composable(SampleAppScreens.Home.route) {
             HomeScreen(activity)
