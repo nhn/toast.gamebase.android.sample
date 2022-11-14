@@ -1,6 +1,7 @@
 package com.toast.android.gamebase.sample.gamebasemanager
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.util.Log
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.auth.data.AuthToken
@@ -28,6 +29,10 @@ fun isSuccess(exception: GamebaseException?): Boolean =
 
 fun showAlert(activity: Activity, title: String, message: String) {
     Gamebase.Util.showAlert(activity, title, message)
+}
+
+fun showAlert(activity: Activity, title: String, message: String, callback: DialogInterface.OnClickListener) {
+    Gamebase.Util.showAlert(activity, title, message, callback)
 }
 
 fun showToast(activity: Activity, message: String, duration: Int) {
@@ -126,21 +131,26 @@ private fun onPushReceiveMessage(message: GamebaseEventMessage) {
 }
 
 // Contact
+fun getContactUrl(
+    configuration: ContactConfiguration? = null,
+    onClosedCallback: ((String, GamebaseException?) -> Unit)
+) {
+    if (configuration == null) {
+        Gamebase.Contact.requestContactURL(onClosedCallback)
+    } else {
+        Gamebase.Contact.requestContactURL(configuration, onClosedCallback)
+    }
+}
+
 fun openContact(
     activity: Activity,
-    userName: String?,
-    callback: (() -> Unit)?
+    configuration: ContactConfiguration?,
+    onClosedCallback: ((GamebaseException?) -> Unit)
 ) {
-    val builder = ContactConfiguration.newBuilder()
-    if (userName != null) {
-        builder.setUserName(userName)
-    }
-    Gamebase.Contact.openContact(
-        activity, builder.build()
-    ) {
-        if (callback != null) {
-            callback()
-        }
+    if (configuration != null) {
+        Gamebase.Contact.openContact(activity, configuration, onClosedCallback)
+    } else {
+        Gamebase.Contact.openContact(activity, onClosedCallback)
     }
 }
 

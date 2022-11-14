@@ -17,4 +17,15 @@
     <dimen name="setting_screen_menu_title_text_padding">10dp</dimen>
     <dimen name="setting_screen_menu_description_text_padding">8dp</dimen>
     <dimen name="setting_screen_list_item_text_padding">10dp</dimen>
+    <dimen name="contact_screen_empty_list_min_height">56dp</dimen>
+    <dimen name="setting_screen_list_item_vertical_padding">5dp</dimen>
+    <dimen name="contact_screen_lazy_colum_border_width">1dp</dimen>
+    <dimen name="contact_screen_lazy_colum_border_corner_radius">8dp</dimen>
+    <dimen name="contact_screen_lazy_colum_item_horizontal_spacer">5dp</dimen>
+    <dimen name="setting_screen_terms_lazy_column_content_padding">8dp</dimen>
+
+    <dimen name="key_value_input_dialog_round_corner_radius">12dp</dimen>
+    <dimen name="key_value_input_dialog_column_padding">20dp</dimen>
+    <dimen name="key_value_input_dialog_key_text_field_width">100dp</dimen>
+    <dimen name="key_value_input_dialog_value_text_field_width">250dp</dimen>
 </resources>

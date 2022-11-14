@@ -1,7 +1,7 @@
 package com.toast.android.gamebase.sample
 
 import androidx.multidex.MultiDexApplication
-import com.toast.android.gamebase.sample.gamebasemanager.LOG_AND_CRASH_APPKEY
+import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.gamebasemanager.initializeNhnCloudLogger
 import com.toast.android.gamebase.sample.gamebasemanager.setNhnCloudLoggerListener
 
@@ -18,7 +18,7 @@ class GamebaseApplication : MultiDexApplication() {
         instance = this
 
         // 앱이 실행되자마자 발생하는 크래시 로그도 빠짐없이 전송하려면 Application.onCreate()에서 NHN Cloud Logger를 초기화해야 합니다.
-        if (!LOG_AND_CRASH_APPKEY.isNullOrEmpty()) {
+        if (getAppKey().isNotEmpty()) {
             initializeNhnCloudLogger(applicationContext)
             setNhnCloudLoggerListener()
         }

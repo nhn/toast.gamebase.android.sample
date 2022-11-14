@@ -1,7 +1,6 @@
 package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,11 +12,19 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
+import com.toast.android.gamebase.sample.gamebasemanager.showWebView
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
+import com.toast.android.gamebase.sample.ui.developer.logger.LoggerInitializeDialog
+import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
+import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
+import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewDialog
 
 @Composable
 fun DeveloperScreen(
@@ -41,9 +48,46 @@ fun DeveloperScreen(
             )
         }
     }
+    LoggerInitializeDialog(
+        activity = activity,
+        isDialogOpened = viewModel.isLoggerInitializeOpened.value,
+        title = stringResource(id = R.string.logger_initialize),
+        message = getAppKey(),
+        setDialogStatus = { newState ->
+            viewModel.isLoggerInitializeOpened.value = newState
+        },
+        isLoggerAppKeyValid = getAppKey().isNotEmpty()
+    )
+    SendLogDialog(
+        isDialogOpened = viewModel.isSendLogOpened.value,
+        title = stringResource(id = R.string.send_logger),
+        setDialogStatus = { newState ->
+            viewModel.isSendLogOpened.value = newState
+        },
+        stringArrayResources = R.array.logger_level
+    )
+    OpenCustomWebViewDialog(
+        isDialogOpened = viewModel.isOpenWebViewOpened.value,
+        title = stringResource(id = R.string.developer_menu_open_webview),
+        setDialogStatus = { newState ->
+            viewModel.isOpenWebViewOpened.value = newState
+        },
+        fieldDisabled = false,
+        onOkButtonClicked = { value ->
+            showWebView(activity, value)
+        }
+    )
+    OpenBrowserDialog(
+        activity = activity,
+        isDialogOpened = viewModel.isOpenWebBrowserOpened.value,
+        title = stringResource(id = R.string.developer_menu_open_outside_browser),
+        setDialogStatus = { newState ->
+            viewModel.isOpenWebBrowserOpened.value = newState
+        },
+        fieldDisabled = false
+    )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DeveloperMenuList(
     groupedListMap: Map<String, List<DeveloperMenu>>,

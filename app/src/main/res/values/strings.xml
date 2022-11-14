@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- TODO: [Fix me] Set your Facebook App ID -->
     <string name="facebook_app_id">252590081934203</string>
@@ -23,7 +23,10 @@
     <string name="withdraw">withdraw</string>
     <string name="success">Success</string>
     <string name="failed">Failed</string>
+    <string name="empty_list_message">리스트가 비어있습니다.</string>
     <string name="copyright_nhn">© NHN Corp. All rights reserved.</string>
+    <string name="empty_list">No items</string>
+    <string name="unknown_error">Unknown Error occurred</string>
 
     <!-- home screen -->
     <string name="home_main_text">Gamebase 기능들을 마음껏 경험해보세요</string>
@@ -138,7 +141,8 @@
     </string-array>
     <string-array name="Alert">
         <item>developer_menu_show_alert</item>
-        <item>developer_menu_show_toast</item>
+        <item>developer_menu_show_short_toast</item>
+        <item>developer_menu_show_long_toast</item>
     </string-array>
     <string-array name="Analytics">
         <item>developer_menu_user_level_info_setting</item>
@@ -173,7 +177,8 @@
     <string name="developer_menu_open_outside_browser">외부 브라우저 열기</string>
     <string name="developer_menu_webview_detail_setting">웹뷰 상세설정</string>
     <string name="developer_menu_show_alert">Alert</string>
-    <string name="developer_menu_show_toast">토스트 메시지</string>
+    <string name="developer_menu_show_short_toast">짧은 토스트 메시지</string>
+    <string name="developer_menu_show_long_toast">긴 토스트 메시지</string>
     <string name="developer_menu_user_level_info_setting">유저 레벨 정보 설정</string>
     <string name="developer_menu_user_level_up_info_setting">유저 레벨업 정보 설정</string>
     <string name="developer_menu_contact_url">고객센터 URL 조회</string>
@@ -194,4 +199,69 @@
     <string name="developer_push_noti_enable_badge">뱃지 아이콘 사용</string>
     <string name="developer_push_noti_enable_set_priority">알림 우선 순위</string>
 
+    <!-- developer menu contact -->
+    <string name="developer_contact_url_alert_title">고객센터 URL</string>
+    <string name="developer_contact_user_name">사용자 이름 입력</string>
+    <string name="developer_contact_additional_url">Additional URL</string>
+    <string name="developer_contact_additional_url_description">고객 센터 타입이 CUSTOM 인 경우에만 사용하시기 바랍니다.</string>
+    <string name="developer_contact_additional_parameter">URL 파라미터</string>
+    <string name="developer_contact_extra_data">Extra data</string>
+    <string name="developer_contact_open_contact">고객센터 열기</string>
+    <string name="developer_contact_remove_item_button_content_description">remove item</string>
+
+    <!-- alert -->
+    <string name="developer_alert_sample_title">제목</string>
+    <string name="developer_alert_sample_message">Alert 입니다.</string>
+    <string name="developer_toast_short_sample_message">짧은 토스트 입니다.</string>
+    <string name="developer_toast_long_sample_message">긴 토스트 입니다.</string>
+
+    <!-- developer terms setting -->
+    <string name="developer_terms_configuration_force_show">약관 강제 표시</string>
+    <string name="developer_terms_configuration_fixed_font_size">고정된 폰크 크기로 약관 표시</string>
+    <string name="developer_terms_show_terms_view">약관 보기</string>
+    <string name="developer_terms_no_need_to_show_terms">단말기 국가코드에 맞는 약관 정보가 콘솔에 등록되어 있지 않습니다.\n약관을 표시하지 않도록 처리하시기 바랍니다.</string>
+
+    <!-- Logger type -->
+    <string-array name="logger_level">
+        <item>DEBUG</item>
+        <item>INFO</item>
+        <item>WARN</item>
+        <item>ERROR</item>
+        <item>FATAL</item>
+    </string-array>
+
+    <!-- logger dialog -->
+    <string name="logger_initialize">Logger 초기화</string>
+    <string name="send_logger">Log 전송</string>
+    <string name="app_key">AppKey</string>
+    <string name="message">Message</string>
+    <string name="user_key">UserKey</string>
+    <string name="user_value">UserValue</string>
+
+    <!-- developer image notice setting -->
+    <string name="developer_image_notice_configuration_background_color">배경색 설정</string>
+    <string name="developer_image_notice_configuration_background_color_label_name">배경색</string>
+    <string name="developer_image_notice_configuration_time_out">최대 로딩 시간 설정</string>
+    <string name="developer_image_notice_configuration_time_out_label_name">최대 로딩 시간</string>
+    <string name="developer_image_notice_configuration_auto_close_custom_scheme">Custom scheme 발생 시 공지 닫기</string>
+    <string name="developer_image_notice_show">이미지 공지 보기</string>
+
+    <!-- developer web view setting -->
+    <string name="developer_web_view_configuration_screen_orientation">스크린 모드 설정</string>
+    <string name="developer_web_view_configuration_navigation_bar_visible">네비게이션바 표시</string>
+    <string name="developer_web_view_configuration_navigation_bar_title">네비게이션바 제목 설정</string>
+    <string name="developer_web_view_configuration_navigation_bar_title_label_name">네비게이션바 제목</string>
+    <string name="developer_web_view_configuration_navigation_bar_color">네비게이션바 색상 설정</string>
+    <string name="developer_web_view_configuration_navigation_bar_color_label_name">네비게이션바 색상</string>
+    <string name="developer_web_view_configuration_navigation_bar_height">네비게이션바 높이 설정</string>
+    <string name="developer_web_view_configuration_navigation_bar_height_label_name">네비게이션 높이</string>
+    <string name="developer_web_view_configuration_navigation_bar_back_button">뒤로가기 버튼 표시</string>
+    <string name="developer_web_view_show">웹뷰 보기</string>
+
+    <!-- web view screen orientation -->
+    <string-array name="screen_orientation">
+        <item>세로 모드</item>
+        <item>가로 모드</item>
+        <item>역가로 모드</item>
+    </string-array>
 </resources>
