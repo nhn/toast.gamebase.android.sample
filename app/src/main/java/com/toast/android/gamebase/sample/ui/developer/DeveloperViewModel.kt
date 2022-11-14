@@ -16,6 +16,11 @@ import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.*
 import com.toast.android.gamebase.sample.gamebasemanager.cancelWithdrawal
+import com.toast.android.gamebase.sample.gamebasemanager.getCountryCodeOfDevice
+import com.toast.android.gamebase.sample.gamebasemanager.getCountryCodeOfUSIM
+import com.toast.android.gamebase.sample.gamebasemanager.getDeviceLanguage
+import com.toast.android.gamebase.sample.gamebasemanager.getDisplayLanguage
+import com.toast.android.gamebase.sample.gamebasemanager.getIntegratedCountryCode
 import com.toast.android.gamebase.sample.gamebasemanager.getContactUrl
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
 import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
@@ -114,6 +119,11 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.WEBIVEW_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperCustomWebViewSetting.route)
             }
+            DeveloperMenu.DEVICE_LANGUAGE -> showMenuNameAlert(activity, developerMenuItem.id, getDeviceLanguage())
+            DeveloperMenu.DISPLAY_LANGUAGE -> showMenuNameAlert(activity, developerMenuItem.id, getDisplayLanguage())
+            DeveloperMenu.DEVICE_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfDevice())
+            DeveloperMenu.USIM_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfUSIM())
+            DeveloperMenu.COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getIntegratedCountryCode())
         }
     }
 
@@ -251,5 +261,12 @@ class DeveloperViewModel: ViewModel() {
             resources.getString(R.string.developer_toast_short_sample_message)
 
         showToast(activity, toastMessage, duration)
+    }
+
+    private fun showMenuNameAlert(activity: Activity, menuId: String, message: String) {
+        val context = activity as Context
+        val menuTitle = context.getStringResourceByName(menuId)
+
+        showAlert(activity, menuTitle, message)
     }
 }

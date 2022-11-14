@@ -25,11 +25,10 @@ data class DeveloperMenu(val category: Int, val id: String, val name: String) {
         const val USER_LEVEL_UP_INFO_SETTING = "developer_menu_user_level_up_info_setting"
         const val CONTACT_URL = "developer_menu_contact_url"
         const val CONTACT_DETAIL_SETTING = "developer_menu_contact_detail_setting"
-        const val ETC_IDFA = "developer_menu_etc_idfa"
         const val DEVICE_LANGUAGE = "developer_menu_etc_device_language"
+        const val DISPLAY_LANGUAGE = "developer_menu_etc_display_language"
         const val DEVICE_COUNTRY_CODE = "developer_menu_etc_device_country_code"
         const val USIM_COUNTRY_CODE = "developer_menu_etc_usim_country_code"
         const val COUNTRY_CODE = "developer_menu_etc_country_code"
-        const val DISPLAY_LAUGUAGE = "developer_menu_etc_display_language"
     }
 }

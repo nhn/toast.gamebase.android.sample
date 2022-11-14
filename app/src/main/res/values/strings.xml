@@ -153,12 +153,11 @@
         <item>developer_menu_contact_detail_setting</item>
     </string-array>
     <string-array name="Etc">
-        <item>developer_menu_etc_idfa</item>
         <item>developer_menu_etc_device_language</item>
+        <item>developer_menu_etc_display_language</item>
         <item>developer_menu_etc_device_country_code</item>
         <item>developer_menu_etc_usim_country_code</item>
         <item>developer_menu_etc_country_code</item>
-        <item>developer_menu_etc_display_language</item>
     </string-array>
 
     <string name="developer_menu_auth_suspend_withdrawal">탈퇴 유예 요청</string>
@@ -184,12 +183,11 @@
     <string name="developer_menu_user_level_up_info_setting">유저 레벨업 정보 설정</string>
     <string name="developer_menu_contact_url">고객센터 URL 조회</string>
     <string name="developer_menu_contact_detail_setting">고객센터 상세 설정</string>
-    <string name="developer_menu_etc_idfa">IDFA 조회</string>
-    <string name="developer_menu_etc_device_language">Device language 조회</string>
+    <string name="developer_menu_etc_device_language">Device language</string>
     <string name="developer_menu_etc_device_country_code">Device Country code</string>
-    <string name="developer_menu_etc_usim_country_code">USIM country code</string>
-    <string name="developer_menu_etc_country_code">Country code</string>
-    <string name="developer_menu_etc_display_language">Display language 조회</string>
+    <string name="developer_menu_etc_usim_country_code">USIM Country code</string>
+    <string name="developer_menu_etc_country_code">Integrated Country code</string>
+    <string name="developer_menu_etc_display_language">Display language</string>
 
     <!-- developer menu auth -->
     <string name="request_withdrawal_success">탈퇴 요청이 완료되었습니다.\n일시 : </string>
