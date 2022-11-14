@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.toast.android.gamebase.sample">
     <queries>
-        <!-- [All SDK] AppToWeb Authenthcation support start -->
+        <!-- [All SDK] AppToWeb Authentication support start -->
         <package android:name="com.android.chrome" />
         <package android:name="com.chrome.beta" />
         <package android:name="com.chrome.dev" />
         <package android:name="com.sec.android.app.sbrowser" />
-        <!-- [All SDK] AppToWeb Authenthcation support end -->
+        <!-- [All SDK] AppToWeb Authentication support end -->
 
         <!-- [Facebook] Configurations begin -->
         <package android:name="com.facebook.katana" />
@@ -58,6 +58,10 @@
                 <data android:host="oauth" android:scheme="@string/kakao_scheme" />
             </intent-filter>
         </activity>
+
+        <!-- TODO: [Fix me] Set your notification small icon -->
+        <meta-data android:name="com.toast.sdk.push.notification.default_small_icon"
+            android:resource="@drawable/gamebase_push_small_icon"/>
 
         <activity
             android:name=".ui.SplashActivity"

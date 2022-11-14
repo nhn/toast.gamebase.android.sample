@@ -133,7 +133,7 @@ class SplashActivity : GamebaseActivity() {
 
     private fun showUnregisteredVersionAndMoveToStore(updateUrl: String, message: String) {
         val moveToStore =
-            DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
+            DialogInterface.OnClickListener { _: DialogInterface?, _: Int ->
                 try {
                     val marketIntent = Intent(Intent.ACTION_VIEW)
                     marketIntent.data = Uri.parse(updateUrl)
