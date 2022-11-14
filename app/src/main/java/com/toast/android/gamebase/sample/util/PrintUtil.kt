@@ -8,8 +8,11 @@ import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.ValueObject
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.base.push.data.GamebasePushTokenInfo
+import com.toast.android.gamebase.event.data.GamebaseEventServerPushData
 import com.toast.android.gamebase.event.data.PushAction
 import com.toast.android.gamebase.event.data.PushMessage
+import com.toast.android.gamebase.sample.gamebasemanager.TAG
+import com.toast.android.gamebase.serverpush.ServerPushData
 import org.json.JSONObject
 
 fun printLoginSuccess(TAG: String, authToken: AuthToken) {
@@ -47,11 +50,18 @@ fun printBanInfo(TAG: String, banInfo: BanInfo) {
     Log.d(TAG, "--------------------------------------")
 }
 
-fun printWhat(TAG: String, category: String, receipt: PurchasableReceipt) {
+fun printPurchasableReceipt(TAG: String, category: String, receipt: PurchasableReceipt) {
     // If the user got item by 'Promotion Code',
     // this event will be occurred.
     Log.i(TAG, "[GamebaseEventHandler] category : $category")
     Log.i(TAG, "[GamebaseEventHandler] PurchasableReceipt : $receipt")
+    Log.d(TAG, "--------------------------------------")
+}
+
+fun printServerPushData(TAG: String, category: String, serverPushData: GamebaseEventServerPushData) {
+    Log.d(TAG, "[GamebaseEventHandler] processServerPush")
+    Log.i(TAG, "[GamebaseEventHandler] category : $category")
+    Log.i(TAG, "[GamebaseEventHandler] serverPushData : $serverPushData")
     Log.d(TAG, "--------------------------------------")
 }
 

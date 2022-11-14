@@ -40,7 +40,12 @@ fun SampleAppNavHost(
             )
         }
         composable(SampleAppScreens.Home.route) {
-            HomeScreen(activity)
+            HomeScreen(
+                activity = activity,
+                onLoggedOut = {
+                    onLoggedOut(navController)
+                }
+            )
         }
         composable(SampleAppScreens.Shopping.route) {
             ShoppingScreen(activity)
@@ -52,12 +57,7 @@ fun SampleAppNavHost(
             SettingsScreen(
                 activity = activity,
                 onLoggedOut = {
-                    navController.navigate(SampleAppScreens.Login.route) {
-                        popUpTo(SampleAppScreens.Home.route) {
-                            inclusive = true
-                        }
-                        launchSingleTop = true
-                    }
+                    onLoggedOut(navController)
                 },
                 navigateToIdpMapping = {
                     navController.navigate(SampleAppScreens.IdpMapping.route) {
@@ -69,5 +69,14 @@ fun SampleAppNavHost(
             IdpMappingScreen(activity = activity)
         }
         developerGraph(navController, activity)
+    }
+}
+
+private fun onLoggedOut(navController: NavHostController) {
+    navController.navigate(SampleAppScreens.Login.route) {
+        popUpTo(SampleAppScreens.Home.route) {
+            inclusive = true
+        }
+        launchSingleTop = true
     }
 }

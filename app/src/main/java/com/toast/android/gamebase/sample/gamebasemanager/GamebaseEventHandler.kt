@@ -19,13 +19,14 @@ import com.toast.android.gamebase.event.data.PushMessage
 import com.toast.android.gamebase.launching.data.LaunchingStatus
 import com.toast.android.gamebase.sample.util.printPushAction
 import com.toast.android.gamebase.sample.util.printPushClickMessage
-import com.toast.android.gamebase.sample.util.printWhat
+import com.toast.android.gamebase.sample.util.printPurchasableReceipt
+import com.toast.android.gamebase.sample.util.printServerPushData
 import org.json.JSONObject
 
 private var mGamebaseEventHandler: GamebaseEventHandler? = null
 
 // Event Handler
-fun addGamebaseEventHandler(activity: Activity) {
+fun addGamebaseEventHandler(activity: Activity, onKickOut: () -> Unit) {
     if (mGamebaseEventHandler != null) {
         Gamebase.removeEventHandler(mGamebaseEventHandler)
     }
@@ -39,19 +40,22 @@ fun addGamebaseEventHandler(activity: Activity) {
                 GamebaseEventCategory.SERVER_PUSH_APP_KICKOUT,
                 GamebaseEventCategory.SERVER_PUSH_TRANSFER_KICKOUT -> {
                     GamebaseEventServerPushData.from(message.data)?.let {
-                        processServerPush(activity, message.category, it)
+                        printServerPushData(TAG, message.category, it)
+                        processServerPush(message.category) {
+                            onKickOut()
+                        }
                     }
                 }
                 GamebaseEventCategory.OBSERVER_LAUNCHING,
                 GamebaseEventCategory.OBSERVER_HEARTBEAT,
                 GamebaseEventCategory.OBSERVER_NETWORK -> {
                     GamebaseEventObserverData.from(message.data)?.let {
-                        processObserver(activity, message.category, it)
+                        processObserver(message.category, it)
                     }
                 }
                 GamebaseEventCategory.PURCHASE_UPDATED -> {
                     PurchasableReceipt.from(message.data)?.let {
-                        printWhat(TAG, message.category, it)
+                        printPurchasableReceipt(TAG, message.category, it)
                     }
                 }
                 GamebaseEventCategory.PUSH_RECEIVED_MESSAGE -> {
@@ -74,14 +78,9 @@ fun addGamebaseEventHandler(activity: Activity) {
 }
 
 private fun processServerPush(
-    activity: Activity,
     category: String,
-    data: GamebaseEventServerPushData
+    onKickOut: () -> Unit
 ) {
-    Log.d(TAG, "[GamebaseEventHandler] processServerPush")
-    Log.i(TAG, "[GamebaseEventHandler] category : $category")
-    Log.i(TAG, "[GamebaseEventHandler] serverPushData : $data")
-    Log.d(TAG, "--------------------------------------")
     if (category == GamebaseEventCategory.SERVER_PUSH_APP_KICKOUT_MESSAGE_RECEIVED) {
         // Currently, the kickout pop-up is displayed.
         // If your game is running, stop it.
@@ -90,13 +89,13 @@ private fun processServerPush(
         // Kicked out from Gamebase server.(Maintenance, banned or etc..)
         // And the game user closes the kickout pop-up.
         // Return to title and initialize Gamebase again.
-        // returnToTitle(activity)
+        onKickOut()
     } else if (category == GamebaseEventCategory.SERVER_PUSH_TRANSFER_KICKOUT) {
         // If the user wants to move the guest account to another device,
         // if the account transfer is successful,
         // the login of the previous device is released,
         // so go back to the title and try to log in again.
-        // returnToTitle(activity)
+        onKickOut()
     }
 }
 
@@ -137,7 +136,6 @@ private fun onPushReceiveMessage(message: GamebaseEventMessage) {
 
 // Observer
 private fun processObserver(
-    activity: Activity,
     category: String,
     data: GamebaseEventObserverData
 ) {
