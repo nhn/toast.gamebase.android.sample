@@ -19,7 +19,6 @@ import com.toast.android.gamebase.sample.ui.common.ClickableText
 import com.toast.android.gamebase.sample.ui.common.DropdownMenuBoxWithTitle
 import com.toast.android.gamebase.sample.ui.common.RoundButton
 import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
-import kotlin.math.exp
 
 @Composable
 fun WebViewSettingScreen(
@@ -83,7 +82,6 @@ fun WebViewSettingScreen(
         setDialogStatus = { newState ->
             viewModel.navigationBarTitleDialogStatus.value = newState
         },
-        fieldDisabled = false,
         onOkButtonClicked = { value ->
             viewModel.navigationBarTitle.value = value
         }
@@ -97,7 +95,6 @@ fun WebViewSettingScreen(
         setDialogStatus = { newState ->
             viewModel.navigationBarColorDialogStatus.value = newState
         },
-        fieldDisabled = false,
         onOkButtonClicked = { value ->
             viewModel.navigationBarColor.value = value
         }
@@ -111,7 +108,6 @@ fun WebViewSettingScreen(
         setDialogStatus = { newState ->
             viewModel.navigationBarHeightDialogStatus.value = newState
         },
-        fieldDisabled = false,
         onOkButtonClicked = { value ->
             viewModel.navigationBarHeight.value = value.toInt()
         }
@@ -123,7 +119,6 @@ fun WebViewSettingScreen(
         setDialogStatus = { newState ->
             viewModel.openWebViewDialogStatus.value = newState
         },
-        fieldDisabled = false,
         onOkButtonClicked = { value ->
             viewModel.openWebView(activity = activity, urlString = value)
         }

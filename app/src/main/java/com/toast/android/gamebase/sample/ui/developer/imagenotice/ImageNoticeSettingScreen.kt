@@ -56,7 +56,6 @@ fun ImageNoticeSettingScreen(
             setDialogStatus = { newState ->
                 viewModel.imageNoticeBackgroundDialogStatue.value = newState
             },
-            fieldEnabled = false,
             onOkButtonClicked = { value ->
                 viewModel.imageNoticeBackgroundColor.value = value
             }
@@ -70,7 +69,6 @@ fun ImageNoticeSettingScreen(
             setDialogStatus = { newState ->
                 viewModel.imageNoticeTimeOutDialogStatus.value = newState
             },
-            fieldEnabled = false,
             onOkButtonClicked = { value ->
                 viewModel.imageNoticeTimeOut.value = value.toLong()
             }

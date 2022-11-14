@@ -73,7 +73,6 @@ fun DeveloperScreen(
         setDialogStatus = { newState ->
             viewModel.isOpenWebViewOpened.value = newState
         },
-        fieldDisabled = false,
         onOkButtonClicked = { value ->
             showWebView(activity, value)
         }
@@ -84,8 +83,7 @@ fun DeveloperScreen(
         title = stringResource(id = R.string.developer_menu_open_outside_browser),
         setDialogStatus = { newState ->
             viewModel.isOpenWebBrowserOpened.value = newState
-        },
-        fieldDisabled = false
+        }
     )
     SetGameUserDataDialog(activity = activity,
         isDialogOpened = viewModel.isUserLevelInfoSettingOpened.value,
@@ -103,7 +101,6 @@ fun DeveloperScreen(
             setDialogStatus = { newState ->
                 viewModel.isUserLevelUpInfoSettingOpened.value = newState
             },
-            fieldEnabled = false,
             onOkButtonClicked = { value ->
                 viewModel.updateOnLevelUp(activity, value)
             }

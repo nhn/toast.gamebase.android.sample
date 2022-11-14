@@ -81,7 +81,7 @@ fun InputDialog(
     labelName: String,
     fieldMessage: String,
     setDialogStatus: (Boolean) -> Unit,
-    fieldEnabled: Boolean,
+    fieldEnabled: Boolean = true,
     onOkButtonClicked: (String) -> Unit
 ) {
     var inputText by remember { mutableStateOf(fieldMessage) }
@@ -100,7 +100,7 @@ fun InputDialog(
             TextFieldWithLabel(
                 labelName = labelName,
                 fieldMessage = inputText,
-                fieldDisabled = fieldEnabled,
+                fieldEnabled = fieldEnabled,
                 onValueChanged = { value ->
                     inputText = value
                 }

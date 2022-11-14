@@ -33,7 +33,7 @@ fun LoggerInitializeDialog(
             labelName = stringResource(id = R.string.app_key),
             fieldMessage = message,
             setDialogStatus = setDialogStatus,
-            fieldEnabled = isLoggerAppKeyValid,
+            fieldEnabled = !isLoggerAppKeyValid,
             onOkButtonClicked = { value ->
                 loggerInitializeDialogStateHolder.initializeLogger(
                     activity = activity,

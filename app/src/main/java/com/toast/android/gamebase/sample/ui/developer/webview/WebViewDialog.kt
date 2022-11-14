@@ -12,7 +12,6 @@ fun OpenCustomWebViewDialog(
     isDialogOpened: Boolean,
     title: String,
     setDialogStatus: (Boolean) -> Unit,
-    fieldDisabled: Boolean,
     onOkButtonClicked: (String) -> Unit
 ) {
     if (isDialogOpened) {
@@ -21,7 +20,6 @@ fun OpenCustomWebViewDialog(
             labelName = stringResource(id = R.string.url),
             fieldMessage = "",
             setDialogStatus = setDialogStatus,
-            fieldEnabled = fieldDisabled,
             onOkButtonClicked = onOkButtonClicked
         )
     }
@@ -32,8 +30,7 @@ fun OpenBrowserDialog(
     activity: Activity,
     isDialogOpened: Boolean,
     title: String,
-    setDialogStatus: (Boolean) -> Unit,
-    fieldDisabled: Boolean
+    setDialogStatus: (Boolean) -> Unit
 ) {
     if (isDialogOpened) {
         InputDialog(
@@ -41,7 +38,6 @@ fun OpenBrowserDialog(
             labelName = stringResource(id = R.string.url),
             fieldMessage = "",
             setDialogStatus = setDialogStatus,
-            fieldEnabled = fieldDisabled,
             onOkButtonClicked = { value ->
                 openExternalBrowser(activity, value)
             }
@@ -57,7 +53,6 @@ fun WebViewSettingDialog(
     labelName: String,
     message: String,
     setDialogStatus: (Boolean) -> Unit,
-    fieldDisabled: Boolean,
     onOkButtonClicked: (String) -> Unit
 ) {
     if (isDialogOpened) {
@@ -66,7 +61,6 @@ fun WebViewSettingDialog(
             labelName = labelName,
             fieldMessage = message,
             setDialogStatus = setDialogStatus,
-            fieldEnabled = fieldDisabled,
             onOkButtonClicked = onOkButtonClicked
         )
     }
