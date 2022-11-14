@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.DialogInterface
 import android.util.Log
 import com.toast.android.gamebase.Gamebase
+import com.toast.android.gamebase.analytics.data.GameUserData
+import com.toast.android.gamebase.analytics.data.LevelUpData
 import com.toast.android.gamebase.auth.data.AuthToken
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
@@ -128,6 +130,23 @@ private fun onPushReceiveMessage(message: GamebaseEventMessage) {
         } catch (ignored: Exception) {
         }
     }
+}
+
+// Analytics
+fun setGameUserData(userLevel: Int, channelId: String?, characterId: String?, classId: String?) {
+    val gameUserData: GameUserData = GameUserData(userLevel).apply {
+        this.channelId = channelId
+        this.characterId = characterId
+        this.classId = classId
+    }
+
+    Gamebase.Analytics.setGameUserData(gameUserData)
+}
+
+fun onLevelUp(userLevel: Int, levelUpTime: Long) {
+    val levelUpData: LevelUpData = LevelUpData(userLevel, levelUpTime)
+
+    Gamebase.Analytics.traceLevelUp(levelUpData)
 }
 
 // Contact

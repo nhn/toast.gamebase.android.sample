@@ -19,8 +19,10 @@ import androidx.navigation.NavController
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.gamebasemanager.showWebView
+import com.toast.android.gamebase.sample.ui.common.InputDialog
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
+import com.toast.android.gamebase.sample.ui.developer.analytics.SetGameUserDataDialog
 import com.toast.android.gamebase.sample.ui.developer.logger.LoggerInitializeDialog
 import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
 import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
@@ -86,6 +88,28 @@ fun DeveloperScreen(
         },
         fieldDisabled = false
     )
+    SetGameUserDataDialog(activity = activity,
+        isDialogOpened = viewModel.isUserLevelInfoSettingOpened.value,
+        title = stringResource(
+            id = R.string.developer_analytics_level_setting_title
+        ),
+        setDialogStatus = { newState ->
+            viewModel.isUserLevelInfoSettingOpened.value = newState
+        })
+    if (viewModel.isUserLevelUpInfoSettingOpened.value) {
+        InputDialog(
+            title = stringResource(id = R.string.developer_analytics_level_up_setting_title),
+            labelName = stringResource(id = R.string.developer_analytics_level_label_name),
+            fieldMessage = "",
+            setDialogStatus = { newState ->
+                viewModel.isUserLevelUpInfoSettingOpened.value = newState
+            },
+            fieldEnabled = false,
+            onOkButtonClicked = { value ->
+                viewModel.updateOnLevelUp(activity, value)
+            }
+        )
+    }
 }
 
 @Composable

@@ -11,7 +11,6 @@ import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
-import com.toast.android.gamebase.contact.ContactConfiguration
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.*
@@ -42,6 +41,8 @@ class DeveloperViewModel: ViewModel() {
     val isSendLogOpened = mutableStateOf(false)
     val isOpenWebViewOpened = mutableStateOf(false)
     val isOpenWebBrowserOpened = mutableStateOf(false)
+    val isUserLevelInfoSettingOpened = mutableStateOf(false)
+    val isUserLevelUpInfoSettingOpened = mutableStateOf(false)
 
     private val failedTitle: String =
         GamebaseApplication.instance.applicationContext.getString(R.string.failed)
@@ -119,6 +120,8 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.WEBIVEW_DETAIL_SETTING -> {
                 navController.navigate(SampleAppScreens.DeveloperCustomWebViewSetting.route)
             }
+            DeveloperMenu.USER_LEVEL_INFO_SETTING -> isUserLevelInfoSettingOpened.value = true
+            DeveloperMenu.USER_LEVEL_UP_INFO_SETTING -> isUserLevelUpInfoSettingOpened.value = true
             DeveloperMenu.DEVICE_LANGUAGE -> showMenuNameAlert(activity, developerMenuItem.id, getDeviceLanguage())
             DeveloperMenu.DISPLAY_LANGUAGE -> showMenuNameAlert(activity, developerMenuItem.id, getDisplayLanguage())
             DeveloperMenu.DEVICE_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfDevice())
@@ -268,5 +271,13 @@ class DeveloperViewModel: ViewModel() {
         val menuTitle = context.getStringResourceByName(menuId)
 
         showAlert(activity, menuTitle, message)
+    }
+
+    fun updateOnLevelUp(activity: Activity, value: String) {
+        try {
+            onLevelUp(value.toInt(), System.currentTimeMillis())
+        } catch (exception: NumberFormatException) {
+            showAlert(activity, TAG, "level needs Int type : $exception")
+        }
     }
 }

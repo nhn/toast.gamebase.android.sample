@@ -264,4 +264,13 @@
         <item>가로 모드</item>
         <item>역가로 모드</item>
     </string-array>
+
+    <!-- analytics -->
+    <string name="developer_analytics_level_setting_title">유저 레벨 정보</string>
+    <string name="developer_analytics_level_up_setting_title">유저 레벨업 정보</string>
+    <string name="developer_analytics_level_label_name">Level(Int)</string>
+    <string name="developer_analytics_channel_id_label_name">Channel ID</string>
+    <string name="developer_analytics_character_id_label_name">Character ID</string>
+    <string name="developer_analytics_class_id_label_name">Class ID</string>
+
 </resources>
