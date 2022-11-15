@@ -1,5 +1,6 @@
 package com.toast.android.gamebase.sample.ui.login
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -29,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.gamebasemanager.openContact
 import com.toast.android.gamebase.sample.getIconResourceById
 import com.toast.android.gamebase.sample.supportedIdpList
 import com.toast.android.gamebase.sample.ui.components.CopyrightFooter
@@ -74,10 +77,21 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.height(4.dp))
                 }
                 item {
+                    ContactTextButton(activity)
                     CopyrightFooter()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ContactTextButton(activity: Activity) {
+    TextButton(onClick = { openContact(activity, null) {} }) {
+        Text(
+            text = stringResource(id = R.string.developer_contact_open_contact),
+            style = MaterialTheme.typography.caption
+        )
     }
 }
 
