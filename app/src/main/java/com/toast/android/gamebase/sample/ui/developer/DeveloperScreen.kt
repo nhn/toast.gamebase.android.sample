@@ -18,14 +18,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.gamebasemanager.showWebView
-import com.toast.android.gamebase.sample.ui.common.InputDialog
-import com.toast.android.gamebase.sample.ui.common.ListDialog
-import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
-import com.toast.android.gamebase.sample.ui.developer.analytics.SetGameUserDataDialog
-import com.toast.android.gamebase.sample.ui.developer.logger.LoggerInitializeDialog
-import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
-import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
-import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewDialog
+import com.toast.android.gamebase.sample.ui.components.InputDialog
+import com.toast.android.gamebase.sample.ui.components.ListDialog
+import com.toast.android.gamebase.sample.ui.components.SubMenuDivider
+import com.toast.android.gamebase.sample.ui.analytics.SetGameUserDataDialog
+import com.toast.android.gamebase.sample.ui.logger.LoggerInitializeDialog
+import com.toast.android.gamebase.sample.ui.logger.SendLogDialog
+import com.toast.android.gamebase.sample.ui.webview.OpenBrowserDialog
+import com.toast.android.gamebase.sample.ui.webview.OpenCustomWebViewDialog
 
 @Composable
 fun DeveloperScreen(

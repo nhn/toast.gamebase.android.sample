@@ -21,15 +21,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.common.ConfirmAlertDialog
-import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
-import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
+import com.toast.android.gamebase.sample.ui.components.ConfirmAlertDialog
+import com.toast.android.gamebase.sample.ui.components.SubMenuDivider
+import com.toast.android.gamebase.sample.ui.components.SwitchWithLabel
 import com.toast.android.gamebase.sample.ui.login.LoginState
-import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 
 @Composable
 fun SettingsScreen(

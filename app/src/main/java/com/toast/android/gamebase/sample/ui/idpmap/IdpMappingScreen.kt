@@ -35,8 +35,8 @@ import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.getIconResourceById
 import com.toast.android.gamebase.sample.supportedIdpList
-import com.toast.android.gamebase.sample.ui.common.ConfirmAlertDialog
-import com.toast.android.gamebase.sample.ui.common.ToggleButton
+import com.toast.android.gamebase.sample.ui.components.ConfirmAlertDialog
+import com.toast.android.gamebase.sample.ui.components.ToggleButton
 import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
