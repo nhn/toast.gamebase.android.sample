@@ -160,12 +160,6 @@ fun SettingsScreen(
             showCancel = true,
             onOkButtonClicked = { settingsViewModel.withdraw(activity) }
         )
-        Text(text = stringResource(id = R.string.idp_mapping_button_do_mapping),
-            modifier = Modifier
-                .padding(6.dp)
-                .clickable {
-                    navigateToIdpMapping()
-                })
     }
 }
 
