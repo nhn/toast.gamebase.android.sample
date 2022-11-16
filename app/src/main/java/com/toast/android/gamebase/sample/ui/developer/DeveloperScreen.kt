@@ -27,6 +27,8 @@ import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
 import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
 import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewDialog
 
+const val WEBVIEW_MENU_DEFAULT_URL = "https://gameplatform.nhncloud.com/ko_KR/service/gamebase"
+
 @Composable
 fun DeveloperScreen(
     activity: Activity,
@@ -70,6 +72,7 @@ fun DeveloperScreen(
     OpenCustomWebViewDialog(
         isDialogOpened = viewModel.isOpenWebViewOpened.value,
         title = stringResource(id = R.string.developer_menu_open_webview),
+        fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
         setDialogStatus = { newState ->
             viewModel.isOpenWebViewOpened.value = newState
         },
@@ -81,6 +84,7 @@ fun DeveloperScreen(
         activity = activity,
         isDialogOpened = viewModel.isOpenWebBrowserOpened.value,
         title = stringResource(id = R.string.developer_menu_open_outside_browser),
+        fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
         setDialogStatus = { newState ->
             viewModel.isOpenWebBrowserOpened.value = newState
         }
