@@ -29,6 +29,7 @@ class LoginViewModel() : ViewModel() {
     var uiState by mutableStateOf(value = LoginState.LOGGED_OUT)
         private set
 
+    // 이전에 인증했던 기록이 있다면 ID와 비밀번호를 입력받지 않고 인증을 시도합니다.
     fun tryLastIdpLogin(activity: GamebaseActivity) {
         if (Gamebase.getLastLoggedInProvider() != null && !isLoggedIn()) {
             lastProviderLogin(activity) {
