@@ -20,7 +20,7 @@ import com.toast.android.gamebase.sample.ui.common.SwitchWithLabel
 
 @Composable
 fun ImageNoticeSettingScreen(
-    activicty: Activity = LocalContext.current as Activity,
+    activity: Activity = LocalContext.current as Activity,
     viewModel: ImageNoticeSettingViewModel = viewModel()
 ) {
     val scrollState = rememberScrollState()
@@ -45,7 +45,7 @@ fun ImageNoticeSettingScreen(
                 viewModel.autoCloseCustomSchemeSwitchStatue.value = newState
             })
         RoundButton(buttonText = stringResource(id = R.string.developer_image_notice_show)) {
-            viewModel.showUserSettingImageNotice(activicty)
+            viewModel.showUserSettingImageNotice(activity)
         }
     }
     if (viewModel.imageNoticeBackgroundDialogStatue.value) {
