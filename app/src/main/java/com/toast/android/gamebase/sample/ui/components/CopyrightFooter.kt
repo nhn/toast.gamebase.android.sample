@@ -13,8 +13,6 @@ import com.toast.android.gamebase.sample.R
 
 @Composable
 fun CopyrightFooter() {
-    Spacer(modifier = Modifier.height(
-        dimensionResource(id = R.dimen.common_copyright_footer_margin_top)))
     Text(
         fontSize = dimensionResource(
             id = R.dimen.common_copyright_footer_font_size).value.sp,
