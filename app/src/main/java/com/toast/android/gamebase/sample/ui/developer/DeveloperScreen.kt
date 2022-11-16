@@ -18,6 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.gamebasemanager.showWebView
+import com.toast.android.gamebase.sample.ui.common.ClickableText
 import com.toast.android.gamebase.sample.ui.common.InputDialog
 import com.toast.android.gamebase.sample.ui.common.ListDialog
 import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
@@ -137,17 +138,15 @@ fun MenuItem(developerMenuItem: DeveloperMenu,
              viewModel: DeveloperViewModel,
              menuNavigator: DeveloperMenuNavigator
 ) {
+
     Surface (
         color = MaterialTheme.colors.surface,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                viewModel.onMenuClick(activity, developerMenuItem, menuNavigator)
-            }
-            .padding(vertical = 12.dp, horizontal = 10.dp)
     ) {
-        Text(
+        ClickableText(
             text = developerMenuItem.name,
-            style = MaterialTheme.typography.body1)
+            style = MaterialTheme.typography.body1
+        ) {
+            viewModel.onMenuClick(activity, developerMenuItem, menuNavigator)
+        }
     }
 }
