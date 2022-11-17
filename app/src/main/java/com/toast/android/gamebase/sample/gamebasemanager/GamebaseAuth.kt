@@ -13,11 +13,13 @@ import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
-import com.toast.android.gamebase.sample.util.printWithIndent
+import com.toast.android.gamebase.sample.data.UserData
+import com.toast.android.gamebase.sample.data.dummyUserData
 import com.toast.android.gamebase.sample.util.printBanInfo
 import com.toast.android.gamebase.sample.util.printLoginError
 import com.toast.android.gamebase.sample.util.printLoginSuccess
 import com.toast.android.gamebase.sample.util.printLoginWithIdpSuccess
+import com.toast.android.gamebase.sample.util.printWithIndent
 
 fun lastProviderLogin(activity: Activity, onLoginFinished: () -> Unit) {
     val lastLoggedInProvider = Gamebase.getLastLoggedInProvider()
@@ -29,7 +31,7 @@ fun lastProviderLogin(activity: Activity, onLoginFinished: () -> Unit) {
         if (Gamebase.isSuccess(exception)) {
             Log.d(TAG, "Login with Last Logged In Provider Success")
             Log.i(TAG, "LastLoggedInProvider : " + Gamebase.getLastLoggedInProvider())
-            handleLoginSuccess(activity, result, onLoginFinished)
+            handleLoginSuccess(result, onLoginFinished)
         } else {
             handleLastProviderLoginFailed(activity, exception, onLoginFinished)
         }
@@ -93,7 +95,7 @@ fun loginWithIdP(
     Gamebase.login(activity, provider, additionalInfo) { result, exception ->
         if (Gamebase.isSuccess(exception)) {
             printLoginWithIdpSuccess(TAG, provider)
-            handleLoginSuccess(activity, result, onLoginSuccess)
+            handleLoginSuccess(result, onLoginSuccess)
         } else {
             handleIdpLoginFailed(
                 activity,
@@ -129,15 +131,24 @@ private fun handleIdpLoginFailed(
 }
 
 private fun handleLoginSuccess(
-    activity: Activity,
     authToken: AuthToken,
     onLoginSuccess: () -> Unit
 ) {
     printLoginSuccess(TAG, authToken)
 
-    //TODO: Initialize Gamebase Analytics
+    // Gamebase Analytics에서 지원하는 모든 API는 로그인 후에 호출이 가능합니다.
+    initializeGamebaseAnalytics(dummyUserData)
 
     onLoginSuccess.invoke()
+}
+
+private fun initializeGamebaseAnalytics(userData: UserData) {
+    setGameUserData(
+        userData.level,
+        userData.channelId,
+        userData.characterId,
+        userData.classId
+    )
 }
 
 fun logout(

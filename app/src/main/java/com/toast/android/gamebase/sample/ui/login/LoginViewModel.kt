@@ -10,10 +10,12 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
 import com.toast.android.gamebase.sample.GamebaseActivity
+import com.toast.android.gamebase.sample.data.dummyUserData
 import com.toast.android.gamebase.sample.gamebasemanager.isLoggedIn
 import com.toast.android.gamebase.sample.gamebasemanager.lastProviderLogin
 import com.toast.android.gamebase.sample.gamebasemanager.loginWithIdP
 import com.toast.android.gamebase.sample.gamebasemanager.registerPush
+import com.toast.android.gamebase.sample.gamebasemanager.setGameUserData
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.loadPushConfiguration
 import kotlinx.coroutines.launch
