@@ -14,13 +14,13 @@ private enum class GamePlayStatus {
 }
 
 // Initialization settings
-// See https://docs.toast.com/en/Game/Gamebase/en/aos-initialization/#initialize
+// https://docs.toast.com/en/Game/Gamebase/en/aos-initialization/#initialize
 // NHN Cloud Project ID
-// See https://docs.toast.com/en/TOAST/en/console-guide/#create-projects
+// https://docs.toast.com/en/TOAST/en/console-guide/#create-projects
 // TODO: [Fix me] Project ID issued from NHN Cloud Project.
 private const val PROJECT_ID = "6ypq5kwa"
 
-// See https://docs.toast.com/en/Game/Gamebase/en/oper-app/#client-list
+// https://docs.toast.com/en/Game/Gamebase/en/oper-app/#client-list
 // TODO: [Fix me] See app client version from Gamebase Console.
 private const val APP_CLIENT_VERSION = "1.0.0"
 
@@ -28,12 +28,12 @@ private const val APP_CLIENT_VERSION = "1.0.0"
 private const val STORE_CODE = PurchaseProvider.StoreCode.GOOGLE
 
 // Debug mode
-// See https://docs.toast.com/en/Game/Gamebase/en/aos-initialization/#debug-mode
+// https://docs.toast.com/en/Game/Gamebase/en/aos-initialization/#debug-mode
 // TODO: [Fix me] Change to 'false' when release mode.
 private const val DEBUG_MODE = true
 
 // Popup settings
-// See https://docs.toast.com/en/Game/Gamebase/en/aos-initialization/#configuration-settings
+// https://docs.toast.com/en/Game/Gamebase/en/aos-initialization/#configuration-settings
 // TODO: [Fix me] CThis value determines whether to use pop-ups provided by Gamebase SDK.
 private const val ENABLE_POPUP = true
 private const val ENABLE_LAUNCHING_STATUS_POPUP = true

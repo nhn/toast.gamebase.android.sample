@@ -19,6 +19,9 @@ import com.toast.android.gamebase.sample.util.printLoginError
 import com.toast.android.gamebase.sample.util.printLoginSuccess
 import com.toast.android.gamebase.sample.util.printLoginWithIdpSuccess
 
+// Gamebase Auth
+// https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/
+
 fun lastProviderLogin(activity: Activity, onLoginFinished: () -> Unit) {
     val lastLoggedInProvider = Gamebase.getLastLoggedInProvider()
     Log.d(TAG, "Last Logged in Provider : $lastLoggedInProvider")
@@ -83,6 +86,7 @@ fun isLoggedIn(): Boolean {
     return !(userId == null || userId.equals("", ignoreCase = true))
 }
 
+// https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/#login-with-idp
 fun loginWithIdP(
     activity: Activity,
     provider: String,
@@ -158,6 +162,7 @@ fun withdraw(
     }
 }
 
+// https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/#mapping
 fun addIdpMapping(
     activity: Activity,
     mappingProvider: String,
@@ -252,6 +257,7 @@ fun forceIdpMapping(
     }
 }
 
+// https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/#temporarywithdrawal
 fun requestWithdrawal(
     activity: Activity,
     callback: GamebaseDataCallback<TemporaryWithdrawalInfo>?
@@ -273,7 +279,7 @@ fun cancelWithdrawal(activity: Activity, callback: GamebaseCallback?) {
 }
 
 // Get Profile Data
-
+// https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/#gamebase-users-information
 fun getUserID(): String {
     return Gamebase.getUserID()
 }

@@ -1,6 +1,7 @@
 package com.toast.android.gamebase.sample.gamebasemanager
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.graphics.Color
 import android.util.Log
 import com.toast.android.gamebase.Gamebase
@@ -15,6 +16,9 @@ import com.toast.android.gamebase.terms.GamebaseTermsConfiguration
 import com.toast.android.gamebase.terms.data.GamebaseQueryTermsResult
 import com.toast.android.gamebase.terms.data.GamebaseTermsContent
 import com.toast.android.gamebase.terms.data.GamebaseUpdateTermsConfiguration
+
+// UI
+// https://docs.toast.com/en/Game/Gamebase/en/aos-ui/
 
 fun showImageNotices(activity: Activity, onCloseCallback: GamebaseCallback? = null) {
     val configuration = ImageNoticeConfiguration.newBuilder()
@@ -61,29 +65,7 @@ fun closeImageNotices(activity: Activity?) {
     Gamebase.ImageNotice.closeImageNotices(activity!!)
 }
 
-fun imageNoticesExample(activity: Activity, onCloseCallback: GamebaseCallback) {
-    val configuration = ImageNoticeConfiguration.newBuilder()
-        .setBackgroundColor("#80000000")
-        .setTimeout(5000L)
-        .enableAutoCloseByCustomScheme(false)
-        .build()
-    Gamebase.ImageNotice.showImageNotices(
-        activity, configuration,
-        { exception -> onCloseCallback.onCallback(exception) }
-    ) { payload, exception ->
-        if (Gamebase.isSuccess(exception)) {
-            Log.i(TAG, "Clicked Image Notice Payload: $payload")
-            if (payload.equals("GO_TO_IN_GAME_STORE", ignoreCase = true)) {
-                // Custom: go to game store
-                closeImageNotices(activity)
-            } else if (payload.equals("GO_TO_PUSH_SETTINGS", ignoreCase = true)) {
-                // custom: go to push setting menu
-                closeImageNotices(activity)
-            }
-        }
-    }
-}
-
+// Terms
 fun showTermsView(
     activity: Activity,
     configuration: GamebaseTermsConfiguration? = null,
@@ -135,6 +117,7 @@ fun updateTerms(
     }
 }
 
+// WebView
 fun showWebView(activity: Activity, urlString: String) {
     Gamebase.WebView.showWebView(activity, urlString)
 }
@@ -161,24 +144,6 @@ fun closeWebView(activity: Activity) {
 // Open with External Web Browser.
 fun openExternalBrowser(activity: Activity, urlString: String) {
     Gamebase.WebView.openWebBrowser(activity, urlString)
-}
-
-private fun webViewExample(
-    activity: Activity,
-    urlString: String,
-    title: String
-) {
-    val configuration = GamebaseWebViewConfiguration.Builder()
-        .setStyle(GamebaseWebViewStyle.BROWSER) // BROWSER, POPUP
-        .setTitleText(title)
-        .setScreenOrientation(ScreenOrientation.PORTRAIT) // PORTRAIT, LANDSCAPE, LANDSCAPE_SENSOR
-        .setNavigationBarColor(Color.RED)
-        .setNavigationBarHeight(40)
-        .setBackButtonVisible(true) // Set Back Button Visible
-        //                .setBackButtonImageResource(R.id.back_button)       // Set Back Button Image ID of resource
-        //                .setCloseButtonImageResource(R.id.close_button)     // Set Close Button Image ID of resource
-        .build()
-    showWebView(activity, urlString, configuration, null, null, null)
 }
 
 private fun webViewExampleWithSchemeEvent(
@@ -212,4 +177,16 @@ private fun webViewExampleWithSchemeEvent(
                     exception.toString())
             }
         })
+}
+
+fun showAlert(activity: Activity, title: String, message: String) {
+    Gamebase.Util.showAlert(activity, title, message)
+}
+
+fun showAlert(activity: Activity, title: String, message: String, callback: DialogInterface.OnClickListener) {
+    Gamebase.Util.showAlert(activity, title, message, callback)
+}
+
+fun showToast(activity: Activity, message: String, duration: Int) {
+    Gamebase.Util.showToast(activity, message, duration)
 }
