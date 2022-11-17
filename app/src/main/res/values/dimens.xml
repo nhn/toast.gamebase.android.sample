@@ -28,4 +28,9 @@
     <dimen name="key_value_input_dialog_column_padding">20dp</dimen>
     <dimen name="key_value_input_dialog_key_text_field_width">100dp</dimen>
     <dimen name="key_value_input_dialog_value_text_field_width">250dp</dimen>
+
+    <dimen name="drop_down_menu_box_dialog_round_corner_radius">12dp</dimen>
+    <dimen name="drop_down_menu_box_dialog_column_padding">20dp</dimen>
+    <dimen name="drop_down_menu_box_dialog_title_padding_bottom">20dp</dimen>
+
 </resources>
