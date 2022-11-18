@@ -30,12 +30,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.openContact
 import com.toast.android.gamebase.sample.getIconResourceById
 import com.toast.android.gamebase.sample.supportedIdpList
 import com.toast.android.gamebase.sample.ui.components.CopyrightFooter
+import com.toast.android.gamebase.sample.ui.components.DropDownMenuBoxDialog
 import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 
 @Composable
@@ -44,7 +46,6 @@ fun LoginScreen(
     loginViewModel: LoginViewModel = viewModel(),
     onLoggedIn: () -> Unit,
 ) {
-
     LaunchedEffect(true) {
         loginViewModel.tryLastIdpLogin(activity)
     }
@@ -82,6 +83,18 @@ fun LoginScreen(
                     CopyrightFooter()
                 }
             }
+
+            DropDownMenuBoxDialog(
+                title = stringResource(id = R.string.login_select_line_region),
+                isDialogOpened = loginViewModel.uiState == LoginState.SHOW_LINE_REGION_DIALOG,
+                setDialogStatus = { isDialogOpened ->
+                    loginViewModel.setRegionDialogState(isDialogOpened)
+                },
+                options = loginViewModel.lineRegionList,
+                onOkButtonClicked = { selected ->
+                    loginViewModel.onRegionDialogOkButtonClicked(activity, selected)
+                }
+            )
         }
     }
 }
@@ -114,7 +127,11 @@ fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewMode
             backgroundColor = Color.White
         ),
         onClick = {
-            loginViewModel.login(activity, idp)
+            if (idp == AuthProvider.LINE) {
+                loginViewModel.showRegionSelectDialog()
+            } else {
+                loginViewModel.login(activity, idp)
+            }
         }) {
         Row(
             modifier = Modifier.fillMaxWidth(),

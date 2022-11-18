@@ -72,6 +72,7 @@
     <!-- login screen -->
     <string name="login_title">Gamebase 로그인</string>
     <string name="login_description">원하시는 로그인 타입을 선택해 주세요.</string>
+    <string name="login_select_line_region">Line 로그인을 위한 region 을 선택하세요 (실제 코드에서는 코드상으로 실제 region을 입력해야합니다)</string>
 
     <!-- profile screen -->
     <string name="profile_picture_content_description">profile picture</string>
@@ -208,6 +209,7 @@
     <string name="developer_contact_extra_data">Extra data</string>
     <string name="developer_contact_open_contact">고객센터 열기</string>
     <string name="developer_contact_remove_item_button_content_description">remove item</string>
+    <string name="developer_contact_url_invalid"> Gamebase Console Service Center URL is invalid. Please check the url field in the TOAST Gamebase Console.</string>
 
     <!-- alert -->
     <string name="developer_alert_sample_title">제목</string>
