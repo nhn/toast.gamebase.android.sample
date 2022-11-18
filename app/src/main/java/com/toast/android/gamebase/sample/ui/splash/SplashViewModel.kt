@@ -1,110 +1,92 @@
 package com.toast.android.gamebase.sample.ui.splash
 
-import android.R
-import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.util.Log
-import androidx.activity.compose.setContent
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
 import com.toast.android.gamebase.Gamebase
-import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.gamebasemanager.initializeGamebase
-import com.toast.android.gamebase.sample.gamebasemanager.isLoggedIn
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
 import com.toast.android.gamebase.sample.gamebasemanager.logout
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.gamebasemanager.showTermsView
-import com.toast.android.gamebase.sample.ui.LaunchingScreen
-import com.toast.android.gamebase.sample.ui.MainActivity
+import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.util.savePushConfiguration
 import com.toast.android.gamebase.terms.data.GamebaseShowTermsViewResult
 
-private const val TAG = "SplashActivity"
+private const val TAG = "SplashScreen"
 private const val INITIALIZE_RETRY_MAX_COUNT = 2
 private const val MARKET_INTENT_REQUEST_CODE = 123
 
-@SuppressLint("CustomSplashScreen")
-class SplashActivity : GamebaseActivity() {
-    private val mActivity = this
+class SplashViewModel : ViewModel() {
+    val isInitialized = mutableStateOf(false)
     private var reInitializeCount = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            LaunchingScreen()
+    fun initialize(activity: GamebaseActivity) {
+        if (Gamebase.isInitialized()) {
+            isInitialized.value = true
+            return
         }
-        if (Gamebase.isInitialized() && isLoggedIn()) {
-            // Application relaunched by clicking of notification.
-            loadMainActivity()
-        } else {
-            init()
-        }
-    }
 
-    private fun loadMainActivity() {
-        val intent = Intent(mActivity, MainActivity::class.java)
-        intent.putExtra(MainActivity.INTENT_APPLICATION_RELAUNCHED, true)
-        mActivity.let {
-            startActivity(intent)
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-            finish()
-        }
-    }
-
-    private fun init() {
         initializeGamebase(
-            activity = mActivity,
+            activity = activity,
             onLaunchingSuccess = {
-                showTermsViewPopup {
-                    moveToMainActivity()
+                showTermsViewPopup(activity) {
+                    isInitialized.value = true
                 }
             },
             showErrorAndRetryInitialize = { title, message ->
-                showErrorAndRetryInitialize(title, message)
+                showErrorAndRetryInitialize(activity, title, message)
             },
             showUnregisteredVersionAndMoveToStore = { updateUrl, message ->
-                showUnregisteredVersionAndMoveToStore(updateUrl, message)
+                showUnregisteredVersionAndMoveToStore(activity, updateUrl, message)
             }
         )
     }
 
-    private fun showErrorAndRetryInitialize(title: String?, message: String?) {
+    private fun showErrorAndRetryInitialize(
+        activity: GamebaseActivity,
+        title: String?,
+        message: String?
+    ) {
         if (title.isNullOrEmpty() || message.isNullOrEmpty()) {
-            logoutOrRetryInitialize()
+            logoutOrRetryInitialize(activity)
         } else {
             val returnToTitle =
                 DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
-                    logoutOrRetryInitialize()
+                    logoutOrRetryInitialize(activity)
                 }
-            Gamebase.Util.showAlert(mActivity, title, message, returnToTitle)
+            showAlert(activity, title, message, returnToTitle)
         }
     }
 
-    private fun logoutOrRetryInitialize() {
+
+    private fun logoutOrRetryInitialize(activity: GamebaseActivity) {
         val userId = Gamebase.getUserID()
         if (!userId.isNullOrEmpty()) {
-            logout(mActivity) { isSuccess, errorMessage ->
+            logout(activity) { isSuccess, errorMessage ->
                 if (!isSuccess) {
                     val msg = errorMessage ?: ""
-                    showAlert(mActivity, "Logout Failed", msg)
+                    showAlert(activity, "Logout Failed", msg)
                 }
             }
         } else {
-            retryInitialize()
+            retryInitialize(activity)
         }
     }
 
-    private fun showTermsViewPopup(onPopupClosed: (() -> Unit)?) {
+    private fun showTermsViewPopup(activity: GamebaseActivity, onPopupClosed: (() -> Unit)?) {
         showTermsView(
-            this
+            activity
         ) { container, exception ->
             if (isSuccess(exception)) {
-                val termsViewResult: GamebaseShowTermsViewResult? = GamebaseShowTermsViewResult.from(container)
+                val termsViewResult: GamebaseShowTermsViewResult? =
+                    GamebaseShowTermsViewResult.from(container)
                 if (termsViewResult != null) {
-                    Log.d("SplashActivity", "GamebaseShowTermsViewResult : $termsViewResult")
+                    Log.d(TAG, "GamebaseShowTermsViewResult : $termsViewResult")
                     if (termsViewResult.isTermsUIOpened) {
                         savePushConfiguration(termsViewResult.pushConfiguration)
                     }
@@ -118,40 +100,35 @@ class SplashActivity : GamebaseActivity() {
                         Thread.sleep(500)
                     } catch (ignored: Exception) {
                     }
-                    showTermsViewPopup(onPopupClosed)
+                    showTermsViewPopup(activity, onPopupClosed)
                 }.start()
             }
         }
     }
 
-    private fun moveToMainActivity() {
-        val intent = Intent(mActivity, MainActivity::class.java)
-        mActivity.let {
-            startActivity(intent)
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-            finish()
-        }
-    }
-
-    private fun showUnregisteredVersionAndMoveToStore(updateUrl: String, message: String) {
+    private fun showUnregisteredVersionAndMoveToStore(
+        activity: GamebaseActivity,
+        updateUrl: String,
+        message: String
+    ) {
         val moveToStore =
             DialogInterface.OnClickListener { _: DialogInterface?, _: Int ->
                 try {
                     val marketIntent = Intent(Intent.ACTION_VIEW)
                     marketIntent.data = Uri.parse(updateUrl)
-                    mActivity.startActivityForResult(marketIntent, MARKET_INTENT_REQUEST_CODE)
+                    activity.startActivityForResult(marketIntent, MARKET_INTENT_REQUEST_CODE)
                 } catch (ignored: ActivityNotFoundException) {
                 }
             }
-        Gamebase.Util.showAlert(
-            mActivity,
+        showAlert(
+            activity,
             "Unregistered Game Version",
             message,
             moveToStore
         )
     }
 
-    private fun retryInitialize() {
+    private fun retryInitialize(activity: GamebaseActivity) {
         if (reInitializeCount < INITIALIZE_RETRY_MAX_COUNT) {
             try {
                 Thread.sleep(1000)
@@ -159,7 +136,7 @@ class SplashActivity : GamebaseActivity() {
                 e.printStackTrace()
             }
             ++reInitializeCount
-            init()
+            initialize(activity)
         }
     }
 }

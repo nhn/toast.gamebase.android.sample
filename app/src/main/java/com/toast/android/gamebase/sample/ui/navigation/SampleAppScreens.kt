@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import com.toast.android.gamebase.sample.R
 
 sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int) {
+    object Splash : SampleAppScreens("splash", R.string.splash)
     object Login: SampleAppScreens("login", R.string.login)
     object Home: SampleAppScreens("home", R.string.home)
     object Shopping: SampleAppScreens("shopping", R.string.shopping)
@@ -23,6 +24,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     companion object {
         fun fromRoute(route: String?): SampleAppScreens =
             when (route?.substringBefore("/")) {
+                Splash.route -> Splash
                 Login.route -> Login
                 Home.route -> Home
                 Shopping.route -> Shopping
