@@ -18,8 +18,8 @@
     <!-- common -->
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
-    <string name="logout">logout</string>
-    <string name="withdraw">withdraw</string>
+    <string name="logout">로그아웃</string>
+    <string name="withdraw">탈퇴</string>
     <string name="success">Success</string>
     <string name="failed">Failed</string>
     <string name="empty_list_message">리스트가 비어있습니다.</string>
