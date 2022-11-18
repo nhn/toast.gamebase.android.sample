@@ -140,7 +140,9 @@ private fun handleLoginSuccess(
     printLoginSuccess(TAG, authToken)
 
     // Gamebase Analytics에서 지원하는 모든 API는 로그인 후에 호출이 가능합니다.
-    initializeGamebaseAnalytics(dummyUserData)
+    if (useAnalyticsTransmissionFeature) {
+        initializeGamebaseAnalytics(dummyUserData)
+    }
 
     onLoginSuccess.invoke()
 }
