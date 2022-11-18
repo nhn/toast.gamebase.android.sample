@@ -1,15 +1,12 @@
 package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,15 +15,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.gamebasemanager.showWebView
-import com.toast.android.gamebase.sample.ui.common.ClickableText
-import com.toast.android.gamebase.sample.ui.common.InputDialog
-import com.toast.android.gamebase.sample.ui.common.ListDialog
-import com.toast.android.gamebase.sample.ui.common.SubMenuDivider
-import com.toast.android.gamebase.sample.ui.developer.analytics.SetGameUserDataDialog
-import com.toast.android.gamebase.sample.ui.developer.logger.LoggerInitializeDialog
-import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
-import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
-import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewDialog
+import com.toast.android.gamebase.sample.ui.analytics.SetGameUserDataDialog
+import com.toast.android.gamebase.sample.ui.components.ClickableText
+import com.toast.android.gamebase.sample.ui.components.InputDialog
+import com.toast.android.gamebase.sample.ui.components.ListDialog
+import com.toast.android.gamebase.sample.ui.components.SubMenuDivider
+import com.toast.android.gamebase.sample.ui.logger.LoggerInitializeDialog
+import com.toast.android.gamebase.sample.ui.logger.SendLogDialog
+import com.toast.android.gamebase.sample.ui.webview.OpenBrowserDialog
+import com.toast.android.gamebase.sample.ui.webview.OpenCustomWebViewDialog
 
 const val WEBVIEW_MENU_DEFAULT_URL = "https://gameplatform.nhncloud.com/ko_KR/service/gamebase"
 

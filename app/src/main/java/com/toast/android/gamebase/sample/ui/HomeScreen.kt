@@ -12,10 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.gamebasemanager.addGamebaseEventHandler
 import com.toast.android.gamebase.sample.gamebasemanager.showImageNotices
 
 @Composable
-fun HomeScreen(activity: Activity) {
+fun HomeScreen(activity: Activity, onLoggedOut: () -> Unit) {
     Surface {
         Column (
             modifier = Modifier.fillMaxSize(),
@@ -23,6 +24,10 @@ fun HomeScreen(activity: Activity) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             LaunchedEffect(Unit) {
+                // Handles All of Gamebase events.
+                addGamebaseEventHandler(activity) {
+                    onLoggedOut()
+                }
                 showImageNotices(activity) {}
             }
             Text(stringResource(id = R.string.home_main_text))

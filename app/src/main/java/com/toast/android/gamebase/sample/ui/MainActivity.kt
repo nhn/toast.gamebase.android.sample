@@ -45,8 +45,6 @@ class MainActivity : GamebaseActivity() {
                 }
             }
         }
-        // Handles All of Gamebase events.
-        addGamebaseEventHandler(this)
     }
 }
 
