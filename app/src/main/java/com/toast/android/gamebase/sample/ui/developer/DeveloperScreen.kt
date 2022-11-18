@@ -1,15 +1,12 @@
 package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,14 +15,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
 import com.toast.android.gamebase.sample.gamebasemanager.showWebView
+import com.toast.android.gamebase.sample.ui.analytics.SetGameUserDataDialog
+import com.toast.android.gamebase.sample.ui.components.ClickableText
 import com.toast.android.gamebase.sample.ui.components.InputDialog
 import com.toast.android.gamebase.sample.ui.components.ListDialog
 import com.toast.android.gamebase.sample.ui.components.SubMenuDivider
-import com.toast.android.gamebase.sample.ui.analytics.SetGameUserDataDialog
 import com.toast.android.gamebase.sample.ui.logger.LoggerInitializeDialog
 import com.toast.android.gamebase.sample.ui.logger.SendLogDialog
 import com.toast.android.gamebase.sample.ui.webview.OpenBrowserDialog
 import com.toast.android.gamebase.sample.ui.webview.OpenCustomWebViewDialog
+
+const val WEBVIEW_MENU_DEFAULT_URL = "https://gameplatform.nhncloud.com/ko_KR/service/gamebase"
 
 @Composable
 fun DeveloperScreen(
@@ -70,6 +70,7 @@ fun DeveloperScreen(
     OpenCustomWebViewDialog(
         isDialogOpened = viewModel.isOpenWebViewOpened.value,
         title = stringResource(id = R.string.developer_menu_open_webview),
+        fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
         setDialogStatus = { newState ->
             viewModel.isOpenWebViewOpened.value = newState
         },
@@ -81,6 +82,7 @@ fun DeveloperScreen(
         activity = activity,
         isDialogOpened = viewModel.isOpenWebBrowserOpened.value,
         title = stringResource(id = R.string.developer_menu_open_outside_browser),
+        fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
         setDialogStatus = { newState ->
             viewModel.isOpenWebBrowserOpened.value = newState
         }
@@ -133,17 +135,15 @@ fun MenuItem(developerMenuItem: DeveloperMenu,
              viewModel: DeveloperViewModel,
              menuNavigator: DeveloperMenuNavigator
 ) {
+
     Surface (
         color = MaterialTheme.colors.surface,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                viewModel.onMenuClick(activity, developerMenuItem, menuNavigator)
-            }
-            .padding(vertical = 12.dp, horizontal = 10.dp)
     ) {
-        Text(
+        ClickableText(
             text = developerMenuItem.name,
-            style = MaterialTheme.typography.body1)
+            style = MaterialTheme.typography.body1
+        ) {
+            viewModel.onMenuClick(activity, developerMenuItem, menuNavigator)
+        }
     }
 }

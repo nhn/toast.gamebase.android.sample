@@ -19,6 +19,7 @@ import com.toast.android.gamebase.sample.ui.components.ClickableText
 import com.toast.android.gamebase.sample.ui.components.DropdownMenuBoxWithTitle
 import com.toast.android.gamebase.sample.ui.components.RoundButton
 import com.toast.android.gamebase.sample.ui.components.SwitchWithLabel
+import com.toast.android.gamebase.sample.ui.developer.WEBVIEW_MENU_DEFAULT_URL
 
 @Composable
 fun WebViewSettingScreen(
@@ -116,6 +117,7 @@ fun WebViewSettingScreen(
     OpenCustomWebViewDialog(
         isDialogOpened = viewModel.openWebViewDialogStatus.value,
         title = stringResource(R.string.developer_web_view_show),
+        fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
         setDialogStatus = { newState ->
             viewModel.openWebViewDialogStatus.value = newState
         },

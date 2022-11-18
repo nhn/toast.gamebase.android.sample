@@ -11,14 +11,15 @@ import com.toast.android.gamebase.sample.ui.components.InputDialog
 fun OpenCustomWebViewDialog(
     isDialogOpened: Boolean,
     title: String,
+    fieldMessage: String = "",
     setDialogStatus: (Boolean) -> Unit,
-    onOkButtonClicked: (String) -> Unit
+    onOkButtonClicked: (String) -> Unit,
 ) {
     if (isDialogOpened) {
         InputDialog(
             title = title,
             labelName = stringResource(id = R.string.url),
-            fieldMessage = "",
+            fieldMessage = fieldMessage,
             setDialogStatus = setDialogStatus,
             onOkButtonClicked = onOkButtonClicked
         )
@@ -30,13 +31,14 @@ fun OpenBrowserDialog(
     activity: Activity,
     isDialogOpened: Boolean,
     title: String,
-    setDialogStatus: (Boolean) -> Unit
+    fieldMessage: String = "",
+    setDialogStatus: (Boolean) -> Unit,
 ) {
     if (isDialogOpened) {
         InputDialog(
             title = title,
             labelName = stringResource(id = R.string.url),
-            fieldMessage = "",
+            fieldMessage = fieldMessage,
             setDialogStatus = setDialogStatus,
             onOkButtonClicked = { value ->
                 openExternalBrowser(activity, value)

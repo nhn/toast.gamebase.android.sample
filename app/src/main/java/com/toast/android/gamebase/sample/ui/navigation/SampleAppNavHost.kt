@@ -14,6 +14,7 @@ import com.toast.android.gamebase.sample.ui.idpmap.IdpMappingScreen
 import com.toast.android.gamebase.sample.ui.login.LoginScreen
 import com.toast.android.gamebase.sample.ui.profile.ProfileScreen
 import com.toast.android.gamebase.sample.ui.settings.SettingsScreen
+import com.toast.android.gamebase.sample.ui.splash.SplashScreen
 
 @Composable
 fun SampleAppNavHost(
@@ -27,6 +28,15 @@ fun SampleAppNavHost(
         startDestination = startRoute,
         modifier = modifier
     ) {
+        composable(SampleAppScreens.Splash.route) {
+            SplashScreen(activity, onInitialized = {
+                navController.navigate(SampleAppScreens.Login.route) {
+                    popUpTo(SampleAppScreens.Splash.route) {
+                        inclusive = true
+                    }
+                }
+            })
+        }
         composable(SampleAppScreens.Login.route) {
             LoginScreen(
                 activity = activity,

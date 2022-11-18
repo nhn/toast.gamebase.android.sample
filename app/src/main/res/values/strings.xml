@@ -7,6 +7,7 @@
     <string name="app_name">Gamebase Sample</string>
 
     <!-- menu name -->
+    <string name="splash">Splash</string>
     <string name="login">Login</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
@@ -18,8 +19,8 @@
     <!-- common -->
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
-    <string name="logout">logout</string>
-    <string name="withdraw">withdraw</string>
+    <string name="logout">로그아웃</string>
+    <string name="withdraw">탈퇴</string>
     <string name="success">Success</string>
     <string name="failed">Failed</string>
     <string name="empty_list_message">리스트가 비어있습니다.</string>
@@ -27,6 +28,9 @@
     <string name="empty_list">No items</string>
     <string name="unknown_error">Unknown Error occurred</string>
     <string name="url">URL</string>
+
+    <!-- splash screen -->
+    <string name="splsh_title">Gamebase SampleApplication</string>
 
     <!-- home screen -->
     <string name="home_main_text">Gamebase 기능들을 마음껏 경험해보세요</string>

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ExposedDropdownMenuBox
@@ -16,6 +17,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -89,11 +91,14 @@ fun DropdownMenuBoxWithTitle(
     modifier: Modifier
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().heightIn(TextFieldDefaults.MinHeight),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = title)
+        Text(
+            text = title,
+            modifier = Modifier.padding(
+                dimensionResource(id = R.dimen.setting_screen_menu_title_text_padding)))
         DropdownMenuBox(
             options = options,
             expanded = expanded,
@@ -195,5 +200,19 @@ fun PreviewDropDownMenuBoxDialog() {
         options = listOf("A", "B", "C"),
         modifier = Modifier,
         onOkButtonClicked = { selected -> }
+    )
+}
+
+@Preview
+@Composable
+fun PreviewDropdownMenuBoxWithTitle() {
+    DropdownMenuBoxWithTitle(
+        title = "title",
+        options = listOf("1", "2", "3"),
+        expanded = false,
+        onExpandChanged = {},
+        selected = 1,
+        onSelected = {},
+        modifier = Modifier
     )
 }

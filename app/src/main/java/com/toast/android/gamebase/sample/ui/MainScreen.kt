@@ -45,8 +45,7 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background,
     ) {
-        // Login Screen
-        if (currentScreen.route == SampleAppScreens.Login.route) {
+        if (currentScreen.route == SampleAppScreens.Login.route || currentScreen.route == SampleAppScreens.Splash.route) {
             SampleAppNavHost(
                 activity = activity,
                 navController = navController,

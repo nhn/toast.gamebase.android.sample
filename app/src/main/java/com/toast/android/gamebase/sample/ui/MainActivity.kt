@@ -27,7 +27,7 @@ class MainActivity : GamebaseActivity() {
 
         val isApplicationRelaunched = intent.getBooleanExtra(INTENT_APPLICATION_RELAUNCHED, false)
         val startRoute =
-            if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Login.route
+            if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Splash.route
         var shouldShowAccessInformationScreen by mutableStateOf(true)
 
         if (getIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, -1) == BuildConfig.VERSION_CODE) {
