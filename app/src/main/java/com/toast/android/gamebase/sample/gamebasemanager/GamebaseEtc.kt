@@ -13,8 +13,13 @@ import com.toast.android.gamebase.event.GamebaseEventHandler
 const val TAG = "GamebaseManager"
 private var mGamebaseEventHandler: GamebaseEventHandler? = null
 
+
 // https://docs.toast.com/ko/Game/Gamebase/ko/aos-etc/
 // Additional features
+
+// ENABLE/DISABLE TOAST ANALYTICS
+// TODO: [FIX ME] Toast analytics 기능을 사용하려면, 해당 value를 true로 수정하면 login 이후에 setGameUserData 를 호출합니다.
+const val useAnalyticsTransmissionFeature = false
 
 fun getDeviceLanguage(): String {
     return Gamebase.getDeviceLanguageCode()

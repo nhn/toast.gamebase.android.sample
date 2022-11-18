@@ -222,10 +222,18 @@ class DeveloperViewModel: ViewModel() {
                 // do job with Contact url
                 showAlert(activity, title, contactUrl)
             } else if (exception?.code == UI_CONTACT_FAIL_INVALID_URL) { // 6911
-                // TODO: Gamebase Console Service Center URL is invalid.
+                // Gamebase Console Service Center URL is invalid.
                 // Please check the url field in the TOAST Gamebase Console.
+                showAlert(
+                    activity,
+                    failedTitle,
+                    (activity as Context).getString(R.string.developer_contact_url_invalid)
+                )
             } else {
                 // An error occur when requesting the contact web view url.
+                exception?.message?.let {
+                    showAlert(activity, failedTitle, it)
+                } ?: showAlert(activity, failedTitle, (activity as Context).getString(R.string.unknown_error))
             }
         }
     }

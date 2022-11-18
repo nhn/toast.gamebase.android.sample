@@ -12,17 +12,22 @@ import com.toast.android.gamebase.auth.mapping.data.ForcingMappingTicket
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.auth.AuthProvider
-import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
-import com.toast.android.gamebase.sample.util.printWithIndent
+import com.toast.android.gamebase.sample.data.UserData
+import com.toast.android.gamebase.sample.data.dummyUserData
 import com.toast.android.gamebase.sample.util.printBanInfo
 import com.toast.android.gamebase.sample.util.printLoginError
 import com.toast.android.gamebase.sample.util.printLoginSuccess
 import com.toast.android.gamebase.sample.util.printLoginWithIdpSuccess
+import com.toast.android.gamebase.sample.util.printWithIndent
 
 // Gamebase Auth
 // https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/
 
-fun lastProviderLogin(activity: Activity, onLoginFinished: () -> Unit) {
+fun lastProviderLogin(
+    activity: Activity,
+    onLastProviderIsLine: () -> Unit,
+    onLoginFinished: () -> Unit
+) {
     val lastLoggedInProvider = Gamebase.getLastLoggedInProvider()
     Log.d(TAG, "Last Logged in Provider : $lastLoggedInProvider")
 
@@ -32,9 +37,9 @@ fun lastProviderLogin(activity: Activity, onLoginFinished: () -> Unit) {
         if (Gamebase.isSuccess(exception)) {
             Log.d(TAG, "Login with Last Logged In Provider Success")
             Log.i(TAG, "LastLoggedInProvider : " + Gamebase.getLastLoggedInProvider())
-            handleLoginSuccess(activity, result, onLoginFinished)
+            handleLoginSuccess(result, onLoginFinished)
         } else {
-            handleLastProviderLoginFailed(activity, exception, onLoginFinished)
+            handleLastProviderLoginFailed(activity, exception, onLastProviderIsLine, onLoginFinished)
         }
     }
 }
@@ -42,6 +47,7 @@ fun lastProviderLogin(activity: Activity, onLoginFinished: () -> Unit) {
 private fun handleLastProviderLoginFailed(
     activity: Activity,
     exception: GamebaseException,
+    onLastProviderIsLine: () -> Unit,
     onLoginFinished: () -> Unit
 ) {
     val hasGamebaseAccessToken = Gamebase.getAccessToken() != null
@@ -49,7 +55,7 @@ private fun handleLastProviderLoginFailed(
 
     if (isNetworkError(exception)) {
         Gamebase.Util.showAlert(activity, "Network Error", "Check your network.")
-        retryWithInterval(Runnable { lastProviderLogin(activity, onLoginFinished) }, 2000L)
+        retryWithInterval(Runnable { lastProviderLogin(activity, onLoginFinished, onLastProviderIsLine) }, 2000L)
     } else if (isBannedUser(exception)) {
         // Do nothing because you set the 'enableBanPopup' true.
         // Gamebase will show ban-popup automatically.
@@ -60,11 +66,10 @@ private fun handleLastProviderLoginFailed(
         if (hasGamebaseAccessToken && lastLoggedInProvider != null) {
             val additionalInfo: MutableMap<String, Any?> = mutableMapOf()
             if (lastLoggedInProvider == AuthProvider.LINE) {
-                // TODO: Line login with dialog
-                additionalInfo[AuthProviderCredentialConstants.LINE_CHANNEL_REGION] =
-                    "japan"
+                onLastProviderIsLine()
+            } else {
+                loginWithIdP(activity, lastLoggedInProvider, additionalInfo, onLoginFinished)
             }
-            loginWithIdP(activity, lastLoggedInProvider, additionalInfo, onLoginFinished)
         } else {
             // Do nothing. User should select IDP from Game UI.
         }
@@ -97,7 +102,7 @@ fun loginWithIdP(
     Gamebase.login(activity, provider, additionalInfo) { result, exception ->
         if (Gamebase.isSuccess(exception)) {
             printLoginWithIdpSuccess(TAG, provider)
-            handleLoginSuccess(activity, result, onLoginSuccess)
+            handleLoginSuccess(result, onLoginSuccess)
         } else {
             handleIdpLoginFailed(
                 activity,
@@ -133,15 +138,26 @@ private fun handleIdpLoginFailed(
 }
 
 private fun handleLoginSuccess(
-    activity: Activity,
     authToken: AuthToken,
     onLoginSuccess: () -> Unit
 ) {
     printLoginSuccess(TAG, authToken)
 
-    //TODO: Initialize Gamebase Analytics
+    // Gamebase Analytics에서 지원하는 모든 API는 로그인 후에 호출이 가능합니다.
+    if (useAnalyticsTransmissionFeature) {
+        initializeGamebaseAnalytics(dummyUserData)
+    }
 
     onLoginSuccess.invoke()
+}
+
+private fun initializeGamebaseAnalytics(userData: UserData) {
+    setGameUserData(
+        userData.level,
+        userData.channelId,
+        userData.characterId,
+        userData.classId
+    )
 }
 
 fun logout(
