@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.components.DropdownMenuBox
+import com.toast.android.gamebase.sample.ui.components.RoundButton
 import com.toast.android.gamebase.sample.ui.components.SubMenuDivider
 import com.toast.android.gamebase.sample.ui.components.SwitchWithLabel
 
@@ -55,7 +56,6 @@ fun PushSettingScreen(
                     viewModel.enableAdAgreement.value = false
                     viewModel.enableAdAgreementNight.value = false
                 }
-                viewModel.updatePushNotificationOptions(activity)
             }
         )
         SwitchWithLabel(
@@ -67,7 +67,6 @@ fun PushSettingScreen(
                 if (!viewModel.enableAdAgreement.value) {
                     viewModel.enableAdAgreementNight.value = false
                 }
-                viewModel.updatePushNotificationOptions(activity)
             }
         )
         SwitchWithLabel(
@@ -76,7 +75,6 @@ fun PushSettingScreen(
             enableSwitch = viewModel.enablePush.value && viewModel.enableAdAgreement.value,
             event = { newState ->
                 viewModel.enableAdAgreementNight.value = newState
-                viewModel.updatePushNotificationOptions(activity)
             }
         )
 
@@ -87,7 +85,6 @@ fun PushSettingScreen(
             enableSwitch = true,
             event = { newState ->
                 viewModel.enableForeground.value = newState
-                viewModel.updatePushNotificationOptions(activity)
             }
         )
         SwitchWithLabel(
@@ -96,7 +93,6 @@ fun PushSettingScreen(
             enableSwitch = true,
             event = { newState ->
                 viewModel.enableBadge.value = newState
-                viewModel.updatePushNotificationOptions(activity)
             }
         )
         Row(
@@ -117,9 +113,11 @@ fun PushSettingScreen(
                 selected = viewModel.notificationPriority.value,
                 onSelected = { selectedId ->
                     viewModel.notificationPriority.value = selectedId
-                    viewModel.updatePushNotificationOptions(activity)
                 }
             )
+        }
+        RoundButton(buttonText = stringResource(id = R.string.button_ok)) {
+            viewModel.updatePushNotificationOptions(activity)
         }
     }
 }
