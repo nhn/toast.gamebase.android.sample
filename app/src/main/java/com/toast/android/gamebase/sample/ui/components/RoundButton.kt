@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 
 @Composable
 fun RoundButton(buttonText: String, onClickListener: () -> Unit) {
@@ -28,5 +29,7 @@ fun RoundButton(buttonText: String, onClickListener: () -> Unit) {
 @Preview
 @Composable
 fun PreviewToastButton() {
-    RoundButton("이미지 공지") {}
+    GamebaseSampleProjectTheme {
+        RoundButton("이미지 공지") {}
+    }
 }
