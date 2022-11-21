@@ -74,7 +74,7 @@ fun KeyValueInputDialog(
                             dimensionResource(id = R.dimen.key_value_input_dialog_column_padding)
                         ))
                         if (inputKey.isEmpty()) {
-                            Text(text = "키를 입력해주세요",
+                            Text(text = stringResource(R.string.enter_key_message),
                                 modifier = Modifier.fillMaxWidth(),
                                 textAlign = TextAlign.Start,
                                 color = Red,
