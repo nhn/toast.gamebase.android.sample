@@ -28,6 +28,7 @@
     <string name="empty_list">No items</string>
     <string name="unknown_error">Unknown Error occurred</string>
     <string name="url">URL</string>
+    <string name="enter_key_message">키를 입력해주세요</string>
 
     <!-- splash screen -->
     <string name="splsh_title">Gamebase SampleApplication</string>

@@ -24,11 +24,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
@@ -43,6 +46,7 @@ fun KeyValueInputDialog(
     if (isDialogOpened) {
         var inputKey by remember { mutableStateOf("") }
         var inputValue by remember { mutableStateOf("") }
+
         val scrollState = rememberScrollState()
         Dialog(onDismissRequest = {  }) {
             Surface(
@@ -69,6 +73,13 @@ fun KeyValueInputDialog(
                         Spacer(modifier = Modifier.height(
                             dimensionResource(id = R.dimen.key_value_input_dialog_column_padding)
                         ))
+                        if (inputKey.isEmpty()) {
+                            Text(text = stringResource(R.string.enter_key_message),
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Start,
+                                color = Red,
+                                style = MaterialTheme.typography.caption)
+                        }
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth(),
@@ -80,7 +91,8 @@ fun KeyValueInputDialog(
                                 value = inputKey,
                                 onValueChange = { inputKey = it },
                                 label = { Text(inputLabelForKey) },
-                                singleLine = true
+                                singleLine = true,
+                                isError = inputKey.isEmpty()
                             )
                             OutlinedTextField(
                                 modifier = Modifier.width(
@@ -102,6 +114,9 @@ fun KeyValueInputDialog(
                         horizontalArrangement = Arrangement.SpaceEvenly) {
                         TextButton(
                             onClick = {
+                                if (inputKey.isEmpty()) {
+                                    return@TextButton
+                                }
                                 onOkButtonClicked(inputKey, inputValue)
                                 setDialogStatus(false)
                             }
