@@ -140,20 +140,6 @@ fun SendLogDialog(
 
 @Preview
 @Composable
-fun PreviewLoggerInitializeDialog() {
-    var activity = LocalContext.current as Activity
-    LoggerInitializeDialog(
-        activity = activity,
-        isDialogOpened = true,
-        title = "제목",
-        message = "test",
-        setDialogStatus = {},
-        isLoggerAppKeyValid = true
-    )
-}
-
-@Preview
-@Composable
 fun PreviewSendLogDialog() {
     SendLogDialog(
         isDialogOpened = true,
