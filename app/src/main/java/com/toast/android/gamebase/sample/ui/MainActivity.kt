@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.BuildConfig
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.ui.access_info.AccessInformationScreen
@@ -17,16 +18,14 @@ import com.toast.android.gamebase.sample.util.putIntInPreference
 
 class MainActivity : GamebaseActivity() {
     companion object {
-        const val INTENT_APPLICATION_RELAUNCHED = "intent_key_is_application_relaunched"
         const val KEY_LAST_ACCESS_INFO_SHOWN_VERSION = "gamebase.sample.pref.access.info.shown.version"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val isApplicationRelaunched = intent.getBooleanExtra(INTENT_APPLICATION_RELAUNCHED, false)
         val startRoute =
-            if (isApplicationRelaunched) SampleAppScreens.Home.route else SampleAppScreens.Splash.route
+            if (Gamebase.isInitialized()) SampleAppScreens.Home.route else SampleAppScreens.Splash.route
         var shouldShowAccessInformationScreen by mutableStateOf(true)
 
         if (getIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, -1) == BuildConfig.VERSION_CODE) {

@@ -23,9 +23,11 @@ import com.toast.android.gamebase.sample.util.printPurchasableReceipt
 import com.toast.android.gamebase.sample.util.printServerPushData
 import org.json.JSONObject
 
+// Gamebase Event Handler
+// https://docs.toast.com/en/Game/Gamebase/en/aos-etc/#gamebase-event-handler
+
 private var mGamebaseEventHandler: GamebaseEventHandler? = null
 
-// Event Handler
 fun addGamebaseEventHandler(activity: Activity, onKickOut: () -> Unit) {
     if (mGamebaseEventHandler != null) {
         Gamebase.removeEventHandler(mGamebaseEventHandler)

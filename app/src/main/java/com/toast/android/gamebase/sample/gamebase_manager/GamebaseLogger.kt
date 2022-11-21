@@ -10,8 +10,8 @@ import com.toast.android.gamebase.toastlogger.data.LogFilter
 import com.toast.android.gamebase.toastlogger.data.LoggerListener
 
 // NHN Cloud Logger (Log & Crash)
+// https://docs.toast.com/en/Game/Gamebase/en/aos-logger/#initialize
 
-// See https://docs.toast.com/en/Game/Gamebase/en/aos-logger/#initialize
 // TODO: [Fix me] AppKey for the Log & Crash from NHN Cloud Console > Analytics > Log & Crash Search
 private const val LOG_AND_CRASH_APPKEY = ""
 private const val SEND_CRASH_LOG = true

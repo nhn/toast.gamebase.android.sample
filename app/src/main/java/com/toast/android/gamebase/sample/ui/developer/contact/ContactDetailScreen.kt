@@ -133,7 +133,7 @@ fun LazyColumnForMap(
     Box(modifier = Modifier
         .clip(
             RoundedCornerShape(
-                dimensionResource(id = R.dimen.contact_screen_lazy_colum_border_corner_radius)
+                dimensionResource(id = R.dimen.contact_screen_lazy_column_border_corner_radius)
             )
         )
         .clickable {
@@ -179,7 +179,7 @@ fun MapItem(key: String, value: String?, onRemoveClicked: () -> Unit) {
             color = MaterialTheme.colors.primary,
             modifier = Modifier.weight(1f))
         Spacer(modifier = Modifier.width(
-            dimensionResource(id = R.dimen.contact_screen_lazy_colum_item_horizontal_spacer)
+            dimensionResource(id = R.dimen.contact_screen_lazy_column_item_horizontal_spacer)
         ))
         Text(text = value ?: "",
             modifier = Modifier.weight(1f))

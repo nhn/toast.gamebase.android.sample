@@ -8,6 +8,9 @@ import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableItem
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 
+// Purchase (Payment)
+// https://docs.toast.com/en/Game/Gamebase/en/aos-purchase/
+
 fun requestNotConsumedItems(
     activity: Activity,
     callback: GamebaseDataCallback<List<PurchasableReceipt>>?

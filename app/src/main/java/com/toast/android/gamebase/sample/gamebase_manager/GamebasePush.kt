@@ -11,6 +11,9 @@ import com.toast.android.gamebase.base.push.data.GamebaseNotificationOptions
 import com.toast.android.gamebase.base.push.data.GamebasePushTokenInfo
 import com.toast.android.gamebase.sample.util.printQueryTokenInfo
 
+// Push
+// https://docs.toast.com/en/Game/Gamebase/en/aos-push/
+
 fun registerPush(
     activity: Activity,
     configuration: PushConfiguration,
