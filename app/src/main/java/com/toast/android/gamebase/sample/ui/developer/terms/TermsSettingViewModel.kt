@@ -1,4 +1,4 @@
-package com.toast.android.gamebase.sample.ui.terms
+package com.toast.android.gamebase.sample.ui.developer.terms
 
 import android.app.Activity
 import android.util.Log

@@ -8,10 +8,10 @@ import androidx.navigation.compose.navigation
 import com.toast.android.gamebase.sample.ui.developer.DeveloperMenuNavigator
 import com.toast.android.gamebase.sample.ui.developer.DeveloperScreen
 import com.toast.android.gamebase.sample.ui.developer.contact.ContactDetailScreen
-import com.toast.android.gamebase.sample.ui.image_notice.ImageNoticeSettingScreen
+import com.toast.android.gamebase.sample.ui.developer.image_notice.ImageNoticeSettingScreen
 import com.toast.android.gamebase.sample.ui.developer.push.PushSettingScreen
-import com.toast.android.gamebase.sample.ui.terms.TermsCustomScreen
-import com.toast.android.gamebase.sample.ui.terms.TermsSettingScreen
+import com.toast.android.gamebase.sample.ui.developer.terms.TermsCustomScreen
+import com.toast.android.gamebase.sample.ui.developer.terms.TermsSettingScreen
 import com.toast.android.gamebase.sample.ui.developer.webview.WebViewSettingScreen
 
 fun NavGraphBuilder.developerGraph(navController: NavController, activity: Activity) {

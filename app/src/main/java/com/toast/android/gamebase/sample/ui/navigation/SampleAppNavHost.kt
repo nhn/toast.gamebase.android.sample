@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.ui.HomeScreen
-import com.toast.android.gamebase.sample.ui.ShoppingScreen
+import com.toast.android.gamebase.sample.ui.shopping.ShoppingScreen
 import com.toast.android.gamebase.sample.ui.settings.idpmap.IdpMappingScreen
 import com.toast.android.gamebase.sample.ui.login.LoginScreen
 import com.toast.android.gamebase.sample.ui.profile.ProfileScreen

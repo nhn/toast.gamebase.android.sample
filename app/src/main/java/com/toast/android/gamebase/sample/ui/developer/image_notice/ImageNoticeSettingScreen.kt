@@ -1,4 +1,4 @@
-package com.toast.android.gamebase.sample.ui.image_notice
+package com.toast.android.gamebase.sample.ui.developer.image_notice
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Column
