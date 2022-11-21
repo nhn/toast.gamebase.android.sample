@@ -45,7 +45,7 @@ fun registerPush(
     }
 }
 
-fun getNotificationOptions(activity: Activity): GamebaseNotificationOptions =
+fun getNotificationOptions(activity: Activity): GamebaseNotificationOptions? =
     Gamebase.Push.getNotificationOptions(activity)
 
 fun queryTokenInfo(
