@@ -13,34 +13,39 @@ import com.toast.android.gamebase.event.GamebaseEventHandler
 const val TAG = "GamebaseManager"
 private var mGamebaseEventHandler: GamebaseEventHandler? = null
 
+
+// https://docs.toast.com/ko/Game/Gamebase/ko/aos-etc/
+// Additional features
+
 // ENABLE/DISABLE TOAST ANALYTICS
 // TODO: [FIX ME] Toast analytics 기능을 사용하려면, 해당 value를 true로 수정하면 login 이후에 setGameUserData 를 호출합니다.
 const val useAnalyticsTransmissionFeature = false
 
-// Common
-fun isSuccess(exception: GamebaseException?): Boolean =
-    Gamebase.isSuccess(exception)
-
-fun showAlert(activity: Activity, title: String, message: String) {
-    Gamebase.Util.showAlert(activity, title, message)
+fun getDeviceLanguage(): String {
+    return Gamebase.getDeviceLanguageCode()
 }
 
-fun showAlert(activity: Activity, title: String, message: String, callback: DialogInterface.OnClickListener) {
-    Gamebase.Util.showAlert(activity, title, message, callback)
+fun getDisplayLanguage(): String {
+    return Gamebase.getDisplayLanguageCode()
 }
 
-fun showToast(activity: Activity, message: String, duration: Int) {
-    Gamebase.Util.showToast(activity, message, duration)
+fun getCountryCodeOfUSIM(): String {
+    return Gamebase.getCountryCodeOfUSIM()
 }
 
-internal fun isNetworkError(exception: GamebaseException): Boolean {
-    val errorCode = exception.code
-    return errorCode == GamebaseError.SOCKET_ERROR ||
-            errorCode == GamebaseError.SOCKET_RESPONSE_TIMEOUT
+fun getCountryCodeOfDevice(): String {
+    return Gamebase.getCountryCodeOfDevice()
 }
 
-internal fun isBannedUser(exception: GamebaseException): Boolean {
-    return exception.code == GamebaseError.BANNED_MEMBER
+/*
+* USIM, 단말기 언어 설정의 순서로 국가 코드를 확인하여 리턴합니다.
+* getCountryCode API는 다음 순서로 동작합니다.
+* USIM에 기록된 국가 코드를 확인해 보고 값이 존재한다면 추가적인 체크 없이 그대로 리턴합니다.
+* USIM 국가 코드가 빈 값이라면 단말기 국가 코드를 확인해 보고 값이 존재한다면 추가적인 체크 없이 그대로 리턴합니다.
+* USIM, 단말기 국가 코드가 모두 빈 값이라면 'ZZ'를 리턴합니다.
+* */
+fun getIntegratedCountryCode(): String {
+    return Gamebase.getCountryCode()
 }
 
 // Analytics
@@ -84,29 +89,16 @@ fun openContact(
     }
 }
 
-fun getDeviceLanguage(): String {
-    return Gamebase.getDeviceLanguageCode()
+// Common
+fun isSuccess(exception: GamebaseException?): Boolean =
+    Gamebase.isSuccess(exception)
+
+internal fun isNetworkError(exception: GamebaseException): Boolean {
+    val errorCode = exception.code
+    return errorCode == GamebaseError.SOCKET_ERROR ||
+            errorCode == GamebaseError.SOCKET_RESPONSE_TIMEOUT
 }
 
-fun getDisplayLanguage(): String {
-    return Gamebase.getDisplayLanguageCode()
-}
-
-fun getCountryCodeOfUSIM(): String {
-    return Gamebase.getCountryCodeOfUSIM()
-}
-
-fun getCountryCodeOfDevice(): String {
-    return Gamebase.getCountryCodeOfDevice()
-}
-
-/*
-* USIM, 단말기 언어 설정의 순서로 국가 코드를 확인하여 리턴합니다.
-* getCountryCode API는 다음 순서로 동작합니다.
-* USIM에 기록된 국가 코드를 확인해 보고 값이 존재한다면 추가적인 체크 없이 그대로 리턴합니다.
-* USIM 국가 코드가 빈 값이라면 단말기 국가 코드를 확인해 보고 값이 존재한다면 추가적인 체크 없이 그대로 리턴합니다.
-* USIM, 단말기 국가 코드가 모두 빈 값이라면 'ZZ'를 리턴합니다.
-* */
-fun getIntegratedCountryCode(): String {
-    return Gamebase.getCountryCode()
+internal fun isBannedUser(exception: GamebaseException): Boolean {
+    return exception.code == GamebaseError.BANNED_MEMBER
 }
