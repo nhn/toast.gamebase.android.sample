@@ -108,7 +108,7 @@ fun SettingsScreen(
                 enableSwitch = true
             ) { newState ->
                 settingsViewModel.pushState.value = newState
-                settingsViewModel.registerPush(activity, PUSH_TYPE.NORMAL_PUSH)
+                settingsViewModel.registerPush(activity)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_advertising_push_title,
@@ -116,7 +116,7 @@ fun SettingsScreen(
                 enableSwitch = settingsViewModel.pushState.value
             ) { newState ->
                 settingsViewModel.advertisePushState.value = newState
-                settingsViewModel.registerPush(activity, PUSH_TYPE.ADVERTISING_PUSH)
+                settingsViewModel.registerPush(activity)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_night_advertising_push_title,
@@ -124,7 +124,7 @@ fun SettingsScreen(
                 enableSwitch = (settingsViewModel.pushState.value && settingsViewModel.advertisePushState.value)
             ) { newState ->
                 settingsViewModel.nightAdvertisePushState.value = newState
-                settingsViewModel.registerPush(activity, PUSH_TYPE.NIGHT_ADVERTISING_PUSH)
+                settingsViewModel.registerPush(activity)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_push_foreground_title,

@@ -26,27 +26,6 @@ import com.toast.android.gamebase.sample.gamebasemanager.withdraw as gamebaseWit
 
 private const val TAG = "SettingsScreen"
 
-enum class PUSH_TYPE() {
-    NORMAL_PUSH {
-        override fun changePushState(settingsViewModel: SettingsViewModel) {
-            settingsViewModel.pushState.value = !settingsViewModel.pushState.value
-        }
-    },
-    ADVERTISING_PUSH {
-        override fun changePushState(settingsViewModel: SettingsViewModel) {
-            settingsViewModel.advertisePushState.value = !settingsViewModel.advertisePushState.value
-        }
-    },
-    NIGHT_ADVERTISING_PUSH {
-        override fun changePushState(settingsViewModel: SettingsViewModel) {
-            settingsViewModel.nightAdvertisePushState.value =
-                !settingsViewModel.nightAdvertisePushState.value
-        }
-    };
-
-    abstract fun changePushState(settingsViewModel: SettingsViewModel)
-}
-
 class SettingsViewModel : ViewModel() {
     var uiState by mutableStateOf(value = LoginState.LOGGED_IN)
         private set
@@ -86,8 +65,7 @@ class SettingsViewModel : ViewModel() {
         requestPushForegroundInfo(activity)
     }
 
-    fun registerPush(activity: GamebaseActivity, pushType: PUSH_TYPE) {
-        pushType.changePushState(this)
+    fun registerPush(activity: GamebaseActivity) {
 
         val configuration: PushConfiguration = PushConfiguration.newBuilder()
             .enablePush(pushState.value)
@@ -117,7 +95,6 @@ class SettingsViewModel : ViewModel() {
             .enableAdAgreement(advertisePushState.value)
             .enableAdAgreementNight(nightAdvertisePushState.value).build()
 
-        foregroundState.value = !foregroundState.value
         val notificationOpitions: GamebaseNotificationOptions =
             GamebaseNotificationOptions.newBuilder().enableForeground(foregroundState.value)
                 .build()
