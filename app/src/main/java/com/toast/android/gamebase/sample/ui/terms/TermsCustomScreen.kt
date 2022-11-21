@@ -14,11 +14,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.components.EmptyListScreen
-import com.toast.android.gamebase.sample.ui.components.ErrorScreen
-import com.toast.android.gamebase.sample.ui.components.LoadingScreen
-import com.toast.android.gamebase.sample.ui.components.RoundButton
-import com.toast.android.gamebase.sample.ui.components.SwitchWithLabel
+import com.toast.android.gamebase.sample.ui.components.*
 import com.toast.android.gamebase.sample.util.printWithIndent
 
 @Composable
@@ -34,7 +30,7 @@ fun TermsCustomScreen(
         dimensionResource(id = R.dimen.setting_screen_column_padding_horizontal))) {
 
         when(viewModel.uiState.value) {
-            TermsUIState.LOADING -> LoadingScreen()
+            TermsUIState.LOADING -> LoadingDialog {}
             TermsUIState.NO_TERMS -> EmptyListScreen()
             TermsUIState.ERROR_TERMS -> {
                 ErrorScreen(errorString =

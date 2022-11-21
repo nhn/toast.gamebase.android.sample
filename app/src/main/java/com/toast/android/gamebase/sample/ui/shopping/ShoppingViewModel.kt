@@ -1,19 +1,21 @@
 package com.toast.android.gamebase.sample.ui.shopping
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.*
 import androidx.lifecycle.*
+import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.purchase.PurchasableItem
-import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.requestItemList as gamebaseRequestItemList
 import com.toast.android.gamebase.sample.gamebasemanager.requestNotConsumedItems
 import com.toast.android.gamebase.sample.gamebasemanager.requestPurchase
 import com.toast.android.gamebase.sample.gamebasemanager.showAlert
 import com.toast.android.gamebase.sample.gamebasemanager.showToast
 import com.toast.android.gamebase.sample.util.printWithIndent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 private const val TAG: String = "ShoppingScreen"
@@ -26,22 +28,48 @@ enum class ShoppingUIState() {
 }
 
 @SuppressLint("StaticFieldLeak")
-class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
+class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : ViewModel(),
+    DefaultLifecycleObserver {
+    private val supervisorJob = SupervisorJob()
     var itemList: List<PurchasableItem> by mutableStateOf(mutableListOf())
         private set
     var needLoadingDialog: Boolean by mutableStateOf(false)
     val uiState = mutableStateOf(ShoppingUIState.REQUEST_LOADING)
 
     // TODO : viewModel에서 activity를 멤버 변수로 가지고 있는 사항 수정
-    lateinit var mActivity: GamebaseActivity
+    lateinit var mActivity: Activity
 
     override fun onStart(owner: LifecycleOwner) {
-        viewModelScope.launch {
-            requestItemList(mActivity)
+        viewModelScope.launch(Dispatchers.IO + supervisorJob) {
+            uiState.value = ShoppingUIState.REQUEST_LOADING
+            try {
+                itemList = shoppingRepository.getItemsList(activity = mActivity)
+                if (itemList.isEmpty()) {
+                    uiState.value = ShoppingUIState.EMPTY_ITEM
+                } else {
+                    uiState.value = ShoppingUIState.REQUEST_SUCCESS
+                }
+            } catch (exception: GamebaseException) {
+                showAlert(
+                    mActivity,
+                    "requestItemListPurchasable error",
+                    exception.printWithIndent()
+                )
+                Log.d(
+                    TAG,
+                    exception.toJsonString()
+                )
+                ShoppingUIState.REQUEST_ERROR
+            }
         }
     }
 
-    fun requestItemNotConsumed(activity: GamebaseActivity) {
+    override fun onCleared() {
+        super.onCleared()
+        supervisorJob.cancel()
+    }
+
+    fun requestItemNotConsumed(activity: Activity) {
         requestNotConsumedItems(activity) { data, exception ->
             if (!isSuccess(exception)) {
                 showAlert(
@@ -57,31 +85,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
         }
     }
 
-    private fun requestItemList(activity: GamebaseActivity) {
-        gamebaseRequestItemList(activity = activity) { data, exception ->
-            if (isSuccess(exception)) {
-                if (data.isEmpty()) {
-                    uiState.value = ShoppingUIState.EMPTY_ITEM
-                } else {
-                    itemList = data
-                    uiState.value = ShoppingUIState.REQUEST_SUCCESS
-                }
-            } else {
-                uiState.value = ShoppingUIState.REQUEST_ERROR
-                showAlert(
-                    activity,
-                    "requestItemListPurchasable error",
-                    exception.printWithIndent()
-                )
-                Log.d(
-                    TAG,
-                    exception.toJsonString()
-                )
-            }
-        }
-    }
-
-    fun requestPurchaseItem(activity: GamebaseActivity, gamebaseProductId: String) {
+    fun requestPurchaseItem(activity: Activity, gamebaseProductId: String) {
         requestPurchase(activity, gamebaseProductId) { data, exception ->
             if (isSuccess(exception)) {
                 showToast(activity, "Success Purchase : $data", Toast.LENGTH_SHORT)
@@ -134,7 +138,7 @@ class ShoppingViewModel : ViewModel(), DefaultLifecycleObserver {
         }
     }
 
-    fun setGamebaseActivity(activity: GamebaseActivity) {
+    fun setGamebaseActivity(activity: Activity) {
         this.mActivity = activity
     }
 }

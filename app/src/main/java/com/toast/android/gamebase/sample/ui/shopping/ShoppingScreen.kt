@@ -1,41 +1,43 @@
 package com.toast.android.gamebase.sample.ui
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.base.purchase.PurchasableItem
-import com.toast.android.gamebase.sample.GamebaseActivity
+import com.toast.android.gamebase.sample.ui.components.LoadingDialog
 import com.toast.android.gamebase.sample.ui.components.EmptyListScreen
 import com.toast.android.gamebase.sample.ui.components.ErrorScreen
-import com.toast.android.gamebase.sample.ui.components.LoadingScreen
 import com.toast.android.gamebase.sample.ui.shopping.ShoppingUIState
 import com.toast.android.gamebase.sample.ui.shopping.ShoppingViewModel
 import com.toast.android.gamebase.sample.ui.shopping.observeShoppingLifecycle
+import com.toast.android.gamebase.sample.ui.shopping.*
 import com.toast.android.gamebase.sample.ui.theme.Black
 import com.toast.android.gamebase.sample.ui.theme.Grey500
 import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
-fun ShoppingScreen(activity: GamebaseActivity, shoppingViewModel: ShoppingViewModel = viewModel()) {
+fun ShoppingScreen(
+    activity: Activity,
+    shoppingViewModel: ShoppingViewModel = viewModel(
+        factory = ShoppingViewModelFactory(ShoppingRepository())
+    )
+) {
     shoppingViewModel.setGamebaseActivity(activity)
     shoppingViewModel.observeShoppingLifecycle(LocalLifecycleOwner.current.lifecycle)
 
@@ -47,36 +49,16 @@ fun ShoppingScreen(activity: GamebaseActivity, shoppingViewModel: ShoppingViewMo
         ShoppingUIState.REQUEST_ERROR -> {
             ErrorScreen(errorString = stringResource(id = R.string.request_shopping_list_error))
         }
-        ShoppingUIState.REQUEST_LOADING -> LoadingScreen()
+        ShoppingUIState.REQUEST_LOADING -> LoadingDialog {}
         ShoppingUIState.EMPTY_ITEM -> EmptyListScreen()
     }
 }
 
 @Composable
-fun ShoppingRequestSuccessScreen(activity: GamebaseActivity, shoppingViewModel: ShoppingViewModel) {
+fun ShoppingRequestSuccessScreen(activity: Activity, shoppingViewModel: ShoppingViewModel) {
     if (shoppingViewModel.needLoadingDialog) {
-        Dialog(
-            onDismissRequest = { shoppingViewModel.needLoadingDialog = false },
-            DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
-        ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(White, shape = RoundedCornerShape(12.dp))
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    CircularProgressIndicator()
-                    Text(
-                        text = stringResource(R.string.loading),
-                        Modifier.padding(top = 8.dp)
-                    )
-                }
-            }
+        LoadingDialog {
+            shoppingViewModel.needLoadingDialog = false
         }
     }
     Surface(
@@ -94,14 +76,17 @@ fun ShoppingRequestSuccessScreen(activity: GamebaseActivity, shoppingViewModel: 
 
 @Composable
 fun ListItems(
-    activity: GamebaseActivity,
+    activity: Activity,
     item: PurchasableItem,
     shoppingViewModel: ShoppingViewModel
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 10.dp, bottom = 10.dp, start = 20.dp, end = 20.dp)
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.shopping_screen_lazy_column_horizontal_padding),
+                vertical = dimensionResource(id = R.dimen.shopping_screen_lazy_column_vertical_padding)
+            )
             .clickable(onClick = {
                 if (!item.gamebaseProductId.isNullOrEmpty()) {
                     shoppingViewModel.requestItemNotConsumed(activity)
@@ -130,7 +115,7 @@ fun ListItems(
             )
         }
 
-        Box(modifier = Modifier.height(30.dp), Alignment.Center) {
+        Box(modifier = Modifier.height(dimensionResource(id = R.dimen.shoppign_screen_lazy_column_box_height)), Alignment.Center) {
             Text(
                 text = item.localizedPrice ?: "",
                 color = Black,
