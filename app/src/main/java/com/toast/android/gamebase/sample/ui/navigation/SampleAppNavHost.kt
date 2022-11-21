@@ -34,6 +34,7 @@ fun SampleAppNavHost(
                     popUpTo(SampleAppScreens.Splash.route) {
                         inclusive = true
                     }
+                    launchSingleTop = true
                 }
             })
         }
@@ -45,6 +46,7 @@ fun SampleAppNavHost(
                         popUpTo(SampleAppScreens.Login.route) {
                             inclusive = true
                         }
+                        launchSingleTop = true
                     }
                 }
             )
