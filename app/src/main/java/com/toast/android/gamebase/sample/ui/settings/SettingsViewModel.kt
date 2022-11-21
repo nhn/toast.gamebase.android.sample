@@ -5,24 +5,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import com.toast.android.gamebase.base.push.PushConfiguration
 import com.toast.android.gamebase.base.push.data.GamebaseNotificationOptions
 import com.toast.android.gamebase.contact.ContactConfiguration
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.gamebasemanager.getNotificationOptions
-import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.openContact
-import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
-import com.toast.android.gamebase.sample.gamebasemanager.showAlert
+import com.toast.android.gamebase.sample.gamebase_manager.getNotificationOptions
+import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
+import com.toast.android.gamebase.sample.gamebase_manager.openContact
+import com.toast.android.gamebase.sample.gamebase_manager.queryTokenInfo
+import com.toast.android.gamebase.sample.gamebase_manager.showAlert
 import com.toast.android.gamebase.sample.ui.login.LoginState
-import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.util.printWithIndent
-import kotlinx.coroutines.launch
-import com.toast.android.gamebase.sample.gamebasemanager.logout as gamebaseLogout
-import com.toast.android.gamebase.sample.gamebasemanager.registerPush as gamebaseRegisterPush
-import com.toast.android.gamebase.sample.gamebasemanager.withdraw as gamebaseWithdraw
+import com.toast.android.gamebase.sample.gamebase_manager.logout as gamebaseLogout
+import com.toast.android.gamebase.sample.gamebase_manager.registerPush as gamebaseRegisterPush
+import com.toast.android.gamebase.sample.gamebase_manager.withdraw as gamebaseWithdraw
 
 private const val TAG = "SettingsScreen"
 

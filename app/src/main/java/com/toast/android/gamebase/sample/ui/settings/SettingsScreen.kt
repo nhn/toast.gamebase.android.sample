@@ -24,9 +24,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.components.ConfirmAlertDialog
-import com.toast.android.gamebase.sample.ui.components.SubMenuDivider
-import com.toast.android.gamebase.sample.ui.components.SwitchWithLabel
+import com.toast.android.gamebase.sample.ui.components.dialog.ConfirmAlertDialog
+import com.toast.android.gamebase.sample.ui.components.text.SubMenuDivider
+import com.toast.android.gamebase.sample.ui.components.input.SwitchWithLabel
 import com.toast.android.gamebase.sample.ui.login.LoginState
 
 @Composable

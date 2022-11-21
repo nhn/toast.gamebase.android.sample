@@ -11,8 +11,6 @@ import com.toast.android.gamebase.base.push.data.GamebasePushTokenInfo
 import com.toast.android.gamebase.event.data.GamebaseEventServerPushData
 import com.toast.android.gamebase.event.data.PushAction
 import com.toast.android.gamebase.event.data.PushMessage
-import com.toast.android.gamebase.sample.gamebasemanager.TAG
-import com.toast.android.gamebase.serverpush.ServerPushData
 import org.json.JSONObject
 
 fun printLoginSuccess(TAG: String, authToken: AuthToken) {

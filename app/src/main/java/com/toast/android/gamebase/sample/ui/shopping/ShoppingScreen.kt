@@ -24,9 +24,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.base.purchase.PurchasableItem
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.ui.components.EmptyListScreen
-import com.toast.android.gamebase.sample.ui.components.ErrorScreen
-import com.toast.android.gamebase.sample.ui.components.LoadingScreen
+import com.toast.android.gamebase.sample.ui.components.screen.EmptyListScreen
+import com.toast.android.gamebase.sample.ui.components.screen.ErrorScreen
+import com.toast.android.gamebase.sample.ui.components.screen.LoadingScreen
 import com.toast.android.gamebase.sample.ui.shopping.ShoppingUIState
 import com.toast.android.gamebase.sample.ui.shopping.ShoppingViewModel
 import com.toast.android.gamebase.sample.ui.shopping.observeShoppingLifecycle

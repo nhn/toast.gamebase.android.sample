@@ -2,7 +2,6 @@ package com.toast.android.gamebase.sample.ui.terms
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -10,12 +9,12 @@ import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.push.PushConfiguration
 import com.toast.android.gamebase.base.push.data.GamebasePushTokenInfo
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.queryTerms
-import com.toast.android.gamebase.sample.gamebasemanager.queryTokenInfo
-import com.toast.android.gamebase.sample.gamebasemanager.registerPush
-import com.toast.android.gamebase.sample.gamebasemanager.showAlert
-import com.toast.android.gamebase.sample.gamebasemanager.updateTerms
+import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
+import com.toast.android.gamebase.sample.gamebase_manager.queryTerms
+import com.toast.android.gamebase.sample.gamebase_manager.queryTokenInfo
+import com.toast.android.gamebase.sample.gamebase_manager.registerPush
+import com.toast.android.gamebase.sample.gamebase_manager.showAlert
+import com.toast.android.gamebase.sample.gamebase_manager.updateTerms
 import com.toast.android.gamebase.sample.util.printWithIndent
 import com.toast.android.gamebase.terms.data.GamebaseQueryTermsResult
 import com.toast.android.gamebase.terms.data.GamebaseTermsContent

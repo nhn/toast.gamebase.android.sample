@@ -12,8 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebasemanager.addGamebaseEventHandler
-import com.toast.android.gamebase.sample.gamebasemanager.showImageNotices
+import com.toast.android.gamebase.sample.gamebase_manager.addGamebaseEventHandler
+import com.toast.android.gamebase.sample.gamebase_manager.showImageNotices
 
 @Composable
 fun HomeScreen(activity: Activity, onLoggedOut: () -> Unit) {

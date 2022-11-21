@@ -7,12 +7,12 @@ import androidx.compose.runtime.*
 import androidx.lifecycle.*
 import com.toast.android.gamebase.base.purchase.PurchasableItem
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.requestItemList as gamebaseRequestItemList
-import com.toast.android.gamebase.sample.gamebasemanager.requestNotConsumedItems
-import com.toast.android.gamebase.sample.gamebasemanager.requestPurchase
-import com.toast.android.gamebase.sample.gamebasemanager.showAlert
-import com.toast.android.gamebase.sample.gamebasemanager.showToast
+import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
+import com.toast.android.gamebase.sample.gamebase_manager.requestItemList as gamebaseRequestItemList
+import com.toast.android.gamebase.sample.gamebase_manager.requestNotConsumedItems
+import com.toast.android.gamebase.sample.gamebase_manager.requestPurchase
+import com.toast.android.gamebase.sample.gamebase_manager.showAlert
+import com.toast.android.gamebase.sample.gamebase_manager.showToast
 import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
 

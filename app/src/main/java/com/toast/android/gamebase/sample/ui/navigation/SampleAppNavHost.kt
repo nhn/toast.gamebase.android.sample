@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.ui.HomeScreen
 import com.toast.android.gamebase.sample.ui.ShoppingScreen
-import com.toast.android.gamebase.sample.ui.idpmap.IdpMappingScreen
+import com.toast.android.gamebase.sample.ui.settings.idpmap.IdpMappingScreen
 import com.toast.android.gamebase.sample.ui.login.LoginScreen
 import com.toast.android.gamebase.sample.ui.profile.ProfileScreen
 import com.toast.android.gamebase.sample.ui.settings.SettingsScreen

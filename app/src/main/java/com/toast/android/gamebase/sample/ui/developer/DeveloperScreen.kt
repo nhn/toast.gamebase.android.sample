@@ -13,17 +13,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
-import com.toast.android.gamebase.sample.gamebasemanager.showWebView
-import com.toast.android.gamebase.sample.ui.analytics.SetGameUserDataDialog
-import com.toast.android.gamebase.sample.ui.components.ClickableText
-import com.toast.android.gamebase.sample.ui.components.InputDialog
-import com.toast.android.gamebase.sample.ui.components.ListDialog
-import com.toast.android.gamebase.sample.ui.components.SubMenuDivider
-import com.toast.android.gamebase.sample.ui.logger.LoggerInitializeDialog
-import com.toast.android.gamebase.sample.ui.logger.SendLogDialog
-import com.toast.android.gamebase.sample.ui.webview.OpenBrowserDialog
-import com.toast.android.gamebase.sample.ui.webview.OpenCustomWebViewDialog
+import com.toast.android.gamebase.sample.gamebase_manager.getAppKey
+import com.toast.android.gamebase.sample.gamebase_manager.showWebView
+import com.toast.android.gamebase.sample.ui.developer.analytics.SetGameUserDataDialog
+import com.toast.android.gamebase.sample.ui.components.text.ClickableText
+import com.toast.android.gamebase.sample.ui.components.dialog.InputDialog
+import com.toast.android.gamebase.sample.ui.components.dialog.ListDialog
+import com.toast.android.gamebase.sample.ui.components.text.SubMenuDivider
+import com.toast.android.gamebase.sample.ui.developer.logger.LoggerInitializeDialog
+import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
+import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
+import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewDialog
 
 const val WEBVIEW_MENU_DEFAULT_URL = "https://gameplatform.nhncloud.com/ko_KR/service/gamebase"
 

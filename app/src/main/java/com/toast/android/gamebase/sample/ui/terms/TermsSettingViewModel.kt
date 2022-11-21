@@ -6,9 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.showAlert
-import com.toast.android.gamebase.sample.gamebasemanager.showTermsView
+import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
+import com.toast.android.gamebase.sample.gamebase_manager.showAlert
+import com.toast.android.gamebase.sample.gamebase_manager.showTermsView
 import com.toast.android.gamebase.sample.util.printWithIndent
 import com.toast.android.gamebase.terms.GamebaseTermsConfiguration
 

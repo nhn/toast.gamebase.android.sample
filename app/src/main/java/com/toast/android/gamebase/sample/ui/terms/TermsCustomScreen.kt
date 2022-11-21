@@ -14,11 +14,11 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.components.EmptyListScreen
-import com.toast.android.gamebase.sample.ui.components.ErrorScreen
-import com.toast.android.gamebase.sample.ui.components.LoadingScreen
-import com.toast.android.gamebase.sample.ui.components.RoundButton
-import com.toast.android.gamebase.sample.ui.components.SwitchWithLabel
+import com.toast.android.gamebase.sample.ui.components.screen.EmptyListScreen
+import com.toast.android.gamebase.sample.ui.components.screen.ErrorScreen
+import com.toast.android.gamebase.sample.ui.components.screen.LoadingScreen
+import com.toast.android.gamebase.sample.ui.components.button.RoundButton
+import com.toast.android.gamebase.sample.ui.components.input.SwitchWithLabel
 import com.toast.android.gamebase.sample.util.printWithIndent
 
 @Composable
