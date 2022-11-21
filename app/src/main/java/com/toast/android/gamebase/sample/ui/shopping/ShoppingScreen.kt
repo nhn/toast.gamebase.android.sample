@@ -1,4 +1,4 @@
-package com.toast.android.gamebase.sample.ui
+package com.toast.android.gamebase.sample.ui.shopping
 
 import android.app.Activity
 import androidx.compose.foundation.background
@@ -20,13 +20,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.base.purchase.PurchasableItem
-import com.toast.android.gamebase.sample.ui.components.LoadingDialog
-import com.toast.android.gamebase.sample.ui.components.EmptyListScreen
-import com.toast.android.gamebase.sample.ui.components.ErrorScreen
-import com.toast.android.gamebase.sample.ui.shopping.ShoppingUIState
-import com.toast.android.gamebase.sample.ui.shopping.ShoppingViewModel
-import com.toast.android.gamebase.sample.ui.shopping.observeShoppingLifecycle
-import com.toast.android.gamebase.sample.ui.shopping.*
+import com.toast.android.gamebase.sample.ui.components.screen.EmptyListScreen
+import com.toast.android.gamebase.sample.ui.components.screen.ErrorScreen
+import com.toast.android.gamebase.sample.ui.components.screen.LoadingDialog
 import com.toast.android.gamebase.sample.ui.theme.Black
 import com.toast.android.gamebase.sample.ui.theme.Grey500
 import com.toast.android.gamebase.sample.ui.theme.White

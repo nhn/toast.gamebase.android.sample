@@ -1,9 +1,9 @@
 package com.toast.android.gamebase.sample
 
 import androidx.multidex.MultiDexApplication
-import com.toast.android.gamebase.sample.gamebasemanager.getAppKey
-import com.toast.android.gamebase.sample.gamebasemanager.initializeNhnCloudLogger
-import com.toast.android.gamebase.sample.gamebasemanager.setNhnCloudLoggerListener
+import com.toast.android.gamebase.sample.gamebase_manager.getAppKey
+import com.toast.android.gamebase.sample.gamebase_manager.initializeNhnCloudLogger
+import com.toast.android.gamebase.sample.gamebase_manager.setNhnCloudLoggerListener
 
 const val TAG = "GamebaseApplication"
 
