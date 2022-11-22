@@ -296,14 +296,14 @@ fun cancelWithdrawal(activity: Activity, callback: GamebaseCallback?) {
 
 // Get Profile Data
 // https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/#gamebase-users-information
-fun getUserID(): String {
+fun getUserID(): String? {
     return Gamebase.getUserID()
 }
-fun getAccessToken(): String {
+fun getAccessToken(): String? {
     return Gamebase.getAccessToken()
 }
-fun getLastLoggedInProvider(): String {
-    return Gamebase.getLastLoggedInProvider() ?: ""
+fun getLastLoggedInProvider(): String? {
+    return Gamebase.getLastLoggedInProvider()
 }
 fun getAuthMappingList(): List<String> {
     return Gamebase.getAuthMappingList()
