@@ -33,8 +33,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.getIconResourceById
-import com.toast.android.gamebase.sample.supportedIdpList
+import com.toast.android.gamebase.sample.data.getIconResourceById
+import com.toast.android.gamebase.sample.data.supportedIdpList
 import com.toast.android.gamebase.sample.ui.components.dialog.ConfirmAlertDialog
 import com.toast.android.gamebase.sample.ui.components.button.ToggleButton
 import com.toast.android.gamebase.sample.ui.theme.White

@@ -2,8 +2,6 @@ package com.toast.android.gamebase.sample.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -34,6 +32,7 @@ fun SampleAppNavHost(
                     popUpTo(SampleAppScreens.Splash.route) {
                         inclusive = true
                     }
+                    launchSingleTop = true
                 }
             })
         }
@@ -45,6 +44,7 @@ fun SampleAppNavHost(
                         popUpTo(SampleAppScreens.Login.route) {
                             inclusive = true
                         }
+                        launchSingleTop = true
                     }
                 }
             )

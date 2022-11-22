@@ -2,14 +2,12 @@ package com.toast.android.gamebase.sample.gamebase_manager
 
 import android.app.Activity
 import android.content.DialogInterface
-import android.graphics.Color
 import android.util.Log
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseCallback
 import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.GamebaseWebViewConfiguration
 import com.toast.android.gamebase.GamebaseWebViewStyle
-import com.toast.android.gamebase.base.ScreenOrientation
 import com.toast.android.gamebase.base.data.GamebaseDataContainer
 import com.toast.android.gamebase.imagenotice.ImageNoticeConfiguration
 import com.toast.android.gamebase.terms.GamebaseTermsConfiguration

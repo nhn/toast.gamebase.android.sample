@@ -17,9 +17,15 @@ class ProfileViewModel : ViewModel() {
         private set
 
     fun updateData() {
-        userId = getUserID()
-        accessToken = getAccessToken()
-        lastLoggedInProvider = getLastLoggedInProvider()
+        getUserID()?.let {
+            userId = it
+        }
+        getAccessToken()?.let {
+            accessToken = it
+        }
+        getLastLoggedInProvider()?.let {
+            lastLoggedInProvider = it
+        }
         connectedIdpList = getAuthMappingList()
     }
 }

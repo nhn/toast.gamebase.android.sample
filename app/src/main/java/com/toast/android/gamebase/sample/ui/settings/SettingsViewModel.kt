@@ -132,7 +132,9 @@ class SettingsViewModel : ViewModel() {
 
     private fun requestPushForegroundInfo(activity: GamebaseActivity) {
         val notificationOptions = getNotificationOptions(activity)
-        foregroundState.value = notificationOptions.isForegroundEnabled
+        if (notificationOptions != null) {
+            foregroundState.value = notificationOptions.isForegroundEnabled
+        }
     }
 
     fun loadServiceCenter(activity: GamebaseActivity, userName: String) {

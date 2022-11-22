@@ -18,7 +18,6 @@ import com.toast.android.gamebase.sample.ui.components.screen.EmptyListScreen
 import com.toast.android.gamebase.sample.ui.components.screen.ErrorScreen
 import com.toast.android.gamebase.sample.ui.components.button.RoundButton
 import com.toast.android.gamebase.sample.ui.components.input.SwitchWithLabel
-import com.toast.android.gamebase.sample.ui.components.*
 import com.toast.android.gamebase.sample.ui.components.screen.LoadingDialog
 import com.toast.android.gamebase.sample.util.printWithIndent
 
