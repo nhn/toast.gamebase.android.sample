@@ -57,7 +57,7 @@ fun IdpMappingScreen(
             currentSelectedItem.value = it
         }
         ConfirmAlertDialog(
-            isDialogOpened = viewModel.uiState != IDP_MAPPING_UI_STATE.DEFAULT,
+            isDialogOpened = viewModel.uiState != IdpMappingUiState.DEFAULT,
             title = stringResource(id = R.string.idp_mapping_dialog_title),
             description = getDialogDescription(
                 activity as Context,
@@ -66,16 +66,16 @@ fun IdpMappingScreen(
                 viewModel.currentException),
             setDialogStatus = { newState ->
                 if (!newState) {
-                    viewModel.uiState = IDP_MAPPING_UI_STATE.DEFAULT
+                    viewModel.uiState = IdpMappingUiState.DEFAULT
                 }
             }
         ){
-            if (viewModel.uiState == IDP_MAPPING_UI_STATE.SHOW_REMOVE_MAPPING_DIALOG) {
+            if (viewModel.uiState == IdpMappingUiState.SHOW_REMOVE_MAPPING_DIALOG) {
                 viewModel.removeMapping(activity, currentSelectedItem.value)
-            } else if (viewModel.uiState == IDP_MAPPING_UI_STATE.SHOW_FORCE_MAPPING_DIALOG) {
+            } else if (viewModel.uiState == IdpMappingUiState.SHOW_FORCE_MAPPING_DIALOG) {
                 viewModel.forceMapping(activity, currentSelectedItem.value, viewModel.currentException)
             }
-            viewModel.uiState = IDP_MAPPING_UI_STATE.DEFAULT
+            viewModel.uiState = IdpMappingUiState.DEFAULT
         }
     }
 }
@@ -83,29 +83,29 @@ fun IdpMappingScreen(
 private fun getDialogDescription(
     context: Context,
     currentSelectedItem: String,
-    uiState: IDP_MAPPING_UI_STATE,
+    uiState: IdpMappingUiState,
     currentException: GamebaseException?
 ): String {
     when (uiState) {
-        IDP_MAPPING_UI_STATE.SHOW_REMOVE_MAPPING_DIALOG -> {
+        IdpMappingUiState.SHOW_REMOVE_MAPPING_DIALOG -> {
             return currentSelectedItem + " " + context.resources.getString(R.string.idp_mapping_dialog_description)
         }
-        IDP_MAPPING_UI_STATE.SHOW_FORCE_MAPPING_DIALOG -> {
+        IdpMappingUiState.SHOW_FORCE_MAPPING_DIALOG -> {
             return context.resources.getString(R.string.idp_mapping_force_mapping_dialog_description)
         }
-        IDP_MAPPING_UI_STATE.MAPPING_FAILED -> {
+        IdpMappingUiState.MAPPING_FAILED -> {
             return context.resources.getString(R.string.idp_mapping_failed_dialog_description) +
                     "\n${currentException?.message}"
         }
-        IDP_MAPPING_UI_STATE.REMOVE_MAPPING_FAILED -> {
+        IdpMappingUiState.REMOVE_MAPPING_FAILED -> {
             return context.resources.getString(R.string.idp_mapping_remove_mapping_failed_dialog_description) +
                     "\n${currentException?.message}"
         }
-        IDP_MAPPING_UI_STATE.FORCE_MAPPING_FAILED -> {
+        IdpMappingUiState.FORCE_MAPPING_FAILED -> {
             return context.resources.getString(R.string.idp_mapping_force_mapping_failed_dialog_description) +
             "\n${currentException?.message}"
         }
-        IDP_MAPPING_UI_STATE.DEFAULT -> {
+        IdpMappingUiState.DEFAULT -> {
             return ""
         }
     }
@@ -130,9 +130,9 @@ fun MappingColumn(
         ) {
             items (
                 items = supportedIdpList.drop(1),
-            key = { item ->
-                item
-            }) { idp ->
+                key = { item ->
+                    item
+                }) { idp ->
                 ListItem(activity, idp, viewModel) {
                     setCurrentSelectedItem(idp)
                 }
