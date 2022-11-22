@@ -3,8 +3,8 @@ package com.toast.android.gamebase.sample.ui.shopping
 import android.app.Activity
 import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.base.purchase.PurchasableItem
-import com.toast.android.gamebase.sample.gamebasemanager.isSuccess
-import com.toast.android.gamebase.sample.gamebasemanager.requestItemList
+import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
+import com.toast.android.gamebase.sample.gamebase_manager.requestItemList
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException

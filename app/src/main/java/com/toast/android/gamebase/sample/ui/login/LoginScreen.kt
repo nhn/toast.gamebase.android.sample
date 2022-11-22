@@ -33,12 +33,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebasemanager.isLoggedIn
-import com.toast.android.gamebase.sample.gamebasemanager.openContact
+import com.toast.android.gamebase.sample.gamebase_manager.isLoggedIn
+import com.toast.android.gamebase.sample.gamebase_manager.openContact
 import com.toast.android.gamebase.sample.getIconResourceById
 import com.toast.android.gamebase.sample.supportedIdpList
-import com.toast.android.gamebase.sample.ui.components.CopyrightFooter
-import com.toast.android.gamebase.sample.ui.components.DropDownMenuBoxDialog
+import com.toast.android.gamebase.sample.ui.components.text.CopyrightFooter
+import com.toast.android.gamebase.sample.ui.components.dialog.DropDownMenuDialog
 import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 
 @Composable
@@ -89,7 +89,7 @@ fun LoginScreen(
                 }
             }
 
-            DropDownMenuBoxDialog(
+            DropDownMenuDialog(
                 title = stringResource(id = R.string.login_select_line_region),
                 isDialogOpened = loginViewModel.uiState == LoginState.SHOW_LINE_REGION_DIALOG,
                 setDialogStatus = { isDialogOpened ->

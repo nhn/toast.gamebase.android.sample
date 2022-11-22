@@ -9,7 +9,7 @@ import androidx.compose.runtime.setValue
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.BuildConfig
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.ui.access.AccessInformationScreen
+import com.toast.android.gamebase.sample.ui.access_info.AccessInformationScreen
 import com.toast.android.gamebase.sample.ui.main.MainScreen
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
