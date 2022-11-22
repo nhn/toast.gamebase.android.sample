@@ -63,7 +63,7 @@ class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : Vi
                     TAG,
                     exception.toJsonString()
                 )
-                ShoppingUIState.REQUEST_ERROR
+                uiState.value = ShoppingUIState.REQUEST_ERROR
             }
         }
     }
