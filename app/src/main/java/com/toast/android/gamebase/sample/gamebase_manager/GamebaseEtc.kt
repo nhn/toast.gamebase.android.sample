@@ -1,7 +1,6 @@
 package com.toast.android.gamebase.sample.gamebase_manager
 
 import android.app.Activity
-import android.content.DialogInterface
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.analytics.data.GameUserData
 import com.toast.android.gamebase.analytics.data.LevelUpData
@@ -11,7 +10,6 @@ import com.toast.android.gamebase.contact.ContactConfiguration
 import com.toast.android.gamebase.event.GamebaseEventHandler
 
 const val TAG = "GamebaseManager"
-private var mGamebaseEventHandler: GamebaseEventHandler? = null
 
 
 // https://docs.toast.com/ko/Game/Gamebase/ko/aos-etc/

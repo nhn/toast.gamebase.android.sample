@@ -11,12 +11,12 @@ import androidx.lifecycle.viewModelScope
 import com.toast.android.gamebase.auth.mapping.data.ForcingMappingTicket
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
+import com.toast.android.gamebase.sample.data.supportedIdpList
 import com.toast.android.gamebase.sample.gamebase_manager.addIdpMapping
 import com.toast.android.gamebase.sample.gamebase_manager.forceIdpMapping
 import com.toast.android.gamebase.sample.gamebase_manager.getAuthMappingList
 import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
 import com.toast.android.gamebase.sample.gamebase_manager.removeIdpMapping
-import com.toast.android.gamebase.sample.supportedIdpList
 import kotlinx.coroutines.launch
 
 private const val TAG = "IdpMappingViewModel"

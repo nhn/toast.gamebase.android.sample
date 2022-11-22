@@ -1,6 +1,7 @@
-package com.toast.android.gamebase.sample
+package com.toast.android.gamebase.sample.data
 
 import com.toast.android.gamebase.base.auth.AuthProvider
+import com.toast.android.gamebase.sample.R
 
 // Add supported Idp List
 val supportedIdpList = listOf(
