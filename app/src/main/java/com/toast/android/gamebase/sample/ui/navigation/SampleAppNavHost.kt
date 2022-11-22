@@ -1,3 +1,7 @@
+/*
+ * © NHN Corp. All rights reserved.
+ * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
 package com.toast.android.gamebase.sample.ui.navigation
 
 import androidx.compose.runtime.Composable
@@ -6,7 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.ui.HomeScreen
+import com.toast.android.gamebase.sample.ui.home.HomeScreen
 import com.toast.android.gamebase.sample.ui.shopping.ShoppingScreen
 import com.toast.android.gamebase.sample.ui.settings.idpmap.IdpMappingScreen
 import com.toast.android.gamebase.sample.ui.login.LoginScreen

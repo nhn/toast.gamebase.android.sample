@@ -1,3 +1,7 @@
+/*
+ * © NHN Corp. All rights reserved.
+ * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
 package com.toast.android.gamebase.sample.ui
 
 import android.os.Bundle
@@ -10,7 +14,6 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.BuildConfig
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.ui.access_info.AccessInformationScreen
-import com.toast.android.gamebase.sample.ui.main.MainScreen
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 import com.toast.android.gamebase.sample.util.getIntInPreference

@@ -1,4 +1,8 @@
-package com.toast.android.gamebase.sample.ui.main
+/*
+ * © NHN Corp. All rights reserved.
+ * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package com.toast.android.gamebase.sample.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

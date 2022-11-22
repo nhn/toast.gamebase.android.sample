@@ -1,3 +1,7 @@
+/*
+ * © NHN Corp. All rights reserved.
+ * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
 package com.toast.android.gamebase.sample.data
 
 import com.toast.android.gamebase.base.auth.AuthProvider
