@@ -33,6 +33,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.gamebasemanager.isLoggedIn
 import com.toast.android.gamebase.sample.gamebasemanager.openContact
 import com.toast.android.gamebase.sample.getIconResourceById
 import com.toast.android.gamebase.sample.supportedIdpList
@@ -46,7 +47,11 @@ fun LoginScreen(
     loginViewModel: LoginViewModel = viewModel(),
     onLoggedIn: () -> Unit,
 ) {
-    LaunchedEffect(true) {
+    LaunchedEffect(Unit) {
+        if (isLoggedIn()) {
+            onLoggedIn()
+            return@LaunchedEffect
+        }
         loginViewModel.tryLastIdpLogin(activity)
     }
 

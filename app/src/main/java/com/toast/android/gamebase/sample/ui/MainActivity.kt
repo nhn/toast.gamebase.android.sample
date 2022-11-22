@@ -25,7 +25,7 @@ class MainActivity : GamebaseActivity() {
         super.onCreate(savedInstanceState)
 
         val startRoute =
-            if (Gamebase.isInitialized()) SampleAppScreens.Home.route else SampleAppScreens.Splash.route
+            if (Gamebase.isInitialized()) SampleAppScreens.Login.route else SampleAppScreens.Splash.route
         var shouldShowAccessInformationScreen by mutableStateOf(true)
 
         if (getIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, -1) == BuildConfig.VERSION_CODE) {
