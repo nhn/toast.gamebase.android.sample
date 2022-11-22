@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "IdpMappingViewModel"
 
-enum class IDP_MAPPING_UI_STATE {
+enum class IdpMappingUiState {
     DEFAULT,
     SHOW_REMOVE_MAPPING_DIALOG,
     SHOW_FORCE_MAPPING_DIALOG,
@@ -31,9 +31,13 @@ enum class IDP_MAPPING_UI_STATE {
 }
 
 class IdpMappingViewModel: ViewModel() {
-    var uiState by mutableStateOf(IDP_MAPPING_UI_STATE.DEFAULT)
+    var uiState by mutableStateOf(IdpMappingUiState.DEFAULT)
     var currentException by mutableStateOf<GamebaseException?>(null)
     var idpMappedMap: SnapshotStateMap<String, Boolean> = mutableStateMapOf()
+
+    init {
+        fetchAuthMappingList()
+    }
 
     fun fetchAuthMappingList() {
         val supportedIdpListWithoutGuest = supportedIdpList.drop(1)
@@ -47,7 +51,7 @@ class IdpMappingViewModel: ViewModel() {
     }
 
     fun showRemoveMappingDialog() {
-        uiState = IDP_MAPPING_UI_STATE.SHOW_REMOVE_MAPPING_DIALOG
+        uiState = IdpMappingUiState.SHOW_REMOVE_MAPPING_DIALOG
     }
 
     fun addMapping(activity: Activity, idp: String) {
@@ -56,25 +60,23 @@ class IdpMappingViewModel: ViewModel() {
             if (isSuccess) {
                 idpMappedMap[idp] = true
             } else if (exception?.code == GamebaseError.AUTH_ADD_MAPPING_ALREADY_MAPPED_TO_OTHER_MEMBER){
-                uiState = IDP_MAPPING_UI_STATE.SHOW_FORCE_MAPPING_DIALOG
+                uiState = IdpMappingUiState.SHOW_FORCE_MAPPING_DIALOG
             } else {
-                uiState = IDP_MAPPING_UI_STATE.MAPPING_FAILED
+                uiState = IdpMappingUiState.MAPPING_FAILED
             }
             currentException = exception
         }
     }
 
     fun removeMapping(activity: Activity, idp: String) {
-        viewModelScope.launch {
-            removeIdpMapping(activity, idp) { exception: GamebaseException? ->
-                val isSuccess = isSuccess(exception)
-                if (isSuccess) {
-                    idpMappedMap[idp] = false
-                } else {
-                    uiState = IDP_MAPPING_UI_STATE.REMOVE_MAPPING_FAILED
-                }
-                currentException = exception
+        removeIdpMapping(activity, idp) { exception: GamebaseException? ->
+            val isSuccess = isSuccess(exception)
+            if (isSuccess) {
+                idpMappedMap[idp] = false
+            } else {
+                uiState = IdpMappingUiState.REMOVE_MAPPING_FAILED
             }
+            currentException = exception
         }
     }
 
@@ -88,7 +90,7 @@ class IdpMappingViewModel: ViewModel() {
             if (isSuccess) {
                 idpMappedMap[idp] = true
             } else {
-                uiState = IDP_MAPPING_UI_STATE.FORCE_MAPPING_FAILED
+                uiState = IdpMappingUiState.FORCE_MAPPING_FAILED
             }
             currentException = exception
         }
