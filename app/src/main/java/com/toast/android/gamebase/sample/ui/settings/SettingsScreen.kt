@@ -24,9 +24,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.components.ConfirmAlertDialog
-import com.toast.android.gamebase.sample.ui.components.SubMenuDivider
-import com.toast.android.gamebase.sample.ui.components.SwitchWithLabel
+import com.toast.android.gamebase.sample.ui.components.dialog.ConfirmAlertDialog
+import com.toast.android.gamebase.sample.ui.components.text.SubMenuDivider
+import com.toast.android.gamebase.sample.ui.components.input.SwitchWithLabel
 import com.toast.android.gamebase.sample.ui.login.LoginState
 
 @Composable
@@ -108,7 +108,7 @@ fun SettingsScreen(
                 enableSwitch = true
             ) { newState ->
                 settingsViewModel.pushState.value = newState
-                settingsViewModel.registerPush(activity, PUSH_TYPE.NORMAL_PUSH)
+                settingsViewModel.registerPush(activity)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_advertising_push_title,
@@ -116,7 +116,7 @@ fun SettingsScreen(
                 enableSwitch = settingsViewModel.pushState.value
             ) { newState ->
                 settingsViewModel.advertisePushState.value = newState
-                settingsViewModel.registerPush(activity, PUSH_TYPE.ADVERTISING_PUSH)
+                settingsViewModel.registerPush(activity)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_night_advertising_push_title,
@@ -124,7 +124,7 @@ fun SettingsScreen(
                 enableSwitch = (settingsViewModel.pushState.value && settingsViewModel.advertisePushState.value)
             ) { newState ->
                 settingsViewModel.nightAdvertisePushState.value = newState
-                settingsViewModel.registerPush(activity, PUSH_TYPE.NIGHT_ADVERTISING_PUSH)
+                settingsViewModel.registerPush(activity)
             }
             SwitchWithLabel(
                 stringId = R.string.setting_push_foreground_title,

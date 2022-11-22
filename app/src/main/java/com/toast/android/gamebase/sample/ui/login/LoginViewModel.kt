@@ -8,10 +8,10 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
 import com.toast.android.gamebase.sample.GamebaseActivity
-import com.toast.android.gamebase.sample.gamebasemanager.isLoggedIn
-import com.toast.android.gamebase.sample.gamebasemanager.lastProviderLogin
-import com.toast.android.gamebase.sample.gamebasemanager.loginWithIdP
-import com.toast.android.gamebase.sample.gamebasemanager.registerPush
+import com.toast.android.gamebase.sample.gamebase_manager.isLoggedIn
+import com.toast.android.gamebase.sample.gamebase_manager.lastProviderLogin
+import com.toast.android.gamebase.sample.gamebase_manager.loginWithIdP
+import com.toast.android.gamebase.sample.gamebase_manager.registerPush
 import com.toast.android.gamebase.sample.util.loadPushConfiguration
 
 enum class LoginState() {
