@@ -1,6 +1,5 @@
 package com.toast.android.gamebase.sample.ui.login
 
-import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,17 +27,17 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebase_manager.isLoggedIn
 import com.toast.android.gamebase.sample.data.getIconResourceById
 import com.toast.android.gamebase.sample.data.supportedIdpList
+import com.toast.android.gamebase.sample.gamebase_manager.isLoggedIn
 import com.toast.android.gamebase.sample.gamebase_manager.openContact
-import com.toast.android.gamebase.sample.ui.components.text.CopyrightFooter
 import com.toast.android.gamebase.sample.ui.components.dialog.DropDownMenuDialog
+import com.toast.android.gamebase.sample.ui.components.text.CopyrightFooter
 import com.toast.android.gamebase.sample.ui.theme.GamebaseSampleProjectTheme
 
 @Composable
@@ -70,21 +69,31 @@ fun LoginScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 item {
-                    Spacer(modifier = Modifier.height(40.dp))
+                    Spacer(modifier = Modifier.height(
+                        dimensionResource(id = R.dimen.login_screen_margin_title)))
                     Text(
                         style = MaterialTheme.typography.h4,
                         text = stringResource(R.string.login_title)
                     )
-                    Spacer(modifier = Modifier.height(2.dp))
+                    Spacer(modifier = Modifier.height(
+                        dimensionResource(id = R.dimen.login_screen_button_space)
+                    ))
                     Text(stringResource(R.string.login_description))
-                    Spacer(modifier = Modifier.height(40.dp))
+                    Spacer(modifier = Modifier.height(
+                        dimensionResource(id = R.dimen.login_screen_margin_title)))
                 }
                 itemsIndexed(supportedIdpList) { _, idp ->
-                    OutlineLoginButton(activity, loginViewModel, idp)
-                    Spacer(modifier = Modifier.height(4.dp))
+                    OutlineLoginButton(
+                        idp,
+                        showLineRegionDialog = { loginViewModel.showRegionSelectDialog() },
+                        doLogin = { loginViewModel.login(activity, idp) }
+                    )
+                    Spacer(modifier = Modifier.height(
+                        dimensionResource(id = R.dimen.login_screen_icon_padding)
+                    ))
                 }
                 item {
-                    ContactTextButton(activity)
+                    ContactTextButton { openContact(activity, null) {} }
                     CopyrightFooter()
                 }
             }
@@ -105,9 +114,9 @@ fun LoginScreen(
 }
 
 @Composable
-fun ContactTextButton(activity: Activity) {
+fun ContactTextButton(openContact: () -> Unit) {
     TextButton(
-        onClick = { openContact(activity, null) {} }
+        onClick = { openContact() }
     ) {
         Spacer(modifier = Modifier.width(
             dimensionResource(id = R.dimen.login_screen_contact_button_horizontal_space)
@@ -123,7 +132,11 @@ fun ContactTextButton(activity: Activity) {
 }
 
 @Composable
-fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewModel, idp: String) {
+fun OutlineLoginButton(
+    idp: String,
+    doLogin: () -> Unit,
+    showLineRegionDialog: () -> Unit
+) {
     OutlinedButton(
         modifier = Modifier
             .fillMaxWidth(0.9f),
@@ -133,9 +146,9 @@ fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewMode
         ),
         onClick = {
             if (idp == AuthProvider.LINE) {
-                loginViewModel.showRegionSelectDialog()
+                showLineRegionDialog()
             } else {
-                loginViewModel.login(activity, idp)
+                doLogin()
             }
         }) {
         Row(
@@ -147,11 +160,11 @@ fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewMode
                 painter = painterResource(getIconResourceById(idp)),
                 contentDescription = idp,
                 modifier = Modifier
-                    .width(30.dp)
-                    .height(30.dp)
-                    .padding(4.dp)
+                    .width(dimensionResource(id = R.dimen.login_screen_icon_size))
+                    .height(dimensionResource(id = R.dimen.login_screen_icon_size))
+                    .padding(dimensionResource(id = R.dimen.login_screen_icon_padding))
             )
-            Spacer(Modifier.width(12.dp))
+            Spacer(Modifier.width(dimensionResource(id = R.dimen.login_screen_icon_text_space)))
             Text(
                 color = Color.Black,
                 text = "$idp 로 로그인",
@@ -159,4 +172,10 @@ fun OutlineLoginButton(activity: GamebaseActivity, loginViewModel: LoginViewMode
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewLoginButton() {
+    OutlineLoginButton("line", {}, {})
 }

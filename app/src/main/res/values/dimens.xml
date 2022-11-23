@@ -13,6 +13,11 @@
     <dimen name="main_screen_screen_menu_padding">12dp</dimen>
 
     <dimen name="login_screen_contact_button_horizontal_space">50dp</dimen>
+    <dimen name="login_screen_margin_title">40dp</dimen>
+    <dimen name="login_screen_icon_size">30dp</dimen>
+    <dimen name="login_screen_icon_padding">4dp</dimen>
+    <dimen name="login_screen_icon_text_space">12dp</dimen>
+    <dimen name="login_screen_button_space">2dp</dimen>
 
     <dimen name="setting_screen_column_padding_horizontal">20dp</dimen>
     <dimen name="setting_screen_menu_title_text_padding">10dp</dimen>
