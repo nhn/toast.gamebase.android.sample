@@ -18,18 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.base.purchase.PurchasableItem
 import com.toast.android.gamebase.sample.ui.components.screen.EmptyListScreen
 import com.toast.android.gamebase.sample.ui.components.screen.ErrorScreen
 import com.toast.android.gamebase.sample.ui.components.screen.LoadingDialog
-import com.toast.android.gamebase.sample.ui.theme.Black
-import com.toast.android.gamebase.sample.ui.theme.Grey500
-import com.toast.android.gamebase.sample.ui.theme.White
+import com.toast.android.gamebase.sample.ui.theme.*
 
 @Composable
 fun ShoppingScreen(
@@ -82,11 +77,6 @@ fun ListItems(
 ) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                horizontal = dimensionResource(id = R.dimen.shopping_screen_lazy_column_horizontal_padding),
-                vertical = dimensionResource(id = R.dimen.shopping_screen_lazy_column_vertical_padding)
-            )
             .clickable(onClick = {
                 if (!item.gamebaseProductId.isNullOrEmpty()) {
                     shoppingViewModel.requestItemNotConsumed(activity)
@@ -94,34 +84,32 @@ fun ListItems(
                     shoppingViewModel.requestItemNotConsumed(activity)
                 }
                 shoppingViewModel.needLoadingDialog = true
-            }),
+            })
+            .fillMaxWidth()
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.shopping_screen_lazy_column_horizontal_padding),
+                vertical = dimensionResource(id = R.dimen.shopping_screen_lazy_column_vertical_padding)
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column() {
             Text(
                 text = item.itemName ?: "",
-                color = Black,
-                fontSize = 10.sp,
-                fontWeight = FontWeight(400),
-                textAlign = TextAlign.Center
+                style = ShoppingTypography.body1,
             )
             Text(
                 text = item.productType,
-                color = Grey500,
-                fontSize = 8.sp,
-                fontWeight = FontWeight(400),
-                textAlign = TextAlign.Center
+                style = ShoppingTypography.subtitle1
             )
         }
-
-        Box(modifier = Modifier.height(dimensionResource(id = R.dimen.shoppign_screen_lazy_column_box_height)), Alignment.Center) {
+        Box(
+            modifier = Modifier.height(dimensionResource(id = R.dimen.shopping_screen_lazy_column_box_height)),
+            Alignment.Center
+        ) {
             Text(
                 text = item.localizedPrice ?: "",
-                color = Black,
-                fontSize = 15.sp,
-                fontWeight = FontWeight(400),
-                textAlign = TextAlign.Center
+                style = ShoppingTypography.body2
             )
         }
     }

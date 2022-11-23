@@ -36,7 +36,7 @@
 
     <dimen name="shopping_screen_lazy_column_vertical_padding">10dp</dimen>
     <dimen name="shopping_screen_lazy_column_horizontal_padding">20dp</dimen>
-    <dimen name="shoppign_screen_lazy_column_box_height">30dp</dimen>
+    <dimen name="shopping_screen_lazy_column_box_height">30dp</dimen>
 
     <dimen name="loading_dialog_box_size">100dp</dimen>
     <dimen name="loading_dialog_rounded_corner_shape">12dp</dimen>
