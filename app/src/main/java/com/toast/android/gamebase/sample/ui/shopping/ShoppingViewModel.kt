@@ -4,7 +4,6 @@
  */
 package com.toast.android.gamebase.sample.ui.shopping
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
@@ -31,23 +30,18 @@ enum class ShoppingUIState {
     EMPTY_ITEM
 }
 
-@SuppressLint("StaticFieldLeak")
-class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : ViewModel(),
-    DefaultLifecycleObserver {
+class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : ViewModel() {
     private val supervisorJob = SupervisorJob()
     var itemList: List<PurchasableItem> by mutableStateOf(mutableListOf())
         private set
     var needLoadingDialog: Boolean by mutableStateOf(false)
     val uiState = mutableStateOf(ShoppingUIState.REQUEST_LOADING)
 
-    // TODO : viewModel에서 activity를 멤버 변수로 가지고 있는 사항 수정
-    lateinit var mActivity: Activity
-
-    override fun onStart(owner: LifecycleOwner) {
+    suspend fun requestItemList(activity: Activity) {
         viewModelScope.launch(Dispatchers.IO + supervisorJob) {
             uiState.value = ShoppingUIState.REQUEST_LOADING
             try {
-                itemList = shoppingRepository.getItemsList(activity = mActivity)
+                itemList = shoppingRepository.getItemsList(activity = activity)
                 if (itemList.isEmpty()) {
                     uiState.value = ShoppingUIState.EMPTY_ITEM
                 } else {
@@ -55,7 +49,7 @@ class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : Vi
                 }
             } catch (exception: GamebaseException) {
                 showAlert(
-                    mActivity,
+                    activity,
                     "requestItemListPurchasable error",
                     exception.printWithIndent()
                 )
@@ -66,11 +60,6 @@ class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : Vi
                 uiState.value = ShoppingUIState.REQUEST_ERROR
             }
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        supervisorJob.cancel()
     }
 
     fun requestItemNotConsumed(activity: Activity) {
@@ -95,20 +84,7 @@ class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : Vi
                 showToast(activity, "Success Purchase : $data", Toast.LENGTH_SHORT)
                 needLoadingDialog = false
                 if (data != null) {
-                    Log.d(TAG, data.paymentSeq)
-                    Log.d(TAG, data.currency)
-                    Log.d(
-                        TAG,
-                        data.purchaseToken ?: "purchaseToken : null"
-                    )
-                    Log.d(
-                        TAG,
-                        data.gamebaseProductId ?: "gamebaseProductId : null"
-                    )
-                    Log.d(
-                        TAG,
-                        data.price.toString()
-                    )
+                    Log.d(TAG, data.toJsonString())
                 }
             } else {
                 showAlert(activity, "Error", exception.printWithIndent())
@@ -117,44 +93,11 @@ class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : Vi
                     TAG,
                     exception.toJsonString()
                 )
-                Log.d(TAG, exception.domain)
-                Log.d(
-                    TAG,
-                    exception.code.toString()
-                )
-                Log.d(
-                    TAG,
-                    exception.message ?: "message : null"
-                )
-                Log.d(
-                    TAG,
-                    exception.detailDomain ?: "detailDomain : null"
-                )
-                Log.d(
-                    TAG,
-                    exception.detailCode.toString()
-                )
-                Log.d(
-                    TAG,
-                    exception.detailMessage ?: "detailMessage : null"
-                )
             }
         }
     }
 
-    fun setGamebaseActivity(activity: Activity) {
-        this.mActivity = activity
-    }
-}
-
-@Composable
-fun <lifecycleObserver : LifecycleObserver> lifecycleObserver.observeShoppingLifecycle(
-    lifecycle: Lifecycle
-) {
-    DisposableEffect(lifecycle) {
-        lifecycle.addObserver(this@observeShoppingLifecycle)
-        onDispose {
-            lifecycle.removeObserver(this@observeShoppingLifecycle)
-        }
+    fun cancelRequestItemList() {
+        supervisorJob.cancel()
     }
 }

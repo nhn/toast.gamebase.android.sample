@@ -13,11 +13,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.base.purchase.PurchasableItem
@@ -33,9 +36,16 @@ fun ShoppingScreen(
         factory = ShoppingViewModelFactory(ShoppingRepository())
     )
 ) {
-    shoppingViewModel.setGamebaseActivity(activity)
-    shoppingViewModel.observeShoppingLifecycle(LocalLifecycleOwner.current.lifecycle)
+    val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
 
+    LaunchedEffect(Unit) {
+        shoppingViewModel.requestItemList(activity)
+    }
+    DisposableEffect(lifecycleOwner) {
+        onDispose {
+            shoppingViewModel.cancelRequestItemList()
+        }
+    }
     when (shoppingViewModel.uiState.value) {
         ShoppingUIState.REQUEST_SUCCESS -> ShoppingRequestSuccessScreen(
             activity = activity,
