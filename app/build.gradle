@@ -18,7 +18,10 @@ android {
     compileSdk 32
 
     defaultConfig {
+        // TODO: [Fix me] Change to your app's package name.
         applicationId "com.toast.gamebasesample"
+
+        // TODO: [Fix me] Change the minSdkVersion according to your your app's dependencies.
         minSdk 21
         targetSdk 32
         versionCode 1
