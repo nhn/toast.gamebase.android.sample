@@ -5,6 +5,7 @@
 package com.toast.android.gamebase.sample.ui.developer.push
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,7 @@ import com.toast.android.gamebase.base.push.PushConfiguration
 import com.toast.android.gamebase.base.push.data.GamebaseNotificationOptions
 import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
 import com.toast.android.gamebase.sample.gamebase_manager.showAlert
+import com.toast.android.gamebase.sample.gamebase_manager.showToast
 import com.toast.android.gamebase.sample.util.printWithIndent
 
 const val NOTIFICATION_PRIORITY_MIN = -2
@@ -72,7 +74,9 @@ class PushSettingViewModel(): ViewModel() {
 //            .setSoundFileName(soundFileName.value)
 
         Gamebase.Push.registerPush(activity, pushConfiguration, notificationOptions) { exception ->
-            if (!isSuccess(exception)) {
+            if (isSuccess(exception)) {
+                showToast(activity, "register push success", Toast.LENGTH_SHORT)
+            } else {
                 showAlert(activity, "Failed to register push", exception.printWithIndent())
             }
         }
