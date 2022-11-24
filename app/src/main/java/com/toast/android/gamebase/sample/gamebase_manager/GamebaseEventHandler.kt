@@ -87,21 +87,25 @@ private fun processServerPush(
     category: String,
     onKickOut: () -> Unit
 ) {
-    if (category == GamebaseEventCategory.SERVER_PUSH_APP_KICKOUT_MESSAGE_RECEIVED) {
-        // Currently, the kickout pop-up is displayed.
-        // If your game is running, stop it.
-        // pauseGame()
-    } else if (category == GamebaseEventCategory.SERVER_PUSH_APP_KICKOUT) {
-        // Kicked out from Gamebase server.(Maintenance, banned or etc..)
-        // And the game user closes the kickout pop-up.
-        // Return to title and initialize Gamebase again.
-        onKickOut()
-    } else if (category == GamebaseEventCategory.SERVER_PUSH_TRANSFER_KICKOUT) {
-        // If the user wants to move the guest account to another device,
-        // if the account transfer is successful,
-        // the login of the previous device is released,
-        // so go back to the title and try to log in again.
-        onKickOut()
+    when (category) {
+        GamebaseEventCategory.SERVER_PUSH_APP_KICKOUT_MESSAGE_RECEIVED -> {
+            // Currently, the kickout pop-up is displayed.
+            // If your game is running, stop it.
+            // pauseGame()
+        }
+        GamebaseEventCategory.SERVER_PUSH_APP_KICKOUT -> {
+            // Kicked out from Gamebase server.(Maintenance, banned or etc..)
+            // And the game user closes the kickout pop-up.
+            // Return to title and initialize Gamebase again.
+            onKickOut()
+        }
+        GamebaseEventCategory.SERVER_PUSH_TRANSFER_KICKOUT -> {
+            // If the user wants to move the guest account to another device,
+            // if the account transfer is successful,
+            // the login of the previous device is released,
+            // so go back to the title and try to log in again.
+            onKickOut()
+        }
     }
 }
 

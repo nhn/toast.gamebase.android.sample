@@ -118,7 +118,7 @@ fun ListAccessInformation(information: AccessInformation) {
                 .background(color = Grey300, shape = CircleShape)
                 .padding(10.dp)
         )
-        Column() {
+        Column {
             Text(
                 text = stringResource(information.title),
                 color = Black,

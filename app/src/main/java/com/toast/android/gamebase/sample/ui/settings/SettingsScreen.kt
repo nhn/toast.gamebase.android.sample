@@ -66,7 +66,7 @@ fun SettingsScreen(
             .verticalScroll(scrollState),
         horizontalAlignment = Alignment.Start
     ) {
-        Column() {
+        Column {
             SubMenuDivider(R.string.setting_version_sdk_title)
             Row(
                 modifier = Modifier.fillMaxSize(),
@@ -88,7 +88,7 @@ fun SettingsScreen(
             }
         }
 
-        Column() {
+        Column {
             SubMenuDivider(R.string.setting_account_title)
             // TODO : idp 계정 연동 구현 완료시 event 추가
             ListItem(R.string.setting_account_connected_idp_title) {
@@ -103,7 +103,7 @@ fun SettingsScreen(
             }
         }
 
-        Column() {
+        Column {
             SubMenuDivider(R.string.setting_notification_title)
             SwitchWithLabel(
                 stringId = R.string.setting_normal_push_title,
@@ -139,7 +139,7 @@ fun SettingsScreen(
             }
         }
 
-        Column() {
+        Column {
             SubMenuDivider(R.string.setting_extra_title)
             ListItem(R.string.setting_service_center_title) {
                 settingsViewModel.loadServiceCenter(activity, "Test User")

@@ -44,7 +44,7 @@ fun ClickableText(
         modifier = Modifier
             .heightIn(TextFieldDefaults.MinHeight)
             .fillMaxWidth()
-            .clickable() {
+            .clickable {
                 onClick()
             }
             .padding(dimensionResource(id = R.dimen.setting_screen_menu_title_text_padding)),

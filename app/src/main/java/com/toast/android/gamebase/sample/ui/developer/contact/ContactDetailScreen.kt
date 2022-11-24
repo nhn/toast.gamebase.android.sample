@@ -158,7 +158,7 @@ fun ColumnForMap(
                     Text(stringResource(id = R.string.empty_list_message))
                 }
             } else {
-                Column() {
+                Column {
                     map.keys.toList().forEach { key ->
                         MapItem(key, map[key].toString()) {
                             onItemRemoveClicked(key)

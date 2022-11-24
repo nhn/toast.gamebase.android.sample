@@ -27,7 +27,7 @@ fun TextFieldWithLabel(
     fieldEnabled: Boolean = true,
     onValueChanged: (String) -> Unit,
 ) {
-    Column() {
+    Column {
         Text(
             text = labelName,
             modifier = Modifier

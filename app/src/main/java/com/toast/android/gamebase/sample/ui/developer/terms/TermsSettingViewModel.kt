@@ -18,11 +18,11 @@ import com.toast.android.gamebase.terms.GamebaseTermsConfiguration
 
 private const val TAG = "TermsSettingViewModel"
 class TermsSettingViewModel: ViewModel() {
-    var termsPopupShowing = mutableStateOf<Boolean>(false)
+    var termsPopupShowing = mutableStateOf(false)
         private set
-    var forceShow = mutableStateOf<Boolean>(false)
+    var forceShow = mutableStateOf(false)
         private set
-    var fixedFontSize = mutableStateOf<Boolean>(false)
+    var fixedFontSize = mutableStateOf(false)
         private set
 
     fun showTermsViewAndCallback(

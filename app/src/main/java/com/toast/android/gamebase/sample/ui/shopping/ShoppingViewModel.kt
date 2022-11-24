@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 private const val TAG: String = "ShoppingScreen"
 
-enum class ShoppingUIState() {
+enum class ShoppingUIState {
     REQUEST_SUCCESS,
     REQUEST_ERROR,
     REQUEST_LOADING,
