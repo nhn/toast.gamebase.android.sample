@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.ui.theme.Black
-import com.toast.android.gamebase.sample.ui.theme.TextFieldColor
+import com.toast.android.gamebase.sample.ui.theme.LightBlue
 import com.toast.android.gamebase.sample.ui.theme.Toast
 import com.toast.android.gamebase.sample.ui.theme.Transparent
 
@@ -43,9 +43,9 @@ fun TextFieldWithLabel(
             readOnly = !fieldEnabled,
             onValueChange = onValueChanged,
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = TextFieldColor,
+                backgroundColor = LightBlue,
                 cursorColor = Black,
-                disabledLabelColor = TextFieldColor,
+                disabledLabelColor = LightBlue,
                 focusedIndicatorColor = Transparent,
                 unfocusedIndicatorColor = Transparent
             ),
