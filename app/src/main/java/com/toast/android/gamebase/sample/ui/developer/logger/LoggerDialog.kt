@@ -6,15 +6,21 @@ package com.toast.android.gamebase.sample.ui.developer.logger
 
 import android.app.Activity
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.components.input.DropdownMenuBox
 import com.toast.android.gamebase.sample.ui.components.dialog.InputDialog
@@ -56,94 +62,113 @@ fun SendLogDialog(
 ) {
     if (isDialogOpened) {
         val sendLogDialogStateHolder = SendLogDialogStateHolder()
-        AlertDialog(modifier = Modifier.fillMaxWidth(), onDismissRequest = {
-            setDialogStatus(false)
-        },
-            title = {
-                Text(
+
+        Dialog(onDismissRequest = {}) {
+            val scrollState = rememberScrollState()
+            Surface(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(dimensionResource(id = R.dimen.logger_dialog_surface_corner_shape)))
+            ) {
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 50.dp),
-                    text = title,
-                    textAlign = TextAlign.Center
-                )
-            },
-            text = {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    TextFieldWithLabel(
-                        labelName = stringResource(id = R.string.message),
-                        fieldMessage = sendLogDialogStateHolder.loggerMessage.value,
-                        onValueChanged = { value ->
-                            sendLogDialogStateHolder.loggerMessage.value = value
-                        }
-                    )
-                    TextFieldWithLabel(
-                        labelName = stringResource(id = R.string.user_key),
-                        fieldMessage = sendLogDialogStateHolder.loggerUserKey.value,
-                        onValueChanged = { value ->
-                            sendLogDialogStateHolder.loggerUserKey.value = value
-                        }
-                    )
-                    TextFieldWithLabel(
-                        labelName = stringResource(id = R.string.user_value),
-                        fieldMessage = sendLogDialogStateHolder.loggerUserValue.value,
-                        onValueChanged = { value ->
-                            sendLogDialogStateHolder.loggerUserValue.value = value
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(text = stringResource(id = R.string.developer_push_noti_enable_set_priority))
-                        DropdownMenuBox(
-                            options = stringArrayResource(id = stringArrayResources).toList(),
-                            expanded = sendLogDialogStateHolder.loggerLevelExpanded.value,
-                            onExpandChanged = { expand ->
-                                sendLogDialogStateHolder.loggerLevelExpanded.value = expand
-                            },
-                            selected = sendLogDialogStateHolder.loggerLevel.value,
-                            onSelected = { selectedId ->
-                                sendLogDialogStateHolder.loggerLevel.value = selectedId
-                            },
-                            modifier = Modifier.width(150.dp)
+                        .padding(
+                            dimensionResource(id = R.dimen.logger_dialog_surface_padding)
                         )
-                    }
-                }
-            },
-            buttons = {
-                Row(
-                    modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 20.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                        .verticalScroll(scrollState)
                 ) {
-                    TextButton(
-                        onClick = {
-                            sendLogDialogStateHolder.sendLogger()
-                            setDialogStatus(false)
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(dimensionResource(id = R.dimen.logger_dialog_text_padding)),
+                        text = title,
+                        textAlign = TextAlign.Center
+                    )
+                    Column() {
+                        TextFieldWithLabel(
+                            labelName = stringResource(id = R.string.message),
+                            fieldMessage = sendLogDialogStateHolder.loggerMessage.value,
+                            onValueChanged = { value ->
+                                sendLogDialogStateHolder.loggerMessage.value = value
+                            }
+                        )
+                        TextFieldWithLabel(
+                            labelName = stringResource(id = R.string.user_key),
+                            fieldMessage = sendLogDialogStateHolder.loggerUserKey.value,
+                            onValueChanged = { value ->
+                                sendLogDialogStateHolder.loggerUserKey.value = value
+                            }
+                        )
+                        TextFieldWithLabel(
+                            labelName = stringResource(id = R.string.user_value),
+                            fieldMessage = sendLogDialogStateHolder.loggerUserValue.value,
+                            onValueChanged = { value ->
+                                sendLogDialogStateHolder.loggerUserValue.value = value
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.logger_dialog_spacer_padding)))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = stringResource(id = R.string.developer_push_noti_enable_set_priority))
+                            DropdownMenuBox(
+                                options = stringArrayResource(id = stringArrayResources).toList(),
+                                expanded = sendLogDialogStateHolder.loggerLevelExpanded.value,
+                                onExpandChanged = { expand ->
+                                    sendLogDialogStateHolder.loggerLevelExpanded.value = expand
+                                },
+                                selected = sendLogDialogStateHolder.loggerLevel.value,
+                                onSelected = { selectedId ->
+                                    sendLogDialogStateHolder.loggerLevel.value = selectedId
+                                },
+                                modifier = Modifier.width(dimensionResource(id = R.dimen.logger_dialog_drop_down_box_width))
+                            )
                         }
-                    ) {
-                        Text(stringResource(id = R.string.button_ok))
                     }
-                    TextButton(
-                        onClick = {
-                            setDialogStatus(false)
-                        }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = dimensionResource(id = R.dimen.logger_dialog_text_padding)),
+                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Text(stringResource(id = R.string.button_cancel))
+                        TextButton(
+                            onClick = {
+                                sendLogDialogStateHolder.sendLogger()
+                                setDialogStatus(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_ok))
+                        }
+                        TextButton(
+                            onClick = {
+                                setDialogStatus(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_cancel))
+                        }
                     }
                 }
             }
-        )
+        }
     }
 }
 
 @Preview
 @Composable
-fun PreviewSendLogDialog() {
+fun PreviewSendLogDialogInPortrait() {
+    SendLogDialog(
+        isDialogOpened = true,
+        title = "제목",
+        setDialogStatus = {},
+        stringArrayResources = R.array.logger_level
+    )
+}
+
+@Preview(device = Devices.AUTOMOTIVE_1024p)
+@Composable
+fun PreviewSendLogDialogInLandscape() {
     SendLogDialog(
         isDialogOpened = true,
         title = "제목",

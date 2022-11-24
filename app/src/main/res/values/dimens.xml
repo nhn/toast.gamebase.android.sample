@@ -46,4 +46,11 @@
     <dimen name="loading_dialog_box_size">100dp</dimen>
     <dimen name="loading_dialog_rounded_corner_shape">12dp</dimen>
     <dimen name="loading_dialog_text_top_padding">8dp</dimen>
+
+    <dimen name="logger_dialog_surface_corner_shape">10dp</dimen>
+    <dimen name="logger_dialog_surface_padding">10dp</dimen>
+    <dimen name="logger_dialog_text_padding">20dp</dimen>
+    <dimen name="logger_dialog_spacer_padding">5dp</dimen>
+    <dimen name="logger_dialog_drop_down_box_width">150dp</dimen>
+
 </resources>
