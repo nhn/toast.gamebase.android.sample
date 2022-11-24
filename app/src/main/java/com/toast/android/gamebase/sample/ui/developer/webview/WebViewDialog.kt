@@ -51,7 +51,6 @@ fun OpenBrowserDialog(
     }
 }
 
-// TODO : IMAGE 공지 setting UI와 겹침 추후에 common.settingUI 등으로 setting 분리 요망
 @Composable
 fun WebViewSettingDialog(
     isDialogOpened: Boolean,

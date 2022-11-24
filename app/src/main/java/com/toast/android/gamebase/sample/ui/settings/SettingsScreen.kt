@@ -50,7 +50,6 @@ fun SettingsScreen(
     }
 
     LaunchedEffect(Unit) {
-        // TODO : 로그인 성공 이후 preference에서 푸시 관련 동의 내용 registerPush 메서드 호출로 활성화
         // 아래 url 주의 사항 확인
         // https://docs.toast.com/ko/Game/Gamebase/ko/aos-push/#register-push
         //settingsViewModel.registerPush(activity, "default")
@@ -90,7 +89,6 @@ fun SettingsScreen(
 
         Column() {
             SubMenuDivider(R.string.setting_account_title)
-            // TODO : idp 계정 연동 구현 완료시 event 추가
             ListItem(R.string.setting_account_connected_idp_title) {
                 navigateToIdpMapping()
                 Log.d("SettingScreen", "idp 계정 연동 listen 활성화")
