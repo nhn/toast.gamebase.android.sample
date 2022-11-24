@@ -94,7 +94,7 @@ class TermsCustomViewModel: ViewModel() {
         }
     }
 
-    fun onSwitchChanged(activity: Activity, key: Int, newState: Boolean) {
+    fun onSwitchChanged(key: Int, newState: Boolean) {
         agreedMap[key]?.value = newState
     }
 

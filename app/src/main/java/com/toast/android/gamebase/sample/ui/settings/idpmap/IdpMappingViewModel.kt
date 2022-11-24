@@ -89,14 +89,14 @@ class IdpMappingViewModel: ViewModel() {
             return
         }
         val forcingMappingTicket = ForcingMappingTicket.from(exception);
-        forceIdpMapping(activity, forcingMappingTicket) { exception ->
-            val isSuccess = isSuccess(exception)
+        forceIdpMapping(activity, forcingMappingTicket) { forceMappingException ->
+            val isSuccess = isSuccess(forceMappingException)
             if (isSuccess) {
                 idpMappedMap[idp] = true
             } else {
                 uiState = IdpMappingUiState.FORCE_MAPPING_FAILED
             }
-            currentException = exception
+            currentException = forceMappingException
         }
     }
 }

@@ -37,7 +37,7 @@ class PushSettingViewModel(): ViewModel() {
     )
 
     fun initialFetch(activity: Activity) {
-        val currentPushOptions = Gamebase.Push.queryTokenInfo(activity) { pushTokenInfo, exception ->
+        Gamebase.Push.queryTokenInfo(activity) { pushTokenInfo, exception ->
             if (isSuccess(exception)) {
                 enablePush.value = pushTokenInfo.agreement.pushEnabled
                 enableAdAgreement.value = pushTokenInfo.agreement.adAgreement
