@@ -10,31 +10,31 @@ interface LoggerLevel {
     fun sendLog(message: String, userField: Map<String?, String?>)
 }
 
-class Debug() : LoggerLevel {
+class Debug : LoggerLevel {
     override fun sendLog(message: String, userField: Map<String?, String?>) {
         sendLogDebug(message, userField)
     }
 }
 
-class Info() : LoggerLevel {
+class Info : LoggerLevel {
     override fun sendLog(message: String, userField: Map<String?, String?>) {
         sendLogInfo(message, userField)
     }
 }
 
-class Warn() : LoggerLevel {
+class Warn : LoggerLevel {
     override fun sendLog(message: String, userField: Map<String?, String?>) {
         sendLogWarn(message, userField)
     }
 }
 
-class Error() : LoggerLevel {
+class Error : LoggerLevel {
     override fun sendLog(message: String, userField: Map<String?, String?>) {
         sendLogError(message, userField)
     }
 }
 
-class Fatal() : LoggerLevel {
+class Fatal : LoggerLevel {
     override fun sendLog(message: String, userField: Map<String?, String?>) {
         sendLogFatal(message, userField)
     }

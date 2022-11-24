@@ -204,7 +204,7 @@ class DeveloperViewModel: ViewModel() {
         viewModelScope.launch {
             queryTerms(activity) { gamebaseQueryTermsResult, exception ->
                 if (Gamebase.isSuccess(exception)) {
-                    showAlert(activity, successTitle, gamebaseQueryTermsResult.printWithIndent());
+                    showAlert(activity, successTitle, gamebaseQueryTermsResult.printWithIndent())
                 } else if (exception.code == GamebaseError.UI_TERMS_NOT_EXIST_FOR_DEVICE_COUNTRY) {
                     // Another country device.
                     // Pass the 'terms and conditions' step.
@@ -213,7 +213,7 @@ class DeveloperViewModel: ViewModel() {
                         (activity as Context).getString(R.string.developer_terms_no_need_to_show_terms)
                     )
                 } else {
-                    showAlert(activity, failedTitle, exception.printWithIndent());
+                    showAlert(activity, failedTitle, exception.printWithIndent())
                 }
             }
         }
@@ -221,7 +221,7 @@ class DeveloperViewModel: ViewModel() {
 
     private fun requestContactUrl(activity: Activity) {
         val title = (activity as Context).getString(R.string.developer_contact_url_alert_title)
-        getContactUrl() { contactUrl, exception ->
+        getContactUrl { contactUrl, exception ->
             if (isSuccess(exception)) {
                 // do job with Contact url
                 showAlert(activity, title, contactUrl)

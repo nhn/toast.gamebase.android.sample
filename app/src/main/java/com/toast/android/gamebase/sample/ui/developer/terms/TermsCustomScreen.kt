@@ -70,7 +70,7 @@ fun TermsContentLazyColumn(viewModel: TermsCustomViewModel) {
                 state = state,
                 enableSwitch = viewModel.enabledMap[item.termsContentSeq]?.value ?: true,
                 event = { newState ->
-                    viewModel.onSwitchChanged(activity, item.termsContentSeq, newState)
+                    viewModel.onSwitchChanged(item.termsContentSeq, newState)
                 }
             )
         }

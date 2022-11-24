@@ -6,7 +6,7 @@ package com.toast.android.gamebase.sample.data
 
 import com.toast.android.gamebase.sample.R
 
-class AccessInformationRepository() {
+class AccessInformationRepository {
     fun getAccessInformation(): List<AccessInformation> {
         return listOf(
             AccessInformation(

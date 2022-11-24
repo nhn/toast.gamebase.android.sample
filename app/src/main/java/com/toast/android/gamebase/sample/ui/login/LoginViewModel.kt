@@ -18,15 +18,13 @@ import com.toast.android.gamebase.sample.gamebase_manager.loginWithIdP
 import com.toast.android.gamebase.sample.gamebase_manager.registerPush
 import com.toast.android.gamebase.sample.util.loadPushConfiguration
 
-enum class LoginState() {
+enum class LoginState {
     LOGGED_IN,
     LOGGED_OUT,
     SHOW_LINE_REGION_DIALOG,
 }
 
-private const val TAG = "LoginViewModel"
-
-class LoginViewModel() : ViewModel() {
+class LoginViewModel : ViewModel() {
     var uiState by mutableStateOf(value = LoginState.LOGGED_OUT)
         private set
     private val enteredRegion = mutableStateOf("none")

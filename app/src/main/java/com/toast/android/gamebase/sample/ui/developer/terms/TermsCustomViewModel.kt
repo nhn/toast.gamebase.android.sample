@@ -54,7 +54,7 @@ class TermsCustomViewModel: ViewModel() {
             // 푸시 수신 동의 여부도 Gamebase 서버에 저장되지 않으므로 agreed 값은 항상 false 로 리턴됩니다.
             // 푸시 수신 동의 여부는 Gamebase.Push.queryTokenInfo API 를 통해 조회하시기 바랍니다.
             queryTokenInfo(activity) { pushTokenInfo, gamebaseException ->
-                agreedMap = queryTermsResult.contents.associate { it ->
+                agreedMap = queryTermsResult.contents.associate {
                     val agreed = determineAgreed(
                         it,
                         gamebaseException,
@@ -62,7 +62,7 @@ class TermsCustomViewModel: ViewModel() {
                     )
                     it.termsContentSeq to mutableStateOf(agreed)
                 }
-                enabledMap = queryTermsResult.contents.associate { it ->
+                enabledMap = queryTermsResult.contents.associate {
                     // 필수 약관은 OFF 불가능
                     it.termsContentSeq to mutableStateOf(!it.required)
                 }
@@ -94,7 +94,7 @@ class TermsCustomViewModel: ViewModel() {
         }
     }
 
-    fun onSwitchChanged(activity: Activity, key: Int, newState: Boolean) {
+    fun onSwitchChanged(key: Int, newState: Boolean) {
         agreedMap[key]?.value = newState
     }
 
@@ -113,8 +113,8 @@ class TermsCustomViewModel: ViewModel() {
             }
         }
 
-        var agreeNight = false;
-        var agreeDay = false;
+        var agreeNight = false
+        var agreeDay = false
         queryTermsResultState.value?.contents?.forEach {
             when (it.agreePush) {
                 "ALL" -> {

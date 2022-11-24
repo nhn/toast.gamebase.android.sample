@@ -11,7 +11,6 @@ import com.toast.android.gamebase.analytics.data.LevelUpData
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.contact.ContactConfiguration
-import com.toast.android.gamebase.event.GamebaseEventHandler
 
 const val TAG = "GamebaseManager"
 
@@ -64,7 +63,7 @@ fun setGameUserData(userLevel: Int, channelId: String?, characterId: String?, cl
 }
 
 fun onLevelUp(userLevel: Int, levelUpTime: Long) {
-    val levelUpData: LevelUpData = LevelUpData(userLevel, levelUpTime)
+    val levelUpData = LevelUpData(userLevel, levelUpTime)
 
     Gamebase.Analytics.traceLevelUp(levelUpData)
 }

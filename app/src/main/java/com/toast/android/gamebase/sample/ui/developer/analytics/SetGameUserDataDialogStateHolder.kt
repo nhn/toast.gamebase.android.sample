@@ -12,7 +12,7 @@ import java.lang.NumberFormatException
 
 private const val TAG = "GameUserDataDialog"
 
-class SetGameUserDataDialogStateHolder() {
+class SetGameUserDataDialogStateHolder {
     val levelInput = mutableStateOf("")
     val channelId = mutableStateOf("")
     val characterId = mutableStateOf("")

@@ -61,7 +61,7 @@ fun ShoppingRequestSuccessScreen(activity: Activity, shoppingViewModel: Shopping
             .fillMaxSize()
             .background(White)
     ) {
-        LazyColumn() {
+        LazyColumn {
             items(items = shoppingViewModel.itemList) { item ->
                 ListItems(activity = activity, item = item, shoppingViewModel = shoppingViewModel)
             }
@@ -93,7 +93,7 @@ fun ListItems(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Column() {
+        Column {
             Text(
                 text = item.itemName ?: "",
                 style = ShoppingTypography.body1,

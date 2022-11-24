@@ -11,7 +11,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.toast.android.gamebase.auth.mapping.data.ForcingMappingTicket
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
@@ -21,9 +20,6 @@ import com.toast.android.gamebase.sample.gamebase_manager.forceIdpMapping
 import com.toast.android.gamebase.sample.gamebase_manager.getAuthMappingList
 import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
 import com.toast.android.gamebase.sample.gamebase_manager.removeIdpMapping
-import kotlinx.coroutines.launch
-
-private const val TAG = "IdpMappingViewModel"
 
 enum class IdpMappingUiState {
     DEFAULT,
@@ -88,15 +84,15 @@ class IdpMappingViewModel: ViewModel() {
         if (exception == null) {
             return
         }
-        val forcingMappingTicket = ForcingMappingTicket.from(exception);
-        forceIdpMapping(activity, forcingMappingTicket) { exception ->
-            val isSuccess = isSuccess(exception)
+        val forcingMappingTicket = ForcingMappingTicket.from(exception)
+        forceIdpMapping(activity, forcingMappingTicket) { forceMappingException ->
+            val isSuccess = isSuccess(forceMappingException)
             if (isSuccess) {
                 idpMappedMap[idp] = true
             } else {
                 uiState = IdpMappingUiState.FORCE_MAPPING_FAILED
             }
-            currentException = exception
+            currentException = forceMappingException
         }
     }
 }

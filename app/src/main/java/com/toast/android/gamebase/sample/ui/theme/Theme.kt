@@ -52,13 +52,3 @@ fun GamebaseSampleProjectTheme(
         content = content
     )
 }
-
-@Composable
-fun LaunchingTheme(content: @Composable () -> Unit) {
-    MaterialTheme(
-        colors = LaunchingPalette,
-        typography = LaunchingTypography,
-        shapes = Shapes,
-        content = content
-    )
-}

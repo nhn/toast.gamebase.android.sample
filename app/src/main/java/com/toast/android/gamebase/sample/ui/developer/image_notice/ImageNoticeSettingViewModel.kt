@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 import com.toast.android.gamebase.imagenotice.ImageNoticeConfiguration
 import com.toast.android.gamebase.sample.gamebase_manager.showImageNotices
 
-class ImageNoticeSettingViewModel() : ViewModel() {
+class ImageNoticeSettingViewModel : ViewModel() {
     var imageNoticeBackgroundDialogStatue = mutableStateOf(false)
     var imageNoticeTimeOutDialogStatus = mutableStateOf(false)
     var imageNoticeBackgroundColor = mutableStateOf("#80000000")

@@ -6,7 +6,7 @@ package com.toast.android.gamebase.sample.ui.developer.logger
 
 import androidx.compose.runtime.mutableStateOf
 
-class SendLogDialogStateHolder() {
+class SendLogDialogStateHolder {
     var loggerLevelExpanded = mutableStateOf(false)
     var loggerLevel = mutableStateOf(0)
     var loggerMessage = mutableStateOf("")
