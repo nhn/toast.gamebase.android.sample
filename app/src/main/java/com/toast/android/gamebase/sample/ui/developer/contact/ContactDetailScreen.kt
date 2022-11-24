@@ -40,7 +40,7 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.components.button.RoundButton
 import com.toast.android.gamebase.sample.ui.components.dialog.KeyValueInputDialog
 import com.toast.android.gamebase.sample.ui.components.input.TextFieldWithLabel
-import com.toast.android.gamebase.sample.ui.theme.TextFieldColor
+import com.toast.android.gamebase.sample.ui.theme.LightBlue
 import com.toast.android.gamebase.sample.ui.theme.Toast
 
 @Composable
@@ -146,7 +146,7 @@ fun ColumnForMap(
             clickListener()
         }
     ) {
-        Surface(color = TextFieldColor) {
+        Surface(color = LightBlue) {
             if (map.isEmpty()) {
                 Row(modifier = Modifier
                     .fillMaxWidth()
