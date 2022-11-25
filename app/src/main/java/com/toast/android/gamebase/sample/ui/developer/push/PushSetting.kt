@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -46,7 +47,7 @@ fun PushSettingScreen(
     }
 
     Column(modifier = Modifier
-        .padding(20.dp)
+        .padding(dimensionResource(id = R.dimen.push_setting_column_padding))
         .verticalScroll(scrollState)) {
 
         SubMenuDivider(R.string.developer_push_configuration_sub_title)
@@ -102,15 +103,15 @@ fun PushSettingScreen(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(6.dp),
+                .padding(dimensionResource(id = R.dimen.push_setting_drop_down_row_padding)),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(text = stringResource(id = R.string.developer_push_noti_enable_set_priority))
             DropdownMenuBox(
                 modifier = Modifier
-                    .width(150.dp)
-                    .height(50.dp),
+                    .width(dimensionResource(id = R.dimen.push_setting_drop_down_width))
+                    .height(dimensionResource(id = R.dimen.push_setting_drop_down_height)),
                 options = viewModel.noticePriorityOptions,
                 expanded = expandState,
                 onExpandChanged = { expand -> expandState = expand },

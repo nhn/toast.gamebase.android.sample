@@ -72,4 +72,8 @@
     <dimen name="analytics_dialog_text_bottom_space">5dp</dimen>
     <dimen name="analytics_dialog_button_row_padding_bottom">20dp</dimen>
 
+    <dimen name="push_setting_column_padding">20dp</dimen>
+    <dimen name="push_setting_drop_down_row_padding">10dp</dimen>
+    <dimen name="push_setting_drop_down_width">150dp</dimen>
+    <dimen name="push_setting_drop_down_height">50dp</dimen>
 </resources>
