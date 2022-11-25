@@ -79,4 +79,9 @@
 
     <dimen name="webview_setting_column_padding">20dp</dimen>
     <dimen name="webview_setting_drop_down_width">150dp</dimen>
+
+    <dimen name="profile_column_padding">30dp</dimen>
+    <dimen name="profile_image_size">180dp</dimen>
+    <dimen name="profile_image_space_bottom">40dp</dimen>
+    <dimen name="profile_item_spacer">20dp</dimen>
 </resources>

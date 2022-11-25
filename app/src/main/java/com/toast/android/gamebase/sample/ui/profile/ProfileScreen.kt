@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,30 +42,30 @@ fun ProfileScreen(
 
     Column (modifier = Modifier
         .verticalScroll(scrollState)
-        .padding(30.dp)){
+        .padding(dimensionResource(id = R.dimen.profile_column_padding))){
 
         Image (
             painter = painterResource(id = R.drawable.profile),
             contentDescription = stringResource(R.string.profile_picture_content_description),
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(180.dp)
+                .size(dimensionResource(id = R.dimen.profile_image_size))
                 .clip(CircleShape)
                 .align(Alignment.CenterHorizontally))
 
-        Spacer(Modifier.height(40.dp))
+        Spacer(Modifier.height(dimensionResource(id = R.dimen.profile_image_space_bottom)))
 
         Text(text = stringResource(R.string.profile_menu_gamebase_user_id), fontWeight = FontWeight.Bold)
         Text(text = profileViewModel.userId, color = Grey700)
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(dimensionResource(id = R.dimen.profile_item_spacer)))
 
         Text(text = stringResource(R.string.profile_menu_gamebase_access_token), fontWeight = FontWeight.Bold)
         Text(text = profileViewModel.accessToken, color = Grey700)
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(dimensionResource(id = R.dimen.profile_item_spacer)))
 
         Text(text = stringResource(R.string.profile_menu_last_logged_in_provider), fontWeight = FontWeight.Bold)
         Text(text = profileViewModel.lastLoggedInProvider, color = Grey700)
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(dimensionResource(id = R.dimen.profile_item_spacer)))
 
         Text(text = stringResource(R.string.profile_menu_connected_idp_list), fontWeight = FontWeight.Bold)
         for (idp in profileViewModel.connectedIdpList) {
