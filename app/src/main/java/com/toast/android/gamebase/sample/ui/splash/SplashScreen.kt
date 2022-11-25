@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -58,11 +59,12 @@ fun SplashScreen(
             Text(
                 text = stringResource(id = R.string.splsh_title),
                 color = Black,
-                fontSize = 30.sp,
+                fontSize = dimensionResource(id = R.dimen.splash_title_font_size).value.sp,
                 fontWeight = FontWeight(400),
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.height(70.dp))
+            Spacer(modifier = Modifier.height(
+                dimensionResource(id = R.dimen.splash_title_space_bottom)))
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center,
