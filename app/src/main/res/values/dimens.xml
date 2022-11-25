@@ -68,4 +68,8 @@
     <dimen name="logger_dialog_spacer_padding">5dp</dimen>
     <dimen name="logger_dialog_drop_down_box_width">150dp</dimen>
 
+    <dimen name="analytics_dialog_title_bottom_padding">50dp</dimen>
+    <dimen name="analytics_dialog_text_bottom_space">5dp</dimen>
+    <dimen name="analytics_dialog_button_row_padding_bottom">20dp</dimen>
+
 </resources>
