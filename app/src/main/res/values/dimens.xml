@@ -84,4 +84,11 @@
     <dimen name="profile_image_size">180dp</dimen>
     <dimen name="profile_image_space_bottom">40dp</dimen>
     <dimen name="profile_item_spacer">20dp</dimen>
+
+    <dimen name="idp_mapping_column_padding">8dp</dimen>
+    <dimen name="idp_mapping_item_row_padding_vertical">10dp</dimen>
+    <dimen name="idp_mapping_item_row_padding_horizontal">20dp</dimen>
+    <dimen name="idp_mapping_image_size">30dp</dimen>
+    <dimen name="idp_mapping_image_padding">4dp</dimen>
+    <dimen name="idp_mapping_image_text_spacer">12dp</dimen>
 </resources>
