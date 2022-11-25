@@ -36,29 +36,29 @@ fun ImageNoticeSettingScreen(
             .verticalScroll(scrollState)
     ) {
         ClickableText(stringId = R.string.developer_image_notice_configuration_background_color) {
-            viewModel.imageNoticeBackgroundDialogStatue.value = true
+            viewModel.imageNoticeBackgroundDialogStatus.value = true
         }
         ClickableText(stringId = R.string.developer_image_notice_configuration_time_out) {
             viewModel.imageNoticeTimeOutDialogStatus.value = true
         }
         SwitchWithLabel(
             label = stringResource(id = R.string.developer_image_notice_configuration_auto_close_custom_scheme),
-            state = viewModel.autoCloseCustomSchemeSwitchStatue.value,
+            state = viewModel.autoCloseCustomSchemeSwitchStatus.value,
             enableSwitch = true,
             event = { newState ->
-                viewModel.autoCloseCustomSchemeSwitchStatue.value = newState
+                viewModel.autoCloseCustomSchemeSwitchStatus.value = newState
             })
         RoundButton(buttonText = stringResource(id = R.string.developer_image_notice_show)) {
             viewModel.showUserSettingImageNotice(activity)
         }
     }
-    if (viewModel.imageNoticeBackgroundDialogStatue.value) {
+    if (viewModel.imageNoticeBackgroundDialogStatus.value) {
         InputDialog(
             title = stringResource(id = R.string.developer_image_notice_configuration_background_color),
             labelName = stringResource(id = R.string.developer_image_notice_configuration_background_color_label_name),
             fieldMessage = viewModel.imageNoticeBackgroundColor.value,
             setDialogStatus = { newState ->
-                viewModel.imageNoticeBackgroundDialogStatue.value = newState
+                viewModel.imageNoticeBackgroundDialogStatus.value = newState
             },
             onOkButtonClicked = { value ->
                 viewModel.imageNoticeBackgroundColor.value = value
