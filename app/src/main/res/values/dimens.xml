@@ -76,4 +76,7 @@
     <dimen name="push_setting_drop_down_row_padding">10dp</dimen>
     <dimen name="push_setting_drop_down_width">150dp</dimen>
     <dimen name="push_setting_drop_down_height">50dp</dimen>
+
+    <dimen name="webview_setting_column_padding">20dp</dimen>
+    <dimen name="webview_setting_drop_down_width">150dp</dimen>
 </resources>
