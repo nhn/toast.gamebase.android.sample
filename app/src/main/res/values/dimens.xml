@@ -93,5 +93,5 @@
     <dimen name="idp_mapping_image_text_spacer">12dp</dimen>
 
     <dimen name="splash_title_font_size">30sp</dimen>
-    <dimen name="splash_title_space_bottom">70sp</dimen>
+    <dimen name="splash_title_space_bottom">70dp</dimen>
 </resources>
