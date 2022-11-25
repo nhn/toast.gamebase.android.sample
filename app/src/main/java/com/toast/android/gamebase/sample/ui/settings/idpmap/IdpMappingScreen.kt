@@ -29,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -126,7 +127,9 @@ fun MappingColumn(
             .background(White)
     ) {
         LazyColumn(
-            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+            contentPadding = PaddingValues(
+                horizontal = dimensionResource(id = R.dimen.idp_mapping_column_padding),
+                vertical = dimensionResource(id = R.dimen.idp_mapping_column_padding))
         ) {
             items (
                 items = supportedIdpList.drop(1),
@@ -152,7 +155,12 @@ fun ListItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp, bottom = 10.dp, start = 20.dp, end = 20.dp),
+                .padding(
+                    top = dimensionResource(id = R.dimen.idp_mapping_item_row_padding_vertical),
+                    bottom = dimensionResource(id = R.dimen.idp_mapping_item_row_padding_vertical),
+                    start = dimensionResource(id = R.dimen.idp_mapping_item_row_padding_horizontal),
+                    end = dimensionResource(id = R.dimen.idp_mapping_item_row_padding_horizontal)
+                ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
@@ -161,11 +169,11 @@ fun ListItem(
                 painter = painterResource(getIconResourceById(idp)),
                 contentDescription = idp,
                 modifier = Modifier
-                    .width(30.dp)
-                    .height(30.dp)
-                    .padding(4.dp)
+                    .width(dimensionResource(id = R.dimen.idp_mapping_image_size))
+                    .height(dimensionResource(id = R.dimen.idp_mapping_image_size))
+                    .padding(dimensionResource(id = R.dimen.idp_mapping_image_padding))
             )
-            Spacer(Modifier.width(12.dp))
+            Spacer(Modifier.width(dimensionResource(id = R.dimen.idp_mapping_image_text_spacer)))
             Text(
                 color = Color.Black,
                 text = idp,

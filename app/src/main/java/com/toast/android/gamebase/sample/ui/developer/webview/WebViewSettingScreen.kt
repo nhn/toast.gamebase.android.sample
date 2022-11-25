@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -35,7 +36,7 @@ fun WebViewSettingScreen(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(24.dp)
+            .padding(dimensionResource(id = R.dimen.webview_setting_column_padding))
             .verticalScroll(scrollState)
     ) {
         SwitchWithLabel(
@@ -72,7 +73,7 @@ fun WebViewSettingScreen(
             onSelected = { selectedId ->
                 viewModel.screenOrientationType.value = selectedId
             },
-            modifier = Modifier.width(150.dp)
+            modifier = Modifier.width(dimensionResource(id = R.dimen.webview_setting_drop_down_width))
         )
         RoundButton(buttonText = stringResource(id = R.string.developer_web_view_show)) {
             viewModel.openWebViewDialogStatus.value = true

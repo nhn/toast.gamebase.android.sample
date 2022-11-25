@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,7 +35,10 @@ fun SetGameUserDataDialog(
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 50.dp),
+                        .padding(
+                            bottom =
+                            dimensionResource(id = R.dimen.analytics_dialog_title_bottom_padding)
+                        ),
                     text = title,
                     textAlign = TextAlign.Center
                 )
@@ -69,14 +73,17 @@ fun SetGameUserDataDialog(
                             setGameUserDataDialogStateHolder.classId.value = value
                         }
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
+                    Spacer(modifier = Modifier.height(
+                        dimensionResource(id = R.dimen.analytics_dialog_text_bottom_space)
+                    ))
                 }
             },
             buttons = {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 20.dp),
+                        .padding(bottom =
+                        dimensionResource(id = R.dimen.analytics_dialog_button_row_padding_bottom)),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     TextButton(
