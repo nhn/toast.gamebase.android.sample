@@ -44,7 +44,7 @@ val ShoppingTypography = Typography(
         fontWeight = FontWeight.Normal,
         color = Black,
         fontSize = 15.sp,
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Left,
     ),
     body2 = TextStyle(
         fontFamily = FontFamily.Default,

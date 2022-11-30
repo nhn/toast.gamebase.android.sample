@@ -103,7 +103,7 @@ fun ListItems(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Column {
+        Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = item.itemName ?: "",
                 style = ShoppingTypography.body1,
