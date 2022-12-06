@@ -33,15 +33,17 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.base.GamebaseException
+import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.data.getIconResourceById
+import com.toast.android.gamebase.sample.data.lineRegionList
 import com.toast.android.gamebase.sample.data.supportedIdpList
 import com.toast.android.gamebase.sample.ui.components.dialog.ConfirmAlertDialog
 import com.toast.android.gamebase.sample.ui.components.button.ToggleButton
+import com.toast.android.gamebase.sample.ui.components.dialog.DropDownMenuDialog
 import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
@@ -79,6 +81,19 @@ fun IdpMappingScreen(
             viewModel.uiState = IdpMappingUiState.DEFAULT
         }
     }
+
+    DropDownMenuDialog(
+        title = stringResource(id = R.string.login_select_line_region),
+        isDialogOpened = viewModel.requiredAdditionalInfo,
+        setDialogStatus = { newState ->
+            viewModel.requiredAdditionalInfo = newState
+        },
+        options = lineRegionList,
+        onOkButtonClicked = { selected ->
+            viewModel.enteredRegion = lineRegionList[selected]
+            viewModel.addMapping(activity, AuthProvider.LINE)
+        }
+    )
 }
 
 private fun getDialogDescription(
@@ -190,7 +205,11 @@ fun ListItem(
             ) {
                 setCurrentSelectedItem()
                 if (viewModel.idpMappedMap[idp] != true) {
-                    viewModel.addMapping(activity, idp)
+                    if (idp == AuthProvider.LINE) {
+                        viewModel.requiredAdditionalInfo = true
+                    } else {
+                        viewModel.addMapping(activity, idp)
+                    }
                 } else {
                     viewModel.showRemoveMappingDialog()
                 }
