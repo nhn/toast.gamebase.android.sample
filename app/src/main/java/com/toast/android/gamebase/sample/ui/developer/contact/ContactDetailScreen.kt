@@ -111,7 +111,7 @@ fun ContactDetailScreen(
                 }
             }
             KeyValueInputDialog(
-                title = stringResource(R.string.developer_contact_additional_url),
+                title = stringResource(R.string.developer_contact_additional_url_parameter),
                 isDialogOpened = viewModel.isAdditionalParametersInputDialogOpened.value,
                 setDialogStatus = { newState ->
                     viewModel.isAdditionalParametersInputDialogOpened.value = newState},

@@ -63,7 +63,7 @@ fun WebViewSettingScreen(
             viewModel.navigationBarHeightDialogStatus.value = true
         }
         DropdownMenuBoxWithTitle(
-            title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_height),
+            title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_orientation),
             options = stringArrayResource(id = R.array.screen_orientation).toList(),
             expanded = viewModel.screenOrientationExpanded.value,
             onExpandChanged = { expand ->

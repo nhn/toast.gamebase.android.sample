@@ -199,7 +199,7 @@
     <string name="developer_push_configuration_sub_title">Push Configurations</string>
     <string name="developer_push_notification_options_sub_title">Notification Options</string>
     <string name="developer_push_noti_enable_badge">뱃지 아이콘 사용</string>
-    <string name="developer_push_noti_enable_set_priority">알림 우선 순위</string>
+    <string name="developer_push_noti_enable_set_priority">Log Level</string>
 
     <!-- developer menu contact -->
     <string name="developer_contact_url_alert_title">고객센터 URL</string>
@@ -207,6 +207,7 @@
     <string name="developer_contact_additional_url">Additional URL</string>
     <string name="developer_contact_additional_url_description">고객 센터 타입이 CUSTOM 인 경우에만 사용하시기 바랍니다.</string>
     <string name="developer_contact_additional_parameter">URL 파라미터</string>
+    <string name="developer_contact_additional_url_parameter">Additional URL Parameter</string>
     <string name="developer_contact_extra_data">Extra data</string>
     <string name="developer_contact_open_contact">고객센터 열기</string>
     <string name="developer_contact_remove_item_button_content_description">remove item</string>
@@ -258,6 +259,7 @@
     <string name="developer_web_view_configuration_navigation_bar_color_label_name">네비게이션바 색상</string>
     <string name="developer_web_view_configuration_navigation_bar_height">네비게이션바 높이 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_height_label_name">네비게이션 높이</string>
+    <string name="developer_web_view_configuration_navigation_bar_orientation">네비게이션바 방향</string>
     <string name="developer_web_view_configuration_navigation_bar_back_button">뒤로가기 버튼 표시</string>
     <string name="developer_web_view_show">웹뷰 보기</string>
 
