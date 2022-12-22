@@ -9,6 +9,7 @@ import android.util.Log
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.base.GamebaseError
+import com.toast.android.gamebase.base.purchase.PurchasableConfiguration
 import com.toast.android.gamebase.base.purchase.PurchasableItem
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 
@@ -19,8 +20,10 @@ fun requestNotConsumedItems(
     activity: Activity,
     callback: GamebaseDataCallback<List<PurchasableReceipt>>?
 ) {
+    val configuration = PurchasableConfiguration.newBuilder().build()
     Gamebase.Purchase.requestItemListOfNotConsumed(
-        activity
+        activity,
+        configuration
     ) { purchasableReceipts, exception ->
         if (Gamebase.isSuccess(exception)) {
             // Succeeded.
@@ -72,7 +75,8 @@ fun requestActivatedPurchases(
     activity: Activity,
     callback: GamebaseDataCallback<List<PurchasableReceipt>>?
 ) {
-    Gamebase.Purchase.requestActivatedPurchases(activity) { list, exception ->
+    val configuration = PurchasableConfiguration.newBuilder().build()
+    Gamebase.Purchase.requestActivatedPurchases(activity, configuration) { list, exception ->
         callback?.onCallback(list, exception)
     }
 }
@@ -81,7 +85,8 @@ fun requestItemListOfNotConsumed(
     activity: Activity,
     callback: GamebaseDataCallback<List<PurchasableReceipt>>?
 ) {
-    Gamebase.Purchase.requestItemListOfNotConsumed(activity) { data, exception ->
+    val configuration = PurchasableConfiguration.newBuilder().build()
+    Gamebase.Purchase.requestItemListOfNotConsumed(activity, configuration) { data, exception ->
         callback?.onCallback(data, exception)
     }
 }
