@@ -124,6 +124,7 @@ private fun tryLoginAgain(activity: Activity, message: GamebaseEventMessage) {
     }
 }
 
+@Suppress("UNUSED_VARIABLE")
 private fun onPushReceiveMessage(message: GamebaseEventMessage) {
     val pushMessage = PushMessage.from(message.data)
     if (pushMessage != null) {
@@ -135,10 +136,12 @@ private fun onPushReceiveMessage(message: GamebaseEventMessage) {
             val json = JSONObject(pushMessage.extras)
             // There is 'isForeground' information.
             val isForeground = json.getBoolean("isForeground")
+
             // You can get your custom key.
             if (json.has("YourCustomKey")) {
                 val customValue = json["YourCustomKey"]
             }
+
         } catch (ignored: Exception) {
         }
     }

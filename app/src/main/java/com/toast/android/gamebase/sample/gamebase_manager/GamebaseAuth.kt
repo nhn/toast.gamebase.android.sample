@@ -2,6 +2,8 @@
  * © NHN Corp. All rights reserved.
  * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
+@file:Suppress("UNUSED_ANONYMOUS_PARAMETER", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
+
 package com.toast.android.gamebase.sample.gamebase_manager
 
 import android.app.Activity
@@ -198,6 +200,7 @@ fun addIdpMapping(
         if (Gamebase.isSuccess(exception)) {
             Log.d(TAG, "Add Mapping successful")
             var userId = authToken.userId
+
             onMappingFinished?.invoke(exception)
             return@addMapping
         }

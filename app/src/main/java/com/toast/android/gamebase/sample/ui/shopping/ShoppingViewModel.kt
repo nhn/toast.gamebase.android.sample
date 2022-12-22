@@ -62,6 +62,7 @@ class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : Vi
         }
     }
 
+    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     fun requestItemNotConsumed(activity: Activity) {
         requestNotConsumedItems(activity) { data, exception ->
             if (!isSuccess(exception)) {

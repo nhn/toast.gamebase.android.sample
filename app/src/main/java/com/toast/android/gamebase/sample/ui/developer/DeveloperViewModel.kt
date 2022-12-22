@@ -34,6 +34,7 @@ import com.toast.android.gamebase.sample.gamebase_manager.showToast
 import com.toast.android.gamebase.sample.util.printWithIndent
 import kotlinx.coroutines.launch
 
+@Suppress("UNUSED_ANONYMOUS_PARAMETER")
 class DeveloperViewModel: ViewModel() {
     val showPurchaseDialog = mutableStateOf(false)
     var purchaseItemList = mutableListOf<PurchasableReceipt>()
@@ -248,9 +249,8 @@ class DeveloperViewModel: ViewModel() {
             activity,
             resources.getString(R.string.developer_alert_sample_title),
             resources.getString(R.string.developer_alert_sample_message)
-        ) { dialog, which -> {
-                // create own callback
-            }
+        ) { dialog, which ->
+            // create own callback
         }
     }
 

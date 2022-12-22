@@ -25,6 +25,7 @@ private const val TAG = "SplashScreen"
 private const val INITIALIZE_RETRY_MAX_COUNT = 2
 private const val MARKET_INTENT_REQUEST_CODE = 123
 
+@Suppress("UNUSED_ANONYMOUS_PARAMETER")
 class SplashViewModel : ViewModel() {
     val isInitialized = mutableStateOf(false)
     private var reInitializeCount = 0
