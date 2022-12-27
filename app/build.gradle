@@ -15,7 +15,7 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         // TODO: [Fix me] Change to your app's package name.
@@ -23,7 +23,7 @@ android {
 
         // TODO: [Fix me] Change the minSdkVersion according to your your app's dependencies.
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 6
         versionName "2.0.0"
 
@@ -34,6 +34,12 @@ android {
         // >>> [Weibo IdP]
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                // TODO: [Fix me] Change the your app's apk output name.
+                outputFileName = "Gamebase-SampleApp-${defaultConfig.versionName}-${variant.buildType.name}.apk"
+            }
         }
     }
     signingConfigs {
