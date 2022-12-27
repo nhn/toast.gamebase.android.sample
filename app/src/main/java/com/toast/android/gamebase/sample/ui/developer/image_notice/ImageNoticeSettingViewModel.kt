@@ -12,17 +12,17 @@ import com.toast.android.gamebase.imagenotice.ImageNoticeConfiguration
 import com.toast.android.gamebase.sample.gamebase_manager.showImageNotices
 
 class ImageNoticeSettingViewModel : ViewModel() {
-    var imageNoticeBackgroundDialogStatue = mutableStateOf(false)
+    var imageNoticeBackgroundDialogStatus = mutableStateOf(false)
     var imageNoticeTimeOutDialogStatus = mutableStateOf(false)
     var imageNoticeBackgroundColor = mutableStateOf("#80000000")
     var imageNoticeTimeOut: MutableState<Long> = mutableStateOf(5000)
-    var autoCloseCustomSchemeSwitchStatue = mutableStateOf(false)
+    var autoCloseCustomSchemeSwitchStatus = mutableStateOf(false)
 
     fun showUserSettingImageNotice(activity: Activity) {
         val configuration = ImageNoticeConfiguration.newBuilder()
             .setBackgroundColor(imageNoticeBackgroundColor.value)
             .setTimeout(imageNoticeTimeOut.value)
-            .enableAutoCloseByCustomScheme(autoCloseCustomSchemeSwitchStatue.value)
+            .enableAutoCloseByCustomScheme(autoCloseCustomSchemeSwitchStatus.value)
             .build()
 
         showImageNotices(activity = activity, configuration = configuration)

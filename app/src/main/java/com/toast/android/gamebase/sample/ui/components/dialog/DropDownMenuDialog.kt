@@ -119,6 +119,6 @@ fun PreviewDropDownMenuBoxDialog() {
         setDialogStatus = {},
         options = listOf("A", "B", "C"),
         modifier = Modifier,
-        onOkButtonClicked = { selected -> }
+        onOkButtonClicked = { _ -> }
     )
 }

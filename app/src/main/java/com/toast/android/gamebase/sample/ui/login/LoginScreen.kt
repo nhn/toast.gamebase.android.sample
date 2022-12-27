@@ -37,6 +37,7 @@ import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.data.getIconResourceById
+import com.toast.android.gamebase.sample.data.lineRegionList
 import com.toast.android.gamebase.sample.data.supportedIdpList
 import com.toast.android.gamebase.sample.gamebase_manager.isLoggedIn
 import com.toast.android.gamebase.sample.gamebase_manager.openContact
@@ -108,7 +109,7 @@ fun LoginScreen(
                 setDialogStatus = { isDialogOpened ->
                     loginViewModel.setRegionDialogState(isDialogOpened)
                 },
-                options = loginViewModel.lineRegionList,
+                options = lineRegionList,
                 onOkButtonClicked = { selected ->
                     loginViewModel.onRegionDialogOkButtonClicked(activity, selected)
                 }
