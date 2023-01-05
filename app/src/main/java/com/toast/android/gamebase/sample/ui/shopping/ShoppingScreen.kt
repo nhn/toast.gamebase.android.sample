@@ -88,12 +88,12 @@ fun ListItems(
     Row(
         modifier = Modifier
             .clickable(onClick = {
+                shoppingViewModel.needLoadingDialog = true
                 if (!item.gamebaseProductId.isNullOrEmpty()) {
                     shoppingViewModel.requestItemNotConsumed(activity)
                     shoppingViewModel.requestPurchaseItem(activity, item.gamebaseProductId!!)
                     shoppingViewModel.requestItemNotConsumed(activity)
                 }
-                shoppingViewModel.needLoadingDialog = true
             })
             .fillMaxWidth()
             .padding(

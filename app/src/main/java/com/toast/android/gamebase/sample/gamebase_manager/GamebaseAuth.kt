@@ -7,7 +7,9 @@
 package com.toast.android.gamebase.sample.gamebase_manager
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseCallback
 import com.toast.android.gamebase.GamebaseDataCallback
@@ -18,6 +20,7 @@ import com.toast.android.gamebase.auth.mapping.data.ForcingMappingTicket
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.auth.AuthProvider
+import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.data.UserData
 import com.toast.android.gamebase.sample.data.dummyUserData
 import com.toast.android.gamebase.sample.util.printBanInfo
@@ -113,15 +116,20 @@ fun loginWithIdP(
         if (Gamebase.isSuccess(exception)) {
             printLoginWithIdpSuccess(TAG, provider)
             handleLoginSuccess(result, onLoginSuccess)
-        } else {
-            handleIdpLoginFailed(
-                activity,
-                exception,
-                provider,
-                additionalInfo,
-                onLoginSuccess
-            )
+            return@login
         }
+        if (exception.code == GamebaseError.AUTH_USER_CANCELED) {
+            val cancelMessage = (activity as Context).getString(R.string.user_cancel_message)
+            showToast(activity, cancelMessage, Toast.LENGTH_SHORT)
+            return@login
+        }
+        handleIdpLoginFailed(
+            activity,
+            exception,
+            provider,
+            additionalInfo,
+            onLoginSuccess
+        )
     }
 }
 
@@ -204,7 +212,12 @@ fun addIdpMapping(
             onMappingFinished?.invoke(exception)
             return@addMapping
         }
-
+        // 매핑 유저 캔슬
+        if (exception.code == GamebaseError.AUTH_USER_CANCELED) {
+            val cancelMessage = (activity as Context).getString(R.string.user_cancel_message)
+            showToast(activity, cancelMessage, Toast.LENGTH_SHORT)
+            return@addMapping
+        }
         // 매핑 추가 실패
         if (exception.code == GamebaseError.SOCKET_ERROR ||
             exception.code == GamebaseError.SOCKET_RESPONSE_TIMEOUT ||

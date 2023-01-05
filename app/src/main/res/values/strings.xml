@@ -29,6 +29,7 @@
     <string name="unknown_error">Unknown Error occurred</string>
     <string name="url">URL</string>
     <string name="enter_key_message">키를 입력해주세요</string>
+    <string name="user_cancel_message">취소 되었습니다.</string>
 
     <!-- splash screen -->
     <string name="splsh_title">Gamebase SampleApplication</string>
@@ -85,6 +86,7 @@
     <!-- shopping screen -->
     <string name="loading">loading...</string>
     <string name="request_shopping_list_error">request shopping list error occurred</string>
+    <string name="purchase_success">구매 성공하였습니다.</string>
 
     <!-- idp mapping screen -->
     <string name="idp_mapping_button_mapped">연동됨</string>
