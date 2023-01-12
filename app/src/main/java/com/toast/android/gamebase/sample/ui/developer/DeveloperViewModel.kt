@@ -2,10 +2,12 @@ package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.GamebaseError
@@ -114,6 +116,7 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.DEVICE_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfDevice())
             DeveloperMenu.USIM_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfUSIM())
             DeveloperMenu.COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getIntegratedCountryCode())
+            DeveloperMenu.OPEN_SOURCE_LICENSES -> startOssLicenseMenuActivity(activity);
         }
     }
 
@@ -273,5 +276,11 @@ class DeveloperViewModel: ViewModel() {
         } catch (exception: NumberFormatException) {
             showAlert(activity, TAG, "level needs Int type : $exception")
         }
+    }
+
+    private fun startOssLicenseMenuActivity(activity: Activity) {
+        activity.startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
+        OssLicensesMenuActivity.setActivityTitle(
+            (activity as Context).resources.getString(R.string.developer_menu_open_source_licenses))
     }
 }

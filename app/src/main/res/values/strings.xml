@@ -162,6 +162,7 @@
         <item>developer_menu_etc_device_country_code</item>
         <item>developer_menu_etc_usim_country_code</item>
         <item>developer_menu_etc_country_code</item>
+        <item>developer_menu_open_source_licenses</item>
     </string-array>
 
     <string name="developer_menu_auth_suspend_withdrawal">탈퇴 유예 요청</string>
@@ -192,6 +193,7 @@
     <string name="developer_menu_etc_usim_country_code">USIM Country code</string>
     <string name="developer_menu_etc_country_code">Integrated Country code</string>
     <string name="developer_menu_etc_display_language">Display language</string>
+    <string name="developer_menu_open_source_licenses">Open source licenses</string>
 
     <!-- developer menu auth -->
     <string name="request_withdrawal_success">탈퇴 요청이 완료되었습니다.\n일시 : </string>
