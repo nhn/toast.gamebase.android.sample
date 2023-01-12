@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 @file:Suppress("UNUSED_ANONYMOUS_PARAMETER", "UNUSED_PARAMETER", "UNUSED_VARIABLE")
 
 package com.toast.android.gamebase.sample.gamebase_manager

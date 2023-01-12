@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.developer.contact
 
 import android.app.Activity
