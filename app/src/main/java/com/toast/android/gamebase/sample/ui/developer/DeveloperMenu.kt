@@ -7,6 +7,7 @@ data class DeveloperMenu(val category: Int, val id: String, val name: String) {
         const val AUTH_SUSPEND_WITHDRAWAL_CANCEL = "developer_menu_auth_suspend_withdrawal_cancel"
         const val PURCHASE_ACTIVATED_SUBSCRIPTION = "developer_menu_purchase_activated_subscription"
         const val PURCHASE_NOT_CONSUMED_LIST = "developer_menu_purchase_not_consumed_list"
+        const val PURCHASE_SUBSCRIPTION_STATUS_LIST = "developer_menu_purchase_subscription_status_list"
         const val PUSH_CURRENT_SETTING = "developer_menu_push_current_setting"
         const val PUSH_DETAIL_SETTING = "developer_menu_push_detail_setting"
         const val LOGGER_INITIALIZE = "developer_menu_logger_initialize"

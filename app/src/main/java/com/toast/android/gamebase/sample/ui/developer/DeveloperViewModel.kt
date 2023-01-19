@@ -12,6 +12,7 @@ import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
+import com.toast.android.gamebase.base.purchase.PurchasableSubscriptionStatus
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebase_manager.*
@@ -92,6 +93,7 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.AUTH_SUSPEND_WITHDRAWAL_CANCEL -> cancelWithdrawal(activity)
             DeveloperMenu.PURCHASE_ACTIVATED_SUBSCRIPTION -> fetchActivatedPurchaseList(activity)
             DeveloperMenu.PURCHASE_NOT_CONSUMED_LIST -> fetchItemNotConsumedList(activity)
+            DeveloperMenu.PURCHASE_SUBSCRIPTION_STATUS_LIST -> fetchItemSubscriptionStatusList(activity)
             DeveloperMenu.PUSH_CURRENT_SETTING -> fetchPushCurrentSetting(activity)
             DeveloperMenu.PUSH_DETAIL_SETTING -> menuNavigator.onPushSettingMenu()
             DeveloperMenu.CONTACT_URL -> requestContactUrl(activity)
@@ -180,6 +182,24 @@ class DeveloperViewModel: ViewModel() {
             if (isSuccess(exception)) {
                 purchaseItemList = list as MutableList<PurchasableReceipt>
                 showPurchaseDialog.value = true
+            } else {
+                showAlert(
+                    activity,
+                    context.resources.getString(R.string.failed),
+                    exception.printWithIndent()
+                )
+            }
+        }
+    }
+
+    private fun fetchItemSubscriptionStatusList(activity: Activity) {
+        val context = activity as Context
+        requestSubscriptionsStatus(activity) { subscriptionStatusList, exception ->
+            if (isSuccess(exception)) {
+                val listAsString = subscriptionStatusList.joinToString("\n") {
+                    it.printWithIndent()
+                }
+                showAlert(activity, successTitle, listAsString)
             } else {
                 showAlert(
                     activity,

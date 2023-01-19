@@ -8,6 +8,7 @@ import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableConfiguration
 import com.toast.android.gamebase.base.purchase.PurchasableItem
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
+import com.toast.android.gamebase.base.purchase.PurchasableSubscriptionStatus
 
 // Purchase (Payment)
 // https://docs.toast.com/en/Game/Gamebase/en/aos-purchase/
@@ -83,6 +84,19 @@ fun requestItemListOfNotConsumed(
 ) {
     val configuration = PurchasableConfiguration.newBuilder().build()
     Gamebase.Purchase.requestItemListOfNotConsumed(activity, configuration) { data, exception ->
+        callback?.onCallback(data, exception)
+    }
+}
+
+fun requestSubscriptionsStatus(
+    activity: Activity,
+    callback: GamebaseDataCallback<List<PurchasableSubscriptionStatus>>?
+) {
+    val configuration = PurchasableConfiguration.newBuilder()
+        .setIncludeExpiredSubscriptions(true)
+        .build()
+
+    Gamebase.Purchase.requestSubscriptionsStatus(activity, configuration) { data, exception ->
         callback?.onCallback(data, exception)
     }
 }
