@@ -18,6 +18,7 @@ const val TAG = "WebViewSetting"
 class WebViewSettingViewModel : ViewModel() {
     val navigationBarVisibleStatus = mutableStateOf(false)
     val navigationBarBackButtonStatus = mutableStateOf(false)
+    val renderOutSafeArea = mutableStateOf(false)
     val navigationBarTitleDialogStatus = mutableStateOf(false)
     val navigationBarTitle = mutableStateOf("")
     val navigationBarColorDialogStatus = mutableStateOf(false)
@@ -43,6 +44,7 @@ class WebViewSettingViewModel : ViewModel() {
                 .setNavigationBarHeight(navigationBarHeight.value)
                 .setBackButtonVisible(navigationBarBackButtonStatus.value)
                 .setNavigationBarVisible(navigationBarVisibleStatus.value)
+                .setRenderOutsideSafeArea(renderOutSafeArea.value)
                 .setScreenOrientation(orientationType)
                 .build()
         showWebView(

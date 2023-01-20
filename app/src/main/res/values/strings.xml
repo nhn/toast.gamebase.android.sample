@@ -257,6 +257,8 @@
     <!-- developer web view setting -->
     <string name="developer_web_view_configuration_screen_orientation">스크린 모드 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_visible">네비게이션바 표시</string>
+    <string name="developer_web_view_configuration_navigation_bar_back_button">뒤로가기 버튼 표시</string>
+    <string name="developer_web_view_configuration_navigation_display_cutout">전체화면 표시(Cutout 무시)</string>
     <string name="developer_web_view_configuration_navigation_bar_title">네비게이션바 제목 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_title_label_name">네비게이션바 제목</string>
     <string name="developer_web_view_configuration_navigation_bar_color">네비게이션바 색상 설정</string>
@@ -264,7 +266,6 @@
     <string name="developer_web_view_configuration_navigation_bar_height">네비게이션바 높이 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_height_label_name">네비게이션 높이</string>
     <string name="developer_web_view_configuration_navigation_bar_orientation">네비게이션바 방향</string>
-    <string name="developer_web_view_configuration_navigation_bar_back_button">뒤로가기 버튼 표시</string>
     <string name="developer_web_view_show">웹뷰 보기</string>
 
     <!-- web view screen orientation -->
