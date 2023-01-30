@@ -197,7 +197,7 @@ fun MapItem(key: String, value: String?, onRemoveClicked: () -> Unit) {
 @Preview
 @Composable
 fun PreviewLazyColumnForMap() {
-    val testMap = mapOf<String, String>("a" to "A", "b" to "B", "c" to "C")
+    val testMap = mapOf("a" to "A", "b" to "B", "c" to "C")
     ColumnForMap(testMap, {}, {})
 }
 

@@ -5,7 +5,7 @@ import android.content.res.Resources.NotFoundException
 import android.util.Log
 
 private const val TAG = "DeveloperMenuFactory"
-class DeveloperMenuFactory() {
+class DeveloperMenuFactory {
     fun createMenu(context: Context,
                    categoryId: Int): List<DeveloperMenu> {
         val menuList = context.resources.getStringArray(categoryId).toList()

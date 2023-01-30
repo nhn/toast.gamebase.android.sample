@@ -95,7 +95,7 @@ class SplashViewModel : ViewModel() {
                 onPopupClosed?.invoke()
             } else {
                 Log.w(TAG, "showTermsView() failed : $exception")
-                // 시간 텀을 두고 약관팝업을 다시 보여주도록 구현할 수 있습니다.
+                // 시간 텀을 두고 약관 팝업을 다시 보여주도록 구현할 수 있습니다.
                 Thread {
                     try {
                         Thread.sleep(500)

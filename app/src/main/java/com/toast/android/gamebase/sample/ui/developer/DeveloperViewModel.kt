@@ -12,7 +12,6 @@ import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
-import com.toast.android.gamebase.base.purchase.PurchasableSubscriptionStatus
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebase_manager.*
@@ -118,7 +117,7 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.DEVICE_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfDevice())
             DeveloperMenu.USIM_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfUSIM())
             DeveloperMenu.COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getIntegratedCountryCode())
-            DeveloperMenu.OPEN_SOURCE_LICENSES -> startOssLicenseMenuActivity(activity);
+            DeveloperMenu.OPEN_SOURCE_LICENSES -> startOssLicenseMenuActivity(activity)
         }
     }
 

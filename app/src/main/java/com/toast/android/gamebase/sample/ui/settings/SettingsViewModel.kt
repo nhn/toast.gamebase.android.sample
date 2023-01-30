@@ -91,11 +91,11 @@ class SettingsViewModel : ViewModel() {
             .enableAdAgreement(advertisePushState.value)
             .enableAdAgreementNight(nightAdvertisePushState.value).build()
 
-        val notificationOpitions: GamebaseNotificationOptions =
+        val notificationOptions: GamebaseNotificationOptions =
             GamebaseNotificationOptions.newBuilder().enableForeground(foregroundState.value)
                 .build()
 
-        gamebaseRegisterPush(activity, configuration, notificationOpitions) { exception ->
+        gamebaseRegisterPush(activity, configuration, notificationOptions) { exception ->
             if (!isSuccess(exception)) {
                 showAlert(
                     activity,

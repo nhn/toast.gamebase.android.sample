@@ -57,11 +57,3 @@ val ShoppingTypography = Typography(
         textAlign = TextAlign.Center
     )
 )
-
-val LaunchingTypography = Typography(
-     body1 = TextStyle(
-         fontFamily = FontFamily.Default,
-         fontWeight = FontWeight(400),
-         fontSize = 30.sp
-     )
-)

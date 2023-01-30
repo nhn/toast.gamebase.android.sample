@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- TODO: [Fix me] Set your Facebook App ID -->
     <string name="facebook_app_id">252590081934203</string>
@@ -84,7 +84,7 @@
     <string name="profile_menu_connected_idp_list">Idp 연동 목록</string>
 
     <!-- shopping screen -->
-    <string name="loading">loading...</string>
+    <string name="loading">loading…</string>
     <string name="request_shopping_list_error">request shopping list error occurred</string>
     <string name="purchase_success">구매 성공하였습니다.</string>
 
