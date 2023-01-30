@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.developer.contact
 
 import android.app.Activity
@@ -201,7 +197,7 @@ fun MapItem(key: String, value: String?, onRemoveClicked: () -> Unit) {
 @Preview
 @Composable
 fun PreviewLazyColumnForMap() {
-    val testMap = mapOf<String, String>("a" to "A", "b" to "B", "c" to "C")
+    val testMap = mapOf("a" to "A", "b" to "B", "c" to "C")
     ColumnForMap(testMap, {}, {})
 }
 

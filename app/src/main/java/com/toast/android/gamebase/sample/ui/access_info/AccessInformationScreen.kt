@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.access_info
 
 import androidx.compose.foundation.Image
@@ -24,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import com.toast.android.gamebase.sample.R
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.toast.android.gamebase.sample.data.AccessInformation
 import com.toast.android.gamebase.sample.data.AccessInformationRepository

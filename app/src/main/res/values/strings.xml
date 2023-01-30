@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- TODO: [Fix me] Set your Facebook App ID -->
     <string name="facebook_app_id">252590081934203</string>
@@ -29,6 +29,7 @@
     <string name="unknown_error">Unknown Error occurred</string>
     <string name="url">URL</string>
     <string name="enter_key_message">키를 입력해주세요</string>
+    <string name="user_cancel_message">취소 되었습니다.</string>
 
     <!-- splash screen -->
     <string name="splsh_title">Gamebase SampleApplication</string>
@@ -83,8 +84,9 @@
     <string name="profile_menu_connected_idp_list">Idp 연동 목록</string>
 
     <!-- shopping screen -->
-    <string name="loading">loading...</string>
+    <string name="loading">loading…</string>
     <string name="request_shopping_list_error">request shopping list error occurred</string>
+    <string name="purchase_success">구매 성공하였습니다.</string>
 
     <!-- idp mapping screen -->
     <string name="idp_mapping_button_mapped">연동됨</string>
@@ -118,6 +120,7 @@
     <string-array name="Purchase">
         <item>developer_menu_purchase_activated_subscription</item>
         <item>developer_menu_purchase_not_consumed_list</item>
+        <item>developer_menu_purchase_subscription_status_list</item>
     </string-array>
     <string-array name="Push">
         <item>developer_menu_push_current_setting</item>
@@ -160,12 +163,14 @@
         <item>developer_menu_etc_device_country_code</item>
         <item>developer_menu_etc_usim_country_code</item>
         <item>developer_menu_etc_country_code</item>
+        <item>developer_menu_open_source_licenses</item>
     </string-array>
 
     <string name="developer_menu_auth_suspend_withdrawal">탈퇴 유예 요청</string>
     <string name="developer_menu_auth_suspend_withdrawal_cancel">탈퇴 유예 철회</string>
     <string name="developer_menu_purchase_activated_subscription">구독 목록 조회</string>
     <string name="developer_menu_purchase_not_consumed_list">미소비 목록 조회</string>
+    <string name="developer_menu_purchase_subscription_status_list">구독 상태 조회</string>
     <string name="developer_menu_push_current_setting">푸시 설정 조회</string>
     <string name="developer_menu_push_detail_setting">푸시 상세 설정</string>
     <string name="developer_menu_logger_initialize">Logger 초기화</string>
@@ -190,6 +195,7 @@
     <string name="developer_menu_etc_usim_country_code">USIM Country code</string>
     <string name="developer_menu_etc_country_code">Integrated Country code</string>
     <string name="developer_menu_etc_display_language">Display language</string>
+    <string name="developer_menu_open_source_licenses">Open source licenses</string>
 
     <!-- developer menu auth -->
     <string name="request_withdrawal_success">탈퇴 요청이 완료되었습니다.\n일시 : </string>
@@ -253,6 +259,8 @@
     <!-- developer web view setting -->
     <string name="developer_web_view_configuration_screen_orientation">스크린 모드 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_visible">네비게이션바 표시</string>
+    <string name="developer_web_view_configuration_navigation_bar_back_button">뒤로가기 버튼 표시</string>
+    <string name="developer_web_view_configuration_navigation_display_cutout">전체화면 표시(Cutout 무시)</string>
     <string name="developer_web_view_configuration_navigation_bar_title">네비게이션바 제목 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_title_label_name">네비게이션바 제목</string>
     <string name="developer_web_view_configuration_navigation_bar_color">네비게이션바 색상 설정</string>
@@ -260,7 +268,6 @@
     <string name="developer_web_view_configuration_navigation_bar_height">네비게이션바 높이 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_height_label_name">네비게이션 높이</string>
     <string name="developer_web_view_configuration_navigation_bar_orientation">네비게이션바 방향</string>
-    <string name="developer_web_view_configuration_navigation_bar_back_button">뒤로가기 버튼 표시</string>
     <string name="developer_web_view_show">웹뷰 보기</string>
 
     <!-- web view screen orientation -->

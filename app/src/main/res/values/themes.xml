@@ -3,4 +3,14 @@
     <style name="Theme.GamebaseSampleProject" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/toast</item>
     </style>
+
+    <style name="Theme.License" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/toast</item>
+        <item name="colorPrimaryDark">@color/toast</item>
+        <item name="actionBarTheme">@style/Theme.Actionbar</item>
+    </style>
+
+    <style name="Theme.Actionbar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:colorForeground">@color/white</item>
+    </style>
 </resources>

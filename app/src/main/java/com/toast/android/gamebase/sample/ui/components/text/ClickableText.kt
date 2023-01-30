@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.components.text
 
 import androidx.compose.foundation.clickable
@@ -25,11 +21,13 @@ import com.toast.android.gamebase.sample.R
 fun ClickableText(
     stringId: Int,
     style: TextStyle = LocalTextStyle.current,
+    showPadding: Boolean = true,
     onClick: () -> Unit
 ) {
     ClickableText(
         text = stringResource(id = stringId),
         onClick = onClick,
+        showPadding = showPadding,
         style = style
     )
 }
@@ -38,6 +36,7 @@ fun ClickableText(
 fun ClickableText(
     text: String,
     style: TextStyle = LocalTextStyle.current,
+    showPadding: Boolean = true,
     onClick: () -> Unit
 ) {
     Box(
@@ -47,7 +46,7 @@ fun ClickableText(
             .clickable {
                 onClick()
             }
-            .padding(dimensionResource(id = R.dimen.setting_screen_menu_title_text_padding)),
+            .then( if(showPadding) Modifier.padding(dimensionResource(id = R.dimen.setting_screen_menu_title_text_padding)) else Modifier),
         contentAlignment = Alignment.CenterStart
     ) {
         Text(
@@ -61,4 +60,10 @@ fun ClickableText(
 @Composable
 fun PreviewClickableText() {
     ClickableText(stringId = R.string.button_ok) {}
+}
+
+@Preview
+@Composable
+fun PreviewClickableTextNoPadding() {
+    ClickableText(text = "No Padding", showPadding = false) {}
 }

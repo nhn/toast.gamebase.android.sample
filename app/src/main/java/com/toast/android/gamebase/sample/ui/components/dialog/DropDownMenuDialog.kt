@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.components.dialog
 
 import androidx.compose.foundation.layout.Arrangement
@@ -119,6 +115,6 @@ fun PreviewDropDownMenuBoxDialog() {
         setDialogStatus = {},
         options = listOf("A", "B", "C"),
         modifier = Modifier,
-        onOkButtonClicked = { _ -> }
+        onOkButtonClicked = { }
     )
 }

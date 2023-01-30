@@ -1,15 +1,13 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.developer
 
+// should define following values into string-array and string value in strings.xml
 data class DeveloperMenu(val category: Int, val id: String, val name: String) {
     companion object {
         const val AUTH_SUSPEND_WITHDRAWAL = "developer_menu_auth_suspend_withdrawal"
         const val AUTH_SUSPEND_WITHDRAWAL_CANCEL = "developer_menu_auth_suspend_withdrawal_cancel"
         const val PURCHASE_ACTIVATED_SUBSCRIPTION = "developer_menu_purchase_activated_subscription"
         const val PURCHASE_NOT_CONSUMED_LIST = "developer_menu_purchase_not_consumed_list"
+        const val PURCHASE_SUBSCRIPTION_STATUS_LIST = "developer_menu_purchase_subscription_status_list"
         const val PUSH_CURRENT_SETTING = "developer_menu_push_current_setting"
         const val PUSH_DETAIL_SETTING = "developer_menu_push_detail_setting"
         const val LOGGER_INITIALIZE = "developer_menu_logger_initialize"
@@ -34,5 +32,6 @@ data class DeveloperMenu(val category: Int, val id: String, val name: String) {
         const val DEVICE_COUNTRY_CODE = "developer_menu_etc_device_country_code"
         const val USIM_COUNTRY_CODE = "developer_menu_etc_usim_country_code"
         const val COUNTRY_CODE = "developer_menu_etc_country_code"
+        const val OPEN_SOURCE_LICENSES = "developer_menu_open_source_licenses"
     }
 }

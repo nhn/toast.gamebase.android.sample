@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.shopping
 
 import android.app.Activity
@@ -88,12 +84,12 @@ fun ListItems(
     Row(
         modifier = Modifier
             .clickable(onClick = {
+                shoppingViewModel.needLoadingDialog = true
                 if (!item.gamebaseProductId.isNullOrEmpty()) {
                     shoppingViewModel.requestItemNotConsumed(activity)
                     shoppingViewModel.requestPurchaseItem(activity, item.gamebaseProductId!!)
                     shoppingViewModel.requestItemNotConsumed(activity)
                 }
-                shoppingViewModel.needLoadingDialog = true
             })
             .fillMaxWidth()
             .padding(

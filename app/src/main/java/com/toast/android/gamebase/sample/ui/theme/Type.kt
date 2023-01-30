@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.theme
 
 import androidx.compose.material.Typography
@@ -60,12 +56,4 @@ val ShoppingTypography = Typography(
         fontSize = 10.sp,
         textAlign = TextAlign.Center
     )
-)
-
-val LaunchingTypography = Typography(
-     body1 = TextStyle(
-         fontFamily = FontFamily.Default,
-         fontWeight = FontWeight(400),
-         fontSize = 30.sp
-     )
 )

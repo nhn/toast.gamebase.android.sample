@@ -1,16 +1,15 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.shopping
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.*
 import androidx.lifecycle.*
+import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.purchase.PurchasableItem
+import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
 import com.toast.android.gamebase.sample.gamebase_manager.requestNotConsumedItems
 import com.toast.android.gamebase.sample.gamebase_manager.requestPurchase
@@ -81,20 +80,25 @@ class ShoppingViewModel(private val shoppingRepository: ShoppingRepository) : Vi
 
     fun requestPurchaseItem(activity: Activity, gamebaseProductId: String) {
         requestPurchase(activity, gamebaseProductId) { data, exception ->
+            needLoadingDialog = false
             if (isSuccess(exception)) {
-                showToast(activity, "Success Purchase : $data", Toast.LENGTH_SHORT)
-                needLoadingDialog = false
+                val successMessage = (activity as Context).getString(R.string.purchase_success)
+                showToast(activity, successMessage, Toast.LENGTH_SHORT)
                 if (data != null) {
                     Log.d(TAG, data.toJsonString())
                 }
-            } else {
-                showAlert(activity, "Error", exception.printWithIndent())
-                needLoadingDialog = false
-                Log.d(
-                    TAG,
-                    exception.toJsonString()
-                )
+                return@requestPurchase
             }
+            if (exception.code == GamebaseError.PURCHASE_USER_CANCELED) {
+                val cancelMessage = (activity as Context).getString(R.string.user_cancel_message)
+                showToast(activity, cancelMessage, Toast.LENGTH_SHORT)
+                return@requestPurchase
+            }
+            showAlert(activity, "Error", exception.printWithIndent())
+            Log.d(
+                TAG,
+                exception.toJsonString()
+            )
         }
     }
 

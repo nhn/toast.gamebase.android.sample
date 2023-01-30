@@ -1,7 +1,3 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.settings
 
 import android.util.Log
@@ -95,11 +91,11 @@ class SettingsViewModel : ViewModel() {
             .enableAdAgreement(advertisePushState.value)
             .enableAdAgreementNight(nightAdvertisePushState.value).build()
 
-        val notificationOpitions: GamebaseNotificationOptions =
+        val notificationOptions: GamebaseNotificationOptions =
             GamebaseNotificationOptions.newBuilder().enableForeground(foregroundState.value)
                 .build()
 
-        gamebaseRegisterPush(activity, configuration, notificationOpitions) { exception ->
+        gamebaseRegisterPush(activity, configuration, notificationOptions) { exception ->
             if (!isSuccess(exception)) {
                 showAlert(
                     activity,

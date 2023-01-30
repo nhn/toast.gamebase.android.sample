@@ -1,15 +1,13 @@
-/*
- * © NHN Corp. All rights reserved.
- * NHN Corp. PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.GamebaseError
@@ -94,6 +92,7 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.AUTH_SUSPEND_WITHDRAWAL_CANCEL -> cancelWithdrawal(activity)
             DeveloperMenu.PURCHASE_ACTIVATED_SUBSCRIPTION -> fetchActivatedPurchaseList(activity)
             DeveloperMenu.PURCHASE_NOT_CONSUMED_LIST -> fetchItemNotConsumedList(activity)
+            DeveloperMenu.PURCHASE_SUBSCRIPTION_STATUS_LIST -> fetchItemSubscriptionStatusList(activity)
             DeveloperMenu.PUSH_CURRENT_SETTING -> fetchPushCurrentSetting(activity)
             DeveloperMenu.PUSH_DETAIL_SETTING -> menuNavigator.onPushSettingMenu()
             DeveloperMenu.CONTACT_URL -> requestContactUrl(activity)
@@ -118,6 +117,7 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.DEVICE_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfDevice())
             DeveloperMenu.USIM_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfUSIM())
             DeveloperMenu.COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getIntegratedCountryCode())
+            DeveloperMenu.OPEN_SOURCE_LICENSES -> startOssLicenseMenuActivity(activity)
         }
     }
 
@@ -181,6 +181,24 @@ class DeveloperViewModel: ViewModel() {
             if (isSuccess(exception)) {
                 purchaseItemList = list as MutableList<PurchasableReceipt>
                 showPurchaseDialog.value = true
+            } else {
+                showAlert(
+                    activity,
+                    context.resources.getString(R.string.failed),
+                    exception.printWithIndent()
+                )
+            }
+        }
+    }
+
+    private fun fetchItemSubscriptionStatusList(activity: Activity) {
+        val context = activity as Context
+        requestSubscriptionsStatus(activity) { subscriptionStatusList, exception ->
+            if (isSuccess(exception)) {
+                val listAsString = subscriptionStatusList.joinToString("\n") {
+                    it.printWithIndent()
+                }
+                showAlert(activity, successTitle, listAsString)
             } else {
                 showAlert(
                     activity,
@@ -277,5 +295,11 @@ class DeveloperViewModel: ViewModel() {
         } catch (exception: NumberFormatException) {
             showAlert(activity, TAG, "level needs Int type : $exception")
         }
+    }
+
+    private fun startOssLicenseMenuActivity(activity: Activity) {
+        activity.startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
+        OssLicensesMenuActivity.setActivityTitle(
+            (activity as Context).resources.getString(R.string.developer_menu_open_source_licenses))
     }
 }
