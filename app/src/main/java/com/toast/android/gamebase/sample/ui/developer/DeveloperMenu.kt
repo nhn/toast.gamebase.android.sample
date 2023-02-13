@@ -32,6 +32,5 @@ data class DeveloperMenu(val category: Int, val id: String, val name: String) {
         const val DEVICE_COUNTRY_CODE = "developer_menu_etc_device_country_code"
         const val USIM_COUNTRY_CODE = "developer_menu_etc_usim_country_code"
         const val COUNTRY_CODE = "developer_menu_etc_country_code"
-        const val OPEN_SOURCE_LICENSES = "developer_menu_open_source_licenses"
     }
 }

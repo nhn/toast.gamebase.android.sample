@@ -25,8 +25,8 @@ android {
         // TODO: [Fix me] Change the minSdkVersion according to your your app's dependencies.
         minSdk 21
         targetSdk 33
-        versionCode 7
-        versionName "2.0.1"
+        versionCode 9
+        versionName "2.47.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -72,7 +72,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compiler_version
+        kotlinCompilerExtensionVersion COMPOSE_COMPILER_VERSION
     }
     packagingOptions {
         resources {
@@ -82,24 +82,17 @@ android {
 }
 
 dependencies {
-    implementation "androidx.multidex:multidex:${multidex_version}"
-
-    implementation "androidx.core:core-ktx:${core_ktx_version}"
-    implementation "androidx.compose.ui:ui:${compose_version}"
-    implementation "androidx.compose.material:material:${compose_version}"
-    implementation "androidx.compose.ui:ui-tooling-preview:${compose_version}"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycle_runtime_ktx_version}"
-    implementation "androidx.activity:activity-compose:${activity_version}"
-    implementation "androidx.navigation:navigation-compose:${navigation_version}"
-    implementation "androidx.appcompat:appcompat:${appcompat_version}"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:${lifecycle_viewmodel_compose_version}"
-
-    testImplementation "junit:junit:${JUNIT_VERSION}"
-    androidTestImplementation "androidx.test.ext:junit:${EXT_JUNIT_VERSION}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSO_CORE_VERSION}"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:${compose_version}"
-    debugImplementation "androidx.compose.ui:ui-tooling:${compose_version}"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:${compose_version}"
+    implementation "androidx.multidex:multidex:${MULTIDEX_VERSION}"
+    implementation "androidx.core:core-ktx:${CORE_KTX_VERSION}"
+    implementation "androidx.compose.ui:ui:${COMPOSE_VERSION}"
+    implementation "androidx.compose.material:material:${COMPOSE_VERSION}"
+    implementation "androidx.compose.ui:ui-tooling-preview:${COMPOSE_VERSION}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${LIFECYCLE_RUNTIME_KTX_VERSION}"
+    implementation "androidx.activity:activity-compose:${COMPOSE_ACTIVITY_VERSION}"
+    implementation "androidx.navigation:navigation-compose:${COMPOSE_NAVIGATION_VERSION}"
+    implementation "androidx.appcompat:appcompat:${APPCOMPAT_VERSION}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:${LIFECYCLE_VIEWMODEL_COMPOSE_VERSION}"
+    implementation "com.google.android.gms:play-services-oss-licenses:${OSS_LICENSES_VERSION}"
 
     // >>> Gamebase - Auth Adapter
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-facebook:${GAMEBASE_VERSION}"
@@ -142,5 +135,11 @@ dependencies {
 //    implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo-v4:${GAMEBASE_SDK_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore-v16:${GAMEBASE_SDK_VERSION}"
 
-    implementation "com.google.android.gms:play-services-oss-licenses:${OSS_LICENSES_VERSION}"
+
+    testImplementation "junit:junit:${JUNIT_VERSION}"
+    androidTestImplementation "androidx.test.ext:junit:${EXT_JUNIT_VERSION}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSO_CORE_VERSION}"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:${COMPOSE_VERSION}"
+    debugImplementation "androidx.compose.ui:ui-tooling:${COMPOSE_VERSION}"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:${COMPOSE_VERSION}"
 }

@@ -1,5 +1,6 @@
 package com.toast.android.gamebase.sample.ui.profile
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -31,12 +32,13 @@ import com.toast.android.gamebase.sample.util.copyClipBoard
 
 @Composable
 fun ProfileScreen(
+    activity: Activity = LocalContext.current as Activity,
     profileViewModel: ProfileViewModel = viewModel()
 ) {
     val scrollState = rememberScrollState()
 
     LaunchedEffect(Unit) {
-        profileViewModel.updateData()
+        profileViewModel.updatePushToken(activity)
     }
 
     Column (modifier = Modifier
@@ -70,6 +72,14 @@ fun ProfileScreen(
             onClick = { copyClipBoard(context, profileViewModel.accessToken) })
         Spacer(Modifier.height(dimensionResource(id = R.dimen.profile_item_spacer)))
 
+        Text(text = stringResource(R.string.profile_menu_gamebase_push_token), fontWeight = FontWeight.Bold)
+        ClickableText(
+            text = profileViewModel.pushToken,
+            showPadding = false,
+            style = MaterialTheme.typography.body1,
+            onClick = { copyClipBoard(context, profileViewModel.pushToken) })
+        Spacer(Modifier.height(dimensionResource(id = R.dimen.profile_item_spacer)))
+
         Text(text = stringResource(R.string.profile_menu_last_logged_in_provider), fontWeight = FontWeight.Bold)
         Text(text = profileViewModel.lastLoggedInProvider, style = MaterialTheme.typography.body1)
         Spacer(Modifier.height(dimensionResource(id = R.dimen.profile_item_spacer)))
@@ -84,5 +94,5 @@ fun ProfileScreen(
 @Preview(widthDp = 360, heightDp = 720)
 @Composable
 fun ProfilePreview() {
-    ProfileScreen()
+    ProfileScreen(LocalContext.current as Activity)
 }

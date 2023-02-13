@@ -35,78 +35,90 @@ fun DeveloperScreen(
 ) {
     Box {
         Surface(color = MaterialTheme.colors.surface) {
-            ListDialog(
-                viewModel.showPurchaseDialog.value,
-                {viewModel.showPurchaseDialog.value = false},
-                viewModel.purchaseItemList,
-                {}
-            )
             DeveloperMenuList(
                 groupedListMap = viewModel.menuMap,
                 activity,
                 viewModel,
                 menuNavigator
             )
-        }
-    }
-    LoggerInitializeDialog(
-        activity = activity,
-        isDialogOpened = viewModel.isLoggerInitializeOpened.value,
-        title = stringResource(id = R.string.logger_initialize),
-        message = getAppKey(),
-        setDialogStatus = { newState ->
-            viewModel.isLoggerInitializeOpened.value = newState
-        },
-        isLoggerAppKeyValid = getAppKey().isNotEmpty()
-    )
-    SendLogDialog(
-        isDialogOpened = viewModel.isSendLogOpened.value,
-        title = stringResource(id = R.string.send_logger),
-        setDialogStatus = { newState ->
-            viewModel.isSendLogOpened.value = newState
-        },
-        stringArrayResources = R.array.logger_level
-    )
-    OpenCustomWebViewDialog(
-        isDialogOpened = viewModel.isOpenWebViewOpened.value,
-        title = stringResource(id = R.string.developer_menu_open_webview),
-        fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
-        setDialogStatus = { newState ->
-            viewModel.isOpenWebViewOpened.value = newState
-        },
-        onOkButtonClicked = { value ->
-            showWebView(activity, value)
-        }
-    )
-    OpenBrowserDialog(
-        activity = activity,
-        isDialogOpened = viewModel.isOpenWebBrowserOpened.value,
-        title = stringResource(id = R.string.developer_menu_open_outside_browser),
-        fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
-        setDialogStatus = { newState ->
-            viewModel.isOpenWebBrowserOpened.value = newState
-        }
-    )
-    SetGameUserDataDialog(activity = activity,
-        isDialogOpened = viewModel.isUserLevelInfoSettingOpened.value,
-        title = stringResource(
-            id = R.string.developer_analytics_level_setting_title
-        ),
-        setDialogStatus = { newState ->
-            viewModel.isUserLevelInfoSettingOpened.value = newState
-        })
-    if (viewModel.isUserLevelUpInfoSettingOpened.value) {
-        InputDialog(
-            title = stringResource(id = R.string.developer_analytics_level_up_setting_title),
-            labelName = stringResource(id = R.string.developer_analytics_level_label_name),
-            fieldMessage = "",
-            setDialogStatus = { newState ->
-                viewModel.isUserLevelUpInfoSettingOpened.value = newState
-            },
-            onOkButtonClicked = { value ->
-                viewModel.updateOnLevelUp(activity, value)
+            ListDialog(
+                viewModel.isActivatedPurchaseDialogOpened.value,
+                { viewModel.isActivatedPurchaseDialogOpened.value = false },
+                viewModel.activatedPurchaseList,
+                {}
+            )
+            ListDialog(
+                viewModel.isItemNotConsumedDialogOpened.value,
+                { viewModel.isItemNotConsumedDialogOpened.value = false },
+                viewModel.itemNotConsumedList,
+                {}
+            )
+            ListDialog(
+                viewModel.isSubscriptionStatusDialogOpened.value,
+                { viewModel.isSubscriptionStatusDialogOpened.value = false },
+                viewModel.subscriptionStatusList,
+                {}
+            )
+            LoggerInitializeDialog(
+                activity = activity,
+                isDialogOpened = viewModel.isLoggerInitializeOpened.value,
+                title = stringResource(id = R.string.logger_initialize),
+                message = getAppKey(),
+                setDialogStatus = { newState ->
+                    viewModel.isLoggerInitializeOpened.value = newState
+                },
+                isLoggerAppKeyValid = getAppKey().isNotEmpty()
+            )
+            SendLogDialog(
+                isDialogOpened = viewModel.isSendLogOpened.value,
+                title = stringResource(id = R.string.send_logger),
+                setDialogStatus = { newState ->
+                    viewModel.isSendLogOpened.value = newState
+                },
+                stringArrayResources = R.array.logger_level
+            )
+            OpenCustomWebViewDialog(
+                isDialogOpened = viewModel.isOpenWebViewOpened.value,
+                title = stringResource(id = R.string.developer_menu_open_webview),
+                fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
+                setDialogStatus = { newState ->
+                    viewModel.isOpenWebViewOpened.value = newState
+                },
+                onOkButtonClicked = { value ->
+                    showWebView(activity, value)
+                }
+            )
+            OpenBrowserDialog(
+                activity = activity,
+                isDialogOpened = viewModel.isOpenWebBrowserOpened.value,
+                title = stringResource(id = R.string.developer_menu_open_outside_browser),
+                fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
+                setDialogStatus = { newState ->
+                    viewModel.isOpenWebBrowserOpened.value = newState
+                }
+            )
+            SetGameUserDataDialog(activity = activity,
+                isDialogOpened = viewModel.isUserLevelInfoSettingOpened.value,
+                title = stringResource(
+                    id = R.string.developer_analytics_level_setting_title
+                ),
+                setDialogStatus = { newState ->
+                    viewModel.isUserLevelInfoSettingOpened.value = newState
+                })
+            if (viewModel.isUserLevelUpInfoSettingOpened.value) {
+                InputDialog(
+                    title = stringResource(id = R.string.developer_analytics_level_up_setting_title),
+                    labelName = stringResource(id = R.string.developer_analytics_level_label_name),
+                    fieldMessage = "",
+                    setDialogStatus = { newState ->
+                        viewModel.isUserLevelUpInfoSettingOpened.value = newState
+                    },
+                    onOkButtonClicked = { value ->
+                        viewModel.updateOnLevelUp(activity, value)
+                    }
+                )
             }
-        )
+        }
     }
 }
 

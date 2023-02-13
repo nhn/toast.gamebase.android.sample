@@ -1,14 +1,19 @@
 package com.toast.android.gamebase.sample.ui.settings
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.toast.android.gamebase.base.push.PushConfiguration
 import com.toast.android.gamebase.base.push.data.GamebaseNotificationOptions
 import com.toast.android.gamebase.contact.ContactConfiguration
 import com.toast.android.gamebase.sample.GamebaseActivity
+import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebase_manager.getNotificationOptions
 import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
 import com.toast.android.gamebase.sample.gamebase_manager.openContact
@@ -141,5 +146,11 @@ class SettingsViewModel : ViewModel() {
         val configuration = ContactConfiguration.newBuilder().setUserName(userName).build()
         openContact(activity, configuration) {
         }
+    }
+
+    fun startOssLicenseMenuActivity(activity: Activity) {
+        activity.startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
+        OssLicensesMenuActivity.setActivityTitle(
+            (activity as Context).resources.getString(R.string.setting_open_source_licenses))
     }
 }

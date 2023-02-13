@@ -138,6 +138,9 @@ fun SettingsScreen(
             ListItem(R.string.setting_service_center_title) {
                 settingsViewModel.loadServiceCenter(activity, "Test User")
             }
+            ListItem(R.string.setting_open_source_licenses) {
+                settingsViewModel.startOssLicenseMenuActivity(activity)
+            }
         }
         ConfirmAlertDialog(
             isDialogOpened = isLogoutDialogOpened.value,

@@ -2,16 +2,15 @@ package com.toast.android.gamebase.sample.ui.developer
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.toast.android.gamebase.base.GamebaseError.UI_CONTACT_FAIL_INVALID_URL
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
+import com.toast.android.gamebase.base.purchase.PurchasableSubscriptionStatus
 import com.toast.android.gamebase.sample.GamebaseApplication
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebase_manager.*
@@ -34,9 +33,16 @@ import kotlinx.coroutines.launch
 
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
 class DeveloperViewModel: ViewModel() {
-    val showPurchaseDialog = mutableStateOf(false)
-    var purchaseItemList = mutableListOf<PurchasableReceipt>()
+    val isActivatedPurchaseDialogOpened = mutableStateOf(false)
+    var activatedPurchaseList = mutableListOf<PurchasableReceipt>()
         private set
+    val isItemNotConsumedDialogOpened = mutableStateOf(false)
+    var itemNotConsumedList = mutableListOf<PurchasableReceipt>()
+        private set
+    val isSubscriptionStatusDialogOpened = mutableStateOf(false)
+    var subscriptionStatusList = mutableListOf<PurchasableSubscriptionStatus>()
+        private set
+
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
     val isLoggerInitializeOpened = mutableStateOf(false)
     val isSendLogOpened = mutableStateOf(false)
@@ -117,7 +123,6 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.DEVICE_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfDevice())
             DeveloperMenu.USIM_COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getCountryCodeOfUSIM())
             DeveloperMenu.COUNTRY_CODE -> showMenuNameAlert(activity, developerMenuItem.id, getIntegratedCountryCode())
-            DeveloperMenu.OPEN_SOURCE_LICENSES -> startOssLicenseMenuActivity(activity)
         }
     }
 
@@ -163,8 +168,8 @@ class DeveloperViewModel: ViewModel() {
         val context = activity as Context
         requestActivatedPurchases(activity) { list, exception ->
             if (isSuccess(exception)) {
-                purchaseItemList = list as MutableList<PurchasableReceipt>
-                showPurchaseDialog.value = true
+                activatedPurchaseList = list as MutableList<PurchasableReceipt>
+                isActivatedPurchaseDialogOpened.value = true
             } else {
                 showAlert(
                     activity,
@@ -179,8 +184,8 @@ class DeveloperViewModel: ViewModel() {
         val context = activity as Context
         requestItemListOfNotConsumed(activity) { list, exception ->
             if (isSuccess(exception)) {
-                purchaseItemList = list as MutableList<PurchasableReceipt>
-                showPurchaseDialog.value = true
+                itemNotConsumedList = list as MutableList<PurchasableReceipt>
+                isItemNotConsumedDialogOpened.value = true
             } else {
                 showAlert(
                     activity,
@@ -193,12 +198,10 @@ class DeveloperViewModel: ViewModel() {
 
     private fun fetchItemSubscriptionStatusList(activity: Activity) {
         val context = activity as Context
-        requestSubscriptionsStatus(activity) { subscriptionStatusList, exception ->
+        requestSubscriptionsStatus(activity) { list, exception ->
             if (isSuccess(exception)) {
-                val listAsString = subscriptionStatusList.joinToString("\n") {
-                    it.printWithIndent()
-                }
-                showAlert(activity, successTitle, listAsString)
+                subscriptionStatusList = list as MutableList<PurchasableSubscriptionStatus>
+                isSubscriptionStatusDialogOpened.value = true
             } else {
                 showAlert(
                     activity,
@@ -295,11 +298,5 @@ class DeveloperViewModel: ViewModel() {
         } catch (exception: NumberFormatException) {
             showAlert(activity, TAG, "level needs Int type : $exception")
         }
-    }
-
-    private fun startOssLicenseMenuActivity(activity: Activity) {
-        activity.startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
-        OssLicensesMenuActivity.setActivityTitle(
-            (activity as Context).resources.getString(R.string.developer_menu_open_source_licenses))
     }
 }
