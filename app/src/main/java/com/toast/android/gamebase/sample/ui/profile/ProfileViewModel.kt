@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.toast.android.gamebase.sample.gamebase_manager.*
 
 class ProfileViewModel : ViewModel() {
-    var userId: String by mutableStateOf(getUserID() ?: "")
+    var userId: String by mutableStateOf(getUserID())
         private set
     var accessToken: String by mutableStateOf(getAccessToken() ?: "")
         private set
