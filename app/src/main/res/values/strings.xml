@@ -98,12 +98,11 @@
     <string name="idp_mapping_failed_dialog_description">계정 연동에 실패하였습니다.</string>
     <string name="idp_mapping_remove_mapping_failed_dialog_description">계정 연동 해제에 실패하였습니다.</string>
     <string name="idp_mapping_force_mapping_confirm_dialog_description">새롭게 연동 하시겠습니까? 기존 데이터는 삭제됩니다.</string>
-    <string name="idp_mapping_force_mapping_info_dialog_description">이 계정에 이미 연동된 데이터가 있습니다. 이 어카운트와 연동할 데이터를 선택해 주세요</string>
     <string name="idp_mapping_force_mapping_failed_dialog_description">계정 강제 연동에 실패하였습니다.</string>
     <string name="idp_mapping_change_login_failed_dialog_description">로그인 계정 변경에 실패하였습니다.</string>
-    <string name="idp_mapping_already_mapped">현재 연동하려는 %1$s 계정에는 이미 %2$s 가 연동되어 있습니다.</string>
-    <string name="idp_mapping_guide_force_mapping">%1$s 계정을 삭제하고 현재 로그인 된 %2$s 계정으로 강제 연동 하시겠습니까?</string>
-    <string name="idp_mapping_guide_change_login">현재 로그인 된 계정 %1$s 에서 로그아웃 하고 %2$s 로 로그인 하시겠습니까?</string>
+    <string name="idp_mapping_already_mapped">선택한 %1$s에 매핑된 계정이 이미 존재합니다.(%2$s) </string>
+    <string name="idp_mapping_guide_force_mapping">%s 계정을 삭제하고 현재 로그인 된 계정으로 강제 연동 하시겠습니까?</string>
+    <string name="idp_mapping_guide_change_login">현재 로그인 된 계정에서 로그아웃 하고 %s로 로그인 하시겠습니까?</string>
 
     <!-- developer menu string array -->
     <!-- never translate this -->

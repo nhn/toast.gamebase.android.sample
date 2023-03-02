@@ -105,7 +105,7 @@ class IdpMappingViewModel: ViewModel() {
         }
     }
 
-    fun changeLogin(activity: Activity){
+    fun changeLogin(activity: Activity) {
         forcingMappingTicket?.let {
             com.toast.android.gamebase.sample.gamebase_manager.changeLogin(activity, it) {
                     authToken, gamebaseException ->

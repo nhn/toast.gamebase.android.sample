@@ -62,81 +62,22 @@ fun IdpMappingScreen(
         ) {
             currentSelectedItem.value = it
         }
-
-        // 강제 매핑 여부 선택 다이얼로그
-        if (viewModel.uiState == IdpMappingUiState.SHOW_FORCE_MAPPING_INFO_DIALOG) {
-            Dialog(onDismissRequest = { }) {
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth(80f)
-                        .wrapContentHeight(),
-                    shape = RoundedCornerShape(
-                        dimensionResource(id = R.dimen.drop_down_menu_box_dialog_round_corner_radius)
-                    ),
-                    color = MaterialTheme.colors.surface
-                ) {
-                    Column(
-                        modifier = Modifier.padding(dimensionResource(id = R.dimen.drop_down_menu_box_dialog_column_padding)),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(
-                                    bottom =
-                                    dimensionResource(id = R.dimen.drop_down_menu_box_dialog_title_padding_bottom)
-                                ),
-                            text = stringResource(
-                                id = R.string.idp_mapping_already_mapped,
-                                currentSelectedItem.value,
-                                viewModel.forcingMappingTicket?.mappedUserId ?: ""
-                            ),
-                            textAlign = TextAlign.Left
-                        )
-                        Column(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            TextButton(
-                                onClick = {
-                                    viewModel.uiState =
-                                        IdpMappingUiState.SHOW_FORCE_MAPPING_CONFIRM_DIALOG
-                                }
-                            ) {
-                                Text(
-                                    stringResource(
-                                        id = R.string.idp_mapping_guide_force_mapping,
-                                        viewModel.forcingMappingTicket?.mappedUserId ?: "",
-                                        getUserID()
-                                    )
-                                )
-                            }
-                            TextButton(
-                                onClick = {
-                                    viewModel.uiState = IdpMappingUiState.DEFAULT
-                                    viewModel.changeLogin(activity)
-                                }
-                            ) {
-                                Text(
-                                    stringResource(
-                                        id = R.string.idp_mapping_guide_change_login,
-                                        getUserID(),
-                                        viewModel.forcingMappingTicket?.mappedUserId ?:""
-                                    )
-                                )
-                            }
-                            TextButton(
-                                onClick = {
-                                    viewModel.uiState = IdpMappingUiState.DEFAULT
-                                }
-                            ) {
-                                Text(stringResource(id = R.string.button_cancel))
-                            }
-                        }
-                    }
-                }
+    }
+    if (viewModel.uiState == IdpMappingUiState.SHOW_FORCE_MAPPING_INFO_DIALOG) {
+        ForceMappingInfoDialog(
+            currentIdp = currentSelectedItem.value,
+            mappedUserId = viewModel.forcingMappingTicket?.mappedUserId?: "",
+            onForceMapping = {
+                viewModel.uiState = IdpMappingUiState.SHOW_FORCE_MAPPING_CONFIRM_DIALOG
+            },
+            onChangeLogin = {
+                viewModel.uiState = IdpMappingUiState.DEFAULT
+                viewModel.changeLogin(activity)
+            },
+            onCancel = {
+                viewModel.uiState = IdpMappingUiState.DEFAULT
             }
-        }
+        )
     }
 
     ConfirmAlertDialog(
@@ -177,6 +118,63 @@ fun IdpMappingScreen(
     )
 }
 
+@Composable
+private fun ForceMappingInfoDialog(
+    currentIdp: String,
+    mappedUserId: String,
+    onForceMapping: () -> Unit,
+    onChangeLogin: () -> Unit,
+    onCancel: () -> Unit
+) {
+    Dialog(onDismissRequest = { }) {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth(80f)
+                .wrapContentHeight(),
+            shape = RoundedCornerShape(
+                dimensionResource(id = R.dimen.drop_down_menu_box_dialog_round_corner_radius)
+            ),
+            color = MaterialTheme.colors.surface
+        ) {
+            Column(
+                modifier = Modifier.padding(dimensionResource(id = R.dimen.drop_down_menu_box_dialog_column_padding)),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            bottom =
+                            dimensionResource(id = R.dimen.drop_down_menu_box_dialog_title_padding_bottom)
+                        ),
+                    text = stringResource(id = R.string.idp_mapping_already_mapped, currentIdp, mappedUserId),
+                    textAlign = TextAlign.Left
+                )
+                Column(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    TextButton(
+                        onClick = onForceMapping
+                    ) {
+                        Text(stringResource(id = R.string.idp_mapping_guide_force_mapping, mappedUserId))
+                    }
+                    TextButton(
+                        onClick = onChangeLogin
+                    ) {
+                        Text(stringResource(id = R.string.idp_mapping_guide_change_login, mappedUserId))
+                    }
+                    TextButton(
+                        onClick = onCancel
+                    ) {
+                        Text(stringResource(id = R.string.button_cancel))
+                    }
+                }
+            }
+        }
+    }
+}
+
 private fun getDialogDescription(
     context: Context,
     currentSelectedItem: String,
@@ -189,9 +187,6 @@ private fun getDialogDescription(
         }
         IdpMappingUiState.SHOW_FORCE_MAPPING_CONFIRM_DIALOG -> {
             return context.resources.getString(R.string.idp_mapping_force_mapping_confirm_dialog_description)
-        }
-        IdpMappingUiState.SHOW_FORCE_MAPPING_INFO_DIALOG -> {
-            return context.resources.getString(R.string.idp_mapping_force_mapping_info_dialog_description)
         }
         IdpMappingUiState.MAPPING_FAILED -> {
             return context.resources.getString(R.string.idp_mapping_failed_dialog_description) +
@@ -209,6 +204,10 @@ private fun getDialogDescription(
             return context.resources.getString(R.string.idp_mapping_dialog_description)
         }
         IdpMappingUiState.DEFAULT -> {
+            return ""
+        }
+        IdpMappingUiState.SHOW_FORCE_MAPPING_INFO_DIALOG -> {
+            // No description in force mapping info dialog
             return ""
         }
     }
