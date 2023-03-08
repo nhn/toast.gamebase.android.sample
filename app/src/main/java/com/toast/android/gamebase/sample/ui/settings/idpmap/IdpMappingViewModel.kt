@@ -22,10 +22,12 @@ import com.toast.android.gamebase.sample.gamebase_manager.removeIdpMapping
 enum class IdpMappingUiState {
     DEFAULT,
     SHOW_REMOVE_MAPPING_DIALOG,
-    SHOW_FORCE_MAPPING_DIALOG,
+    SHOW_FORCE_MAPPING_INFO_DIALOG,
+    SHOW_FORCE_MAPPING_CONFIRM_DIALOG,
     MAPPING_FAILED,
     REMOVE_MAPPING_FAILED,
-    FORCE_MAPPING_FAILED
+    FORCE_MAPPING_FAILED,
+    CHANGE_LOGIN_FAILED
 }
 
 class IdpMappingViewModel: ViewModel() {
@@ -35,6 +37,8 @@ class IdpMappingViewModel: ViewModel() {
     var requiredAdditionalInfo by mutableStateOf(false)
     // line을 통한 idP mapping 시 사용
     var enteredRegion by mutableStateOf("none")
+
+    var forcingMappingTicket: ForcingMappingTicket? = null
 
     init {
         fetchAuthMappingList()
@@ -66,7 +70,8 @@ class IdpMappingViewModel: ViewModel() {
             if (isSuccess) {
                 idpMappedMap[idp] = true
             } else if (exception?.code == GamebaseError.AUTH_ADD_MAPPING_ALREADY_MAPPED_TO_OTHER_MEMBER) {
-                uiState = IdpMappingUiState.SHOW_FORCE_MAPPING_DIALOG
+                forcingMappingTicket = ForcingMappingTicket.from(exception);
+                uiState = IdpMappingUiState.SHOW_FORCE_MAPPING_INFO_DIALOG
             } else {
                 uiState = IdpMappingUiState.MAPPING_FAILED
             }
@@ -86,20 +91,31 @@ class IdpMappingViewModel: ViewModel() {
         }
     }
 
-    fun forceMapping(activity: Activity, idp: String, exception: GamebaseException?) {
-        if (exception == null) {
-            return
-        }
-        val forcingMappingTicket = ForcingMappingTicket.from(exception)
-
-        forceIdpMapping(activity, forcingMappingTicket) { forceMappingException ->
-            val isSuccess = isSuccess(forceMappingException)
-            if (isSuccess) {
-                idpMappedMap[idp] = true
-            } else {
-                uiState = IdpMappingUiState.FORCE_MAPPING_FAILED
+    fun forceMapping(activity: Activity, idp: String) {
+        forcingMappingTicket?.let {
+            forceIdpMapping(activity, it) { forceMappingException ->
+                val isSuccess = isSuccess(forceMappingException)
+                if (isSuccess) {
+                    idpMappedMap[idp] = true
+                } else {
+                    uiState = IdpMappingUiState.FORCE_MAPPING_FAILED
+                }
+                currentException = forceMappingException
             }
-            currentException = forceMappingException
+        }
+    }
+
+    fun changeLogin(activity: Activity) {
+        forcingMappingTicket?.let {
+            com.toast.android.gamebase.sample.gamebase_manager.changeLogin(activity, it) {
+                    authToken, gamebaseException ->
+                if (isSuccess(gamebaseException)) {
+                    fetchAuthMappingList()
+                } else {
+                    uiState = IdpMappingUiState.CHANGE_LOGIN_FAILED
+                }
+                currentException = gamebaseException
+            }
         }
     }
 }

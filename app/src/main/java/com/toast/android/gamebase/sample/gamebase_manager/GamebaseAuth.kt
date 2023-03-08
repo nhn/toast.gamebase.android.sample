@@ -192,6 +192,16 @@ fun withdraw(
     }
 }
 
+fun changeLogin(
+    activity: Activity,
+    forcingMappingTicket: ForcingMappingTicket,
+    onChangeLoginFinished: (authToken: AuthToken, gamebaseException: GamebaseException?) -> Unit
+) {
+    Gamebase.changeLogin(activity, forcingMappingTicket) { authToken, gamebaseException ->
+        onChangeLoginFinished(authToken, gamebaseException)
+    }
+}
+
 // https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/#mapping
 fun addIdpMapping(
     activity: Activity,
@@ -368,8 +378,8 @@ fun cancelWithdrawal(activity: Activity, callback: GamebaseCallback?) {
 
 // Get Profile Data
 // https://docs.toast.com/en/Game/Gamebase/en/aos-authentication/#gamebase-users-information
-fun getUserID(): String? {
-    return Gamebase.getUserID()
+fun getUserID(): String {
+    return Gamebase.getUserID() ?: ""
 }
 fun getAccessToken(): String? {
     return Gamebase.getAccessToken()
