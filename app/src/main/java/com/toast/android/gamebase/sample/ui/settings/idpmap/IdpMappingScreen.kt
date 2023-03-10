@@ -34,6 +34,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.base.GamebaseException
@@ -152,7 +153,8 @@ private fun ForceMappingInfoDialog(
                     textAlign = TextAlign.Left
                 )
                 Column(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     TextButton(
                         onClick = onForceMapping
@@ -304,4 +306,10 @@ fun ListItem(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewForceMappingInfoDialog() {
+    ForceMappingInfoDialog("Google", "sampleId", {}, {}, {})
 }
