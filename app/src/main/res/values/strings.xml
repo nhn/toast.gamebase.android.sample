@@ -101,8 +101,8 @@
     <string name="idp_mapping_force_mapping_failed_dialog_description">계정 강제 연동에 실패하였습니다.</string>
     <string name="idp_mapping_change_login_failed_dialog_description">로그인 계정 변경에 실패하였습니다.</string>
     <string name="idp_mapping_already_mapped">선택한 %1$s에 매핑된 계정이 이미 존재합니다.(%2$s) </string>
-    <string name="idp_mapping_guide_force_mapping">%s계정을 삭제하고 현재 로그인 된 계정으로 강제 연동 하기</string>
-    <string name="idp_mapping_guide_change_login">현재 로그인 된 계정에서 로그아웃 하고 %s로 로그인 하기</string>
+    <string name="idp_mapping_guide_force_mapping">기존 계정을 삭제하고 현재 로그인된 계정으로 강제 연동 하기</string>
+    <string name="idp_mapping_guide_change_login">현재 로그인된 계정에서 로그아웃 하고 기존 계정 로그인 하기</string>
 
     <!-- developer menu string array -->
     <!-- never translate this -->

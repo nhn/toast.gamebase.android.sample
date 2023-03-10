@@ -159,12 +159,12 @@ private fun ForceMappingInfoDialog(
                     TextButton(
                         onClick = onForceMapping
                     ) {
-                        Text(stringResource(id = R.string.idp_mapping_guide_force_mapping, mappedUserId))
+                        Text(stringResource(id = R.string.idp_mapping_guide_force_mapping))
                     }
                     TextButton(
                         onClick = onChangeLogin
                     ) {
-                        Text(stringResource(id = R.string.idp_mapping_guide_change_login, mappedUserId))
+                        Text(stringResource(id = R.string.idp_mapping_guide_change_login))
                     }
                     TextButton(
                         onClick = onCancel
