@@ -1,0 +1,289 @@
+<resources>
+    <string name="app_name">Gamebase Sample</string>
+
+    <!-- menu name -->
+    <string name="splash">Splash</string>
+    <string name="login">Login</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="shopping">Shopping</string>
+    <string name="settings">Settings</string>
+    <string name="idp_mapping">Mapping</string>
+    <string name="developer">Developer</string>
+
+    <!-- common -->
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="logout">Log out</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
+    <string name="empty_list_message">The list is empty.</string>
+    <string name="copyright_nhn">© NHN Corp. All rights reserved.</string>
+    <string name="empty_list">No items</string>
+    <string name="unknown_error">Unknown error occurred</string>
+    <string name="url">URL</string>
+    <string name="enter_key_message">Please enter the key</string>
+    <string name="user_cancel_message">Canceled by the user.</string>
+
+    <!-- splash screen -->
+    <string name="splsh_title">Gamebase SampleApplication</string>
+
+    <!-- home screen -->
+    <string name="home_main_text">Experience the full range of Gamebase features</string>
+
+    <!-- access information screen -->
+    <string name="access_info_title">App Access Permissions</string>
+    <string name="access_info_subtitle">Gamebase uses the following permissions in certain situations.</string>
+    <string name="access_info_list_title">Optional Permissions</string>
+    <string name="access_info_ad_id_title">Advertising Identifier (optional)</string>
+    <string name="access_info_ad_id_subtitle">Required for Gamebase IDEA API calls</string>
+    <string name="access_info_ad_id_content_description">person</string>
+    <string name="access_info_camera_title">Camera (optional)</string>
+    <string name="access_info_camera_subtitle">Required for Game customer service API calls. Used when users attach photos or videos to inquiries.</string>
+    <string name="access_info_camera_content_description">camera</string>
+    <string name="access_info_photo_title">Photos (optional)</string>
+    <string name="access_info_photo_subtitle">Required for Gamebase customer service API calls. Used when users attach photos or videos from their albums to inquiries.</string>
+    <string name="access_info_photo_content_description">photo</string>
+
+    <!-- setting screen -->
+    <string name="setting_login_manage">Gamebase Sample</string>
+    <string name="setting_version_title">Version</string>
+    <string name="setting_version_sdk_title">Gamebase</string>
+    <string name="setting_account_title">Account Management</string>
+    <string name="setting_account_connected_idp_title">idP Account Link</string>
+    <string name="setting_account_logout_title">Log out</string>
+    <string name="setting_account_withdraw_title">Withdraw</string>
+    <string name="setting_logout_dialog_title">Gamebase Logout</string>
+    <string name="setting_logout_dialog_description">Do you want to log out?</string>
+    <string name="setting_withdraw_dialog_title">Gamebase Withdraw</string>
+    <string name="setting_withdraw_dialog_description">Do you want to withdraw?\nAfter withdrawal, it is difficult to recover your account.</string>
+    <string name="setting_notification_title">Notifications</string>
+    <string name="setting_normal_push_title">Receive push notifications</string>
+    <string name="setting_advertising_push_title">Receive advertising push noti</string>
+    <string name="setting_night_advertising_push_title">Receive nighttime ad push notifications</string>
+    <string name="setting_push_foreground_title">Receive push notifications in foreground</string>
+    <string name="setting_extra_title">Others</string>
+    <string name="setting_service_center_title">Customer Service</string>
+    <string name="setting_open_source_licenses">Open Source Licenses</string>
+
+    <!-- login screen -->
+    <string name="login_title">Gamebase Login</string>
+    <string name="login_description">Please select the login type you want.</string>
+    <string name="sign_in_button">Sign in with %s</string>
+    <string name="login_select_line_region">Please select the region for Line login (in the actual code, you need to enter the actual region)</string>
+
+    <!-- profile screen -->
+    <string name="profile_picture_content_description">profile picture</string>
+    <string name="profile_menu_gamebase_user_id">Gamebase UserID</string>
+    <string name="profile_menu_gamebase_access_token">Gamebase AccessToken</string>
+    <string name="profile_menu_gamebase_push_token">Gamebase PushToken</string>
+    <string name="profile_menu_last_logged_in_provider">Last Logged in Provider</string>
+    <string name="profile_menu_connected_idp_list">List of Linked IdPs</string>
+
+    <!-- shopping screen -->
+    <string name="loading">loading…</string>
+    <string name="request_shopping_list_error">Request shopping list error occurred</string>
+    <string name="purchase_success">Purchase successful.</string>
+
+    <!-- idp mapping screen -->
+    <string name="idp_mapping_button_mapped">Mapped</string>
+    <string name="idp_mapping_button_do_mapping">Link</string>
+    <string name="idp_mapping_dialog_title">Link Accounts</string>
+    <string name="idp_mapping_dialog_description">Do you want to unlink the %s account?</string>
+    <string name="idp_mapping_failed_dialog_description">Failed to link accounts.</string>
+    <string name="idp_mapping_remove_mapping_failed_dialog_description">Failed to unlink accounts.</string>
+    <string name="idp_mapping_force_mapping_confirm_dialog_description">Do you want to link a new account? The existing data will be deleted.</string>
+    <string name="idp_mapping_force_mapping_failed_dialog_description">Failed to force link accounts.</string>
+    <string name="idp_mapping_change_login_failed_dialog_description">Failed to change login account.</string>
+    <string name="idp_mapping_already_mapped">An account mapped to the selected %1$s already exists.(%2$s) </string>
+    <string name="idp_mapping_guide_force_mapping">Delete the existing account and link the currently logged-in account</string>
+    <string name="idp_mapping_guide_change_login">Log out of the currently logged-in account and log in to the existing account</string>
+
+    <!-- developer menu string array -->
+    <!-- never translate this -->
+    <string name="developer_menu_category_auth">Auth</string>
+    <string name="developer_menu_category_purchase">Purchase</string>
+    <string name="developer_menu_category_push">Push</string>
+    <string name="developer_menu_category_logger">Logger</string>
+    <string name="developer_menu_category_terms">Terms</string>
+    <string name="developer_menu_category_image_notice">ImageNotice</string>
+    <string name="developer_menu_category_webview">WebView</string>
+    <string name="developer_menu_category_alert">Alert</string>
+    <string name="developer_menu_category_analytics">Analytics</string>
+    <string name="developer_menu_category_contact">Contact</string>
+    <string name="developer_menu_category_etc">Etc</string>
+
+    <!-- never translate this -->
+    <string-array name="Auth">
+        <item>developer_menu_auth_suspend_withdrawal</item>
+        <item>developer_menu_auth_suspend_withdrawal_cancel</item>
+    </string-array>
+    <string-array name="Purchase">
+        <item>developer_menu_purchase_activated_subscription</item>
+        <item>developer_menu_purchase_not_consumed_list</item>
+        <item>developer_menu_purchase_subscription_status_list</item>
+    </string-array>
+    <string-array name="Push">
+        <item>developer_menu_push_current_setting</item>
+        <item>developer_menu_push_detail_setting</item>
+    </string-array>
+    <string-array name="Logger">
+        <item>developer_menu_logger_initialize</item>
+        <item>developer_menu_send_log</item>
+    </string-array>
+    <string-array name="Terms">
+        <item>developer_menu_terms_info</item>
+        <item>developer_menu_terms_detail_setting</item>
+        <item>developer_menu_terms_agreement_save</item>
+    </string-array>
+    <string-array name="ImageNotice">
+        <item>developer_menu_show_image_notice</item>
+        <item>developer_menu_image_notice_detail_setting</item>
+    </string-array>
+    <string-array name="WebView">
+        <item>developer_menu_open_webview</item>
+        <item>developer_menu_open_outside_browser</item>
+        <item>developer_menu_webview_detail_setting</item>
+    </string-array>
+    <string-array name="Alert">
+        <item>developer_menu_show_alert</item>
+        <item>developer_menu_show_short_toast</item>
+        <item>developer_menu_show_long_toast</item>
+    </string-array>
+    <string-array name="Analytics">
+        <item>developer_menu_user_level_info_setting</item>
+        <item>developer_menu_user_level_up_info_setting</item>
+    </string-array>
+    <string-array name="Contact">
+        <item>developer_menu_contact_url</item>
+        <item>developer_menu_contact_detail_setting</item>
+    </string-array>
+    <string-array name="Etc">
+        <item>developer_menu_etc_device_language</item>
+        <item>developer_menu_etc_display_language</item>
+        <item>developer_menu_etc_device_country_code</item>
+        <item>developer_menu_etc_usim_country_code</item>
+        <item>developer_menu_etc_country_code</item>
+    </string-array>
+
+    <string name="developer_menu_auth_suspend_withdrawal">Request Withdrawal Suspension</string>
+    <string name="developer_menu_auth_suspend_withdrawal_cancel">Cancel Withdrawal Suspension Request</string>
+    <string name="developer_menu_purchase_activated_subscription">View Subscriptions</string>
+    <string name="developer_menu_purchase_not_consumed_list">View Unconsumed List</string>
+    <string name="developer_menu_purchase_subscription_status_list">View Subscription Status</string>
+    <string name="developer_menu_push_current_setting">Push Settings</string>
+    <string name="developer_menu_push_detail_setting">Push Detailed Settings</string>
+    <string name="developer_menu_logger_initialize">Initialize Logger</string>
+    <string name="developer_menu_send_log">Send Debug Logs</string>
+    <string name="developer_menu_terms_info">Terms and Conditions Information</string>
+    <string name="developer_menu_terms_detail_setting">Terms and Conditions Detailed Settings</string>
+    <string name="developer_menu_terms_agreement_save">Save Terms and Conditions Agreement Status</string>
+    <string name="developer_menu_show_image_notice">Show Image Notices</string>
+    <string name="developer_menu_image_notice_detail_setting">Image Notice Detailed Settings</string>
+    <string name="developer_menu_open_webview">Open Webview</string>
+    <string name="developer_menu_open_outside_browser">Open External Browser</string>
+    <string name="developer_menu_webview_detail_setting">Webview Detailed Settings</string>
+    <string name="developer_menu_show_alert">Alert</string>
+    <string name="developer_menu_show_short_toast">Show Short Toast Message</string>
+    <string name="developer_menu_show_long_toast">Show Long Toast Message</string>
+    <string name="developer_menu_user_level_info_setting">Set User Level Information</string>
+    <string name="developer_menu_user_level_up_info_setting">Set User Level-Up Information</string>
+    <string name="developer_menu_contact_url">Show Customer Service URL</string>
+    <string name="developer_menu_contact_detail_setting">Customer Service Detailed Settings</string>
+
+    <string name="developer_menu_etc_device_language">Device language</string>
+    <string name="developer_menu_etc_device_country_code">Device Country code</string>
+    <string name="developer_menu_etc_usim_country_code">USIM Country code</string>
+    <string name="developer_menu_etc_country_code">Integrated Country code</string>
+    <string name="developer_menu_etc_display_language">Display language</string>
+
+    <!-- developer menu auth -->
+    <string name="request_withdrawal_success">Withdrawal request has been completed.\nDate: </string>
+    <string name="cancel_withdrawal_success">Withdrawal cancellation request has been successful.</string>
+
+    <!-- developer push setting -->
+    <string name="developer_push_configuration_sub_title">Push Configurations</string>
+    <string name="developer_push_notification_options_sub_title">Notification Options</string>
+    <string name="developer_push_noti_enable_badge">Use Badge Icon</string>
+    <string name="developer_push_noti_enable_set_priority">Log Level</string>
+
+    <!-- developer menu contact -->
+    <string name="developer_contact_url_alert_title">Customer Service URL</string>
+    <string name="developer_contact_user_name">Enter User Name</string>
+    <string name="developer_contact_additional_url">Additional URL</string>
+    <string name="developer_contact_additional_url_description">Please use this only if the customer service type is CUSTOM.</string>
+    <string name="developer_contact_additional_parameter">URL Parameters</string>
+    <string name="developer_contact_additional_url_parameter">Additional URL Parameters</string>
+    <string name="developer_contact_extra_data">Extra data</string>
+    <string name="developer_contact_open_contact">Open Customer Service</string>
+    <string name="developer_contact_remove_item_button_content_description">remove item</string>
+    <string name="developer_contact_url_invalid"> Gamebase Console Service Center URL is invalid. Please check the url field in the TOAST Gamebase Console.</string>
+
+    <!-- alert -->
+    <string name="developer_alert_sample_title">Title</string>
+    <string name="developer_alert_sample_message">This is an alert.</string>
+    <string name="developer_toast_short_sample_message">This is a short toast.</string>
+    <string name="developer_toast_long_sample_message">This is a long toast.</string>
+
+    <!-- developer terms setting -->
+    <string name="developer_terms_configuration_force_show">Force show terms and conditions</string>
+    <string name="developer_terms_configuration_fixed_font_size">Show terms and conditions fixed font size</string>
+    <string name="developer_terms_show_terms_view">View Terms and Conditions</string>
+    <string name="developer_terms_no_need_to_show_terms">There is no terms and conditions information registered in the console that corresponds to the device\'s country code.\nPlease process not to display the terms and conditions.</string>
+
+    <!-- Logger type -->
+    <string-array name="logger_level">
+        <item>DEBUG</item>
+        <item>INFO</item>
+        <item>WARN</item>
+        <item>ERROR</item>
+        <item>FATAL</item>
+    </string-array>
+
+    <!-- logger dialog -->
+    <string name="logger_initialize">Logger 초기화</string>
+    <string name="send_logger">Log 전송</string>
+    <string name="app_key">AppKey</string>
+    <string name="message">Message</string>
+    <string name="user_key">UserKey</string>
+    <string name="user_value">UserValue</string>
+
+    <!-- developer image notice setting -->
+    <string name="developer_image_notice_configuration_background_color">Set background color</string>
+    <string name="developer_image_notice_configuration_background_color_label_name">Background color</string>
+    <string name="developer_image_notice_configuration_time_out">Set maximum loading time</string>
+    <string name="developer_image_notice_configuration_time_out_label_name">Maximum loading time</string>
+    <string name="developer_image_notice_configuration_auto_close_custom_scheme">Close the notice when Custom scheme is activated</string>
+    <string name="developer_image_notice_show">View image notice</string>
+
+    <!-- developer web view setting -->
+    <string name="developer_web_view_configuration_screen_orientation">Screen mode configuration</string>
+    <string name="developer_web_view_configuration_navigation_bar_visible">Show navigation bar</string>
+    <string name="developer_web_view_configuration_navigation_bar_back_button">Show back button</string>
+    <string name="developer_web_view_configuration_navigation_display_cutout">Display full screen (ignore cutout)</string>
+    <string name="developer_web_view_configuration_navigation_bar_title">Set navigation bar title</string>
+    <string name="developer_web_view_configuration_navigation_bar_title_label_name">Navigation bar title</string>
+    <string name="developer_web_view_configuration_navigation_bar_color">Set navigation bar color</string>
+    <string name="developer_web_view_configuration_navigation_bar_color_label_name">Navigation bar color</string>
+    <string name="developer_web_view_configuration_navigation_bar_height">Set navigation bar height</string>
+    <string name="developer_web_view_configuration_navigation_bar_height_label_name">Navigation bar height</string>
+    <string name="developer_web_view_configuration_navigation_bar_orientation">Navigation bar orientation</string>
+    <string name="developer_web_view_show">Show WebView</string>
+
+    <!-- web view screen orientation -->
+    <string-array name="screen_orientation">
+        <item>Portrait</item>
+        <item>Landscape</item>
+        <item>Reverse landscape</item>
+    </string-array>
+
+    <!-- analytics -->
+    <string name="developer_analytics_level_setting_title">User Level Information</string>
+    <string name="developer_analytics_level_up_setting_title">User Level Up Information</string>
+    <string name="developer_analytics_level_label_name">Level(Int)</string>
+    <string name="developer_analytics_channel_id_label_name">Channel ID</string>
+    <string name="developer_analytics_character_id_label_name">Character ID</string>
+    <string name="developer_analytics_class_id_label_name">Class ID</string>
+
+</resources>

@@ -1,34 +1,29 @@
 <resources>
-
-    <!-- TODO: [Fix me] Set your Facebook App ID -->
-    <string name="facebook_app_id" translatable="false">252590081934203</string>
-    <string name="facebook_client_token" translatable="false">012e060867866b205ca253e258ab2991</string>
-
-    <string name="app_name">Gamebase Sample</string>
+    <string name="app_name">게임베이스 샘플</string>
 
     <!-- menu name -->
-    <string name="splash">Splash</string>
-    <string name="login">Login</string>
-    <string name="home">Home</string>
-    <string name="profile">Profile</string>
-    <string name="shopping">Shopping</string>
-    <string name="settings">Settings</string>
-    <string name="idp_mapping">Mapping</string>
-    <string name="developer">Developer</string>
+    <string name="splash">스플래시</string>
+    <string name="login">로그인</string>
+    <string name="home">홈</string>
+    <string name="profile">프로필</string>
+    <string name="shopping">쇼핑</string>
+    <string name="settings">설정</string>
+    <string name="idp_mapping">Idp 연동</string>
+    <string name="developer">개발자 메뉴</string>
 
     <!-- common -->
-    <string name="button_ok">OK</string>
-    <string name="button_cancel">Cancel</string>
+    <string name="button_ok">확인</string>
+    <string name="button_cancel">취소</string>
     <string name="logout">로그아웃</string>
     <string name="withdraw">탈퇴</string>
     <string name="success">Success</string>
     <string name="failed">Failed</string>
     <string name="empty_list_message">리스트가 비어있습니다.</string>
     <string name="copyright_nhn">© NHN Corp. All rights reserved.</string>
-    <string name="empty_list">No items</string>
-    <string name="unknown_error">Unknown Error occurred</string>
+    <string name="empty_list">아이템이 없습니다.</string>
+    <string name="unknown_error">알수없는 에러가 발생하였습니다.</string>
     <string name="url">URL</string>
-    <string name="enter_key_message">키를 입력해주세요</string>
+    <string name="enter_key_message">키를 입력해주세요.</string>
     <string name="user_cancel_message">취소 되었습니다.</string>
 
     <!-- splash screen -->
@@ -46,10 +41,10 @@
     <string name="access_info_ad_id_content_description">person</string>
     <string name="access_info_camera_title">카메라 (선택)</string>
     <string name="access_info_camera_subtitle">Game 고객센터 API 호출 시 필요.\n사용자가 문의사항에 사진 또는 동영상 첨부시 사용.</string>
-    <string name="access_info_camera_content_description">camera</string>
+    <string name="access_info_camera_content_description">카메라</string>
     <string name="access_info_photo_title">사진 (선택)</string>
     <string name="access_info_photo_subtitle">Gamebase 고객센터 API 호출 시 필요.\n사용자가 문의사항에 앨범에서 사진 또는 동영상 첨부시 사용.</string>
-    <string name="access_info_photo_content_description">photo</string>
+    <string name="access_info_photo_content_description">사진</string>
 
     <!-- setting screen -->
     <string name="setting_login_manage">Gamebase Sample</string>
@@ -75,11 +70,11 @@
     <!-- login screen -->
     <string name="login_title">Gamebase 로그인</string>
     <string name="login_description">원하시는 로그인 타입을 선택해 주세요.</string>
-    <string name="sign_in_button">%s 로 로그인</string>
-    <string name="login_select_line_region">Line 로그인을 위한 region 을 선택하세요 (실제 코드에서는 코드상으로 실제 region을 입력해야합니다)</string>
+    <string name="sign_in_button">%s로 로그인</string>
+    <string name="login_select_line_region">Line 로그인을 위한 region 을 선택하세요 (실제 서비스에서는 코드상으로 region을 입력해야합니다)</string>
 
     <!-- profile screen -->
-    <string name="profile_picture_content_description">profile picture</string>
+    <string name="profile_picture_content_description">프로필 사진</string>
     <string name="profile_menu_gamebase_user_id">Gamebase UserID</string>
     <string name="profile_menu_gamebase_access_token">Gamebase AccessToken</string>
     <string name="profile_menu_gamebase_push_token">Gamebase PushToken</string>
@@ -88,14 +83,14 @@
 
     <!-- shopping screen -->
     <string name="loading">loading…</string>
-    <string name="request_shopping_list_error">request shopping list error occurred</string>
+    <string name="request_shopping_list_error">아이템 목록 요청 중 오류가 발생했습니다.</string>
     <string name="purchase_success">구매 성공하였습니다.</string>
 
     <!-- idp mapping screen -->
     <string name="idp_mapping_button_mapped">연동됨</string>
     <string name="idp_mapping_button_do_mapping">연동하기</string>
     <string name="idp_mapping_dialog_title">계정 연동</string>
-    <string name="idp_mapping_dialog_description">연동을 해제하시겠습니까?</string>
+    <string name="idp_mapping_dialog_description">%s 연동을 해제하시겠습니까?</string>
     <string name="idp_mapping_failed_dialog_description">계정 연동에 실패하였습니다.</string>
     <string name="idp_mapping_remove_mapping_failed_dialog_description">계정 연동 해제에 실패하였습니다.</string>
     <string name="idp_mapping_force_mapping_confirm_dialog_description">새롭게 연동 하시겠습니까? 기존 데이터는 삭제됩니다.</string>
@@ -107,17 +102,17 @@
 
     <!-- developer menu string array -->
     <!-- never translate this -->
-    <string name="developer_menu_category_auth">Auth</string>
-    <string name="developer_menu_category_purchase">Purchase</string>
-    <string name="developer_menu_category_push">Push</string>
-    <string name="developer_menu_category_logger">Logger</string>
-    <string name="developer_menu_category_terms">Terms</string>
-    <string name="developer_menu_category_image_notice">ImageNotice</string>
-    <string name="developer_menu_category_webview">WebView</string>
-    <string name="developer_menu_category_alert">Alert</string>
-    <string name="developer_menu_category_analytics">Analytics</string>
-    <string name="developer_menu_category_contact">Contact</string>
-    <string name="developer_menu_category_etc">Etc</string>
+    <string name="developer_menu_category_auth" translatable="false">Auth</string>
+    <string name="developer_menu_category_purchase" translatable="false">Purchase</string>
+    <string name="developer_menu_category_push" translatable="false">Push</string>
+    <string name="developer_menu_category_logger" translatable="false">Logger</string>
+    <string name="developer_menu_category_terms" translatable="false">Terms</string>
+    <string name="developer_menu_category_image_notice" translatable="false">ImageNotice</string>
+    <string name="developer_menu_category_webview" translatable="false">WebView</string>
+    <string name="developer_menu_category_alert" translatable="false">Alert</string>
+    <string name="developer_menu_category_analytics" translatable="false">Analytics</string>
+    <string name="developer_menu_category_contact" translatable="false">Contact</string>
+    <string name="developer_menu_category_etc" translatable="false">Etc</string>
 
     <!-- never translate this -->
     <string-array name="Auth">
@@ -184,8 +179,8 @@
     <string name="developer_menu_terms_info">약관 정보 조회</string>
     <string name="developer_menu_terms_detail_setting">약관 상세 설정</string>
     <string name="developer_menu_terms_agreement_save">약관 동의 내역 저장</string>
-    <string name="developer_menu_show_image_notice">이미지공지 보기</string>
-    <string name="developer_menu_image_notice_detail_setting">이미지공지 상세설정</string>
+    <string name="developer_menu_show_image_notice">이미지 공지 보기</string>
+    <string name="developer_menu_image_notice_detail_setting">이미지 공지 상세설정</string>
     <string name="developer_menu_open_webview">웹뷰 열기</string>
     <string name="developer_menu_open_outside_browser">외부 브라우저 열기</string>
     <string name="developer_menu_webview_detail_setting">웹뷰 상세설정</string>
@@ -196,8 +191,8 @@
     <string name="developer_menu_user_level_up_info_setting">유저 레벨업 정보 설정</string>
     <string name="developer_menu_contact_url">고객센터 URL 조회</string>
     <string name="developer_menu_contact_detail_setting">고객센터 상세 설정</string>
-    <string name="developer_menu_etc_device_language">Device language</string>
-    <string name="developer_menu_etc_device_country_code">Device Country code</string>
+    <string name="developer_menu_etc_device_language">디바이스 언어</string>
+    <string name="developer_menu_etc_device_country_code">디바이스 Country code</string>
     <string name="developer_menu_etc_usim_country_code">USIM Country code</string>
     <string name="developer_menu_etc_country_code">Integrated Country code</string>
     <string name="developer_menu_etc_display_language">Display language</string>
@@ -222,7 +217,7 @@
     <string name="developer_contact_extra_data">Extra data</string>
     <string name="developer_contact_open_contact">고객센터 열기</string>
     <string name="developer_contact_remove_item_button_content_description">remove item</string>
-    <string name="developer_contact_url_invalid"> Gamebase Console Service Center URL is invalid. Please check the url field in the TOAST Gamebase Console.</string>
+    <string name="developer_contact_url_invalid">Gamebase Console의 고객센터 URL이 잘못되었습니다. Gamebase Console의 URL 필드를 확인해주세요.</string>
 
     <!-- alert -->
     <string name="developer_alert_sample_title">제목</string>
