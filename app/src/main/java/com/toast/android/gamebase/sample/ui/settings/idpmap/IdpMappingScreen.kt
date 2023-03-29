@@ -185,7 +185,7 @@ private fun getDialogDescription(
 ): String {
     when (uiState) {
         IdpMappingUiState.SHOW_REMOVE_MAPPING_DIALOG -> {
-            return currentSelectedItem + " " + context.resources.getString(R.string.idp_mapping_dialog_description)
+            return String.format(context.resources.getString(R.string.idp_mapping_dialog_description), currentSelectedItem)
         }
         IdpMappingUiState.SHOW_FORCE_MAPPING_CONFIRM_DIALOG -> {
             return context.resources.getString(R.string.idp_mapping_force_mapping_confirm_dialog_description)

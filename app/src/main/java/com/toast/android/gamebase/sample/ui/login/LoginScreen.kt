@@ -168,7 +168,7 @@ fun OutlineLoginButton(
             Spacer(Modifier.width(dimensionResource(id = R.dimen.login_screen_icon_text_space)))
             Text(
                 color = Color.Black,
-                text = "$idp 로 로그인",
+                text = stringResource(id = R.string.sign_in_button, idp.capitalize()),
                 textAlign = TextAlign.Center
             )
         }
