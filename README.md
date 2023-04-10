@@ -1,6 +1,8 @@
 # Gamebase Sample App for Android Overview
 This is a Sample App that allows you to refer to the basic flow when applying the Gamebase Android SDK. This app makes it easier to apply the Gamebase Android SDK.
 
+[![code with hearth by NHN](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-NHN-ff1414.svg)](https://github.com/nhn) ![Android](https://img.shields.io/badge/android-3DDC84?style=flat&logo=android&logoColor=white) ![Kotlin Badge](https://img.shields.io/badge/Kotlin-7F52FF?logo=kotlin&logoColor=fff&style=flat) [![Maven central](https://img.shields.io/maven-central/v/com.toast.android.gamebase/gamebase-sdk?logo=apachemaven)](https://mvnrepository.com/artifact/com.toast.android.gamebase/gamebase-sdk) ![MIT](https://img.shields.io/badge/license-MIT-green)
+
    * [Start guide](https://docs.nhncloud.com/en/Game/Gamebase/en/aos-started)   
    * [SDK 연동 가이드](https://docs.nhncloud.com/ko/Game/Gamebase/ko/aos-started)
 
