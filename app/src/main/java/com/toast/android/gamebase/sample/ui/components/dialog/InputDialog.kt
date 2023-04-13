@@ -102,6 +102,7 @@ fun InputDialog(
                 labelName = labelName,
                 fieldMessage = inputText,
                 fieldEnabled = fieldEnabled,
+                showClearButton = true,
                 onValueChanged = { value ->
                     inputText = value
                 }
