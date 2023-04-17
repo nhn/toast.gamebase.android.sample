@@ -1,8 +1,11 @@
 package com.toast.android.gamebase.sample.gamebase_manager
 
 import android.app.Activity
+import android.content.Context
 import android.content.DialogInterface
 import android.util.Log
+import android.webkit.URLUtil
+import android.widget.Toast
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseCallback
 import com.toast.android.gamebase.GamebaseDataCallback
@@ -10,6 +13,7 @@ import com.toast.android.gamebase.GamebaseWebViewConfiguration
 import com.toast.android.gamebase.GamebaseWebViewStyle
 import com.toast.android.gamebase.base.data.GamebaseDataContainer
 import com.toast.android.gamebase.imagenotice.ImageNoticeConfiguration
+import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.terms.GamebaseTermsConfiguration
 import com.toast.android.gamebase.terms.data.GamebaseQueryTermsResult
 import com.toast.android.gamebase.terms.data.GamebaseTermsContent
@@ -141,6 +145,11 @@ fun closeWebView(activity: Activity) {
 
 // Open with External Web Browser.
 fun openExternalBrowser(activity: Activity, urlString: String) {
+    val errorMessage = (activity as Context).resources.getString(R.string.developer_web_view_url_invalid)
+    if (!URLUtil.isValidUrl(urlString)) {
+        Gamebase.Util.showToast(activity, errorMessage, Toast.LENGTH_SHORT)
+        return
+    }
     Gamebase.WebView.openWebBrowser(activity, urlString)
 }
 
