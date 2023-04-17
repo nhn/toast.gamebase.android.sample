@@ -274,6 +274,7 @@
     <string name="developer_web_view_configuration_navigation_bar_height_label_name">네비게이션 높이</string>
     <string name="developer_web_view_configuration_navigation_bar_orientation">네비게이션바 방향</string>
     <string name="developer_web_view_show">웹뷰 보기</string>
+    <string name="developer_web_view_url_invalid">Url 형식이 올바르지 않습니다.</string>
 
     <!-- web view screen orientation -->
     <string-array name="screen_orientation">

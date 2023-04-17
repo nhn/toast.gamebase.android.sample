@@ -270,6 +270,7 @@
     <string name="developer_web_view_configuration_navigation_bar_height_label_name">Navigation bar height</string>
     <string name="developer_web_view_configuration_navigation_bar_orientation">Navigation bar orientation</string>
     <string name="developer_web_view_show">Show WebView</string>
+    <string name="developer_web_view_url_invalid">Url is invalid.</string>
 
     <!-- web view screen orientation -->
     <string-array name="screen_orientation">
