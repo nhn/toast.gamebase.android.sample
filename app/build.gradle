@@ -25,8 +25,8 @@ android {
         // TODO: [Fix me] Change the minSdkVersion according to your your app's dependencies.
         minSdk 21
         targetSdk 33
-        versionCode 11
-        versionName "2.49.0"
+        versionCode 12
+        versionName "2.50.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -123,6 +123,7 @@ dependencies {
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-galaxy:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-amazon:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-huawei:${GAMEBASE_VERSION}"
+//    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-mycard:${GAMEBASE_VERSION}"
 
     // >>> Gamebase - Push Adapter
     implementation "com.toast.android.gamebase:gamebase-adapter-push-fcm:${GAMEBASE_VERSION}"
