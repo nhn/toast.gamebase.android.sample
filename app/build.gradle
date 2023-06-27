@@ -119,6 +119,7 @@ dependencies {
     // https://github.com/ONE-store/onestore_iap_release/tree/iap19-release/android_app_sample/app/libs
 //    implementation files("libs/iap_sdk-${ONE_STORE_V19_VERSION}.aar")
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore-v19:${GAMEBASE_VERSION}"
+//    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore-v21:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore-external:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-galaxy:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-amazon:${GAMEBASE_VERSION}"
