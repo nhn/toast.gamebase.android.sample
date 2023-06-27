@@ -28,6 +28,7 @@ class WebViewSettingViewModel : ViewModel() {
     val screenOrientationExpanded = mutableStateOf(false)
     val screenOrientationType = mutableStateOf(0)
     val openWebViewDialogStatus = mutableStateOf(false)
+    val openColorInputInvalidAlertStatus = mutableStateOf(false)
 
     fun openWebView(activity: Activity, urlString: String) {
         val orientationType =
