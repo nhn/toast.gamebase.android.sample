@@ -1,6 +1,7 @@
 package com.toast.android.gamebase.sample.ui.developer.webview
 
 import android.app.Activity
+import android.graphics.Color
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,6 +19,7 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.ui.components.text.ClickableText
 import com.toast.android.gamebase.sample.ui.components.input.DropdownMenuBoxWithTitle
 import com.toast.android.gamebase.sample.ui.components.button.RoundButton
+import com.toast.android.gamebase.sample.ui.components.dialog.ConfirmAlertDialog
 import com.toast.android.gamebase.sample.ui.components.input.SwitchWithLabel
 import com.toast.android.gamebase.sample.ui.developer.WEBVIEW_MENU_DEFAULT_URL
 
@@ -104,7 +106,23 @@ fun WebViewSettingScreen(
             viewModel.navigationBarColorDialogStatus.value = newState
         },
         onOkButtonClicked = { value ->
+            try {
+                Color.parseColor(value)
+            } catch (e: IllegalArgumentException) {
+                viewModel.openColorInputInvalidAlertStatus.value = true
+                return@WebViewSettingDialog
+            }
             viewModel.navigationBarColor.value = value
+        }
+    )
+
+    ConfirmAlertDialog(
+        isDialogOpened = viewModel.openColorInputInvalidAlertStatus.value,
+        title = "Failed",
+        description = "Color is invalid",
+        onOkButtonClicked = {},
+        setDialogStatus = { newState ->
+            viewModel.openColorInputInvalidAlertStatus.value = newState
         }
     )
 
