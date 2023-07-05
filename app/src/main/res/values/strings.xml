@@ -5,6 +5,7 @@
     <string name="facebook_client_token" translatable="false"> </string>
 
     <string name="app_name">Gamebase Sample</string>
+    <string name="gamebase_splash_content_description" translatable="false">NHN Gamebase</string>
 
     <!-- menu name -->
     <string name="splash">Splash</string>
