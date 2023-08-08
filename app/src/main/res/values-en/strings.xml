@@ -218,4 +218,10 @@
     <string name="developer_analytics_character_id_label_name">Character ID</string>
     <string name="developer_analytics_class_id_label_name">Class ID</string>
 
+    <!-- network -->
+    <string name="network_changed_not">Internet connection has been lost.</string>
+    <string name="network_changed_mobile">Mobile network is connected.</string>
+    <string name="network_changed_wifi">WiFi is connected.</string>
+    <string name="network_changed_any">Network is connected.</string>
+
 </resources>
