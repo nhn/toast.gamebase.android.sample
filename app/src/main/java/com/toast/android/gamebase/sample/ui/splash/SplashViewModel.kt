@@ -115,10 +115,14 @@ class SplashViewModel : ViewModel() {
         val moveToStore =
             DialogInterface.OnClickListener { _: DialogInterface?, _: Int ->
                 try {
-                    val marketIntent = Intent(Intent.ACTION_VIEW)
-                    marketIntent.data = Uri.parse(updateUrl)
-                    activity.startActivityForResult(marketIntent, MARKET_INTENT_REQUEST_CODE)
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse(updateUrl)
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }.run {
+                        activity.startActivity(this)
+                    }
                 } catch (ignored: ActivityNotFoundException) {
+                    Log.w(TAG, "market not found.")
                 }
             }
         showAlert(

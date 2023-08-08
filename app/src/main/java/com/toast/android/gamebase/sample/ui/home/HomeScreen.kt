@@ -17,7 +17,7 @@ import com.toast.android.gamebase.sample.gamebase_manager.showImageNotices
 
 @Composable
 fun HomeScreen(activity: Activity, onLoggedOut: () -> Unit) {
-    var initialApiCalled by rememberSaveable{ mutableStateOf(false) }
+    var initialApiCalled by rememberSaveable { mutableStateOf(false) }
 
     Surface {
         Column (
