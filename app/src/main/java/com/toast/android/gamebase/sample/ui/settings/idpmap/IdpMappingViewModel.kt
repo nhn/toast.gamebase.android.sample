@@ -30,6 +30,7 @@ enum class IdpMappingUiState {
     CHANGE_LOGIN_FAILED
 }
 
+@Suppress("UNUSED_ANONYMOUS_PARAMETER")
 class IdpMappingViewModel: ViewModel() {
     var uiState by mutableStateOf(IdpMappingUiState.DEFAULT)
     var currentException by mutableStateOf<GamebaseException?>(null)
