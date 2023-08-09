@@ -168,7 +168,7 @@ fun OutlineLoginButton(
             Spacer(Modifier.width(dimensionResource(id = R.dimen.login_screen_icon_text_space)))
             Text(
                 color = Color.Black,
-                text = stringResource(id = R.string.sign_in_button, idp.replaceFirstChar { firstChar -> firstChar.uppercase() }),
+                text = stringResource(id = R.string.sign_in_button, idp.replaceFirstChar { it.uppercase() }),
                 textAlign = TextAlign.Center
             )
         }
