@@ -122,7 +122,7 @@ class SplashViewModel : ViewModel() {
                         activity.startActivity(this)
                     }
                 } catch (ignored: ActivityNotFoundException) {
-                    Log.w(TAG, "market not found.")
+                    Log.w(TAG, "Market not found.")
                 }
             }
         showAlert(
