@@ -59,11 +59,7 @@ private fun handleLastProviderLoginFailed(
 
     if (isNetworkError(exception)) {
         Gamebase.Util.showAlert(activity, "Network Error", "Check your network.")
-        // 시간 간격을 주고 retry 할 수 있습니다.
-//        retryWithInterval(
-//            Runnable {
-//                lastProviderLogin(activity, onLoginFinished, onLastProviderIsLine) }, 2000L
-//        )
+        // You can retry with some time interval.
     } else if (isBannedUser(exception)) {
         // Do nothing because you set the 'enableBanPopup' true.
         // Gamebase will show ban-popup automatically.
@@ -82,16 +78,6 @@ private fun handleLastProviderLoginFailed(
             // Do nothing. User should select IDP from Game UI.
         }
     }
-}
-
-private fun retryWithInterval(runnable: Runnable, intervalMillis: Long) {
-    Thread {
-        try {
-            Thread.sleep(intervalMillis)
-            runnable.run()
-        } catch (_: InterruptedException) {
-        }
-    }.start()
 }
 
 fun isLoggedIn(): Boolean {

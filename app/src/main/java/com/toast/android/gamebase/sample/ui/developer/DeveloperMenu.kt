@@ -19,7 +19,7 @@ data class DeveloperMenu(val category: Int, val id: String, val name: String) {
         const val IMAGE_NOTICE_DETAIL_SETTING = "developer_menu_image_notice_detail_setting"
         const val OPEN_WEBVIEW = "developer_menu_open_webview"
         const val OPEN_OUTSIDE_BROWSER = "developer_menu_open_outside_browser"
-        const val WEBIVEW_DETAIL_SETTING = "developer_menu_webview_detail_setting"
+        const val WEBVIEW_DETAIL_SETTING = "developer_menu_webview_detail_setting"
         const val SHOW_ALERT = "developer_menu_show_alert"
         const val SHOW_SHORT_TOAST = "developer_menu_show_short_toast"
         const val SHOW_LONG_TOAST = "developer_menu_show_long_toast"

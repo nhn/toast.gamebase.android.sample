@@ -34,7 +34,7 @@ private const val DEBUG_MODE = true
 
 // Popup settings
 // https://docs.toast.com/en/Game/Gamebase/en/aos-initialization/#configuration-settings
-// TODO: [Fix me] CThis value determines whether to use pop-ups provided by Gamebase SDK.
+// TODO: [Fix me] This value determines whether to use pop-ups provided by Gamebase SDK.
 private const val ENABLE_POPUP = true
 private const val ENABLE_LAUNCHING_STATUS_POPUP = true
 private const val ENABLE_BAN_POPUP = true

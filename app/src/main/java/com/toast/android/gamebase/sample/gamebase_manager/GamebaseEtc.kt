@@ -14,10 +14,11 @@ const val TAG = "GamebaseManager"
 // https://docs.toast.com/ko/Game/Gamebase/ko/aos-etc/
 // Additional features
 
-// ENABLE/DISABLE TOAST ANALYTICS
+// Enable/Disable TOAST ANALYTICS
 // TODO: [FIX ME] To use the Toast analytics feature, set the value to true and call setGameUserData after login.
-// WARNING : 해당 value를 true로 변경할 시, developer 메뉴 -> Analytics -> 유저 레벨 정보 설정에서
-// Channel ID, Character ID, Class ID를 공란으로 설정할 시 초기에 설정한 값(dummyUserData)이 계속 사용 됩니다.
+// WARNING: If you change this value to true,
+// the initial value (dummyUserData) will continue to be used that you set the Channel ID, Character ID, and Class ID to blank
+// in the developer menu -> Analytics -> User Level Information Settings.
 const val useAnalyticsTransmissionFeature = false
 
 fun getDeviceLanguage(): String {
