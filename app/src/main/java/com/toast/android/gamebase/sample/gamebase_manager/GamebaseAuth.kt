@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseCallback
 import com.toast.android.gamebase.GamebaseDataCallback
+import com.toast.android.gamebase.analytics.data.GameUserData
 import com.toast.android.gamebase.auth.data.AuthToken
 import com.toast.android.gamebase.auth.data.BanInfo
 import com.toast.android.gamebase.auth.data.TemporaryWithdrawalInfo
@@ -17,8 +18,6 @@ import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.auth.AuthProvider
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.data.UserData
-import com.toast.android.gamebase.sample.data.dummyUserData
 import com.toast.android.gamebase.sample.util.printBanInfo
 import com.toast.android.gamebase.sample.util.printLoginError
 import com.toast.android.gamebase.sample.util.printLoginSuccess
@@ -157,6 +156,14 @@ private fun handleLoginSuccess(
 ) {
     printLoginSuccess(TAG, authToken)
 
+    // TODO: [Fix me] The user level information can be set after login to the game has been made.
+    // https://docs.nhncloud.com/en/Game/Gamebase/en/aos-etc/#analytics
+    val dummyUserData = GameUserData(99).apply {
+        this.channelId = "channel sample"
+        this.characterId = "character name"
+        this.classId = "character class"
+    }
+
     // Gamebase Analytics에서 지원하는 모든 API는 로그인 후에 호출이 가능합니다.
     if (useAnalyticsTransmissionFeature) {
         initializeGamebaseAnalytics(dummyUserData)
@@ -165,13 +172,8 @@ private fun handleLoginSuccess(
     onLoginSuccess.invoke()
 }
 
-private fun initializeGamebaseAnalytics(userData: UserData) {
-    setGameUserData(
-        userData.level,
-        userData.channelId,
-        userData.characterId,
-        userData.classId
-    )
+private fun initializeGamebaseAnalytics(userData: GameUserData) {
+    setGameUserData(userData)
 }
 
 fun logout(
