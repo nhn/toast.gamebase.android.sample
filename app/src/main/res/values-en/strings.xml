@@ -26,9 +26,6 @@
     <string name="enter_key_message">Please enter the key</string>
     <string name="user_cancel_message">Canceled by the user.</string>
 
-    <!-- splash screen -->
-    <string name="splsh_title">Gamebase SampleApplication</string>
-
     <!-- home screen -->
     <string name="home_main_text">Experience the full range of Gamebase features</string>
 

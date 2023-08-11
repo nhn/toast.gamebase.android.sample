@@ -26,9 +26,6 @@
     <string name="enter_key_message">키를 입력해주세요.</string>
     <string name="user_cancel_message">취소 되었습니다.</string>
 
-    <!-- splash screen -->
-    <string name="splsh_title">Gamebase SampleApplication</string>
-
     <!-- home screen -->
     <string name="home_main_text">Gamebase 기능들을 마음껏 경험해보세요</string>
 
