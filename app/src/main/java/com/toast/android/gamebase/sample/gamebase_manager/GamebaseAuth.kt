@@ -144,7 +144,8 @@ private fun handleLoginSuccess(
 
     // TODO: [Fix me] The user level information can be set after login to the game has been made.
     // https://docs.nhncloud.com/en/Game/Gamebase/en/aos-etc/#analytics
-    val dummyUserData = GameUserData(99).apply {
+    val sampleInitLevelFetchedByGameServer = 99
+    val dummyUserData = GameUserData(sampleInitLevelFetchedByGameServer).apply {
         this.channelId = "channel sample"
         this.characterId = "character name"
         this.classId = "character class"

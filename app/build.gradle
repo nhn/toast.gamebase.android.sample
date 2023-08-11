@@ -19,6 +19,7 @@ android {
     compileSdk 33
     namespace 'com.toast.android.gamebase.sample'
     defaultConfig {
+        // TODO: [Fix me] Change to your app's package name.
         applicationId "com.toast.gamebasesample"
 
         minSdk 21
