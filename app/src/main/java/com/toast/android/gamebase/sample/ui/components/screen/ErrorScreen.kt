@@ -29,5 +29,5 @@ fun ErrorScreen(errorString: String) {
 @Preview
 @Composable
 fun ErrorScreenPreview() {
-    ErrorScreen("알수없는 에러가 발생하였습니다.")
+    ErrorScreen("알 수 없는 에러가 발생하였습니다.")
 }

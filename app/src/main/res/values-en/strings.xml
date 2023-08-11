@@ -26,9 +26,6 @@
     <string name="enter_key_message">Please enter the key</string>
     <string name="user_cancel_message">Canceled by the user.</string>
 
-    <!-- splash screen -->
-    <string name="splsh_title">Gamebase SampleApplication</string>
-
     <!-- home screen -->
     <string name="home_main_text">Experience the full range of Gamebase features</string>
 
@@ -101,72 +98,6 @@
     <string name="idp_mapping_guide_change_login">Log out of the currently logged-in account and log in to the existing account</string>
 
     <!-- developer menu string array -->
-    <!-- never translate this -->
-    <string name="developer_menu_category_auth">Auth</string>
-    <string name="developer_menu_category_purchase">Purchase</string>
-    <string name="developer_menu_category_push">Push</string>
-    <string name="developer_menu_category_logger">Logger</string>
-    <string name="developer_menu_category_terms">Terms</string>
-    <string name="developer_menu_category_image_notice">ImageNotice</string>
-    <string name="developer_menu_category_webview">WebView</string>
-    <string name="developer_menu_category_alert">Alert</string>
-    <string name="developer_menu_category_analytics">Analytics</string>
-    <string name="developer_menu_category_contact">Contact</string>
-    <string name="developer_menu_category_etc">Etc</string>
-
-    <!-- never translate this -->
-    <string-array name="Auth">
-        <item>developer_menu_auth_suspend_withdrawal</item>
-        <item>developer_menu_auth_suspend_withdrawal_cancel</item>
-    </string-array>
-    <string-array name="Purchase">
-        <item>developer_menu_purchase_activated_subscription</item>
-        <item>developer_menu_purchase_not_consumed_list</item>
-        <item>developer_menu_purchase_subscription_status_list</item>
-    </string-array>
-    <string-array name="Push">
-        <item>developer_menu_push_current_setting</item>
-        <item>developer_menu_push_detail_setting</item>
-    </string-array>
-    <string-array name="Logger">
-        <item>developer_menu_logger_initialize</item>
-        <item>developer_menu_send_log</item>
-    </string-array>
-    <string-array name="Terms">
-        <item>developer_menu_terms_info</item>
-        <item>developer_menu_terms_detail_setting</item>
-        <item>developer_menu_terms_agreement_save</item>
-    </string-array>
-    <string-array name="ImageNotice">
-        <item>developer_menu_show_image_notice</item>
-        <item>developer_menu_image_notice_detail_setting</item>
-    </string-array>
-    <string-array name="WebView">
-        <item>developer_menu_open_webview</item>
-        <item>developer_menu_open_outside_browser</item>
-        <item>developer_menu_webview_detail_setting</item>
-    </string-array>
-    <string-array name="Alert">
-        <item>developer_menu_show_alert</item>
-        <item>developer_menu_show_short_toast</item>
-        <item>developer_menu_show_long_toast</item>
-    </string-array>
-    <string-array name="Analytics">
-        <item>developer_menu_user_level_info_setting</item>
-        <item>developer_menu_user_level_up_info_setting</item>
-    </string-array>
-    <string-array name="Contact">
-        <item>developer_menu_contact_url</item>
-        <item>developer_menu_contact_detail_setting</item>
-    </string-array>
-    <string-array name="Etc">
-        <item>developer_menu_etc_device_language</item>
-        <item>developer_menu_etc_display_language</item>
-        <item>developer_menu_etc_device_country_code</item>
-        <item>developer_menu_etc_usim_country_code</item>
-        <item>developer_menu_etc_country_code</item>
-    </string-array>
-
     <string name="developer_menu_auth_suspend_withdrawal">Request Withdrawal Suspension</string>
     <string name="developer_menu_auth_suspend_withdrawal_cancel">Cancel Withdrawal Suspension Request</string>
     <string name="developer_menu_purchase_activated_subscription">View Subscriptions</string>

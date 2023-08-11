@@ -115,7 +115,7 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> menuNavigator.onImageNoticeSettingMenu()
             DeveloperMenu.OPEN_WEBVIEW -> isOpenWebViewOpened.value = true
             DeveloperMenu.OPEN_OUTSIDE_BROWSER -> isOpenWebBrowserOpened.value = true
-            DeveloperMenu.WEBIVEW_DETAIL_SETTING -> menuNavigator.onWebViewSettingMenu()
+            DeveloperMenu.WEBVIEW_DETAIL_SETTING -> menuNavigator.onWebViewSettingMenu()
             DeveloperMenu.USER_LEVEL_INFO_SETTING -> isUserLevelInfoSettingOpened.value = true
             DeveloperMenu.USER_LEVEL_UP_INFO_SETTING -> isUserLevelUpInfoSettingOpened.value = true
             DeveloperMenu.DEVICE_LANGUAGE -> showMenuNameAlert(activity, developerMenuItem.id, getDeviceLanguage())

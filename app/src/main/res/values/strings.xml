@@ -32,9 +32,6 @@
     <string name="enter_key_message">키를 입력해주세요</string>
     <string name="user_cancel_message">취소 되었습니다.</string>
 
-    <!-- splash screen -->
-    <string name="splsh_title">Gamebase SampleApplication</string>
-
     <!-- home screen -->
     <string name="home_main_text">Gamebase 기능들을 마음껏 경험해보세요</string>
 
@@ -108,17 +105,17 @@
 
     <!-- developer menu string array -->
     <!-- never translate this -->
-    <string name="developer_menu_category_auth">Auth</string>
-    <string name="developer_menu_category_purchase">Purchase</string>
-    <string name="developer_menu_category_push">Push</string>
-    <string name="developer_menu_category_logger">Logger</string>
-    <string name="developer_menu_category_terms">Terms</string>
-    <string name="developer_menu_category_image_notice">ImageNotice</string>
-    <string name="developer_menu_category_webview">WebView</string>
-    <string name="developer_menu_category_alert">Alert</string>
-    <string name="developer_menu_category_analytics">Analytics</string>
-    <string name="developer_menu_category_contact">Contact</string>
-    <string name="developer_menu_category_etc">Etc</string>
+    <string name="developer_menu_category_auth" translatable="false">Auth</string>
+    <string name="developer_menu_category_purchase" translatable="false">Purchase</string>
+    <string name="developer_menu_category_push" translatable="false">Push</string>
+    <string name="developer_menu_category_logger" translatable="false">Logger</string>
+    <string name="developer_menu_category_terms" translatable="false">Terms</string>
+    <string name="developer_menu_category_image_notice" translatable="false">ImageNotice</string>
+    <string name="developer_menu_category_webview" translatable="false">WebView</string>
+    <string name="developer_menu_category_alert" translatable="false">Alert</string>
+    <string name="developer_menu_category_analytics" translatable="false">Analytics</string>
+    <string name="developer_menu_category_contact" translatable="false">Contact</string>
+    <string name="developer_menu_category_etc" translatable="false">Etc</string>
 
     <!-- never translate this -->
     <string-array name="Auth">

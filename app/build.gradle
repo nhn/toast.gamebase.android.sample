@@ -22,11 +22,10 @@ android {
         // TODO: [Fix me] Change to your app's package name.
         applicationId "com.toast.gamebasesample"
 
-        // TODO: [Fix me] Change the minSdkVersion according to your your app's dependencies.
         minSdk 21
         targetSdk 33
         versionCode 13
-        versionName "2.52.0"
+        versionName GAMEBASE_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -38,7 +37,6 @@ android {
         }
         applicationVariants.all { variant ->
             variant.outputs.all {
-                // TODO: [Fix me] Change the your app's apk output name.
                 outputFileName = "Gamebase-SampleApp-${defaultConfig.versionName}-${variant.buildType.name}.apk"
             }
         }

@@ -17,7 +17,7 @@ class GamebaseApplication : MultiDexApplication() {
         super.onCreate()
         instance = this
 
-        // 앱이 실행되자마자 발생하는 크래시 로그도 빠짐없이 전송하려면 Application.onCreate()에서 NHN Cloud Logger를 초기화해야 합니다.
+        // To send crash logs that occur as soon as the app starts, you must initialize the NHN Cloud Logger in Application.onCreate().
         if (getAppKey().isNotEmpty()) {
             initializeNhnCloudLogger(applicationContext)
             setNhnCloudLoggerListener()
