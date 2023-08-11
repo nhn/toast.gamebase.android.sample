@@ -33,7 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import com.toast.android.gamebase.base.NetworkManager
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebase_manager.mOnNetworkChanged
+import com.toast.android.gamebase.sample.gamebase_manager.mOnNetworkChangedListener
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppNavHost
 import com.toast.android.gamebase.sample.ui.navigation.SampleAppScreens
 import com.toast.android.gamebase.sample.ui.theme.Green
@@ -56,13 +56,23 @@ fun MainScreen(
         currentBackStackEntry.value?.destination?.route
     )
     LaunchedEffect (Unit) {
-        mOnNetworkChanged = {
+        fun getNetworkStateMessage(
+            context: Context,
+            code: Int
+        ) = when (code) {
+            NetworkManager.TYPE_NOT -> context.resources.getString(R.string.network_changed_not)
+            NetworkManager.TYPE_WIFI -> context.resources.getString(R.string.network_changed_wifi)
+            NetworkManager.TYPE_MOBILE -> context.resources.getString(R.string.network_changed_mobile)
+            NetworkManager.TYPE_ANY -> context.resources.getString(R.string.network_changed_any)
+            else -> ""
+        }
+        mOnNetworkChangedListener = {
             networkState.value = it
-            val networkStateString = getNetworkString(activity, it)
-            if (networkStateString.isNotEmpty()) {
+            val networkStateMessage = getNetworkStateMessage(activity, it)
+            if (networkStateMessage.isNotEmpty()) {
                 scope.launch {
                     scaffoldState.snackbarHostState.showSnackbar(
-                        message = networkStateString,
+                        message = networkStateMessage,
                     )
                 }
             }
@@ -127,24 +137,16 @@ fun MainScreen(
     }
 }
 
-private fun getNetworkString(
-    context: Context,
-    code: Int
-) = when (code) {
-    NetworkManager.TYPE_NOT -> context.resources.getString(R.string.network_changed_not)
-    NetworkManager.TYPE_WIFI -> context.resources.getString(R.string.network_changed_wifi)
-    NetworkManager.TYPE_MOBILE -> context.resources.getString(R.string.network_changed_mobile)
-    NetworkManager.TYPE_ANY -> context.resources.getString(R.string.network_changed_any)
-    else -> ""
-}
-
 private fun getNetworkStateSnackbarColor(
     code: Int
-) = when (code) {
-    NetworkManager.TYPE_WIFI, NetworkManager.TYPE_MOBILE, NetworkManager.TYPE_ANY -> Green
-    NetworkManager.TYPE_NOT -> Grey700
-    else -> Grey700
-}
+): Color =
+    if (code == NetworkManager.TYPE_NOT) {
+        // Network disconnected
+        Grey700
+    } else {
+        // Network connected
+        Green
+    }
 
 private fun onDestinationClicked(
     navController: NavHostController,
