@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <queries>
         <!-- [All SDK] AppToWeb Authentication support start -->
         <package android:name="com.android.chrome" />
@@ -13,26 +18,14 @@
         <package android:name="com.facebook.katana" />
         <!-- [Facebook] Configurations end -->
 
-        <!-- [LINE] Configurations begin -->
-        <package android:name="jp.naver.line.android" />
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="https" />
-        </intent>
-        <!-- [LINE] Configurations end -->
-
         <!-- [Weibo] Configurations begin -->
         <package android:name="com.weico.international" />
         <package android:name="com.sina.weibo" />
         <!-- [Weibo] Configurations end -->
     </queries>
 
-    <!-- [Line] Add 'tools:replace="android:allowBackup"' because of Line SDK -->
     <application
         android:name=".GamebaseApplication"
-        android:allowBackup="true"
-        tools:replace="android:allowBackup"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_gamebase_nhn"

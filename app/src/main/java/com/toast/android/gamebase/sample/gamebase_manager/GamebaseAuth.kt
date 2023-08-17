@@ -17,6 +17,7 @@ import com.toast.android.gamebase.auth.mapping.data.ForcingMappingTicket
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
 import com.toast.android.gamebase.base.auth.AuthProvider
+import com.toast.android.gamebase.base.auth.AuthProviderCredentialConstants
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.util.printBanInfo
 import com.toast.android.gamebase.sample.util.printLoginError
@@ -33,10 +34,16 @@ fun lastProviderLogin(
     onLoginFinished: () -> Unit
 ) {
     val lastLoggedInProvider = Gamebase.getLastLoggedInProvider()
+
+    // Can set show loading animation during login
+    val option = hashMapOf<String, Any?>()
+    option[AuthProviderCredentialConstants.SHOW_LOADING_ANIMATION] = false
+
     Log.d(TAG, "Last Logged in Provider : $lastLoggedInProvider")
 
     Gamebase.loginForLastLoggedInProvider(
-        activity
+        activity,
+        option,
     ) { result, exception ->
         if (Gamebase.isSuccess(exception)) {
             Log.d(TAG, "Login with Last Logged In Provider Success")
