@@ -289,4 +289,10 @@
     <string name="developer_analytics_character_id_label_name">Character ID</string>
     <string name="developer_analytics_class_id_label_name">Class ID</string>
 
+    <!-- network -->
+    <string name="network_changed_not">인터넷 연결이 끊겼습니다.</string>
+    <string name="network_changed_mobile">모바일 네트워크가 연결되었습니다.</string>
+    <string name="network_changed_wifi">WiFi 가 연결되었습니다.</string>
+    <string name="network_changed_any">네트워크가 연결되었습니다.</string>
+
 </resources>

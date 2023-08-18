@@ -28,6 +28,8 @@ import org.json.JSONObject
 
 private var mGamebaseEventHandler: GamebaseEventHandler? = null
 
+var mOnNetworkChangedListener: (Int) -> Unit = {}
+
 fun addGamebaseEventHandler(activity: Activity, onKickOut: () -> Unit) {
     if (mGamebaseEventHandler != null) {
         Gamebase.removeEventHandler(mGamebaseEventHandler)
@@ -212,11 +214,7 @@ private fun processObserver(
         val networkTypeCode = data.code
         Log.d(TAG, "Network changing : $data")
 
-        // You can check the changed network status in here.
-        if (networkTypeCode == NetworkManager.TYPE_NOT) {
-            // Network disconnected.
-        } else {
-            // Network connected.
-        }
+        // You can check the changed network status by code
+        mOnNetworkChangedListener(networkTypeCode)
     }
 }

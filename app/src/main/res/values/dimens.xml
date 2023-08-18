@@ -6,6 +6,7 @@
     <dimen name="common_copyright_footer_margin_bottom">48dp</dimen>
     <dimen name="common_submenu_divider_margin_top">12dp</dimen>
     <dimen name="common_switch_padding">10dp</dimen>
+    <dimen name="common_snackbar_padding">4dp</dimen>
 
     <dimen name="access_info_screen_padding_top">50dp</dimen>
     <dimen name="access_info_title_font_size">30sp</dimen>
