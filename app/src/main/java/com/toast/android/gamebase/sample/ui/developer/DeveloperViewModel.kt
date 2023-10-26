@@ -46,6 +46,7 @@ class DeveloperViewModel: ViewModel() {
     val menuMap: MutableMap<String, List<DeveloperMenu>> = createMenuMap()
     val isLoggerInitializeOpened = mutableStateOf(false)
     val isSendLogOpened = mutableStateOf(false)
+    val isSendReportOpened = mutableStateOf(false)
     val isOpenWebViewOpened = mutableStateOf(false)
     val isOpenWebBrowserOpened = mutableStateOf(false)
     val isUserLevelInfoSettingOpened = mutableStateOf(false)
@@ -111,6 +112,7 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.SHOW_LONG_TOAST -> showSampleToast(activity, Toast.LENGTH_LONG)
             DeveloperMenu.LOGGER_INITIALIZE -> isLoggerInitializeOpened.value = true
             DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
+            DeveloperMenu.SEND_REPORT -> isSendReportOpened.value = true
             DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity)
             DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> menuNavigator.onImageNoticeSettingMenu()
             DeveloperMenu.OPEN_WEBVIEW -> isOpenWebViewOpened.value = true

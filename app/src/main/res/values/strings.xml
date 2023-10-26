@@ -134,6 +134,7 @@
     <string-array name="Logger">
         <item>developer_menu_logger_initialize</item>
         <item>developer_menu_send_log</item>
+        <item>developer_menu_send_report</item>
     </string-array>
     <string-array name="Terms">
         <item>developer_menu_terms_info</item>
@@ -179,6 +180,7 @@
     <string name="developer_menu_push_detail_setting">푸시 상세 설정</string>
     <string name="developer_menu_logger_initialize">Logger 초기화</string>
     <string name="developer_menu_send_log">디버그 로그 전송</string>
+    <string name="developer_menu_send_report">Throwable 리포트 전송</string>
     <string name="developer_menu_terms_info">약관 정보 조회</string>
     <string name="developer_menu_terms_detail_setting">약관 상세 설정</string>
     <string name="developer_menu_terms_agreement_save">약관 동의 내역 저장</string>
@@ -246,6 +248,8 @@
     <!-- logger dialog -->
     <string name="logger_initialize">Logger 초기화</string>
     <string name="send_logger">Log 전송</string>
+    <string name="send_report">Throwable report 전송</string>
+    <string name="send_report_description">Test 용 임의의 Throwable 객체가 전송됩니다.</string>
     <string name="app_key">AppKey</string>
     <string name="message">Message</string>
     <string name="user_key">UserKey</string>
