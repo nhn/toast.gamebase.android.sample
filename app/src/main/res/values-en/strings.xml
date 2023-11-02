@@ -107,6 +107,7 @@
     <string name="developer_menu_push_detail_setting">Push Detailed Settings</string>
     <string name="developer_menu_logger_initialize">Initialize Logger</string>
     <string name="developer_menu_send_log">Send Debug Logs</string>
+    <string name="developer_menu_send_report">Send Throwable Report</string>
     <string name="developer_menu_terms_info">Terms and Conditions Information</string>
     <string name="developer_menu_terms_detail_setting">Terms and Conditions Detailed Settings</string>
     <string name="developer_menu_terms_agreement_save">Save Terms and Conditions Agreement Status</string>
@@ -173,8 +174,10 @@
     </string-array>
 
     <!-- logger dialog -->
-    <string name="logger_initialize">Logger 초기화</string>
-    <string name="send_logger">Log 전송</string>
+    <string name="logger_initialize">Logger Initialize</string>
+    <string name="send_logger">Send Log</string>
+    <string name="send_report">Send Throwable Report</string>
+    <string name="send_report_description">A random Throwable object is being sent for testing purposes.</string>
     <string name="app_key">AppKey</string>
     <string name="message">Message</string>
     <string name="user_key">UserKey</string>

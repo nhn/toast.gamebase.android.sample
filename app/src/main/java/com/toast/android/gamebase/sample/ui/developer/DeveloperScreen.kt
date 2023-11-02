@@ -22,6 +22,7 @@ import com.toast.android.gamebase.sample.ui.components.dialog.ListDialog
 import com.toast.android.gamebase.sample.ui.components.text.SubMenuDivider
 import com.toast.android.gamebase.sample.ui.developer.logger.LoggerInitializeDialog
 import com.toast.android.gamebase.sample.ui.developer.logger.SendLogDialog
+import com.toast.android.gamebase.sample.ui.developer.logger.SendReportDialog
 import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
 import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewDialog
 
@@ -76,6 +77,13 @@ fun DeveloperScreen(
                     viewModel.isSendLogOpened.value = newState
                 },
                 stringArrayResources = R.array.logger_level
+            )
+            SendReportDialog(
+                isDialogOpened = viewModel.isSendReportOpened.value,
+                title = stringResource(id = R.string.send_report),
+                setDialogStatus = { newState ->
+                    viewModel.isSendReportOpened.value = newState
+                },
             )
             OpenCustomWebViewDialog(
                 isDialogOpened = viewModel.isOpenWebViewOpened.value,

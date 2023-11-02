@@ -58,6 +58,12 @@ fun sendLogFatal(message: String, userField: Map<String?, String?>) {
     Gamebase.Logger.fatal(message, userField)
 }
 
+// A Throwable from a try/catch sentence can be sent by Gamebase.Logger.report()
+// For more usage : https://docs.nhncloud.com/en/nhncloud/en/nhncloud-sdk/log-collector-android/#use-handled-exception-api
+fun sendReport(message: String, throwable: Throwable, userField: Map<String?, String?>) {
+    Gamebase.Logger.report(message, throwable, userField)
+}
+
 // 리스너(listener)를 등록하면 로그 전송 후 추가 작업을 진행할 수 있습니다.
 fun setNhnCloudLoggerListener() {
     Gamebase.Logger.setLoggerListener(object : LoggerListener {

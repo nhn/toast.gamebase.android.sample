@@ -151,6 +151,96 @@ fun SendLogDialog(
     }
 }
 
+@Composable
+fun SendReportDialog(
+    isDialogOpened: Boolean,
+    title: String,
+    setDialogStatus: (Boolean) -> Unit
+) {
+    if (isDialogOpened) {
+        val sendReportDialogStateHolder = SendReportDialogStateHolder()
+
+        Dialog(onDismissRequest = {}) {
+            val scrollState = rememberScrollState()
+            Surface(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(dimensionResource(id = R.dimen.logger_dialog_surface_corner_shape)))
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(
+                            dimensionResource(id = R.dimen.logger_dialog_surface_padding)
+                        )
+                        .fillMaxWidth()
+                        .verticalScroll(scrollState)
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(dimensionResource(id = R.dimen.logger_dialog_text_padding)),
+                        text = title,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = stringResource(id = R.string.send_report_description),
+                        textAlign = TextAlign.Left
+                    )
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.logger_dialog_spacer_padding)))
+                    Column() {
+                        TextFieldWithLabel(
+                            labelName = stringResource(id = R.string.message),
+                            fieldMessage = sendReportDialogStateHolder.loggerMessage.value,
+                            onValueChanged = { value ->
+                                sendReportDialogStateHolder.loggerMessage.value = value
+                            }
+                        )
+                        TextFieldWithLabel(
+                            labelName = stringResource(id = R.string.user_key),
+                            fieldMessage = sendReportDialogStateHolder.loggerUserKey.value,
+                            onValueChanged = { value ->
+                                sendReportDialogStateHolder.loggerUserKey.value = value
+                            }
+                        )
+                        TextFieldWithLabel(
+                            labelName = stringResource(id = R.string.user_value),
+                            fieldMessage = sendReportDialogStateHolder.loggerUserValue.value,
+                            onValueChanged = { value ->
+                                sendReportDialogStateHolder.loggerUserValue.value = value
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.logger_dialog_spacer_padding)))
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = dimensionResource(id = R.dimen.logger_dialog_text_padding)),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        TextButton(
+                            onClick = {
+                                sendReportDialogStateHolder.sendReport()
+                                setDialogStatus(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_ok))
+                        }
+                        TextButton(
+                            onClick = {
+                                setDialogStatus(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_cancel))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 @Preview
 @Composable
 fun PreviewSendLogDialogInPortrait() {
@@ -162,6 +252,16 @@ fun PreviewSendLogDialogInPortrait() {
     )
 }
 
+@Preview
+@Composable
+fun PreviewSendReportDialogInPortrait() {
+    SendReportDialog(
+        isDialogOpened = true,
+        title = "제목",
+        setDialogStatus = {}
+    )
+}
+
 @Preview(device = Devices.AUTOMOTIVE_1024p)
 @Composable
 fun PreviewSendLogDialogInLandscape() {
@@ -170,5 +270,15 @@ fun PreviewSendLogDialogInLandscape() {
         title = "제목",
         setDialogStatus = {},
         stringArrayResources = R.array.logger_level
+    )
+}
+
+@Preview(device = Devices.AUTOMOTIVE_1024p)
+@Composable
+fun PreviewSendReportDialogInLandscape() {
+    SendReportDialog(
+        isDialogOpened = true,
+        title = "제목",
+        setDialogStatus = {}
     )
 }

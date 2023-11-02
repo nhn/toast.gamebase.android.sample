@@ -12,6 +12,7 @@ data class DeveloperMenu(val category: Int, val id: String, val name: String) {
         const val PUSH_DETAIL_SETTING = "developer_menu_push_detail_setting"
         const val LOGGER_INITIALIZE = "developer_menu_logger_initialize"
         const val SEND_LOG = "developer_menu_send_log"
+        const val SEND_REPORT = "developer_menu_send_report"
         const val TERMS_INFO = "developer_menu_terms_info"
         const val TERMS_DETAIL_SETTING = "developer_menu_terms_detail_setting"
         const val TERMS_AGREEMENT_SAVE = "developer_menu_terms_agreement_save"
