@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -53,9 +54,8 @@ fun SplashSurface() {
         ) {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        dimensionResource(id = R.dimen.splash_image_padding)
+                    .width(
+                        dimensionResource(id = R.dimen.splash_image_width)
                     ),
                 contentAlignment = Alignment.Center,
             ) {

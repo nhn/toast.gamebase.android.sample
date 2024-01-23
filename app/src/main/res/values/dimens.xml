@@ -92,5 +92,5 @@
     <dimen name="idp_mapping_image_padding">4dp</dimen>
     <dimen name="idp_mapping_image_text_spacer">12dp</dimen>
 
-    <dimen name="splash_image_padding">30dp</dimen>
+    <dimen name="splash_image_width">230dp</dimen>
 </resources>
