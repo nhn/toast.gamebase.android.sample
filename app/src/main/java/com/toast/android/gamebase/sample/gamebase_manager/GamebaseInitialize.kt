@@ -7,6 +7,7 @@ import com.toast.android.gamebase.GamebaseConfiguration
 import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.base.purchase.PurchaseProvider
 import com.toast.android.gamebase.error.data.UpdateInfo
+import com.toast.android.gamebase.launching.data.LaunchingInfo
 import com.toast.android.gamebase.launching.data.LaunchingStatus
 
 private enum class GamePlayStatus {
@@ -41,7 +42,7 @@ private const val ENABLE_BAN_POPUP = true
 
 fun initializeGamebase(
     activity: Activity,
-    onLaunchingSuccess: () -> Unit,
+    onLaunchingSuccess: (LaunchingInfo) -> Unit,
     showErrorAndRetryInitialize: (String?, String?) -> Unit,
     showUnregisteredVersionAndMoveToStore: (String, String) -> Unit
 ) {
@@ -73,7 +74,7 @@ fun initializeGamebase(
                 if (canPlay == GamePlayStatus.PLAYABLE) {
                     // 게임 플레이를 시작합니다.
                     Log.v(TAG, "Launching Succeeded")
-                    onLaunchingSuccess()
+                    onLaunchingSuccess(launchingInfo)
                 } else {
                     // 게임 불가 사유를 밝히고 게임을 중지합니다.
                     Log.w(TAG, "Launching Failed($launchingStatusCode) : $errorLog")

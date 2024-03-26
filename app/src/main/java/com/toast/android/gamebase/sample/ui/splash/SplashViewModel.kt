@@ -14,6 +14,7 @@ import com.toast.android.gamebase.sample.gamebase_manager.logout
 import com.toast.android.gamebase.sample.gamebase_manager.showAlert
 import com.toast.android.gamebase.sample.gamebase_manager.showTermsView
 import com.toast.android.gamebase.sample.GamebaseActivity
+import com.toast.android.gamebase.sample.util.saveLaunchingInfo
 import com.toast.android.gamebase.sample.util.savePushConfiguration
 import com.toast.android.gamebase.terms.data.GamebaseShowTermsViewResult
 
@@ -35,6 +36,7 @@ class SplashViewModel : ViewModel() {
         initializeGamebase(
             activity = activity,
             onLaunchingSuccess = {
+                saveLaunchingInfo(it)
                 showTermsViewPopup(activity) {
                     isInitialized.value = true
                 }

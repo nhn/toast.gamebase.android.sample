@@ -35,6 +35,10 @@
     <dimen name="login_screen_icon_text_space">12dp</dimen>
     <dimen name="login_screen_button_space">2dp</dimen>
 
+    <dimen name="home_screen_guide_text_padding">30dp</dimen>
+    <dimen name="home_screen_test_device_text_size">10sp</dimen>
+    <dimen name="home_screen_test_device_text_padding">5dp</dimen>
+
     <dimen name="setting_screen_column_padding_horizontal">20dp</dimen>
     <dimen name="setting_screen_menu_title_text_padding">10dp</dimen>
     <dimen name="setting_screen_menu_description_text_padding">8dp</dimen>
