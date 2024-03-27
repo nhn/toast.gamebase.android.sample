@@ -38,7 +38,7 @@ fun HomeScreen(activity: Activity, onLoggedOut: () -> Unit) {
             }
             val launchingInfo = loadLaunchingInfo()
             isTestDevice = launchingInfo?.isTestDevice ?: false
-            matchingTypes = launchingInfo?.testDeviceMatchingTypes?.joinToString(separator = "|") ?: ""
+            matchingTypes = launchingInfo?.testDeviceMatchingTypes?.joinToString(separator = " | ") ?: ""
         }
         InnerHomeScreen(isTestDevice, matchingTypes)
     }
