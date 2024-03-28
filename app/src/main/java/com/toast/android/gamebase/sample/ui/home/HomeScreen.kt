@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,31 +15,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.gamebase_manager.addGamebaseEventHandler
 import com.toast.android.gamebase.sample.gamebase_manager.showImageNotices
-import com.toast.android.gamebase.sample.util.loadLaunchingInfo
 
 @Composable
-fun HomeScreen(activity: Activity, onLoggedOut: () -> Unit) {
-    var initialApiCalled by rememberSaveable { mutableStateOf(false) }
-    var isTestDevice by rememberSaveable { mutableStateOf(false) }
-    var matchingTypes by rememberSaveable { mutableStateOf("") }
-
+fun HomeScreen(activity: Activity, onLoggedOut: () -> Unit, homeViewModel: HomeViewModel = viewModel()) {
     Surface {
         LaunchedEffect(Unit) {
-            if (!initialApiCalled) {
-                initialApiCalled = true
-                addGamebaseEventHandler(activity) {
-                    onLoggedOut()
-                }
-                showImageNotices(activity) {}
-            }
-            val launchingInfo = loadLaunchingInfo()
-            isTestDevice = launchingInfo?.isTestDevice ?: false
-            matchingTypes = launchingInfo?.testDeviceMatchingTypes?.joinToString(separator = " | ") ?: ""
+            homeViewModel.setGamebaseEventHandler(activity = activity)
+            homeViewModel.getTestDeviceInfo()
+            showImageNotices(activity) {}
         }
-        InnerHomeScreen(isTestDevice, matchingTypes)
+        if (homeViewModel.onKickOut) {
+            onLoggedOut()
+        }
+        InnerHomeScreen(homeViewModel.isTestDevice, homeViewModel.matchingTypes)
     }
 }
 
@@ -72,5 +62,5 @@ fun InnerHomeScreen(testDevice: Boolean, matchingTypes: String) {
 @Preview
 @Composable
 fun PreviewHomeScreen() {
-    InnerHomeScreen(true, "IP|Device")
+    InnerHomeScreen(true, "IP | Device")
 }

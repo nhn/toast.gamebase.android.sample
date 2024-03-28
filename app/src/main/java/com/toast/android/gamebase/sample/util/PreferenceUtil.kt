@@ -49,29 +49,3 @@ fun loadPushConfiguration(): PushConfiguration? {
     }
     return null
 }
-
-fun saveLaunchingInfo(launchingInfo: LaunchingInfo) {
-    val applicationContext = GamebaseApplication.instance.applicationContext
-    val pref = applicationContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
-    val editor = pref.edit()
-
-    editor.putString(PREF_KEY_LAUNCHING_INFO, launchingInfo.toJsonString())
-    editor.apply()
-}
-
-fun loadLaunchingInfo(): LaunchingInfo? {
-    val applicationContext = GamebaseApplication.instance.applicationContext
-    val pref = applicationContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
-    if (!pref.contains(PREF_KEY_LAUNCHING_INFO)) {
-        return null
-    }
-    val launchingInfoStr = pref.getString(PREF_KEY_LAUNCHING_INFO, "{}") ?: return null
-    val launchingInfo = try {
-            JsonUtil.fromJson(launchingInfoStr, LaunchingInfo::class.java)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Logger.w("LaunchingInfo", "LaunchingInfo($launchingInfoStr) from Json failed : ${e.message}")
-            null
-        }
-    return launchingInfo
-}

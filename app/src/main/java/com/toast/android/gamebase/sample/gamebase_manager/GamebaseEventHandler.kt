@@ -6,7 +6,6 @@ import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.auth.data.AuthToken
 import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.GamebaseException
-import com.toast.android.gamebase.base.NetworkManager
 import com.toast.android.gamebase.base.purchase.PurchasableReceipt
 import com.toast.android.gamebase.event.GamebaseEventCategory
 import com.toast.android.gamebase.event.GamebaseEventHandler
@@ -26,15 +25,9 @@ import org.json.JSONObject
 // Gamebase Event Handler
 // https://docs.toast.com/en/Game/Gamebase/en/aos-etc/#gamebase-event-handler
 
-private var mGamebaseEventHandler: GamebaseEventHandler? = null
-
 var mOnNetworkChangedListener: (Int) -> Unit = {}
 
-fun addGamebaseEventHandler(activity: Activity, onKickOut: () -> Unit) {
-    if (mGamebaseEventHandler != null) {
-        Gamebase.removeEventHandler(mGamebaseEventHandler)
-    }
-    mGamebaseEventHandler =
+fun createGamebaseEventHandler(activity: Activity, onKickOut: () -> Unit) : GamebaseEventHandler =
         GamebaseEventHandler { message ->
             when(message.category) {
                 GamebaseEventCategory.LOGGED_OUT -> {
@@ -78,8 +71,6 @@ fun addGamebaseEventHandler(activity: Activity, onKickOut: () -> Unit) {
                 else -> {}
             }
         }
-    Gamebase.addEventHandler(mGamebaseEventHandler)
-}
 
 private fun processServerPush(
     category: String,

@@ -42,7 +42,7 @@ private const val ENABLE_BAN_POPUP = true
 
 fun initializeGamebase(
     activity: Activity,
-    onLaunchingSuccess: (LaunchingInfo) -> Unit,
+    onLaunchingSuccess: () -> Unit,
     showErrorAndRetryInitialize: (String?, String?) -> Unit,
     showUnregisteredVersionAndMoveToStore: (String, String) -> Unit
 ) {
@@ -74,7 +74,7 @@ fun initializeGamebase(
                 if (canPlay == GamePlayStatus.PLAYABLE) {
                     // 게임 플레이를 시작합니다.
                     Log.v(TAG, "Launching Succeeded")
-                    onLaunchingSuccess(launchingInfo)
+                    onLaunchingSuccess()
                 } else {
                     // 게임 불가 사유를 밝히고 게임을 중지합니다.
                     Log.w(TAG, "Launching Failed($launchingStatusCode) : $errorLog")
@@ -151,3 +151,5 @@ private fun checkIfGameCanPlay(launchingStatusCode: Int?): Pair<GamePlayStatus, 
     }
     return (canPlay to errorLog)
 }
+
+fun getLaunchingInfo(): LaunchingInfo? = Gamebase.Launching.getLaunchingInformations()
