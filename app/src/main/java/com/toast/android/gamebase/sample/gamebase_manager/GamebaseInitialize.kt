@@ -7,6 +7,7 @@ import com.toast.android.gamebase.GamebaseConfiguration
 import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.base.purchase.PurchaseProvider
 import com.toast.android.gamebase.error.data.UpdateInfo
+import com.toast.android.gamebase.launching.data.LaunchingInfo
 import com.toast.android.gamebase.launching.data.LaunchingStatus
 
 private enum class GamePlayStatus {
@@ -150,3 +151,5 @@ private fun checkIfGameCanPlay(launchingStatusCode: Int?): Pair<GamePlayStatus, 
     }
     return (canPlay to errorLog)
 }
+
+fun getLaunchingInfo(): LaunchingInfo? = Gamebase.Launching.getLaunchingInformations()

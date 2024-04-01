@@ -1,12 +1,15 @@
 package com.toast.android.gamebase.sample.util
 
 import android.content.Context
+import com.toast.android.gamebase.base.JsonUtil
 import com.toast.android.gamebase.base.log.Logger
 import com.toast.android.gamebase.base.push.PushConfiguration
+import com.toast.android.gamebase.launching.data.LaunchingInfo
 import com.toast.android.gamebase.sample.GamebaseApplication
 
 private const val PREFERENCE_NAME = "gamebase.sample.app"
 private const val PREF_KEY_PUSH_CONFIGURATION = "gamebase.sample.pref.push.configuration"
+private const val PREF_KEY_LAUNCHING_INFO = "gamebase.sample.pref.launching.info"
 
 fun putIntInPreference(context : Context, key: String, value: Int) {
     val mPreferenceEditor = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit()
