@@ -73,6 +73,9 @@ fun showTermsView(
     configuration: GamebaseTermsConfiguration? = null,
     callback: GamebaseDataCallback<GamebaseDataContainer?>?
 ) {
+    if (Gamebase.Terms.isShowingTermsView()) {
+        Gamebase.WebView.closeWebView(activity);
+    }
     if (configuration != null) {
         Gamebase.Terms.showTermsView(
             activity,
