@@ -1,5 +1,6 @@
 package com.toast.android.gamebase.sample.ui.splash
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
@@ -35,9 +36,7 @@ class SplashViewModel : ViewModel() {
         initializeGamebase(
             activity = activity,
             onLaunchingSuccess = {
-                showTermsViewPopup(activity) {
-                    isInitialized.value = true
-                }
+                isInitialized.value = true
             },
             showErrorAndRetryInitialize = { title, message ->
                 showErrorAndRetryInitialize(activity, title, message)
@@ -79,7 +78,7 @@ class SplashViewModel : ViewModel() {
         }
     }
 
-    private fun showTermsViewPopup(activity: GamebaseActivity, onPopupClosed: (() -> Unit)?) {
+    fun showTermsViewPopup(activity: Activity, onPopupClosed: (() -> Unit)?) {
         showTermsView(
             activity
         ) { container, exception ->

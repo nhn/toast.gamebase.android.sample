@@ -36,7 +36,9 @@ fun SplashScreen(
 
     LaunchedEffect(splashViewModel.isInitialized.value) {
         if (splashViewModel.isInitialized.value) {
-            onInitialized()
+            splashViewModel.showTermsViewPopup(activity) {
+                onInitialized()
+            }
         }
     }
     SplashSurface()
