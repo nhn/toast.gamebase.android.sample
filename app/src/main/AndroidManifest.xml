@@ -27,10 +27,7 @@
     <uses-sdk tools:overrideLibrary=
         "com.kakao.sdk.v2.auth,com.kakao.sdk.v2.common,com.kakao.sdk.v2.link,com.kakao.sdk.v2.network,com.kakao.sdk.v2.partner.auth,com.kakao.sdk.v2.partner,com.kakao.sdk.v2.partner.talk,com.kakao.sdk.v2.partner.user,com.kakao.sdk.v2.partner.friend,com.kakao.sdk.v2.story,com.kakao.sdk.v2.talk,com.kakao.sdk.v2.template,com.kakao.sdk.v2.user,com.kakao.sdk.v2.share,com.kakao.sdk.friend,
         com.kakaogame.kakao,com.kakaogame.common,com.kakaogame,com.kakaogame.device,com.kakaogame.googlegame,com.kakaogame.facebook,com.kakaogame.twitter,com.kakaogame.apple,
-        com.naver.glink.android.sdk,com.navercorp.nng.android.sdk,com.nhn.android.oauth,androidx.security,
-        com.nhncloud.android.iap.onestore,
-        com.toast.android.gamebase.auth.twitter,
-        com.nhncloud.android.iap.mycard"
+        com.nhncloud.android.iap.onestore"
         />
 
     <application
@@ -51,17 +48,13 @@
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-
-            <data
-                android:host="oauth"
-                android:scheme="@string/kakao_scheme" />
-        </intent-filter>
-    </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="oauth" android:scheme="@string/kakao_scheme" />
+            </intent-filter>
+        </activity>
 
         <!-- [KakaoGame] Configurations begin -->
         <activity android:name="com.kakao.sdk.partner.user.AgeAuthActivity"
