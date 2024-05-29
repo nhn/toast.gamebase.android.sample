@@ -2,6 +2,7 @@
 
 <configuartion-list>
 
+    <!-- TODO: [Fix me] Set your Kakao game App ID and secret -->
     <configuration key="appId" value="777531" />
     <configuration key="appSecret" value="dab23ce63d3c4f023572f645983b6307" />
 

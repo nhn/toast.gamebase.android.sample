@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- TODO: [Fix me] Set your Facebook App ID -->
+    <!-- TODO: [Fix me] Facebook App ID & Client Token or enter them in Gamebase console -->
     <string name="facebook_app_id" translatable="false"> </string>
     <string name="facebook_client_token" translatable="false"> </string>
 

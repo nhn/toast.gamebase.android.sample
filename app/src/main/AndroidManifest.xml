@@ -24,6 +24,12 @@
         <!-- [Weibo] Configurations end -->
     </queries>
 
+    <uses-sdk tools:overrideLibrary=
+        "com.kakao.sdk.v2.auth,com.kakao.sdk.v2.common,com.kakao.sdk.v2.link,com.kakao.sdk.v2.network,com.kakao.sdk.v2.partner.auth,com.kakao.sdk.v2.partner,com.kakao.sdk.v2.partner.talk,com.kakao.sdk.v2.partner.user,com.kakao.sdk.v2.partner.friend,com.kakao.sdk.v2.story,com.kakao.sdk.v2.talk,com.kakao.sdk.v2.template,com.kakao.sdk.v2.user,com.kakao.sdk.v2.share,com.kakao.sdk.friend,
+        com.kakaogame.kakao,com.kakaogame.common,com.kakaogame,com.kakaogame.device,com.kakaogame.googlegame,com.kakaogame.facebook,com.kakaogame.twitter,com.kakaogame.apple,
+        com.nhncloud.android.iap.onestore"
+        />
+
     <application
         android:name=".GamebaseApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -34,13 +40,24 @@
         android:theme="@style/Theme.GamebaseSampleProject">
 
         <!-- [Facebook] Configurations begin -->
-        <!-- TODO: [Fix me] Set your Facebook App ID -->
+        <!-- TODO: [Fix me] Set your Facebook App ID or enter them in Gamebase console -->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
         <!-- [Facebook] Configurations end -->
 
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="oauth" android:scheme="@string/kakao_scheme" />
+            </intent-filter>
+        </activity>
+
         <!-- [KakaoGame] Configurations begin -->
-        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+        <activity android:name="com.kakao.sdk.partner.user.AgeAuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -62,6 +79,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/kakao_scheme" android:host="@string/kakaolink_host" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/kakao_scheme" android:host="@string/kakaostory_host" />
             </intent-filter>
         </activity>
 
