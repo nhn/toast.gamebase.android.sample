@@ -24,7 +24,7 @@ android {
 
         minSdk 21
         targetSdk 33
-        versionCode 17
+        versionCode 18
         versionName GAMEBASE_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
