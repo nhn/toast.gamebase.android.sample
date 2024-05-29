@@ -40,7 +40,7 @@
         android:theme="@style/Theme.GamebaseSampleProject">
 
         <!-- [Facebook] Configurations begin -->
-        <!-- TODO: [Fix me] Set your Facebook App ID -->
+        <!-- TODO: [Fix me] Set your Facebook App ID or enter them in Gamebase console -->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
         <!-- [Facebook] Configurations end -->
