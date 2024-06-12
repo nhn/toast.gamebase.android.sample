@@ -10,15 +10,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://plugins.gradle.org/m2/" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
 
         // >>> [Kakaogame SDK Repository]
-        maven {
-            url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/'
-            allowInsecureProtocol true
-        }
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
         maven { url 'https://s3.ap-northeast-2.amazonaws.com/kakao-sdk-release/release/' }
-
     }
 }
 
