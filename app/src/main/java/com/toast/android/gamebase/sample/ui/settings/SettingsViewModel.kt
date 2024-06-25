@@ -3,6 +3,7 @@ package com.toast.android.gamebase.sample.ui.settings
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -152,5 +153,11 @@ class SettingsViewModel : ViewModel() {
         activity.startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
         OssLicensesMenuActivity.setActivityTitle(
             (activity as Context).resources.getString(R.string.setting_open_source_licenses))
+    }
+
+    fun openSampleAppUrlInBrowser(activity: Activity) {
+        val url = "https://github.com/nhn/toast.gamebase.android.sample"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        activity.startActivity(intent)
     }
 }

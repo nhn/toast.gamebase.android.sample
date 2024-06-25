@@ -141,6 +141,9 @@ fun SettingsScreen(
             ListItem(R.string.setting_open_source_licenses) {
                 settingsViewModel.startOssLicenseMenuActivity(activity)
             }
+            ListItem(R.string.setting_app_source_code) {
+                settingsViewModel.openSampleAppUrlInBrowser(activity = activity)
+            }
         }
         ConfirmAlertDialog(
             isDialogOpened = isLogoutDialogOpened.value,
