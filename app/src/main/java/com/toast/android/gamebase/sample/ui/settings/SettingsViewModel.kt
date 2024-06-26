@@ -3,7 +3,6 @@ package com.toast.android.gamebase.sample.ui.settings
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +17,7 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebase_manager.getNotificationOptions
 import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
 import com.toast.android.gamebase.sample.gamebase_manager.openContact
+import com.toast.android.gamebase.sample.gamebase_manager.openExternalBrowser
 import com.toast.android.gamebase.sample.gamebase_manager.queryTokenInfo
 import com.toast.android.gamebase.sample.gamebase_manager.showAlert
 import com.toast.android.gamebase.sample.ui.login.LoginState
@@ -157,7 +157,6 @@ class SettingsViewModel : ViewModel() {
 
     fun openSampleAppUrlInBrowser(activity: Activity) {
         val url = "https://github.com/nhn/toast.gamebase.android.sample"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        activity.startActivity(intent)
+        openExternalBrowser(activity, url)
     }
 }
