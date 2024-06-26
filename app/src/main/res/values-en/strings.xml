@@ -63,6 +63,7 @@
     <string name="setting_extra_title">Others</string>
     <string name="setting_service_center_title">Customer Service</string>
     <string name="setting_open_source_licenses">Open Source Licenses</string>
+    <string name="setting_app_source_code">App Source Code</string>
 
     <!-- login screen -->
     <string name="login_title">Gamebase Login</string>

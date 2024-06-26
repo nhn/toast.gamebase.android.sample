@@ -17,6 +17,7 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.gamebase_manager.getNotificationOptions
 import com.toast.android.gamebase.sample.gamebase_manager.isSuccess
 import com.toast.android.gamebase.sample.gamebase_manager.openContact
+import com.toast.android.gamebase.sample.gamebase_manager.openExternalBrowser
 import com.toast.android.gamebase.sample.gamebase_manager.queryTokenInfo
 import com.toast.android.gamebase.sample.gamebase_manager.showAlert
 import com.toast.android.gamebase.sample.ui.login.LoginState
@@ -152,5 +153,10 @@ class SettingsViewModel : ViewModel() {
         activity.startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
         OssLicensesMenuActivity.setActivityTitle(
             (activity as Context).resources.getString(R.string.setting_open_source_licenses))
+    }
+
+    fun openSampleAppUrlInBrowser(activity: Activity) {
+        val url = "https://github.com/nhn/toast.gamebase.android.sample"
+        openExternalBrowser(activity, url)
     }
 }
