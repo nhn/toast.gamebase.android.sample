@@ -4,6 +4,9 @@
     <string name="facebook_app_id" translatable="false"> </string>
     <string name="facebook_client_token" translatable="false"> </string>
 
+    <!-- TODO: [Fix me] GPGS v2 App ID -->
+    <string name="game_services_project_id" translatable="false">283619115829</string>
+
     <string name="app_name">Gamebase Sample</string>
     <string name="gamebase_splash_content_description" translatable="false">NHN Gamebase</string>
 
