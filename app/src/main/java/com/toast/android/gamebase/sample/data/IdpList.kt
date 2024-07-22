@@ -15,6 +15,7 @@ val supportedIdpList = listOf(
     AuthProvider.TWITTER,
     AuthProvider.WEIBO,
     "payco",
+    AuthProvider.GPGS_V2,
 )
 
 fun getIconResourceById(idp: String): Int {
@@ -29,6 +30,7 @@ fun getIconResourceById(idp: String): Int {
         AuthProvider.TWITTER -> return R.drawable.twitter_logo
         AuthProvider.WEIBO -> return R.drawable.weibo_logo
         "payco" -> return R.drawable.payco_logo
+        AuthProvider.GPGS_V2 -> return R.drawable.gpgs_logo
     }
     return R.drawable.guest_logo
 }

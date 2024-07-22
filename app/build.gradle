@@ -24,7 +24,7 @@ android {
 
         minSdk 21
         targetSdk 33
-        versionCode 20
+        versionCode 21
         versionName GAMEBASE_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -100,6 +100,7 @@ dependencies {
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-payco:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-twitter:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-appleid:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-gpgs-v2:${GAMEBASE_VERSION}"
 
     // >>> [Weibo IdP]
 //    implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo:${GAMEBASE_VERSION}"

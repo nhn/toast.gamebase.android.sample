@@ -45,6 +45,12 @@
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
         <!-- [Facebook] Configurations end -->
 
+        <!-- [GPGSv2] Configurations begin -->
+        <!-- TODO: [Fix me] Set your GPGSv2 APP ID -->
+        <meta-data android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/game_services_project_id"/>
+        <!-- [GPGSv2] Configurations end -->
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
