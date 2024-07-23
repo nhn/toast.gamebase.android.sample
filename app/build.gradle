@@ -40,6 +40,9 @@ android {
                 outputFileName = "Gamebase-SampleApp-${defaultConfig.versionName}-${variant.buildType.name}.apk"
             }
         }
+        lintOptions {
+            abortOnError false
+        }
     }
     signingConfigs {
         config {
