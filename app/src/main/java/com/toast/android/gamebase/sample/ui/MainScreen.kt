@@ -30,7 +30,6 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.base.NetworkManager
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
@@ -57,10 +56,7 @@ fun MainScreen(
         currentBackStackEntry.value?.destination?.route
     )
     LaunchedEffect (Unit) {
-        if (!Gamebase.isInitialized()) {
-            // 게임베이스가 초기화되어있지 않다면 splash스크린으로 돌아가 다시 초기화를 수행한다.
-            onDestinationClicked(navController, scope, scaffoldState, SampleAppScreens.Splash.route)
-        }
+        jumpToRoute(navController, scope, scaffoldState, startRoute)
         fun getNetworkStateMessage(
             context: Context,
             code: Int
@@ -122,7 +118,7 @@ fun MainScreen(
                 },
                 drawerContent = {
                     MainDrawer { route ->
-                        onDestinationClicked(navController, scope, scaffoldState, route)
+                        jumpToRoute(navController, scope, scaffoldState, route)
                     }
                 }
             ) { innerPadding ->
@@ -153,7 +149,7 @@ private fun getNetworkStateSnackbarColor(
         Green
     }
 
-private fun onDestinationClicked(
+private fun jumpToRoute(
     navController: NavHostController,
     scope: CoroutineScope,
     scaffoldState: ScaffoldState,
