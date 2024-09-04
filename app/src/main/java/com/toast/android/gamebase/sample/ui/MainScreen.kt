@@ -44,7 +44,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(
     activity: GamebaseActivity,
-    startRoute: String
+    startRoute: String,
+    isProcessRestart: Boolean = false,
 ) {
     val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
@@ -52,11 +53,12 @@ fun MainScreen(
     val networkState = remember { mutableStateOf(-1) }
 
     val currentBackStackEntry = navController.currentBackStackEntryAsState()
-    val currentScreen = SampleAppScreens.fromRoute(
-        currentBackStackEntry.value?.destination?.route
-    )
+    val currentScreen = SampleAppScreens.fromRoute(currentBackStackEntry.value?.destination?.route)
     LaunchedEffect (Unit) {
-        jumpToRoute(navController, scope, scaffoldState, startRoute)
+        if (isProcessRestart) {
+            jumpToRoute(navController, scope, scaffoldState, SampleAppScreens.Splash.route)
+        }
+
         fun getNetworkStateMessage(
             context: Context,
             code: Int

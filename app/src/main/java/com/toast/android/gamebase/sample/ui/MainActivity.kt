@@ -26,12 +26,7 @@ class MainActivity : GamebaseActivity() {
         super.onCreate(savedInstanceState)
 
         // Gamebase가 초기화 되었으면 Splash를 스킵하고 Login 화면부터 띄워준다.
-        var startRoute = if (Gamebase.isInitialized()) SampleAppScreens.Login.route else SampleAppScreens.Splash.route
-
-        // 그런데 앱이 재시작된 상태면 splash를 띄워 다시 초기화를 한다.
-        if (isProcessRestarted(savedInstanceState)) {
-            startRoute = SampleAppScreens.Splash.route
-        }
+        val startRoute = if (Gamebase.isInitialized()) SampleAppScreens.Login.route else SampleAppScreens.Splash.route
 
         var shouldShowAccessInformationScreen by mutableStateOf(true)
 
@@ -43,7 +38,8 @@ class MainActivity : GamebaseActivity() {
                 LoadStartScreen(
                     activity = this,
                     startRoute = startRoute,
-                    shouldShowAccessInformationScreen = shouldShowAccessInformationScreen
+                    isProcessRestart = isProcessRestarted(savedInstanceState),
+                    shouldShowAccessInformationScreen = shouldShowAccessInformationScreen,
                 ) {
                     shouldShowAccessInformationScreen = false
                     putIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, BuildConfig.VERSION_CODE)
@@ -68,6 +64,7 @@ fun LoadStartScreen(
     activity: GamebaseActivity,
     startRoute: String,
     shouldShowAccessInformationScreen: Boolean,
+    isProcessRestart: Boolean,
     updateVersionInPreferenceAndState: () -> Unit
 ) {
     if (shouldShowAccessInformationScreen) {
@@ -75,7 +72,8 @@ fun LoadStartScreen(
     } else {
         MainScreen(
             activity = activity,
-            startRoute = startRoute
+            startRoute = startRoute,
+            isProcessRestart = isProcessRestart
         )
     }
 }
