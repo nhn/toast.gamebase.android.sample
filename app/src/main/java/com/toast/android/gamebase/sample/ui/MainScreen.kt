@@ -44,7 +44,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(
     activity: GamebaseActivity,
-    startRoute: String
+    startRoute: String,
+    isProcessRestart: Boolean = false,
 ) {
     val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
@@ -52,10 +53,12 @@ fun MainScreen(
     val networkState = remember { mutableStateOf(-1) }
 
     val currentBackStackEntry = navController.currentBackStackEntryAsState()
-    val currentScreen = SampleAppScreens.fromRoute(
-        currentBackStackEntry.value?.destination?.route
-    )
+    val currentScreen = SampleAppScreens.fromRoute(currentBackStackEntry.value?.destination?.route)
     LaunchedEffect (Unit) {
+        if (isProcessRestart) {
+            jumpToRoute(navController, scope, scaffoldState, SampleAppScreens.Splash.route)
+        }
+
         fun getNetworkStateMessage(
             context: Context,
             code: Int
@@ -117,7 +120,7 @@ fun MainScreen(
                 },
                 drawerContent = {
                     MainDrawer { route ->
-                        onDestinationClicked(navController, scope, scaffoldState, route)
+                        jumpToRoute(navController, scope, scaffoldState, route)
                     }
                 }
             ) { innerPadding ->
@@ -148,7 +151,7 @@ private fun getNetworkStateSnackbarColor(
         Green
     }
 
-private fun onDestinationClicked(
+private fun jumpToRoute(
     navController: NavHostController,
     scope: CoroutineScope,
     scaffoldState: ScaffoldState,
