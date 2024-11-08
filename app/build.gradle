@@ -104,6 +104,7 @@ dependencies {
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-twitter:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-appleid:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-gpgs-v2:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-steam:${GAMEBASE_VERSION}"
 
     // >>> [Weibo IdP]
 //    implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo:${GAMEBASE_VERSION}"

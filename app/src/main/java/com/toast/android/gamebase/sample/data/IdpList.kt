@@ -16,6 +16,7 @@ val supportedIdpList = listOf(
     AuthProvider.WEIBO,
     "payco",
     AuthProvider.GPGS_V2,
+    AuthProvider.STEAM,
 )
 
 fun getIconResourceById(idp: String): Int {
@@ -31,6 +32,7 @@ fun getIconResourceById(idp: String): Int {
         AuthProvider.WEIBO -> return R.drawable.weibo_logo
         "payco" -> return R.drawable.payco_logo
         AuthProvider.GPGS_V2 -> return R.drawable.gpgs_logo
+        AuthProvider.STEAM -> return R.drawable.steam_logo
     }
     return R.drawable.guest_logo
 }
