@@ -102,7 +102,7 @@ fun LoginScreen(
             DropDownMenuDialog(
                 title = stringResource(id = R.string.login_select_line_region),
                 isDialogOpened = loginViewModel.uiState == LoginState.SHOW_LINE_REGION_DIALOG,
-                setDialogStatus = { isDialogOpened ->
+                setDialogState = { isDialogOpened ->
                     loginViewModel.setRegionDialogState(isDialogOpened)
                 },
                 options = lineRegionList,

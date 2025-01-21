@@ -32,42 +32,42 @@ fun ImageNoticeSettingScreen(
             .verticalScroll(scrollState)
     ) {
         ClickableText(stringId = R.string.developer_image_notice_configuration_background_color) {
-            viewModel.imageNoticeBackgroundDialogStatus.value = true
+            viewModel.imageNoticeBackgroundDialogState.value = true
         }
         ClickableText(stringId = R.string.developer_image_notice_configuration_time_out) {
-            viewModel.imageNoticeTimeOutDialogStatus.value = true
+            viewModel.imageNoticeTimeOutDialogState.value = true
         }
         SwitchWithLabel(
             label = stringResource(id = R.string.developer_image_notice_configuration_auto_close_custom_scheme),
-            state = viewModel.autoCloseCustomSchemeSwitchStatus.value,
+            state = viewModel.autoCloseCustomSchemeSwitchState.value,
             enableSwitch = true,
             event = { newState ->
-                viewModel.autoCloseCustomSchemeSwitchStatus.value = newState
+                viewModel.autoCloseCustomSchemeSwitchState.value = newState
             })
         RoundButton(buttonText = stringResource(id = R.string.developer_image_notice_show)) {
             viewModel.showUserSettingImageNotice(activity)
         }
     }
-    if (viewModel.imageNoticeBackgroundDialogStatus.value) {
+    if (viewModel.imageNoticeBackgroundDialogState.value) {
         InputDialog(
             title = stringResource(id = R.string.developer_image_notice_configuration_background_color),
             labelName = stringResource(id = R.string.developer_image_notice_configuration_background_color_label_name),
             fieldMessage = viewModel.imageNoticeBackgroundColor.value,
-            setDialogStatus = { newState ->
-                viewModel.imageNoticeBackgroundDialogStatus.value = newState
+            setDialogState = { newState ->
+                viewModel.imageNoticeBackgroundDialogState.value = newState
             },
             onOkButtonClicked = { value ->
                 viewModel.imageNoticeBackgroundColor.value = value
             }
         )
     }
-    if (viewModel.imageNoticeTimeOutDialogStatus.value) {
+    if (viewModel.imageNoticeTimeOutDialogState.value) {
         InputDialog(
             title = stringResource(id = R.string.developer_image_notice_configuration_time_out),
             labelName = stringResource(id = R.string.developer_image_notice_configuration_time_out_label_name),
             fieldMessage = viewModel.imageNoticeTimeOut.value.toString(),
-            setDialogStatus = { newState ->
-                viewModel.imageNoticeTimeOutDialogStatus.value = newState
+            setDialogState = { newState ->
+                viewModel.imageNoticeTimeOutDialogState.value = newState
             },
             onOkButtonClicked = { value ->
                 viewModel.imageNoticeTimeOut.value = value.toLong()

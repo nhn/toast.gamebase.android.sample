@@ -18,13 +18,13 @@ fun SetGameUserDataDialog(
     activity: Activity,
     isDialogOpened: Boolean,
     title: String,
-    setDialogStatus: (Boolean) -> Unit
+    setDialogState: (Boolean) -> Unit
 ) {
     if (isDialogOpened) {
         val setGameUserDataDialogStateHolder = SetGameUserDataDialogStateHolder()
 
         AlertDialog(modifier = Modifier.fillMaxWidth(), onDismissRequest = {
-            setDialogStatus(false)
+            setDialogState(false)
         },
             title = {
                 Text(
@@ -84,14 +84,14 @@ fun SetGameUserDataDialog(
                     TextButton(
                         onClick = {
                             setGameUserDataDialogStateHolder.setGameUserDataInDialog(activity)
-                            setDialogStatus(false)
+                            setDialogState(false)
                         }
                     ) {
                         Text(stringResource(id = R.string.button_ok))
                     }
                     TextButton(
                         onClick = {
-                            setDialogStatus(false)
+                            setDialogState(false)
                         }
                     ) {
                         Text(stringResource(id = R.string.button_cancel))

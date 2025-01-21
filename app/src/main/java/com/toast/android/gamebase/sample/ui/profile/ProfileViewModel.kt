@@ -28,7 +28,7 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    fun updateLastLoggedInProvider(activity: Activity) {
+    fun updateLastLoggedInProvider() {
         requestLastLoggedInProvider { provider, gamebaseException ->
             if (isSuccess(gamebaseException)) {
                 provider?.let {

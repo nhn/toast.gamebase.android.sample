@@ -38,17 +38,17 @@ fun WebViewSettingScreen(
     ) {
         SwitchWithLabel(
             label = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_visible),
-            state = viewModel.navigationBarVisibleStatus,
+            state = viewModel.navigationBarVisibleState,
             enableSwitch = true,
             event = { newState ->
-                viewModel.navigationBarVisibleStatus = newState
+                viewModel.navigationBarVisibleState = newState
             })
         SwitchWithLabel(
             label = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_back_button),
-            state = viewModel.navigationBarBackButtonStatus,
+            state = viewModel.navigationBarBackButtonState,
             enableSwitch = true,
             event = { newState ->
-                viewModel.navigationBarBackButtonStatus = newState
+                viewModel.navigationBarBackButtonState = newState
             })
         SwitchWithLabel(
             label = stringResource(id = R.string.developer_web_view_configuration_navigation_display_cutout),
@@ -58,16 +58,16 @@ fun WebViewSettingScreen(
                 viewModel.renderOutSafeArea = newState
             })
         ClickableText(stringId = R.string.developer_web_view_configuration_navigation_bar_title) {
-            viewModel.navigationBarTitleDialogStatus = true
+            viewModel.navigationBarTitleDialogState = true
         }
         ClickableText(stringId = R.string.developer_web_view_configuration_navigation_bar_color) {
-            viewModel.navigationBarColorDialogStatus = true
+            viewModel.navigationBarColorDialogState = true
         }
         ClickableText(stringId = R.string.developer_web_view_configuration_navigation_bar_height) {
-            viewModel.navigationBarHeightDialogStatus = true
+            viewModel.navigationBarHeightDialogState = true
         }
         ClickableText(stringId = R.string.developer_web_view_configuration_cutout_color) {
-            viewModel.cutoutAreaColorDialogStatus = true
+            viewModel.cutoutAreaColorDialogState = true
         }
         DropdownMenuBoxWithTitle(
             title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_orientation),
@@ -83,17 +83,17 @@ fun WebViewSettingScreen(
             modifier = Modifier.width(dimensionResource(id = R.dimen.webview_setting_drop_down_width))
         )
         RoundButton(buttonText = stringResource(id = R.string.developer_web_view_show)) {
-            viewModel.openWebViewDialogStatus = true
+            viewModel.openWebViewDialogState = true
         }
     }
 
     WebViewSettingDialog(
-        isDialogOpened = viewModel.navigationBarTitleDialogStatus,
+        isDialogOpened = viewModel.navigationBarTitleDialogState,
         title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_title),
         labelName = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_title_label_name),
         message = viewModel.navigationBarTitle,
-        setDialogStatus = { newState ->
-            viewModel.navigationBarTitleDialogStatus = newState
+        setDialogState = { newState ->
+            viewModel.navigationBarTitleDialogState = newState
         },
         onOkButtonClicked = { text ->
             viewModel.navigationBarTitle = text
@@ -101,18 +101,18 @@ fun WebViewSettingScreen(
     )
 
     WebViewSettingDialog(
-        isDialogOpened = viewModel.navigationBarColorDialogStatus,
+        isDialogOpened = viewModel.navigationBarColorDialogState,
         title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_color),
         labelName = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_color_label_name),
         message = viewModel.navigationBarColor,
-        setDialogStatus = { newState ->
-            viewModel.navigationBarColorDialogStatus = newState
+        setDialogState = { newState ->
+            viewModel.navigationBarColorDialogState = newState
         },
         onOkButtonClicked = { color ->
             try {
                 Color.parseColor(color)
             } catch (e: Exception) {
-                viewModel.openColorInputInvalidAlertStatus = true
+                viewModel.openColorInputInvalidAlertState = true
                 return@WebViewSettingDialog
             }
             viewModel.navigationBarColor = color
@@ -120,18 +120,18 @@ fun WebViewSettingScreen(
     )
 
     WebViewSettingDialog(
-        isDialogOpened = viewModel.cutoutAreaColorDialogStatus,
+        isDialogOpened = viewModel.cutoutAreaColorDialogState,
         title = stringResource(id = R.string.developer_web_view_configuration_cutout_color),
         labelName = stringResource(id = R.string.developer_web_view_configuration_cutout_color_label_name),
         message = viewModel.cutoutAreaColor,
-        setDialogStatus = { newState ->
-            viewModel.cutoutAreaColorDialogStatus = newState
+        setDialogState = { newState ->
+            viewModel.cutoutAreaColorDialogState = newState
         },
         onOkButtonClicked = { color ->
             try {
                 Color.parseColor(color)
             } catch (e: Exception) {
-                viewModel.openColorInputInvalidAlertStatus = true
+                viewModel.openColorInputInvalidAlertState = true
                 return@WebViewSettingDialog
             }
             viewModel.cutoutAreaColor = color
@@ -139,22 +139,22 @@ fun WebViewSettingScreen(
     )
 
     ConfirmAlertDialog(
-        isDialogOpened = viewModel.openColorInputInvalidAlertStatus,
+        isDialogOpened = viewModel.openColorInputInvalidAlertState,
         title = "Failed",
         description = "Color is invalid",
         onOkButtonClicked = {},
-        setDialogStatus = { newState ->
-            viewModel.openColorInputInvalidAlertStatus = newState
+        setDialogState = { newState ->
+            viewModel.openColorInputInvalidAlertState = newState
         }
     )
 
     WebViewSettingDialog(
-        isDialogOpened = viewModel.navigationBarHeightDialogStatus,
+        isDialogOpened = viewModel.navigationBarHeightDialogState,
         title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_height),
         labelName = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_height_label_name),
         message = viewModel.navigationBarHeight.toString(),
-        setDialogStatus = { newState ->
-            viewModel.navigationBarHeightDialogStatus = newState
+        setDialogState = { newState ->
+            viewModel.navigationBarHeightDialogState = newState
         },
         onOkButtonClicked = { height ->
             viewModel.navigationBarHeight = height.toInt()
@@ -162,11 +162,11 @@ fun WebViewSettingScreen(
     )
 
     OpenCustomWebViewDialog(
-        isDialogOpened = viewModel.openWebViewDialogStatus,
+        isDialogOpened = viewModel.openWebViewDialogState,
         title = stringResource(R.string.developer_web_view_show),
         fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
-        setDialogStatus = { newState ->
-            viewModel.openWebViewDialogStatus = newState
+        setDialogState = { newState ->
+            viewModel.openWebViewDialogState = newState
         },
         onOkButtonClicked = { url ->
             viewModel.openWebView(activity = activity, urlString = url)

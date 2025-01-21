@@ -51,8 +51,8 @@ fun TermsSettingScreen(
                 activity,
                 fixedFontSize = viewModel.fixedFontSize.value,
                 forceShow = viewModel.forceShow.value
-            ) { status ->
-                viewModel.termsPopupShowing.value = status
+            ) { state ->
+                viewModel.termsPopupShowing.value = state
             }
         }
     }

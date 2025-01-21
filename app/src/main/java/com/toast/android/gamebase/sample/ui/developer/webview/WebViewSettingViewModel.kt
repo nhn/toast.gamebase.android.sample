@@ -18,27 +18,27 @@ import com.toast.android.gamebase.sample.gamebase_manager.showWebView
 const val TAG = "WebViewSetting"
 
 class WebViewSettingViewModel : ViewModel() {
-    var navigationBarVisibleStatus: Boolean by mutableStateOf(false)
-    var navigationBarBackButtonStatus: Boolean by mutableStateOf(false)
+    var navigationBarVisibleState: Boolean by mutableStateOf(false)
+    var navigationBarBackButtonState: Boolean by mutableStateOf(false)
 
     var renderOutSafeArea: Boolean by mutableStateOf(false)
-    var navigationBarTitleDialogStatus: Boolean by mutableStateOf(false)
+    var navigationBarTitleDialogState: Boolean by mutableStateOf(false)
     var navigationBarTitle: String by mutableStateOf("")
 
-    var navigationBarColorDialogStatus: Boolean by mutableStateOf(false)
+    var navigationBarColorDialogState: Boolean by mutableStateOf(false)
     var navigationBarColor: String by mutableStateOf("#80000000")
 
-    var navigationBarHeightDialogStatus: Boolean by mutableStateOf(false)
+    var navigationBarHeightDialogState: Boolean by mutableStateOf(false)
     var navigationBarHeight: Int by mutableStateOf(50)
 
-    var cutoutAreaColorDialogStatus: Boolean by mutableStateOf(false)
+    var cutoutAreaColorDialogState: Boolean by mutableStateOf(false)
     var cutoutAreaColor: String by mutableStateOf("")
 
     var screenOrientationExpanded: Boolean by mutableStateOf(false)
     var screenOrientationType: Int by mutableStateOf(0)
 
-    var openWebViewDialogStatus: Boolean by mutableStateOf(false)
-    var openColorInputInvalidAlertStatus: Boolean by mutableStateOf(false)
+    var openWebViewDialogState: Boolean by mutableStateOf(false)
+    var openColorInputInvalidAlertState: Boolean by mutableStateOf(false)
 
     fun openWebView(activity: Activity, urlString: String) {
         val orientationType =
@@ -53,8 +53,8 @@ class WebViewSettingViewModel : ViewModel() {
             GamebaseWebViewConfiguration.Builder().setTitleText(navigationBarTitle)
                 .setNavigationBarColor(Color.parseColor(navigationBarColor))
                 .setNavigationBarHeight(navigationBarHeight)
-                .setBackButtonVisible(navigationBarBackButtonStatus)
-                .setNavigationBarVisible(navigationBarVisibleStatus)
+                .setBackButtonVisible(navigationBarBackButtonState)
+                .setNavigationBarVisible(navigationBarVisibleState)
                 .setRenderOutsideSafeArea(renderOutSafeArea)
                 .setScreenOrientation(orientationType)
 

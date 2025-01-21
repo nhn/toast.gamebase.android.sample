@@ -109,7 +109,7 @@ fun ContactDetailScreen(
             KeyValueInputDialog(
                 title = stringResource(R.string.developer_contact_additional_url_parameter),
                 isDialogOpened = viewModel.isAdditionalParametersInputDialogOpened.value,
-                setDialogStatus = { newState ->
+                setDialogState = { newState ->
                     viewModel.isAdditionalParametersInputDialogOpened.value = newState},
                 onOkButtonClicked = { inputKey, inputValue ->
                     viewModel.saveAdditionalParameter(inputKey, inputValue)
@@ -117,7 +117,7 @@ fun ContactDetailScreen(
             KeyValueInputDialog(
                 title = stringResource(R.string.developer_contact_extra_data),
                 isDialogOpened = viewModel.isExtraDataInputDialogOpened.value,
-                setDialogStatus = { newState ->
+                setDialogState = { newState ->
                     viewModel.isExtraDataInputDialogOpened.value = newState },
                 onOkButtonClicked = { inputKey, inputValue ->
                     viewModel.saveExtraData(inputKey, inputValue)

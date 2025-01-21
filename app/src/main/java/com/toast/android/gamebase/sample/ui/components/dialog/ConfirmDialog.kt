@@ -20,14 +20,14 @@ fun ConfirmAlertDialog(
     isDialogOpened: Boolean,
     title: String,
     description: String,
-    setDialogStatus: (Boolean) -> Unit,
+    setDialogState: (Boolean) -> Unit,
     showCancel: Boolean = false,
     onOkButtonClicked: () -> Unit,
 ) {
     if (isDialogOpened) {
         AlertDialog(
             onDismissRequest = {
-                setDialogStatus(false)
+                setDialogState(false)
             },
             title = {
                 Text(title)
@@ -46,7 +46,7 @@ fun ConfirmAlertDialog(
                     TextButton(
                         onClick = {
                             onOkButtonClicked()
-                            setDialogStatus(false)
+                            setDialogState(false)
                         }
                     ) {
                         Text(stringResource(id = R.string.button_ok))
@@ -54,7 +54,7 @@ fun ConfirmAlertDialog(
                     if (showCancel) {
                         TextButton(
                             onClick = {
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_cancel))
@@ -75,7 +75,7 @@ fun PreviewConfirmDialog() {
         isDialogOpened = true,
         title = "제목",
         description = "설명",
-        setDialogStatus = {},
+        setDialogState = {},
         onOkButtonClicked = {}
     )
 }
@@ -88,7 +88,7 @@ fun PreviewConfirmDialogWithCancel() {
         title = "제목",
         description = "설명",
         showCancel = true,
-        setDialogStatus = {},
+        setDialogState = {},
         onOkButtonClicked = {}
     )
 }
