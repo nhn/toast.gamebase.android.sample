@@ -14,7 +14,7 @@ class ProfileViewModel : ViewModel() {
         private set
     var pushToken: String by mutableStateOf("")
         private set
-    var lastLoggedInProvider: String by mutableStateOf( "")
+    var lastLoggedInProvider: String by mutableStateOf("")
         private set
     var connectedIdpList: List<String> by mutableStateOf(getAuthMappingList())
         private set
@@ -29,9 +29,9 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun updateLastLoggedInProvider(activity: Activity) {
-        requestLastLoggedInProvider { s, gamebaseException ->
+        requestLastLoggedInProvider { provider, gamebaseException ->
             if (isSuccess(gamebaseException)) {
-                s?.let {
+                provider?.let {
                     lastLoggedInProvider = it
                 }
             }
