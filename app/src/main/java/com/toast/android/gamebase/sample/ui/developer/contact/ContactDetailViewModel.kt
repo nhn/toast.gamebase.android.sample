@@ -21,7 +21,7 @@ class ContactDetailViewModel: ViewModel() {
     val extraData: Map<String, String>
         get() = _extraData
 
-    // input dialog open status
+    // input dialog open state
     val isAdditionalParametersInputDialogOpened = mutableStateOf(false)
     val isExtraDataInputDialogOpened = mutableStateOf(false)
 

@@ -28,7 +28,7 @@ fun LoggerInitializeDialog(
     isDialogOpened: Boolean,
     title: String,
     message: String,
-    setDialogStatus: (Boolean) -> Unit,
+    setDialogState: (Boolean) -> Unit,
     isLoggerAppKeyValid: Boolean,
 ) {
     if (isDialogOpened) {
@@ -37,7 +37,7 @@ fun LoggerInitializeDialog(
             title = title,
             labelName = stringResource(id = R.string.app_key),
             fieldMessage = message,
-            setDialogStatus = setDialogStatus,
+            setDialogState = setDialogState,
             fieldEnabled = !isLoggerAppKeyValid,
             onOkButtonClicked = { value ->
                 loggerInitializeDialogStateHolder.initializeLogger(
@@ -53,7 +53,7 @@ fun LoggerInitializeDialog(
 fun SendLogDialog(
     isDialogOpened: Boolean,
     title: String,
-    setDialogStatus: (Boolean) -> Unit,
+    setDialogState: (Boolean) -> Unit,
     stringArrayResources: Int
 ) {
     if (isDialogOpened) {
@@ -132,14 +132,14 @@ fun SendLogDialog(
                         TextButton(
                             onClick = {
                                 sendLogDialogStateHolder.sendLogger()
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
                         }
                         TextButton(
                             onClick = {
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_cancel))
@@ -155,7 +155,7 @@ fun SendLogDialog(
 fun SendReportDialog(
     isDialogOpened: Boolean,
     title: String,
-    setDialogStatus: (Boolean) -> Unit
+    setDialogState: (Boolean) -> Unit
 ) {
     if (isDialogOpened) {
         val sendReportDialogStateHolder = SendReportDialogStateHolder()
@@ -221,14 +221,14 @@ fun SendReportDialog(
                         TextButton(
                             onClick = {
                                 sendReportDialogStateHolder.sendReport()
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
                         }
                         TextButton(
                             onClick = {
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_cancel))
@@ -247,7 +247,7 @@ fun PreviewSendLogDialogInPortrait() {
     SendLogDialog(
         isDialogOpened = true,
         title = "제목",
-        setDialogStatus = {},
+        setDialogState = {},
         stringArrayResources = R.array.logger_level
     )
 }
@@ -258,7 +258,7 @@ fun PreviewSendReportDialogInPortrait() {
     SendReportDialog(
         isDialogOpened = true,
         title = "제목",
-        setDialogStatus = {}
+        setDialogState = {}
     )
 }
 
@@ -268,7 +268,7 @@ fun PreviewSendLogDialogInLandscape() {
     SendLogDialog(
         isDialogOpened = true,
         title = "제목",
-        setDialogStatus = {},
+        setDialogState = {},
         stringArrayResources = R.array.logger_level
     )
 }
@@ -279,6 +279,6 @@ fun PreviewSendReportDialogInLandscape() {
     SendReportDialog(
         isDialogOpened = true,
         title = "제목",
-        setDialogStatus = {}
+        setDialogState = {}
     )
 }

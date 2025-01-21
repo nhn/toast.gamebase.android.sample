@@ -44,7 +44,6 @@ import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.sample.data.getIconResourceById
 import com.toast.android.gamebase.sample.data.lineRegionList
 import com.toast.android.gamebase.sample.data.supportedIdpList
-import com.toast.android.gamebase.sample.gamebase_manager.getUserID
 import com.toast.android.gamebase.sample.ui.components.dialog.ConfirmAlertDialog
 import com.toast.android.gamebase.sample.ui.components.button.ToggleButton
 import com.toast.android.gamebase.sample.ui.components.dialog.DropDownMenuDialog
@@ -90,7 +89,7 @@ fun IdpMappingScreen(
             viewModel.uiState,
             viewModel.currentException
         ),
-        setDialogStatus = { newState ->
+        setDialogState = { newState ->
             if (!newState) {
                 viewModel.uiState = IdpMappingUiState.DEFAULT
             }
@@ -108,7 +107,7 @@ fun IdpMappingScreen(
     DropDownMenuDialog(
         title = stringResource(id = R.string.login_select_line_region),
         isDialogOpened = viewModel.requiredAdditionalInfo,
-        setDialogStatus = { newState ->
+        setDialogState = { newState ->
             viewModel.requiredAdditionalInfo = newState
         },
         options = lineRegionList,

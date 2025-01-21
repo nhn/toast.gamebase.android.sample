@@ -23,7 +23,7 @@ import com.toast.android.gamebase.sample.ui.theme.*
 @Composable
 fun InputDialog(
     isDialogOpened: Boolean,
-    setDialogStatus: (Boolean) -> Unit,
+    setDialogState: (Boolean) -> Unit,
     inputTemplate: String = "",
     onOkButtonClicked: (inputText: String) -> Unit,
 ) {
@@ -57,14 +57,14 @@ fun InputDialog(
                         TextButton(
                             onClick = {
                                 onOkButtonClicked(inputText)
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
                         }
                         TextButton(
                             onClick = {
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_cancel))
@@ -81,13 +81,13 @@ fun InputDialog(
     title: String,
     labelName: String,
     fieldMessage: String,
-    setDialogStatus: (Boolean) -> Unit,
+    setDialogState: (Boolean) -> Unit,
     fieldEnabled: Boolean = true,
     onOkButtonClicked: (String) -> Unit
 ) {
     var inputText by remember { mutableStateOf(fieldMessage) }
 
-    AlertDialog(onDismissRequest = { setDialogStatus(false) },
+    AlertDialog(onDismissRequest = { setDialogState(false) },
         title = {
             Text(
                 modifier = Modifier
@@ -118,14 +118,14 @@ fun InputDialog(
                 TextButton(
                     onClick = {
                         onOkButtonClicked(inputText)
-                        setDialogStatus(false)
+                        setDialogState(false)
                     }
                 ) {
                     Text(stringResource(id = R.string.button_ok))
                 }
                 TextButton(
                     onClick = {
-                        setDialogStatus(false)
+                        setDialogState(false)
                     }
                 ) {
                     Text(stringResource(id = R.string.button_cancel))

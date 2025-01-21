@@ -30,7 +30,7 @@ import com.toast.android.gamebase.sample.ui.components.input.DropdownMenuBox
 fun DropDownMenuDialog(
     title: String,
     isDialogOpened: Boolean,
-    setDialogStatus: (Boolean) -> Unit,
+    setDialogState: (Boolean) -> Unit,
     options: List<String>,
     modifier: Modifier = Modifier,
     onOkButtonClicked: (Int) -> Unit,
@@ -87,14 +87,14 @@ fun DropDownMenuDialog(
                         TextButton(
                             onClick = {
                                 onOkButtonClicked(selected)
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
                         }
                         TextButton(
                             onClick = {
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_cancel))
@@ -112,7 +112,7 @@ fun PreviewDropDownMenuBoxDialog() {
     DropDownMenuDialog(
         title = "Select one",
         isDialogOpened = true,
-        setDialogStatus = {},
+        setDialogState = {},
         options = listOf("A", "B", "C"),
         modifier = Modifier,
         onOkButtonClicked = { }

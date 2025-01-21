@@ -30,7 +30,7 @@ import com.toast.android.gamebase.sample.util.printWithIndent
 @Composable
 fun ListDialog(
     isDialogOpened: Boolean,
-    setDialogStatus: (Boolean) -> Unit,
+    setDialogState: (Boolean) -> Unit,
     data: List<*>,
     onOkButtonClicked: () -> Unit,
 ) {
@@ -68,7 +68,7 @@ fun ListDialog(
                         TextButton(
                             onClick = {
                                 onOkButtonClicked()
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))

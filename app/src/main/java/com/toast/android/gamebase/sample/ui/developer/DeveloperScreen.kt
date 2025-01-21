@@ -65,7 +65,7 @@ fun DeveloperScreen(
                 isDialogOpened = viewModel.isLoggerInitializeOpened.value,
                 title = stringResource(id = R.string.logger_initialize),
                 message = getAppKey(),
-                setDialogStatus = { newState ->
+                setDialogState = { newState ->
                     viewModel.isLoggerInitializeOpened.value = newState
                 },
                 isLoggerAppKeyValid = getAppKey().isNotEmpty()
@@ -73,7 +73,7 @@ fun DeveloperScreen(
             SendLogDialog(
                 isDialogOpened = viewModel.isSendLogOpened.value,
                 title = stringResource(id = R.string.send_logger),
-                setDialogStatus = { newState ->
+                setDialogState = { newState ->
                     viewModel.isSendLogOpened.value = newState
                 },
                 stringArrayResources = R.array.logger_level
@@ -81,7 +81,7 @@ fun DeveloperScreen(
             SendReportDialog(
                 isDialogOpened = viewModel.isSendReportOpened.value,
                 title = stringResource(id = R.string.send_report),
-                setDialogStatus = { newState ->
+                setDialogState = { newState ->
                     viewModel.isSendReportOpened.value = newState
                 },
             )
@@ -89,7 +89,7 @@ fun DeveloperScreen(
                 isDialogOpened = viewModel.isOpenWebViewOpened.value,
                 title = stringResource(id = R.string.developer_menu_open_webview),
                 fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
-                setDialogStatus = { newState ->
+                setDialogState = { newState ->
                     viewModel.isOpenWebViewOpened.value = newState
                 },
                 onOkButtonClicked = { value ->
@@ -101,7 +101,7 @@ fun DeveloperScreen(
                 isDialogOpened = viewModel.isOpenWebBrowserOpened.value,
                 title = stringResource(id = R.string.developer_menu_open_outside_browser),
                 fieldMessage = WEBVIEW_MENU_DEFAULT_URL,
-                setDialogStatus = { newState ->
+                setDialogState = { newState ->
                     viewModel.isOpenWebBrowserOpened.value = newState
                 }
             )
@@ -110,7 +110,7 @@ fun DeveloperScreen(
                 title = stringResource(
                     id = R.string.developer_analytics_level_setting_title
                 ),
-                setDialogStatus = { newState ->
+                setDialogState = { newState ->
                     viewModel.isUserLevelInfoSettingOpened.value = newState
                 })
             if (viewModel.isUserLevelUpInfoSettingOpened.value) {
@@ -118,7 +118,7 @@ fun DeveloperScreen(
                     title = stringResource(id = R.string.developer_analytics_level_up_setting_title),
                     labelName = stringResource(id = R.string.developer_analytics_level_label_name),
                     fieldMessage = "",
-                    setDialogStatus = { newState ->
+                    setDialogState = { newState ->
                         viewModel.isUserLevelUpInfoSettingOpened.value = newState
                     },
                     onOkButtonClicked = { value ->

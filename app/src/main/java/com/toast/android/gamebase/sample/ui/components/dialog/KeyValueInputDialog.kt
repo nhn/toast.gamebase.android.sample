@@ -37,7 +37,7 @@ import com.toast.android.gamebase.sample.ui.theme.White
 fun KeyValueInputDialog(
     title: String,
     isDialogOpened: Boolean,
-    setDialogStatus: (Boolean) -> Unit,
+    setDialogState: (Boolean) -> Unit,
     inputLabelForKey: String = "key",
     inputLabelForValue: String = "value",
     onOkButtonClicked: (inputKey: String, inputValue: String) -> Unit,
@@ -117,14 +117,14 @@ fun KeyValueInputDialog(
                                     return@TextButton
                                 }
                                 onOkButtonClicked(inputKey, inputValue)
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
                         }
                         TextButton(
                             onClick = {
-                                setDialogStatus(false)
+                                setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_cancel))
@@ -142,6 +142,6 @@ fun PreviewKeyValueInputDialog() {
     KeyValueInputDialog(
         title = "Title",
         isDialogOpened = true,
-        setDialogStatus = {},
+        setDialogState = {},
         onOkButtonClicked = { _, _ ->})
 }

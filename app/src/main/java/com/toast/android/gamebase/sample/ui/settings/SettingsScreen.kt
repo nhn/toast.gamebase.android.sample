@@ -149,7 +149,7 @@ fun SettingsScreen(
             isDialogOpened = isLogoutDialogOpened.value,
             title = stringResource(id = R.string.setting_logout_dialog_title),
             description = stringResource(id = R.string.setting_logout_dialog_description),
-            setDialogStatus = { newState -> isLogoutDialogOpened.value = newState },
+            setDialogState = { newState -> isLogoutDialogOpened.value = newState },
             showCancel = true,
             onOkButtonClicked = { settingsViewModel.logout(activity) }
         )
@@ -157,7 +157,7 @@ fun SettingsScreen(
             isDialogOpened = isWithdrawDialogOpened.value,
             title = stringResource(id = R.string.setting_withdraw_dialog_title),
             description = stringResource(id = R.string.setting_withdraw_dialog_description),
-            setDialogStatus = { newState -> isWithdrawDialogOpened.value = newState },
+            setDialogState = { newState -> isWithdrawDialogOpened.value = newState },
             showCancel = true,
             onOkButtonClicked = { settingsViewModel.withdraw(activity) }
         )

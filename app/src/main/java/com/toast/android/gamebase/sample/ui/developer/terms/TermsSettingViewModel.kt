@@ -25,7 +25,7 @@ class TermsSettingViewModel: ViewModel() {
         activity: Activity,
         forceShow: Boolean,
         fixedFontSize: Boolean,
-        updateTermsPopupStatus: (isShowing: Boolean) -> Unit
+        updateTermsPopupState: (isShowing: Boolean) -> Unit
     ) {
         val termsConfiguration = GamebaseTermsConfiguration.newBuilder()
             .setForceShow(forceShow)
@@ -37,7 +37,7 @@ class TermsSettingViewModel: ViewModel() {
         val successTitle: String =
             GamebaseApplication.instance.applicationContext.getString(R.string.success)
 
-        updateTermsPopupStatus(true)
+        updateTermsPopupState(true)
         showTermsView(activity = activity, configuration = termsConfiguration
         ) { dataContainer, exception ->
             if (isSuccess(exception)) {
@@ -49,7 +49,7 @@ class TermsSettingViewModel: ViewModel() {
             } else {
                 showAlert(activity, failedTitle, exception.printWithIndent())
             }
-            updateTermsPopupStatus(false)
+            updateTermsPopupState(false)
         }
     }
 }
