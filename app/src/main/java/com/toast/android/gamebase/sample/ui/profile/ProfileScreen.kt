@@ -39,6 +39,7 @@ fun ProfileScreen(
 
     LaunchedEffect(Unit) {
         profileViewModel.updatePushToken(activity)
+        profileViewModel.updateLastLoggedInProvider(activity)
     }
 
     Column (modifier = Modifier

@@ -24,6 +24,8 @@ class WebViewSettingViewModel : ViewModel() {
     val navigationBarColorDialogStatus = mutableStateOf(false)
     val navigationBarColor = mutableStateOf("#80000000")
     val navigationBarHeightDialogStatus = mutableStateOf(false)
+    val cutoutAreaColorDialogStatus = mutableStateOf(false)
+    val cutoutAreaColor = mutableStateOf("")
     val navigationBarHeight = mutableStateOf(50)
     val screenOrientationExpanded = mutableStateOf(false)
     val screenOrientationType = mutableStateOf(0)
@@ -39,7 +41,7 @@ class WebViewSettingViewModel : ViewModel() {
                 else -> ScreenOrientation.PORTRAIT
             }
 
-        val configuration: GamebaseWebViewConfiguration =
+        val configurationBuilder: GamebaseWebViewConfiguration.Builder =
             GamebaseWebViewConfiguration.Builder().setTitleText(navigationBarTitle.value)
                 .setNavigationBarColor(Color.parseColor(navigationBarColor.value))
                 .setNavigationBarHeight(navigationBarHeight.value)
@@ -47,7 +49,11 @@ class WebViewSettingViewModel : ViewModel() {
                 .setNavigationBarVisible(navigationBarVisibleStatus.value)
                 .setRenderOutsideSafeArea(renderOutSafeArea.value)
                 .setScreenOrientation(orientationType)
-                .build()
+
+        if (cutoutAreaColor.value != "") {
+            configurationBuilder.setCutoutAreaColor(Color.parseColor(cutoutAreaColor.value))
+        }
+        val configuration: GamebaseWebViewConfiguration = configurationBuilder.build()
         showWebView(
             activity = activity,
             url = urlString,

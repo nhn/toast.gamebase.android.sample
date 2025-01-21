@@ -66,6 +66,9 @@ fun WebViewSettingScreen(
         ClickableText(stringId = R.string.developer_web_view_configuration_navigation_bar_height) {
             viewModel.navigationBarHeightDialogStatus.value = true
         }
+        ClickableText(stringId = R.string.developer_web_view_configuration_cutout_color) {
+            viewModel.cutoutAreaColorDialogStatus.value = true
+        }
         DropdownMenuBoxWithTitle(
             title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_orientation),
             options = stringArrayResource(id = R.array.screen_orientation).toList(),
@@ -108,13 +111,33 @@ fun WebViewSettingScreen(
         onOkButtonClicked = { value ->
             try {
                 Color.parseColor(value)
-            } catch (e: IllegalArgumentException) {
+            } catch (e: Exception) {
                 viewModel.openColorInputInvalidAlertStatus.value = true
                 return@WebViewSettingDialog
             }
             viewModel.navigationBarColor.value = value
         }
     )
+
+    WebViewSettingDialog(
+        isDialogOpened = viewModel.cutoutAreaColorDialogStatus.value,
+        title = stringResource(id = R.string.developer_web_view_configuration_cutout_color),
+        labelName = stringResource(id = R.string.developer_web_view_configuration_cutout_color_label_name),
+        message = viewModel.cutoutAreaColor.value,
+        setDialogStatus = { newState ->
+            viewModel.cutoutAreaColorDialogStatus.value = newState
+        },
+        onOkButtonClicked = { value ->
+            try {
+                Color.parseColor(value)
+            } catch (e: Exception) {
+                viewModel.openColorInputInvalidAlertStatus.value = true
+                return@WebViewSettingDialog
+            }
+            viewModel.cutoutAreaColor.value = value
+        }
+    )
+
 
     ConfirmAlertDialog(
         isDialogOpened = viewModel.openColorInputInvalidAlertStatus.value,
