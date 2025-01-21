@@ -106,6 +106,8 @@ dependencies {
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-gpgs-v2:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-steam:${GAMEBASE_VERSION}"
 
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-gpgs-autologin:${GAMEBASE_VERSION}"
+
     // >>> [Weibo IdP]
 //    implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo:${GAMEBASE_VERSION}"
 
@@ -147,4 +149,7 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:${COMPOSE_VERSION}"
     debugImplementation "androidx.compose.ui:ui-tooling:${COMPOSE_VERSION}"
     debugImplementation "androidx.compose.ui:ui-test-manifest:${COMPOSE_VERSION}"
+}
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
 }

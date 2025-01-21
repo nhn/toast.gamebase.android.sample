@@ -383,6 +383,17 @@ fun getAccessToken(): String? {
 fun getLastLoggedInProvider(): String? {
     return Gamebase.getLastLoggedInProvider()
 }
+
+// If you include the "gamebase-adapter-auth-gpgs-autologin" module in your build,
+// use requestLastLoggedInProvider(GamebaseDataCallback<String>) API, instead of the synchronous getLastLoggedInProvider() API.
+fun requestLastLoggedInProvider(callback: (String?, GamebaseException?) -> Unit) =
+    Gamebase.requestLastLoggedInProvider { provider, exception ->
+        callback.invoke(
+            provider,
+            exception
+        )
+    }
+
 fun getAuthMappingList(): List<String> {
     return Gamebase.getAuthMappingList()
 }

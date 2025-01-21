@@ -200,6 +200,8 @@
     <string name="developer_web_view_configuration_navigation_bar_title_label_name">네비게이션바 제목</string>
     <string name="developer_web_view_configuration_navigation_bar_color">네비게이션바 색상 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_color_label_name">네비게이션바 색상</string>
+    <string name="developer_web_view_configuration_cutout_color">컷아웃 색상 설정</string>
+    <string name="developer_web_view_configuration_cutout_color_label_name">컷아웃 색상</string>
     <string name="developer_web_view_configuration_navigation_bar_height">네비게이션바 높이 설정</string>
     <string name="developer_web_view_configuration_navigation_bar_height_label_name">네비게이션 높이</string>
     <string name="developer_web_view_configuration_navigation_bar_orientation">네비게이션바 방향</string>
