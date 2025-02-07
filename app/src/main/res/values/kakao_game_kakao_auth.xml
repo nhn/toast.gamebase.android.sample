@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- TODO: [Fix me] Set your Kakao IdP settings -->
-    <string name="kakao_app_key">dab23ce63d3c4f023572f645983b6307</string>
-    <string name="kakao_scheme">kakaodab23ce63d3c4f023572f645983b6307</string>
+    <string name="kakao_app_key">78e7ae7d3d1d68108aa4e4fba202c11e</string>
+    <string name="kakao_scheme">kakao78e7ae7d3d1d68108aa4e4fba202c11e</string>
     <string name="kakaotalk_host">kakaotalk</string>
     <string name="kakaolink_host">kakaolink</string>
     <string name="kakaostory_host">kakaostory</string>
