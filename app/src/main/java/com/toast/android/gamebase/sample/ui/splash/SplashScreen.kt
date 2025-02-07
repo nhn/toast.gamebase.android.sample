@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.ui.theme.Toast
 import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
@@ -50,7 +51,7 @@ fun SplashSurface() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(White),
+                .background(Toast),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
