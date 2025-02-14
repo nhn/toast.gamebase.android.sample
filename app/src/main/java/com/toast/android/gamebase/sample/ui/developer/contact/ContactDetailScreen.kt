@@ -37,7 +37,7 @@ import com.toast.android.gamebase.sample.ui.components.button.RoundButton
 import com.toast.android.gamebase.sample.ui.components.dialog.KeyValueInputDialog
 import com.toast.android.gamebase.sample.ui.components.input.TextFieldWithLabel
 import com.toast.android.gamebase.sample.ui.theme.LightBlue
-import com.toast.android.gamebase.sample.ui.theme.Toast
+import com.toast.android.gamebase.sample.ui.theme.SkyBlue
 
 @Composable
 fun ContactDetailScreen(
@@ -73,7 +73,7 @@ fun ContactDetailScreen(
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.setting_screen_list_item_text_padding)))
                 Text(
                     text = stringResource(id = R.string.developer_contact_additional_parameter),
-                    style = TextStyle(color = Toast)
+                    style = TextStyle(color = SkyBlue)
                 )
                 ColumnForMap(
                     viewModel.additionalParameters,
@@ -88,7 +88,7 @@ fun ContactDetailScreen(
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.setting_screen_list_item_text_padding)))
                 Text(
                     text = stringResource(id = R.string.developer_contact_extra_data),
-                    style = TextStyle(color = Toast)
+                    style = TextStyle(color = SkyBlue)
                 )
                 ColumnForMap(
                     viewModel.extraData,
