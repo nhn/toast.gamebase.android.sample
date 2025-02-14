@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.ui.theme.Black
 import com.toast.android.gamebase.sample.ui.theme.LightBlue
-import com.toast.android.gamebase.sample.ui.theme.Toast
+import com.toast.android.gamebase.sample.ui.theme.SkyBlue
 import com.toast.android.gamebase.sample.ui.theme.Transparent
 
 @Composable
@@ -44,7 +44,7 @@ fun TextFieldWithLabel(
                 .fillMaxWidth()
                 .padding(top = 4.dp, bottom = 4.dp),
             textAlign = TextAlign.Start,
-            color = Toast
+            color = SkyBlue
         )
         Row() {
             TextField(

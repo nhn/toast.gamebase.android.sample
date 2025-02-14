@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val LightColorPalette = lightColors(
-    primary = Toast,
+    primary = SkyBlue,
     primaryVariant = Purple700,
     secondary = LightBlue,
     background = Color.White,

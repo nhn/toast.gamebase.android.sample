@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.theme.Toast
+import com.toast.android.gamebase.sample.ui.theme.SkyBlue
 
 @Composable
 fun SwitchWithLabel(
@@ -47,7 +47,7 @@ fun SwitchWithLabel(
             checked = state,
             enabled = enableSwitch,
             onCheckedChange = event,
-            colors = SwitchDefaults.colors(checkedThumbColor = Toast)
+            colors = SwitchDefaults.colors(checkedThumbColor = SkyBlue)
         )
     }
 }
@@ -74,7 +74,7 @@ fun SwitchWithLabel(
             checked = state,
             enabled = enableSwitch,
             onCheckedChange = event,
-            colors = SwitchDefaults.colors(checkedThumbColor = Toast)
+            colors = SwitchDefaults.colors(checkedThumbColor = SkyBlue)
         )
     }
 }

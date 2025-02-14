@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.toast.android.gamebase.sample.ui.theme.Grey300
 import com.toast.android.gamebase.sample.ui.theme.Purple700
-import com.toast.android.gamebase.sample.ui.theme.Toast
+import com.toast.android.gamebase.sample.ui.theme.SkyBlue
 import com.toast.android.gamebase.sample.ui.theme.White
 
 @Composable
@@ -24,7 +24,7 @@ fun ToggleButton(
     state: Boolean,
     text1: String,
     text2: String,
-    textColor: Color = Toast,
+    textColor: Color = SkyBlue,
     bgColor: Color = White,
     shape: Shape = RoundedCornerShape(50),
     onToggle: () -> Unit,

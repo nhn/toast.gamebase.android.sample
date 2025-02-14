@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -18,12 +16,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toast.android.gamebase.sample.GamebaseActivity
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.ui.theme.Toast
-import com.toast.android.gamebase.sample.ui.theme.White
+import com.toast.android.gamebase.sample.ui.theme.SkyBlue
 
 @Composable
 fun SplashScreen(
@@ -51,7 +47,7 @@ fun SplashSurface() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Toast),
+                .background(SkyBlue),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {

@@ -83,7 +83,7 @@ fun AccessInformationScreen(updateVersionInPreferenceAndState: () -> Unit) {
                     .height(dimensionResource(id = R.dimen.access_info_button_height))
                     .fillMaxSize(),
                 onClick = updateVersionInPreferenceAndState,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Toast),
+                colors = ButtonDefaults.buttonColors(backgroundColor = SkyBlue),
             ) {
                 Text(
                     text = stringResource(R.string.button_ok),
