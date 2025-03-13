@@ -201,6 +201,10 @@
     <string name="developer_web_view_configuration_navigation_bar_title_label_name">Navigation bar title</string>
     <string name="developer_web_view_configuration_navigation_bar_color">Set navigation bar color</string>
     <string name="developer_web_view_configuration_navigation_bar_color_label_name">Navigation bar color</string>
+    <string name="developer_web_view_configuration_navigation_bar_title_color">Set navigation bar title color</string>
+    <string name="developer_web_view_configuration_navigation_bar_title_color_label_name">Navigation bar title color</string>
+    <string name="developer_web_view_configuration_navigation_bar_icon_tint_color">Set navigation bar icon tint color</string>
+    <string name="developer_web_view_configuration_navigation_bar_icon_tint_color_label_name">Navigation bar icon tint color</string>
     <string name="developer_web_view_configuration_cutout_color">Set cutout area color</string>
     <string name="developer_web_view_configuration_cutout_color_label_name">Cutout area color</string>
     <string name="developer_web_view_configuration_navigation_bar_height">Set navigation bar height</string>
