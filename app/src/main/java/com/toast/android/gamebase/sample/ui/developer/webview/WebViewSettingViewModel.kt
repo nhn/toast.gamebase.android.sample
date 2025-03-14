@@ -64,13 +64,13 @@ class WebViewSettingViewModel : ViewModel() {
                 .setRenderOutsideSafeArea(renderOutSafeArea)
                 .setScreenOrientation(orientationType)
 
-        if (cutoutAreaColor != "") {
+        if (cutoutAreaColor.isNotEmpty()) {
             configurationBuilder.setCutoutAreaColor(Color.parseColor(cutoutAreaColor))
         }
-        if (navigationBarTitleColor != "") {
+        if (navigationBarTitleColor.isNotEmpty()) {
             configurationBuilder.setNavigationBarTitleColor(Color.parseColor(navigationBarTitleColor))
         }
-        if (navigationBarIconTintColor != "") {
+        if (navigationBarIconTintColor.isNotEmpty()) {
             configurationBuilder.setNavigationBarIconTintColor(Color.parseColor(navigationBarIconTintColor))
         }
 
