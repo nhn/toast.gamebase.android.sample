@@ -28,6 +28,12 @@ class WebViewSettingViewModel : ViewModel() {
     var navigationBarColorDialogState: Boolean by mutableStateOf(false)
     var navigationBarColor: String by mutableStateOf("#80000000")
 
+    var navigationBarTitleColorDialogState: Boolean by mutableStateOf(false)
+    var navigationBarTitleColor: String by mutableStateOf("")
+
+    var navigationBarIconTintColorDialogState: Boolean by mutableStateOf(false)
+    var navigationBarIconTintColor: String by mutableStateOf("")
+
     var navigationBarHeightDialogState: Boolean by mutableStateOf(false)
     var navigationBarHeight: Int by mutableStateOf(50)
 
@@ -58,9 +64,16 @@ class WebViewSettingViewModel : ViewModel() {
                 .setRenderOutsideSafeArea(renderOutSafeArea)
                 .setScreenOrientation(orientationType)
 
-        if (cutoutAreaColor != "") {
+        if (cutoutAreaColor.isNotEmpty()) {
             configurationBuilder.setCutoutAreaColor(Color.parseColor(cutoutAreaColor))
         }
+        if (navigationBarTitleColor.isNotEmpty()) {
+            configurationBuilder.setNavigationBarTitleColor(Color.parseColor(navigationBarTitleColor))
+        }
+        if (navigationBarIconTintColor.isNotEmpty()) {
+            configurationBuilder.setNavigationBarIconTintColor(Color.parseColor(navigationBarIconTintColor))
+        }
+
         val configuration: GamebaseWebViewConfiguration = configurationBuilder.build()
         showWebView(
             activity = activity,

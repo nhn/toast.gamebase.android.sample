@@ -63,6 +63,12 @@ fun WebViewSettingScreen(
         ClickableText(stringId = R.string.developer_web_view_configuration_navigation_bar_color) {
             viewModel.navigationBarColorDialogState = true
         }
+        ClickableText(stringId = R.string.developer_web_view_configuration_navigation_bar_title_color) {
+            viewModel.navigationBarTitleColorDialogState = true
+        }
+        ClickableText(stringId = R.string.developer_web_view_configuration_navigation_bar_icon_tint_color) {
+            viewModel.navigationBarIconTintColorDialogState = true
+        }
         ClickableText(stringId = R.string.developer_web_view_configuration_navigation_bar_height) {
             viewModel.navigationBarHeightDialogState = true
         }
@@ -116,6 +122,42 @@ fun WebViewSettingScreen(
                 return@WebViewSettingDialog
             }
             viewModel.navigationBarColor = color
+        }
+    )
+    WebViewSettingDialog(
+        isDialogOpened = viewModel.navigationBarTitleColorDialogState,
+        title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_title_color),
+        labelName = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_title_color_label_name),
+        message = viewModel.navigationBarTitleColor,
+        setDialogState = { newState ->
+            viewModel.navigationBarTitleColorDialogState = newState
+        },
+        onOkButtonClicked = { color ->
+            try {
+                Color.parseColor(color)
+            } catch (e: Exception) {
+                viewModel.openColorInputInvalidAlertState = true
+                return@WebViewSettingDialog
+            }
+            viewModel.navigationBarTitleColor = color
+        }
+    )
+    WebViewSettingDialog(
+        isDialogOpened = viewModel.navigationBarIconTintColorDialogState,
+        title = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_icon_tint_color),
+        labelName = stringResource(id = R.string.developer_web_view_configuration_navigation_bar_icon_tint_color_label_name),
+        message = viewModel.navigationBarIconTintColor,
+        setDialogState = { newState ->
+            viewModel.navigationBarIconTintColorDialogState = newState
+        },
+        onOkButtonClicked = { color ->
+            try {
+                Color.parseColor(color)
+            } catch (e: Exception) {
+                viewModel.openColorInputInvalidAlertState = true
+                return@WebViewSettingDialog
+            }
+            viewModel.navigationBarIconTintColor = color
         }
     )
 
