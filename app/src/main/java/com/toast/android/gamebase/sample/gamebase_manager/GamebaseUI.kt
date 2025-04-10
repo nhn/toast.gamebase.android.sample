@@ -12,6 +12,7 @@ import com.toast.android.gamebase.GamebaseDataCallback
 import com.toast.android.gamebase.GamebaseWebViewConfiguration
 import com.toast.android.gamebase.GamebaseWebViewStyle
 import com.toast.android.gamebase.base.data.GamebaseDataContainer
+import com.toast.android.gamebase.gamenotice.GameNoticeConfiguration
 import com.toast.android.gamebase.imagenotice.ImageNoticeConfiguration
 import com.toast.android.gamebase.sample.R
 import com.toast.android.gamebase.terms.GamebaseTermsConfiguration
@@ -65,6 +66,23 @@ fun showImageNotices(
 
 fun closeImageNotices(activity: Activity?) {
     Gamebase.ImageNotice.closeImageNotices(activity!!)
+}
+
+fun openGameNotices(activity: Activity, onCloseCallback: GamebaseCallback? = null) {
+    openGameNotices(activity, GameNoticeConfiguration.newBuilder().build()) {
+        onCloseCallback?.onCallback(it)
+    }
+}
+
+fun openGameNotices(
+    activity: Activity,
+    configuration: GameNoticeConfiguration,
+    onCloseCallback: GamebaseCallback? = null
+) {
+    Gamebase.GameNotice.openGameNotice(
+        activity,
+        configuration
+    ) { exception -> onCloseCallback?.onCallback(exception) }
 }
 
 // Terms

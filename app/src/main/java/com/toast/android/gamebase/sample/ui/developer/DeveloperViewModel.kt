@@ -74,6 +74,8 @@ class DeveloperViewModel: ViewModel() {
             menuFactory.createMenu(context, R.array.Terms)
         developerMenuMap[context.resources.getString(R.string.developer_menu_category_image_notice)] =
             menuFactory.createMenu(context, R.array.ImageNotice)
+        developerMenuMap[context.resources.getString(R.string.developer_menu_category_game_notice)] =
+            menuFactory.createMenu(context, R.array.GameNotice)
         developerMenuMap[context.resources.getString(R.string.developer_menu_category_webview)] =
             menuFactory.createMenu(context, R.array.WebView)
         developerMenuMap[context.resources.getString(R.string.developer_menu_category_alert)] =
@@ -114,7 +116,9 @@ class DeveloperViewModel: ViewModel() {
             DeveloperMenu.SEND_LOG -> isSendLogOpened.value = true
             DeveloperMenu.SEND_REPORT -> isSendReportOpened.value = true
             DeveloperMenu.SHOW_IMAGE_NOTICE -> showImageNotices(activity)
+            DeveloperMenu.OPEN_GAME_NOTICE -> openGameNotices(activity)
             DeveloperMenu.IMAGE_NOTICE_DETAIL_SETTING -> menuNavigator.onImageNoticeSettingMenu()
+            DeveloperMenu.GAME_NOTICE_DETAIL_SETTING -> menuNavigator.onGameNoticeSettingMenu()
             DeveloperMenu.OPEN_WEBVIEW -> isOpenWebViewOpened.value = true
             DeveloperMenu.OPEN_OUTSIDE_BROWSER -> isOpenWebBrowserOpened.value = true
             DeveloperMenu.WEBVIEW_DETAIL_SETTING -> menuNavigator.onWebViewSettingMenu()

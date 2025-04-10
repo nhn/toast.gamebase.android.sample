@@ -8,6 +8,7 @@ import androidx.navigation.compose.navigation
 import com.toast.android.gamebase.sample.ui.developer.DeveloperMenuNavigator
 import com.toast.android.gamebase.sample.ui.developer.DeveloperScreen
 import com.toast.android.gamebase.sample.ui.developer.contact.ContactDetailScreen
+import com.toast.android.gamebase.sample.ui.developer.game_notice.GameNoticeSettingScreen
 import com.toast.android.gamebase.sample.ui.developer.image_notice.ImageNoticeSettingScreen
 import com.toast.android.gamebase.sample.ui.developer.push.PushSettingScreen
 import com.toast.android.gamebase.sample.ui.developer.terms.TermsCustomScreen
@@ -37,6 +38,9 @@ fun NavGraphBuilder.developerGraph(navController: NavController, activity: Activ
                 override fun onImageNoticeSettingMenu() {
                     navController.navigate(SampleAppScreens.DeveloperCustomImageNoticeSetting.route)
                 }
+                override fun onGameNoticeSettingMenu() {
+                    navController.navigate(SampleAppScreens.DeveloperCustomGameNoticeSetting.route)
+                }
                 override fun onWebViewSettingMenu() {
                     navController.navigate(SampleAppScreens.DeveloperCustomWebViewSetting.route)
                 }
@@ -56,6 +60,9 @@ fun NavGraphBuilder.developerGraph(navController: NavController, activity: Activ
         }
         composable(SampleAppScreens.DeveloperCustomImageNoticeSetting.route) {
             ImageNoticeSettingScreen()
+        }
+        composable(SampleAppScreens.DeveloperCustomGameNoticeSetting.route) {
+            GameNoticeSettingScreen()
         }
         composable(SampleAppScreens.DeveloperCustomWebViewSetting.route) {
             WebViewSettingScreen()
