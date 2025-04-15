@@ -39,6 +39,16 @@
     <dimen name="home_screen_test_device_text_size">10sp</dimen>
     <dimen name="home_screen_test_device_text_padding">5dp</dimen>
 
+    <dimen name="home_screen_button_padding_horizontal">10dp</dimen>
+    <dimen name="home_screen_button_padding_vertical">15dp</dimen>
+    <dimen name="home_screen_button_size">60dp</dimen>
+    <dimen name="home_screen_button_round_corner_shape_radius">12dp</dimen>
+    <dimen name="home_screen_button_image_size">36dp</dimen>
+    <dimen name="home_screen_button_text_font_size">12dp</dimen>
+    <dimen name="home_screen_button_image_text_padding">2dp</dimen>
+    <dimen name="home_screen_button_icon_space">2dp</dimen>
+    <dimen name="home_screen_button_space">15dp</dimen>
+
     <dimen name="setting_screen_column_padding_horizontal">20dp</dimen>
     <dimen name="setting_screen_menu_title_text_padding">10dp</dimen>
     <dimen name="setting_screen_menu_description_text_padding">8dp</dimen>

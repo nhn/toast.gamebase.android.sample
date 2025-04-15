@@ -28,6 +28,8 @@
 
     <!-- home screen -->
     <string name="home_main_text">Gamebase 기능들을 마음껏 경험해보세요</string>
+    <string name="home_contact_button">고객센터</string>
+    <string name="home_game_notice_button">게임공지</string>
 
     <!-- access information screen -->
     <string name="access_info_title">앱 접근 권한 안내</string>

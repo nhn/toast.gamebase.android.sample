@@ -28,6 +28,8 @@
 
     <!-- home screen -->
     <string name="home_main_text">Experience the full range of Gamebase features</string>
+    <string name="home_contact_button">Contact Center</string>
+    <string name="home_game_notice_button">Game Notice</string>
 
     <!-- access information screen -->
     <string name="access_info_title">App Access Permissions</string>
