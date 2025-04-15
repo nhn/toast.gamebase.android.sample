@@ -163,8 +163,6 @@ fun IconButton(
             text = buttonText
         )
     }
-    // dimensionResource(R.dimen.home_screen_button_text_font_size)
-    // stringResource(R.string.home_game_notice_button)
 }
 
 @Preview
