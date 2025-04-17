@@ -19,6 +19,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
     object DeveloperCustomTermsSetting: SampleAppScreens("terms_custom_setting", R.string.developer_menu_category_terms)
     object DeveloperContactDetail: SampleAppScreens("contact_detail", R.string.developer_menu_category_contact)
     object DeveloperCustomImageNoticeSetting: SampleAppScreens("image_notice_setting", R.string.developer_menu_category_image_notice)
+    object DeveloperCustomGameNoticeSetting: SampleAppScreens("game_notice_setting", R.string.developer_menu_category_game_notice)
     object DeveloperCustomWebViewSetting: SampleAppScreens("web_view_setting", R.string.developer_menu_category_webview)
 
     companion object {
@@ -38,6 +39,7 @@ sealed class SampleAppScreens(val route: String, @StringRes val resourceId: Int)
                 DeveloperCustomTermsSetting.route -> DeveloperCustomTermsSetting
                 DeveloperContactDetail.route -> DeveloperContactDetail
                 DeveloperCustomImageNoticeSetting.route -> DeveloperCustomImageNoticeSetting
+                DeveloperCustomGameNoticeSetting.route -> DeveloperCustomGameNoticeSetting
                 DeveloperCustomWebViewSetting.route -> DeveloperCustomWebViewSetting
                 null -> Home
                 else -> throw IllegalArgumentException("Route $route is not recognized.")

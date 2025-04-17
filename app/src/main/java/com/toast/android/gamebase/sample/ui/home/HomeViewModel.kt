@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.toast.android.gamebase.sample.GamebaseRepository
 import com.toast.android.gamebase.sample.gamebase_manager.getLaunchingInfo
+import com.toast.android.gamebase.sample.gamebase_manager.openGameNotices
 
 class HomeViewModel : ViewModel() {
     var isTestDevice by mutableStateOf(false)

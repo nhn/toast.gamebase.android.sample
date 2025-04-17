@@ -37,6 +37,8 @@
 
     <!-- home screen -->
     <string name="home_main_text">Gamebase 기능들을 마음껏 경험해보세요</string>
+    <string name="home_contact_button">고객센터</string>
+    <string name="home_game_notice_button">게임공지</string>
 
     <!-- access information screen -->
     <string name="access_info_title">앱 접근 권한 안내</string>
@@ -115,6 +117,7 @@
     <string name="developer_menu_category_logger" translatable="false">Logger</string>
     <string name="developer_menu_category_terms" translatable="false">Terms</string>
     <string name="developer_menu_category_image_notice" translatable="false">ImageNotice</string>
+    <string name="developer_menu_category_game_notice" translatable="false">GameNotice</string>
     <string name="developer_menu_category_webview" translatable="false">WebView</string>
     <string name="developer_menu_category_alert" translatable="false">Alert</string>
     <string name="developer_menu_category_analytics" translatable="false">Analytics</string>
@@ -148,6 +151,10 @@
     <string-array name="ImageNotice">
         <item>developer_menu_show_image_notice</item>
         <item>developer_menu_image_notice_detail_setting</item>
+    </string-array>
+    <string-array name="GameNotice">
+        <item>developer_menu_open_game_notice</item>
+        <item>developer_menu_game_notice_detail_setting</item>
     </string-array>
     <string-array name="WebView">
         <item>developer_menu_open_webview</item>
@@ -190,6 +197,8 @@
     <string name="developer_menu_terms_agreement_save">약관 동의 내역 저장</string>
     <string name="developer_menu_show_image_notice">이미지공지 보기</string>
     <string name="developer_menu_image_notice_detail_setting">이미지공지 상세설정</string>
+    <string name="developer_menu_open_game_notice">게임공지 보기</string>
+    <string name="developer_menu_game_notice_detail_setting">게임공지 상세설정</string>
     <string name="developer_menu_open_webview">웹뷰 열기</string>
     <string name="developer_menu_open_outside_browser">외부 브라우저 열기</string>
     <string name="developer_menu_webview_detail_setting">웹뷰 상세설정</string>
@@ -266,6 +275,11 @@
     <string name="developer_image_notice_configuration_time_out_label_name">최대 로딩 시간</string>
     <string name="developer_image_notice_configuration_auto_close_custom_scheme">Custom scheme 발생 시 공지 닫기</string>
     <string name="developer_image_notice_show">이미지 공지 보기</string>
+
+    <!-- developer game notice setting -->
+    <string name="developer_game_notice_configuration_background_color">배경색 설정</string>
+    <string name="developer_game_notice_configuration_background_color_label_name">배경색</string>
+    <string name="developer_game_notice_open">게임 공지 보기</string>
 
     <!-- developer web view setting -->
     <string name="developer_web_view_configuration_screen_orientation">스크린 모드 설정</string>

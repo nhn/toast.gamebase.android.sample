@@ -6,5 +6,6 @@ interface DeveloperMenuNavigator {
     fun onTermsCustomMenu()
     fun onContactDetailMenu()
     fun onImageNoticeSettingMenu()
+    fun onGameNoticeSettingMenu()
     fun onWebViewSettingMenu()
 }
