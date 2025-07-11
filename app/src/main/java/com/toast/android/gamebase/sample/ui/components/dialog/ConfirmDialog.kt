@@ -43,14 +43,6 @@ fun ConfirmAlertDialog(
                             bottom = dimensionResource(id = R.dimen.common_confirm_dialog_padding_bottom)
                         ),
                     horizontalArrangement = Arrangement.SpaceEvenly) {
-                    TextButton(
-                        onClick = {
-                            onOkButtonClicked()
-                            setDialogState(false)
-                        }
-                    ) {
-                        Text(stringResource(id = R.string.button_ok))
-                    }
                     if (showCancel) {
                         TextButton(
                             onClick = {
@@ -59,6 +51,14 @@ fun ConfirmAlertDialog(
                         ) {
                             Text(stringResource(id = R.string.button_cancel))
                         }
+                    }
+                    TextButton(
+                        onClick = {
+                            onOkButtonClicked()
+                            setDialogState(false)
+                        }
+                    ) {
+                        Text(stringResource(id = R.string.button_ok))
                     }
                 }
             },

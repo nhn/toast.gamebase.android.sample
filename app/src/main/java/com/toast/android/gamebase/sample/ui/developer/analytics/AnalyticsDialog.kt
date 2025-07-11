@@ -83,18 +83,18 @@ fun SetGameUserDataDialog(
                 ) {
                     TextButton(
                         onClick = {
+                            setDialogState(false)
+                        }
+                    ) {
+                        Text(stringResource(id = R.string.button_cancel))
+                    }
+                    TextButton(
+                        onClick = {
                             setGameUserDataDialogStateHolder.setGameUserDataInDialog(activity)
                             setDialogState(false)
                         }
                     ) {
                         Text(stringResource(id = R.string.button_ok))
-                    }
-                    TextButton(
-                        onClick = {
-                            setDialogState(false)
-                        }
-                    ) {
-                        Text(stringResource(id = R.string.button_cancel))
                     }
                 }
             }

@@ -131,18 +131,18 @@ fun SendLogDialog(
                     ) {
                         TextButton(
                             onClick = {
+                                setDialogState(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_cancel))
+                        }
+                        TextButton(
+                            onClick = {
                                 sendLogDialogStateHolder.sendLogger()
                                 setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
-                        }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
                         }
                     }
                 }
@@ -220,18 +220,18 @@ fun SendReportDialog(
                     ) {
                         TextButton(
                             onClick = {
+                                setDialogState(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_cancel))
+                        }
+                        TextButton(
+                            onClick = {
                                 sendReportDialogStateHolder.sendReport()
                                 setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
-                        }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
                         }
                     }
                 }

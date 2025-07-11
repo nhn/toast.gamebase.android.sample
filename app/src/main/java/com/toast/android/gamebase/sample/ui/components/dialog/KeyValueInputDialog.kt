@@ -113,6 +113,13 @@ fun KeyValueInputDialog(
                         horizontalArrangement = Arrangement.SpaceEvenly) {
                         TextButton(
                             onClick = {
+                                setDialogState(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_cancel))
+                        }
+                        TextButton(
+                            onClick = {
                                 if (inputKey.isEmpty()) {
                                     return@TextButton
                                 }
@@ -121,13 +128,6 @@ fun KeyValueInputDialog(
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
-                        }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
                         }
                     }
                 }
