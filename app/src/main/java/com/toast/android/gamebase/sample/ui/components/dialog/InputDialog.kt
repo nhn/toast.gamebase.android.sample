@@ -12,6 +12,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -109,28 +110,18 @@ fun InputDialog(
             )
         },
         buttons = {
-            Row(
+            DialogButtonRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 20.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                TextButton(
-                    onClick = {
-                        setDialogState(false)
-                    }
-                ) {
-                    Text(stringResource(id = R.string.button_cancel))
-                }
-                TextButton(
-                    onClick = {
-                        onOkButtonClicked(inputText)
-                        setDialogState(false)
-                    }
-                ) {
-                    Text(stringResource(id = R.string.button_ok))
-                }
-            }
+                    .padding(bottom = dimensionResource(id = R.dimen.common_confirm_dialog_padding_bottom)),
+                onOkButtonClicked = {
+                    onOkButtonClicked(inputText)
+                    setDialogState(false)
+                },
+                onCancelButtonClicked = {
+                    setDialogState(false)
+                },
+            )
         }
     )
 }

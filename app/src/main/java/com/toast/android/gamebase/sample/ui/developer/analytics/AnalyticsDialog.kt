@@ -4,13 +4,13 @@ import android.app.Activity
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.ui.components.dialog.DialogButtonRow
 import com.toast.android.gamebase.sample.ui.components.input.TextFieldWithLabel
 
 @Composable
@@ -74,29 +74,19 @@ fun SetGameUserDataDialog(
                 }
             },
             buttons = {
-                Row(
+                DialogButtonRow(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom =
                         dimensionResource(id = R.dimen.analytics_dialog_button_row_padding_bottom)),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    TextButton(
-                        onClick = {
-                            setDialogState(false)
-                        }
-                    ) {
-                        Text(stringResource(id = R.string.button_cancel))
+                    onOkButtonClicked = {
+                        setGameUserDataDialogStateHolder.setGameUserDataInDialog(activity)
+                        setDialogState(false)
+                    },
+                    onCancelButtonClicked = {
+                        setDialogState(false)
                     }
-                    TextButton(
-                        onClick = {
-                            setGameUserDataDialogStateHolder.setGameUserDataInDialog(activity)
-                            setDialogState(false)
-                        }
-                    ) {
-                        Text(stringResource(id = R.string.button_ok))
-                    }
-                }
+                )
             }
         )
     }
