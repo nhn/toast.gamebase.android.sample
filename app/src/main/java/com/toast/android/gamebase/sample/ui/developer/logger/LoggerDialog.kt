@@ -124,28 +124,18 @@ fun SendLogDialog(
                             )
                         }
                     }
-                    Row(
+                    DialogButtonRow(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = dimensionResource(id = R.dimen.logger_dialog_text_padding)),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
-                        }
-                        TextButton(
-                            onClick = {
-                                sendLogDialogStateHolder.sendLogger()
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_ok))
-                        }
-                    }
+                        onOkButtonClicked = {
+                            sendLogDialogStateHolder.sendLogger()
+                            setDialogState(false)
+                        },
+                        onCancelButtonClicked = {
+                            setDialogState(false)
+                        },
+                    )
                 }
             }
         }
