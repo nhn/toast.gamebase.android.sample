@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import com.toast.android.gamebase.sample.R
+import com.toast.android.gamebase.sample.ui.components.dialog.DialogButtonRow
 import com.toast.android.gamebase.sample.ui.components.input.DropdownMenuBox
 import com.toast.android.gamebase.sample.ui.components.dialog.InputDialog
 import com.toast.android.gamebase.sample.ui.components.input.TextFieldWithLabel
@@ -123,28 +124,18 @@ fun SendLogDialog(
                             )
                         }
                     }
-                    Row(
+                    DialogButtonRow(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = dimensionResource(id = R.dimen.logger_dialog_text_padding)),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        TextButton(
-                            onClick = {
-                                sendLogDialogStateHolder.sendLogger()
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_ok))
-                        }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
-                        }
-                    }
+                        onOkButtonClicked = {
+                            sendLogDialogStateHolder.sendLogger()
+                            setDialogState(false)
+                        },
+                        onCancelButtonClicked = {
+                            setDialogState(false)
+                        },
+                    )
                 }
             }
         }
@@ -212,28 +203,18 @@ fun SendReportDialog(
                         )
                         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.logger_dialog_spacer_padding)))
                     }
-                    Row(
+                    DialogButtonRow(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = dimensionResource(id = R.dimen.logger_dialog_text_padding)),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        TextButton(
-                            onClick = {
-                                sendReportDialogStateHolder.sendReport()
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_ok))
-                        }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
-                        }
-                    }
+                        onOkButtonClicked = {
+                            sendReportDialogStateHolder.sendReport()
+                            setDialogState(false)
+                        },
+                        onCancelButtonClicked = {
+                            setDialogState(false)
+                        },
+                    )
                 }
             }
         }

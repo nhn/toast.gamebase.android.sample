@@ -2,7 +2,6 @@ package com.toast.android.gamebase.sample.ui.components.dialog
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -12,7 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -49,27 +48,15 @@ fun InputDialog(
                         onValueChange = { inputText = it },
                         label = { Text("URL") }
                     )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        TextButton(
-                            onClick = {
-                                onOkButtonClicked(inputText)
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_ok))
-                        }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
-                        }
-                    }
+                    DialogButtonRow(
+                        onOkButtonClicked = {
+                            onOkButtonClicked(inputText)
+                            setDialogState(false)
+                        },
+                        onCancelButtonClicked = {
+                            setDialogState(false)
+                        },
+                    )
                 }
             }
         }
@@ -109,28 +96,18 @@ fun InputDialog(
             )
         },
         buttons = {
-            Row(
+            DialogButtonRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 20.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                TextButton(
-                    onClick = {
-                        onOkButtonClicked(inputText)
-                        setDialogState(false)
-                    }
-                ) {
-                    Text(stringResource(id = R.string.button_ok))
-                }
-                TextButton(
-                    onClick = {
-                        setDialogState(false)
-                    }
-                ) {
-                    Text(stringResource(id = R.string.button_cancel))
-                }
-            }
+                    .padding(bottom = dimensionResource(id = R.dimen.common_confirm_dialog_padding_bottom)),
+                onOkButtonClicked = {
+                    onOkButtonClicked(inputText)
+                    setDialogState(false)
+                },
+                onCancelButtonClicked = {
+                    setDialogState(false)
+                },
+            )
         }
     )
 }

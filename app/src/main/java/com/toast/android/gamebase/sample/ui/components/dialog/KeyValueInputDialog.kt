@@ -16,7 +16,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -107,29 +106,18 @@ fun KeyValueInputDialog(
                             dimensionResource(id = R.dimen.key_value_input_dialog_column_padding)
                         ))
                     }
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly) {
-                        TextButton(
-                            onClick = {
-                                if (inputKey.isEmpty()) {
-                                    return@TextButton
-                                }
-                                onOkButtonClicked(inputKey, inputValue)
-                                setDialogState(false)
+                    DialogButtonRow(
+                        onOkButtonClicked = {
+                            if (inputKey.isEmpty()) {
+                                return@DialogButtonRow
                             }
-                        ) {
-                            Text(stringResource(id = R.string.button_ok))
+                            onOkButtonClicked(inputKey, inputValue)
+                            setDialogState(false)
+                        },
+                        onCancelButtonClicked = {
+                            setDialogState(false)
                         }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
-                        }
-                    }
+                    )
                 }
             }
         }
