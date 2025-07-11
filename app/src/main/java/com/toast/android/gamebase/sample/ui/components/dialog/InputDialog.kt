@@ -56,18 +56,18 @@ fun InputDialog(
                     ) {
                         TextButton(
                             onClick = {
+                                setDialogState(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_cancel))
+                        }
+                        TextButton(
+                            onClick = {
                                 onOkButtonClicked(inputText)
                                 setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
-                        }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
                         }
                     }
                 }
@@ -117,18 +117,18 @@ fun InputDialog(
             ) {
                 TextButton(
                     onClick = {
+                        setDialogState(false)
+                    }
+                ) {
+                    Text(stringResource(id = R.string.button_cancel))
+                }
+                TextButton(
+                    onClick = {
                         onOkButtonClicked(inputText)
                         setDialogState(false)
                     }
                 ) {
                     Text(stringResource(id = R.string.button_ok))
-                }
-                TextButton(
-                    onClick = {
-                        setDialogState(false)
-                    }
-                ) {
-                    Text(stringResource(id = R.string.button_cancel))
                 }
             }
         }

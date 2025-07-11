@@ -86,18 +86,18 @@ fun DropDownMenuDialog(
                     ) {
                         TextButton(
                             onClick = {
+                                setDialogState(false)
+                            }
+                        ) {
+                            Text(stringResource(id = R.string.button_cancel))
+                        }
+                        TextButton(
+                            onClick = {
                                 onOkButtonClicked(selected)
                                 setDialogState(false)
                             }
                         ) {
                             Text(stringResource(id = R.string.button_ok))
-                        }
-                        TextButton(
-                            onClick = {
-                                setDialogState(false)
-                            }
-                        ) {
-                            Text(stringResource(id = R.string.button_cancel))
                         }
                     }
                 }
