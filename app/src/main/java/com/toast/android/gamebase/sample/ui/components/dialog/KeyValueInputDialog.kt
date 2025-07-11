@@ -107,14 +107,14 @@ fun KeyValueInputDialog(
                         ))
                     }
                     DialogButtonRow(
-                        onCancelButtonClicked = {
-                            setDialogState(false)
-                        },
                         onOkButtonClicked = {
                             if (inputKey.isEmpty()) {
                                 return@DialogButtonRow
                             }
                             onOkButtonClicked(inputKey, inputValue)
+                            setDialogState(false)
+                        },
+                        onCancelButtonClicked = {
                             setDialogState(false)
                         }
                     )
