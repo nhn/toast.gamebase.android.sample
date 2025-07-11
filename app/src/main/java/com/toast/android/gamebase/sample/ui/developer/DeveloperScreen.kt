@@ -26,7 +26,7 @@ import com.toast.android.gamebase.sample.ui.developer.logger.SendReportDialog
 import com.toast.android.gamebase.sample.ui.developer.webview.OpenBrowserDialog
 import com.toast.android.gamebase.sample.ui.developer.webview.OpenCustomWebViewDialog
 
-const val WEBVIEW_MENU_DEFAULT_URL = "https://gameplatform.nhncloud.com/ko_KR/service/gamebase"
+const val WEBVIEW_MENU_DEFAULT_URL = "https://www.nhncloud.com/kr/service/game/gamebase"
 
 @Composable
 fun DeveloperScreen(
