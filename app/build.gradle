@@ -24,7 +24,7 @@ android {
 
         minSdk 21
         targetSdk 34
-        versionCode 28
+        versionCode Integer.parseInt(VERSION_CODE)
         versionName GAMEBASE_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -157,3 +157,42 @@ dependencies {
 configurations.all {
     resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
 }
+
+tasks.register('generateConfig', WriteBuildConfigTask) {
+    outputDir = file("$buildDir/generated/source/config")
+    versionValue = Integer.parseInt("${VERSION_CODE}")
+}
+
+android {
+    sourceSets {
+        main.java.srcDir "$buildDir/generated/source/config"
+    }
+}
+
+class WriteBuildConfigTask extends DefaultTask {
+    @OutputDirectory
+    File outputDir
+
+    @Input
+    Integer versionValue
+
+    @TaskAction
+    void generate() {
+        if (!outputDir.exists()) {
+            outputDir.mkdirs()
+        }
+
+        def namespace = project.android.namespace
+
+        def outputFile = new File(outputDir, "BuildConfig.kt")
+        outputFile.text = """
+            package $namespace
+
+            object BuildConfig {
+                const val VERSION_CODE = $versionValue
+            }
+        """.stripIndent()
+    }
+}
+
+preBuild.dependsOn generateConfig
