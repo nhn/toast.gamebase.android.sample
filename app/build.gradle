@@ -16,24 +16,20 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdk 34
+    compileSdk 35
     namespace 'com.toast.android.gamebase.sample'
     defaultConfig {
         // TODO: [Fix me] Change to your app's package name.
         applicationId "com.nhn.gamebasesample"
 
-        minSdk 21
-        targetSdk 34
+        minSdk 22
+        targetSdk 35
         versionCode Integer.parseInt(VERSION_CODE)
         versionName GAMEBASE_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
-        }
-        // >>> [Weibo IdP]
-        ndk {
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
         }
         applicationVariants.all { variant ->
             variant.outputs.all {
@@ -63,12 +59,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
         coreLibraryDesugaringEnabled true
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
     buildFeatures {
         compose true
@@ -86,6 +82,7 @@ android {
 dependencies {
     implementation "androidx.multidex:multidex:${MULTIDEX_VERSION}"
     implementation "androidx.core:core-ktx:${CORE_KTX_VERSION}"
+    implementation "androidx.activity:activity-ktx:${ACTIVITY_KTX_VERSION}"
     implementation "androidx.compose.ui:ui:${COMPOSE_VERSION}"
     implementation "androidx.compose.material:material:${COMPOSE_VERSION}"
     implementation "androidx.compose.ui:ui-tooling-preview:${COMPOSE_VERSION}"
@@ -106,11 +103,9 @@ dependencies {
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-appleid:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-gpgs-v2:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-steam:${GAMEBASE_VERSION}"
+    implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo:${GAMEBASE_VERSION}"
 
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-gpgs-autologin:${GAMEBASE_VERSION}"
-
-    // >>> [Weibo IdP]
-//    implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo:${GAMEBASE_VERSION}"
 
     // >>> Gamebase - Purchase Adapter 를 선택하세요
     implementation "com.toast.android.gamebase:gamebase-adapter-purchase-google:${GAMEBASE_VERSION}"
@@ -124,28 +119,24 @@ dependencies {
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore-v21:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore-external:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-galaxy:${GAMEBASE_VERSION}"
-//    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-amazon:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-huawei:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-mycard:${GAMEBASE_VERSION}"
 
     // >>> Gamebase - Push Adapter
     implementation "com.toast.android.gamebase:gamebase-adapter-push-fcm:${GAMEBASE_VERSION}"
-//    implementation "com.toast.android.gamebase:gamebase-adapter-push-adm:${GAMEBASE_VERSION}"
 
     // >>> 다음 모듈의 사용 방법은 고객 센터로 문의 하시기 바랍니다.
 //    implementation "com.toast.android.gamebase:gamebase-adapter-auth-hangame:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-auth-hangamejp:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-auth-hangamejpemail:${GAMEBASE_VERSION}"
     implementation "com.toast.android.gamebase:gamebase-adapter-auth-kakaogame:${GAMEBASE_VERSION}"
-    implementation(files("../weibo_sdk/openDefault-${WEIBO_IDP_VERSION}.aar"))
-    implementation "com.toast.android.gamebase:gamebase-adapter-auth-weibo-v4:${GAMEBASE_VERSION}"
 //    implementation "com.toast.android.gamebase:gamebase-adapter-purchase-onestore-v16:${GAMEBASE_VERSION}"
 
     // >>> [Push Custom Receiver]
 //    implementation "com.toast.android.gamebase:gamebase-adapter-push-notification:$GAMEBASE_SDK_VERSION"
 
     // Flag to enable support for the new language APIs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.9")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 
     testImplementation "junit:junit:${JUNIT_VERSION}"
     androidTestImplementation "androidx.test.ext:junit:${EXT_JUNIT_VERSION}"
