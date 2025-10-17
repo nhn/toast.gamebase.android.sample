@@ -11,9 +11,6 @@
 # Generated files
 bin/
 gen/
-BUILD_AOS/
-buildTemp/
-DOCUMENT/
 
 # Gradle files
 .gradle/
@@ -46,7 +43,3 @@ captures/
 /*/.settings/
 
 **/.vscode/**
-
-# By build script
-mapping-merged.txt
-/*/mapping-merged.txt

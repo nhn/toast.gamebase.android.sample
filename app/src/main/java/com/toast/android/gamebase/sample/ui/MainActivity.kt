@@ -2,10 +2,16 @@ package com.toast.android.gamebase.sample.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.sample.BuildConfig
 import com.toast.android.gamebase.sample.GamebaseActivity
@@ -33,16 +39,29 @@ class MainActivity : GamebaseActivity() {
         if (getIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, -1) == BuildConfig.VERSION_CODE) {
             shouldShowAccessInformationScreen = false
         }
+
+        enableEdgeToEdge()
+
         setContent {
             GamebaseSampleProjectTheme {
-                LoadStartScreen(
-                    activity = this,
-                    startRoute = startRoute,
-                    isProcessRestart = isProcessRestarted(savedInstanceState),
-                    shouldShowAccessInformationScreen = shouldShowAccessInformationScreen,
+                Box(
+                    modifier = Modifier
+                        .background(color = MaterialTheme.colors.primary)
+                        .safeDrawingPadding()
                 ) {
-                    shouldShowAccessInformationScreen = false
-                    putIntInPreference(applicationContext, KEY_LAST_ACCESS_INFO_SHOWN_VERSION, BuildConfig.VERSION_CODE)
+                    LoadStartScreen(
+                        activity = this@MainActivity,
+                        startRoute = startRoute,
+                        isProcessRestart = isProcessRestarted(savedInstanceState),
+                        shouldShowAccessInformationScreen = shouldShowAccessInformationScreen,
+                    ) {
+                        shouldShowAccessInformationScreen = false
+                        putIntInPreference(
+                            applicationContext,
+                            KEY_LAST_ACCESS_INFO_SHOWN_VERSION,
+                            BuildConfig.VERSION_CODE
+                        )
+                    }
                 }
             }
         }
