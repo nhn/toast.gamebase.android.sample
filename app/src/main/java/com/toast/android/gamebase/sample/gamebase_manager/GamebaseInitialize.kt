@@ -5,6 +5,7 @@ import android.util.Log
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseConfiguration
 import com.toast.android.gamebase.GamebaseDataCallback
+import com.toast.android.gamebase.base.agesignal.GamebaseAgeSignalsRequest
 import com.toast.android.gamebase.base.purchase.PurchaseProvider
 import com.toast.android.gamebase.error.data.UpdateInfo
 import com.toast.android.gamebase.launching.data.LaunchingInfo
@@ -51,6 +52,18 @@ fun initializeGamebase(
      * Set 'false' when build RELEASE.
      */
     Gamebase.setDebugMode(DEBUG_MODE)
+
+    Gamebase.AgeSignals.checkAgeSignals(
+        activity,
+        GamebaseAgeSignalsRequest.newBuilder().build(),
+        GamebaseDataCallback { ageSignalResult, gamebaseException ->
+            if (Gamebase.isSuccess(gamebaseException)) {
+                Log.d(TAG, "Age signals checked: ${ageSignalResult.userStatus()}")
+            } else {
+                Log.w(TAG, "Age signals check failed: ${gamebaseException.toJsonString()}")
+            }
+        }
+    )
 
     val configuration = GamebaseConfiguration
         .newBuilder(
