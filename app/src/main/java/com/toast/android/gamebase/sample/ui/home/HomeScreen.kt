@@ -3,27 +3,26 @@ package com.toast.android.gamebase.sample.ui.home
 import android.app.Activity
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,11 +38,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.toast.android.gamebase.GamebaseGameNotice
-import com.toast.android.gamebase.gamenotice.GameNoticeConfiguration
-import com.toast.android.gamebase.sample.GamebaseRepository
 import com.toast.android.gamebase.sample.R
-import com.toast.android.gamebase.sample.data.getIconResourceById
 import com.toast.android.gamebase.sample.gamebase_manager.openContact
 import com.toast.android.gamebase.sample.gamebase_manager.openGameNotices
 import com.toast.android.gamebase.sample.gamebase_manager.showImageNotices
@@ -55,17 +50,28 @@ fun HomeScreen(activity: Activity, onLoggedOut: () -> Unit, homeViewModel: HomeV
         LaunchedEffect(Unit) {
             homeViewModel.setGamebaseEventHandler(activity = activity)
             homeViewModel.getTestDeviceInfo()
+            homeViewModel.checkNewGameNotice()
             showImageNotices(activity) {}
         }
         if (homeViewModel.onKickOut) {
             onLoggedOut()
         }
-        InnerHomeScreen(homeViewModel.isTestDevice, homeViewModel.matchingTypes)
+        InnerHomeScreen(
+            testDevice = homeViewModel.isTestDevice,
+            matchingTypes = homeViewModel.matchingTypes,
+            hasNewGameNotice = homeViewModel.hasNewGameNotice,
+            onGameNoticeRead = { homeViewModel.markGameNoticeAsRead() }
+        )
     }
 }
 
 @Composable
-fun InnerHomeScreen(testDevice: Boolean, matchingTypes: String) {
+fun InnerHomeScreen(
+    testDevice: Boolean,
+    matchingTypes: String,
+    hasNewGameNotice: Boolean = false,
+    onGameNoticeRead: () -> Unit = {}
+) {
     Box (
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -88,7 +94,7 @@ fun InnerHomeScreen(testDevice: Boolean, matchingTypes: String) {
                 vertical = dimensionResource(id = R.dimen.home_screen_button_padding_vertical)
             )
         ) {
-            IconButton(
+            IconButtonWithBadge(
                 onClick = {
                     activity?.let {
                         openGameNotices(
@@ -97,12 +103,14 @@ fun InnerHomeScreen(testDevice: Boolean, matchingTypes: String) {
                                 Log.d(TAG, "Game Notice Exception: $exception")
                             }
                         )
+                        onGameNoticeRead()
                     }
                 },
                 iconResId = R.drawable.game_notice,
                 iconSize = dimensionResource(R.dimen.home_screen_button_image_size),
                 buttonText = stringResource(R.string.home_game_notice_button),
-                buttonTextFontSize = dimensionResource(R.dimen.home_screen_button_text_font_size)
+                buttonTextFontSize = dimensionResource(R.dimen.home_screen_button_text_font_size),
+                showBadge = hasNewGameNotice
             )
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.home_screen_button_space)))
             IconButton(
@@ -156,6 +164,50 @@ fun IconButton(
             contentDescription = buttonText,
             modifier = Modifier.size(iconSize)
         )
+        Text(
+            modifier = Modifier.padding(top = dimensionResource(R.dimen.home_screen_button_image_text_padding)),
+            fontSize = buttonTextFontSize.value.sp,
+            textAlign = TextAlign.Center,
+            text = buttonText
+        )
+    }
+}
+
+@Composable
+fun IconButtonWithBadge(
+    onClick: () -> Unit,
+    iconResId: Int,
+    iconSize: Dp,
+    buttonText: String,
+    buttonTextFontSize: Dp,
+    showBadge: Boolean = false,
+) {
+    Column(
+        modifier = Modifier
+            .width(dimensionResource(R.dimen.home_screen_button_size))
+            .wrapContentHeight().heightIn(min = dimensionResource(R.dimen.home_screen_button_size))
+            .clip(RoundedCornerShape(dimensionResource(R.dimen.home_screen_button_round_corner_shape_radius)))
+            .clickable {
+                onClick()
+            },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Box {
+            Image(
+                painter = painterResource(iconResId),
+                contentDescription = buttonText,
+                modifier = Modifier.size(iconSize)
+            )
+            if (showBadge) {
+                Box(
+                    modifier = Modifier
+                        .size(10.dp)
+                        .background(Color.Red, CircleShape)
+                        .align(Alignment.TopEnd)
+                )
+            }
+        }
         Text(
             modifier = Modifier.padding(top = dimensionResource(R.dimen.home_screen_button_image_text_padding)),
             fontSize = buttonTextFontSize.value.sp,
