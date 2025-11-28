@@ -10,6 +10,7 @@ import com.toast.android.gamebase.sample.GamebaseApplication
 private const val PREFERENCE_NAME = "gamebase.sample.app"
 private const val PREF_KEY_PUSH_CONFIGURATION = "gamebase.sample.pref.push.configuration"
 private const val PREF_KEY_LAUNCHING_INFO = "gamebase.sample.pref.launching.info"
+private const val PREF_KEY_LAST_CHECKED_GAME_NOTICE_TIME = "gamebase.sample.pref.last.checked.game.notice.time"
 
 fun putIntInPreference(context : Context, key: String, value: Int) {
     val mPreferenceEditor = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit()
@@ -48,4 +49,16 @@ fun loadPushConfiguration(): PushConfiguration? {
         }
     }
     return null
+}
+
+fun saveLastCheckedGameNoticeTime(timeMillis: Long) {
+    val applicationContext = GamebaseApplication.instance.applicationContext
+    val pref = applicationContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+    pref.edit().putLong(PREF_KEY_LAST_CHECKED_GAME_NOTICE_TIME, timeMillis).apply()
+}
+
+fun getLastCheckedGameNoticeTime(): Long {
+    val applicationContext = GamebaseApplication.instance.applicationContext
+    val pref = applicationContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+    return pref.getLong(PREF_KEY_LAST_CHECKED_GAME_NOTICE_TIME, 0L)
 }
