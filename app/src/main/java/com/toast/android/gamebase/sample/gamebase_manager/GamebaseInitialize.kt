@@ -5,6 +5,7 @@ import android.util.Log
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseConfiguration
 import com.toast.android.gamebase.GamebaseDataCallback
+import com.toast.android.gamebase.base.GamebaseError
 import com.toast.android.gamebase.base.agesignal.GamebaseAgeSignalsRequest
 import com.toast.android.gamebase.base.agesignal.GamebaseAgeSignalsResult
 import com.toast.android.gamebase.base.agesignal.GamebaseAgeSignalsVerificationStatus
@@ -66,7 +67,17 @@ fun initializeGamebase(
                     Gamebase.Util.showAlert(activity, "Age Signals Result", message)
                 }
             } else {
-                Log.w(TAG, "Age signals check failed: ${gamebaseException.toJsonString()}")
+                // 실패: 에러 처리
+                val errorCode = gamebaseException?.code
+                val errorMessage = gamebaseException?.message
+                when (errorCode) {
+                    GamebaseError.NOT_SUPPORTED -> {
+                        Log.w(TAG, "Age Signals API is not supported on this device")
+                    }
+                    GamebaseError.AUTH_EXTERNAL_LIBRARY_ERROR -> {
+                        Log.w(TAG, "Google Play Age Signals error($errorMessage)")
+                    }
+                }
             }
         }
     )
