@@ -5,6 +5,10 @@ import android.util.Log
 import com.toast.android.gamebase.Gamebase
 import com.toast.android.gamebase.GamebaseConfiguration
 import com.toast.android.gamebase.GamebaseDataCallback
+import com.toast.android.gamebase.base.GamebaseError
+import com.toast.android.gamebase.base.agesignal.GamebaseAgeSignalsRequest
+import com.toast.android.gamebase.base.agesignal.GamebaseAgeSignalsResult
+import com.toast.android.gamebase.base.agesignal.GamebaseAgeSignalsVerificationStatus
 import com.toast.android.gamebase.base.purchase.PurchaseProvider
 import com.toast.android.gamebase.error.data.UpdateInfo
 import com.toast.android.gamebase.launching.data.LaunchingInfo
@@ -51,6 +55,32 @@ fun initializeGamebase(
      * Set 'false' when build RELEASE.
      */
     Gamebase.setDebugMode(DEBUG_MODE)
+
+    Gamebase.AgeSignals.checkAgeSignals(
+        activity,
+        GamebaseAgeSignalsRequest.newBuilder().build(),
+        GamebaseDataCallback { ageSignalResult, gamebaseException ->
+            if (Gamebase.isSuccess(gamebaseException)) {
+                Log.d(TAG, "Age signals checked: ${ageSignalResult?.userStatus()}")
+                val message = handleAgeSignalsResult(ageSignalResult)
+                if (message != null) {
+                    Gamebase.Util.showAlert(activity, "Age Signals Result", message)
+                }
+            } else {
+                // 실패: 에러 처리
+                val errorCode = gamebaseException?.code
+                val errorMessage = gamebaseException?.message
+                when (errorCode) {
+                    GamebaseError.NOT_SUPPORTED -> {
+                        Log.w(TAG, "Age Signals API is not supported on this device")
+                    }
+                    GamebaseError.AUTH_EXTERNAL_LIBRARY_ERROR -> {
+                        Log.w(TAG, "Google Play Age Signals error($errorMessage)")
+                    }
+                }
+            }
+        }
+    )
 
     val configuration = GamebaseConfiguration
         .newBuilder(
@@ -106,6 +136,49 @@ fun initializeGamebase(
                 showErrorAndRetryInitialize("Launching Exception", exception.toJsonString())
             }
         })
+}
+
+fun handleAgeSignalsResult(result: GamebaseAgeSignalsResult?): String? {
+    if (result == null) {
+        Log.w(TAG, "Age signals result is null. ")
+        return null
+    }
+    val userStatus = result.userStatus()
+    if (userStatus == null) {
+        // This means the user is not in a regulated region (Texas, Utah, Louisiana).
+        // You can proceed with your app's logic for non-regulated users.
+        Log.d(TAG, "User is not in a regulated region.")
+        return null
+    }
+
+    when (userStatus) {
+        GamebaseAgeSignalsVerificationStatus.VERIFIED -> {
+            Log.d(TAG, "Verified adult user.")
+            return null
+        }
+        GamebaseAgeSignalsVerificationStatus.SUPERVISED -> {
+            // Minor with parental consent
+            // Provide restricted features for minors according to Texas SB 2420
+            val ageLower = result.ageLower() // e.g., 13
+            val ageUpper = result.ageUpper() // e.g., 17
+            Log.d(TAG, "Supervised minor user. Age range: $ageLower - $ageUpper")
+            return null
+        }
+        GamebaseAgeSignalsVerificationStatus.SUPERVISED_APPROVAL_PENDING -> {
+            return "Supervised minor with approval pending. You can use only restricted features."
+        }
+        GamebaseAgeSignalsVerificationStatus.SUPERVISED_APPROVAL_DENIED -> {
+            return "Supervised minor with approval denied. You can use only restricted features."
+        }
+        GamebaseAgeSignalsVerificationStatus.UNKNOWN -> {
+            return "Please visit Play Store and set up information."
+        }
+        else -> {
+            // Log this case to handle potential future states flexibly.
+            Log.d(TAG, "Unknown age verification status: $userStatus")
+            return null
+        }
+    }
 }
 
 private fun checkIfGameCanPlay(launchingStatusCode: Int?): Pair<GamePlayStatus, String> {
