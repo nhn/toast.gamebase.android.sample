@@ -49,7 +49,8 @@ fun printBanInfo(TAG: String, banInfo: BanInfo) {
 }
 
 fun printPurchasableReceipt(TAG: String, category: String, receipt: PurchasableReceipt) {
-    // If the user got item by 'Promotion Code',
+    // If the user got item by 'Promotion Code' or
+    // 'Lazy purchase', or 'Parents permission',...,
     // this event will be occurred.
     Log.i(TAG, "[GamebaseEventHandler] category : $category")
     Log.i(TAG, "[GamebaseEventHandler] PurchasableReceipt : $receipt")

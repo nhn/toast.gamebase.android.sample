@@ -16,14 +16,14 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdk 35
+    compileSdk 36
     namespace 'com.toast.android.gamebase.sample'
     defaultConfig {
         // TODO: [Fix me] Change to your app's package name.
         applicationId "com.nhn.gamebasesample"
 
         minSdk 22
-        targetSdk 35
+        targetSdk 36
         versionCode Integer.parseInt(VERSION_CODE)
         versionName GAMEBASE_VERSION
 
@@ -144,9 +144,6 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:${COMPOSE_VERSION}"
     debugImplementation "androidx.compose.ui:ui-tooling:${COMPOSE_VERSION}"
     debugImplementation "androidx.compose.ui:ui-test-manifest:${COMPOSE_VERSION}"
-}
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
 }
 
 tasks.register('generateConfig', WriteBuildConfigTask) {
