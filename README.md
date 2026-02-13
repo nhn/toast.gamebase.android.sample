@@ -7,7 +7,7 @@ This is a Sample App that allows you to refer to the basic flow when applying th
    * [SDK 연동 가이드](https://docs.nhncloud.com/ko/Game/Gamebase/ko/aos-started)
 
 # Requirements
-* minSdk 21
+* minSdk 22
 
 # Release Notes
 

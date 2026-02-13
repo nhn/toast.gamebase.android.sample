@@ -1,5 +1,6 @@
 package com.toast.android.gamebase.sample.ui.login
 
+import android.app.Activity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -32,7 +33,7 @@ class LoginViewModel : ViewModel() {
             lastProviderLogin(
                 activity,
                 onLoginFinished = {
-                    uiState = LoginState.LOGGED_IN
+                    onLoginSucceeded(activity)
                 },
                 onLastProviderIsLine = {
                     showRegionSelectDialog()
@@ -52,13 +53,17 @@ class LoginViewModel : ViewModel() {
             idp,
             additionalInfo
         ) {
-            uiState = LoginState.LOGGED_IN
+            onLoginSucceeded(activity)
+        }
+    }
 
-            // Call registerPush with saved PushConfiguration.
-            val savedPushConfiguration = loadPushConfiguration()
-            savedPushConfiguration?.let {
-                registerPush(activity, savedPushConfiguration, callback = null)
-            }
+    private fun onLoginSucceeded(activity: Activity) {
+        uiState = LoginState.LOGGED_IN
+
+        // Call registerPush with saved PushConfiguration.
+        val savedPushConfiguration = loadPushConfiguration()
+        savedPushConfiguration?.let {
+            registerPush(activity, savedPushConfiguration, callback = null)
         }
     }
 
